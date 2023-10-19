@@ -59,16 +59,72 @@
 		0813A2CD2AD6DEFE00428484 /* Capivarias */ = {
 			isa = PBXGroup;
 			children = (
+				08CEE5F22AE163AA00149B83 /* Controllers */,
+				08CEE5F12AE1639F00149B83 /* Scenes */,
+				08CEE5F02AE1638F00149B83 /* Documents */,
+				08CEE5EF2AE1633F00149B83 /* Auxiliary */,
+				08CEE5EC2AE1631300149B83 /* Screen Elements */,
 				0813A2CE2AD6DEFE00428484 /* AppDelegate.swift */,
-				0813A2D02AD6DEFE00428484 /* GameScene.sks */,
-				0813A2D22AD6DEFE00428484 /* Actions.sks */,
-				0813A2D42AD6DEFE00428484 /* GameScene.swift */,
-				0813A2D62AD6DEFE00428484 /* GameViewController.swift */,
 				0813A2D82AD6DEFE00428484 /* Main.storyboard */,
 				0813A2DB2AD6DEFF00428484 /* Assets.xcassets */,
 				0813A2DD2AD6DEFF00428484 /* LaunchScreen.storyboard */,
 			);
 			path = Capivarias;
+			sourceTree = "<group>";
+		};
+		08CEE5EC2AE1631300149B83 /* Screen Elements */ = {
+			isa = PBXGroup;
+			children = (
+				08CEE5EE2AE1632A00149B83 /* Characters */,
+				08CEE5ED2AE1632300149B83 /* Joystick */,
+			);
+			path = "Screen Elements";
+			sourceTree = "<group>";
+		};
+		08CEE5ED2AE1632300149B83 /* Joystick */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Joystick;
+			sourceTree = "<group>";
+		};
+		08CEE5EE2AE1632A00149B83 /* Characters */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Characters;
+			sourceTree = "<group>";
+		};
+		08CEE5EF2AE1633F00149B83 /* Auxiliary */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Auxiliary;
+			sourceTree = "<group>";
+		};
+		08CEE5F02AE1638F00149B83 /* Documents */ = {
+			isa = PBXGroup;
+			children = (
+				0813A2D02AD6DEFE00428484 /* GameScene.sks */,
+				0813A2D22AD6DEFE00428484 /* Actions.sks */,
+			);
+			path = Documents;
+			sourceTree = "<group>";
+		};
+		08CEE5F12AE1639F00149B83 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				0813A2D42AD6DEFE00428484 /* GameScene.swift */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		08CEE5F22AE163AA00149B83 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				0813A2D62AD6DEFE00428484 /* GameViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
