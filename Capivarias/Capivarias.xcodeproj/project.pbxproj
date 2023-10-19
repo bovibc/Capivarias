@@ -15,6 +15,11 @@
 		0813A2DA2AD6DEFE00428484 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0813A2D82AD6DEFE00428484 /* Main.storyboard */; };
 		0813A2DC2AD6DEFF00428484 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0813A2DB2AD6DEFF00428484 /* Assets.xcassets */; };
 		0813A2DF2AD6DEFF00428484 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0813A2DD2AD6DEFF00428484 /* LaunchScreen.storyboard */; };
+		08CEE5F42AE1643A00149B83 /* Textures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CEE5F32AE1643A00149B83 /* Textures.swift */; };
+		08CEE5F62AE1651A00149B83 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CEE5F52AE1651A00149B83 /* Constants.swift */; };
+		08CEE5F82AE1653C00149B83 /* Capybara.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CEE5F72AE1653C00149B83 /* Capybara.swift */; };
+		08CEE5FA2AE167E800149B83 /* Alligator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CEE5F92AE167E800149B83 /* Alligator.swift */; };
+		08CEE5FC2AE1680800149B83 /* Joystick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CEE5FB2AE1680800149B83 /* Joystick.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +32,11 @@
 		0813A2D92AD6DEFE00428484 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0813A2DB2AD6DEFF00428484 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0813A2DE2AD6DEFF00428484 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		08CEE5F32AE1643A00149B83 /* Textures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Textures.swift; sourceTree = "<group>"; };
+		08CEE5F52AE1651A00149B83 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		08CEE5F72AE1653C00149B83 /* Capybara.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Capybara.swift; sourceTree = "<group>"; };
+		08CEE5F92AE167E800149B83 /* Alligator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alligator.swift; sourceTree = "<group>"; };
+		08CEE5FB2AE1680800149B83 /* Joystick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Joystick.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,10 +69,10 @@
 		0813A2CD2AD6DEFE00428484 /* Capivarias */ = {
 			isa = PBXGroup;
 			children = (
+				08CEE5EF2AE1633F00149B83 /* Auxiliary */,
 				08CEE5F22AE163AA00149B83 /* Controllers */,
 				08CEE5F12AE1639F00149B83 /* Scenes */,
 				08CEE5F02AE1638F00149B83 /* Documents */,
-				08CEE5EF2AE1633F00149B83 /* Auxiliary */,
 				08CEE5EC2AE1631300149B83 /* Screen Elements */,
 				0813A2CE2AD6DEFE00428484 /* AppDelegate.swift */,
 				0813A2D82AD6DEFE00428484 /* Main.storyboard */,
@@ -84,6 +94,7 @@
 		08CEE5ED2AE1632300149B83 /* Joystick */ = {
 			isa = PBXGroup;
 			children = (
+				08CEE5FB2AE1680800149B83 /* Joystick.swift */,
 			);
 			path = Joystick;
 			sourceTree = "<group>";
@@ -91,6 +102,8 @@
 		08CEE5EE2AE1632A00149B83 /* Characters */ = {
 			isa = PBXGroup;
 			children = (
+				08CEE5F72AE1653C00149B83 /* Capybara.swift */,
+				08CEE5F92AE167E800149B83 /* Alligator.swift */,
 			);
 			path = Characters;
 			sourceTree = "<group>";
@@ -98,6 +111,8 @@
 		08CEE5EF2AE1633F00149B83 /* Auxiliary */ = {
 			isa = PBXGroup;
 			children = (
+				08CEE5F32AE1643A00149B83 /* Textures.swift */,
+				08CEE5F52AE1651A00149B83 /* Constants.swift */,
 			);
 			path = Auxiliary;
 			sourceTree = "<group>";
@@ -200,8 +215,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08CEE5F62AE1651A00149B83 /* Constants.swift in Sources */,
+				08CEE5FC2AE1680800149B83 /* Joystick.swift in Sources */,
 				0813A2D52AD6DEFE00428484 /* GameScene.swift in Sources */,
+				08CEE5FA2AE167E800149B83 /* Alligator.swift in Sources */,
+				08CEE5F42AE1643A00149B83 /* Textures.swift in Sources */,
 				0813A2D72AD6DEFE00428484 /* GameViewController.swift in Sources */,
+				08CEE5F82AE1653C00149B83 /* Capybara.swift in Sources */,
 				0813A2CF2AD6DEFE00428484 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
