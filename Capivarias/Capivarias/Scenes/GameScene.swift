@@ -20,11 +20,12 @@ class GameScene: SKScene {
     var playerSpeed: CGFloat = 3
     let spriteScale = 0.07
     var joystick = Joystick()
+    var capybara: Capybara = Capybara()
     
     override func didMove(to view: SKView) {
         setupBackground()
         setupScene()
-        //setupCapivara()
+        setupCapivara()
         connectController()
     }
 
@@ -42,15 +43,8 @@ class GameScene: SKScene {
     }
 
     private func setupCapivara() {
-        let screenWidth = view?.frame.width ?? 0
-        let scale = screenWidth * spriteScale / playerSprite.size.width
-        let texture = SKTexture(imageNamed: "capybara_stopped")
-        playerSprite.physicsBody = SKPhysicsBody(texture: texture, size: texture.size())
-        playerSprite.physicsBody?.affectedByGravity = false
-        playerSprite.position = CGPoint(x: 200, y: size.height/2)
-        playerSprite.zPosition = 10
-        playerSprite.setScale(scale)
-        addChild(playerSprite)
+        self.capybara.startCapybara(screenWidth: view?.frame.width ?? 0, screenHeight: size.height)
+        addChild(capybara.sprite)
     }
 
 
