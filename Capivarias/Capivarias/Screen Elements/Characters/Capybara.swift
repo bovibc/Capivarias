@@ -34,7 +34,7 @@ class Capybara {
     }
     
     func stop() {
-        let textures = [SKTexture(imageNamed: "parada")]
+        let textures = [SKTexture(imageNamed: "capybara_stopped")]
         let action = SKAction.animate(with: textures,
                                       timePerFrame: 0.001,
                                       resize: true,
