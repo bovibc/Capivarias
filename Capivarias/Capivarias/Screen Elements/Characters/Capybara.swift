@@ -12,7 +12,7 @@ class Capybara {
 
     private var life: Float = 100
     private var breathTime: Float = 100
-    private var speed: Float = 3.0
+    private var speed: CGFloat = 3.0
     private var defense: Float = 100
     private var assetScale: CGFloat = 0.09
     private var stoppedImage: String = "capybara_stopped"
@@ -31,5 +31,35 @@ class Capybara {
         sprite.position = CGPoint(x: 200, y: screenHeight/2)
         sprite.zPosition = 10
         sprite.setScale(scale)
+    }
+    
+    func stop() {
+        let textures = [SKTexture(imageNamed: "parada")]
+        let action = SKAction.animate(with: textures,
+                                      timePerFrame: 0.001,
+                                      resize: true,
+                                      restore: true)
+        sprite.removeAllActions()
+        sprite.run(SKAction.repeatForever(action))
+    }
+
+    func walk() {
+        
+    }
+
+    func goLeft() {
+        sprite.position.x += speed
+    }
+
+    func goRight() {
+        sprite.position.x -= speed
+    }
+
+    func goTop() {
+        sprite.position.y += speed
+    }
+
+    func goBottom() {
+        sprite.position.y -= speed
     }
 }

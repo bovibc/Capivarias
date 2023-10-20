@@ -10,14 +10,9 @@ import GameplayKit
 import GameController
 
 class GameScene: SKScene {
-
-    var playerSprite = SKSpriteNode(imageNamed: "capybara_stopped")
-    var playerPositionX: CGFloat = 0
-    var playerPositionY: CGFloat = 0
     var isCapivaraWalking = false
     var virtualController: GCVirtualController?
     var background = SKSpriteNode(imageNamed: "dry")
-    var playerSpeed: CGFloat = 3
     let spriteScale = 0.07
     var joystick = Joystick()
     var capybara: Capybara = Capybara()
@@ -47,37 +42,37 @@ class GameScene: SKScene {
         addChild(capybara.sprite)
     }
 
-
     override func update(_ currentTime: TimeInterval) {
-        playerPositionX = CGFloat((virtualController?.controller?.extendedGamepad?.leftThumbstick.xAxis.value)!)
-        playerPositionY = CGFloat((virtualController?.controller?.extendedGamepad?.leftThumbstick.yAxis.value)!)
-        
 
-        print("x: \(playerPositionX)      Y: \(playerPositionY)")
-
-        if (playerPositionX < 0.005 && playerPositionX > -0.005) && (playerPositionY < 0.005 && playerPositionY > -0.005) {
+        if joystick.isJoystickStatic() {
+            capybara.stop()
             isCapivaraWalking = false
         } else {
-            
-        }
-
-        if playerPositionX >= 0.5 {
-            playerSprite.position.x += playerSpeed
-        }
-
-        if playerPositionX <= -0.5 {
-            playerSprite.position.x -= playerSpeed
-        }
-
-        if playerPositionY >= 0.5 {
-            playerSprite.position.y += playerSpeed
-        }
-
-        if playerPositionY <= -0.5 {
-            playerSprite.position.y -= playerSpeed
+            let direction = joystick.getDirection()
+            validateMovement(direction)
+            capybara.walk()
         }
     }
 
+    private func validateMovement(_ direction: Direction) {
+        switch direction.horizontal {
+        case .left:
+            capybara.goLeft()
+        case .right:
+            capybara.goRight()
+        case .none:
+            break
+        }
+
+        switch direction.vertical {
+        case .top:
+            capybara.goTop()
+        case .bottom:
+            capybara.goBottom()
+        case .none:
+            break
+        }
+    }
 
     func connectController() {
         joystick.connectController { controller in
