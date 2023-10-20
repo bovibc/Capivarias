@@ -19,6 +19,7 @@ class GameScene: SKScene {
     var background = SKSpriteNode(imageNamed: "dry")
     var playerSpeed: CGFloat = 3
     let spriteScale = 0.07
+    var joystick = Joystick()
     
     override func didMove(to view: SKView) {
         setupBackground()
@@ -85,11 +86,8 @@ class GameScene: SKScene {
 
 
     func connectController() {
-        let controlConfig = GCVirtualController.Configuration()
-        controlConfig.elements = [GCInputLeftThumbstick, GCInputButtonX, GCInputButtonY]
-        
-        let controller = GCVirtualController(configuration: controlConfig)
-        controller.connect()
-        virtualController = controller
+        joystick.connectController { controller in
+            self.virtualController = controller
+        }
     }
 }
