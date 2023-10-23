@@ -52,6 +52,11 @@ class GameScene: SKScene {
     private func setupCapivara() {
         self.capybara.startCapybara(screenWidth: size.width , screenHeight: size.height)
         addChild(capybara.sprite)
+        if !isCapivaraWalking {
+            isCapivaraWalking = true
+            capybara.walk(isCapivaraWalking: isCapivaraWalking)
+        }
+       
     }
 
     override func update(_ currentTime: TimeInterval) {
@@ -62,7 +67,10 @@ class GameScene: SKScene {
         } else {
             let direction = joystick.getDirection()
             validateMovement(direction)
-            capybara.walk()
+            if !isCapivaraWalking {
+                isCapivaraWalking = true
+                capybara.walk(isCapivaraWalking: isCapivaraWalking)
+            }
         }
     }
 
@@ -78,7 +86,7 @@ class GameScene: SKScene {
 
         switch direction.vertical {
         case .top:
-            capybara.goTop()
+            capybara.stop()
         case .bottom:
             capybara.goBottom()
         case .none:

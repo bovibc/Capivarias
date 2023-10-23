@@ -9,16 +9,17 @@ import Foundation
 import SpriteKit
 
 class Capybara {
-
+    
     private var life: Float = 100
     private var breathTime: Float = 100
     private var speed: CGFloat = 0.004
     private var defense: Float = 100
     private var assetScale: CGFloat = 0.1
     private var stoppedImage: String = "capybara_stopped"
-
+    //private var playerSprite = SKSpriteNode(imageNamed: "capybara_stopped")
+    
     var sprite: SKSpriteNode
-
+    
     init() {
         self.sprite = SKSpriteNode(imageNamed: stoppedImage)
     }
@@ -47,26 +48,40 @@ class Capybara {
         sprite.run(SKAction.repeatForever(action))
         
     }
-
-    func walk() {
-        print(sprite.zRotation)
-        sprite.zRotation = 0
+    
+    
+   
         
+        
+        func walk(isCapivaraWalking: Bool) {
+            print(sprite.zRotation)
+            sprite.zRotation = 0
+            let textures = Textures.getTextures(name: "", atlas: "Capybara_Walking")
+            let action = SKAction.animate(with: textures,
+                                          timePerFrame: 1/TimeInterval(textures.count),
+                                          resize: true,
+                                          restore: true)
+            
+            if !isCapivaraWalking {
+                sprite.removeAllActions()
+                sprite.run(SKAction.repeatForever(action))
+            }
+        }
+        
+        func goLeft() {
+            sprite.position.x += speed
+        }
+        
+        func goRight() {
+            sprite.position.x -= speed
+        }
+        
+        func goTop() {
+            sprite.position.y += speed
+        }
+        
+        func goBottom() {
+            sprite.position.y -= speed
+        }
     }
 
-    func goLeft() {
-        sprite.position.x += speed
-    }
-
-    func goRight() {
-        sprite.position.x -= speed
-    }
-
-    func goTop() {
-        sprite.position.y += speed
-    }
-
-    func goBottom() {
-        sprite.position.y -= speed
-    }
-}
