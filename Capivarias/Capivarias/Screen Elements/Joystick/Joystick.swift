@@ -32,19 +32,20 @@ enum VerticalDirection {
 }
 
 class Joystick: SKScene {
-
+    var positionX: CGFloat = 0
+    var positionY: CGFloat = 0
     var virtualController: GCVirtualController?
 
     func isJoystickStatic() -> Bool {
-        let positionX = CGFloat((virtualController?.controller?.extendedGamepad?.leftThumbstick.xAxis.value)!)
-        let positionY = CGFloat((virtualController?.controller?.extendedGamepad?.leftThumbstick.yAxis.value)!)
+        positionX = CGFloat((virtualController?.controller?.extendedGamepad?.leftThumbstick.xAxis.value)!)
+        positionY = CGFloat((virtualController?.controller?.extendedGamepad?.leftThumbstick.yAxis.value)!)
 
         return (positionX < 0.005 && positionX > -0.005) && (positionY < 0.005 && positionY > -0.005)
     }
 
     func getDirection() -> Direction {
-        let positionX = CGFloat((virtualController?.controller?.extendedGamepad?.leftThumbstick.xAxis.value)!)
-        let positionY = CGFloat((virtualController?.controller?.extendedGamepad?.leftThumbstick.yAxis.value)!)
+        positionX = CGFloat((virtualController?.controller?.extendedGamepad?.leftThumbstick.xAxis.value)!)
+        positionY = CGFloat((virtualController?.controller?.extendedGamepad?.leftThumbstick.yAxis.value)!)
         var horizontal: HorizontalDirection
         var vertical: VerticalDirection
 
