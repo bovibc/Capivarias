@@ -23,7 +23,7 @@ class Capybara {
         self.sprite = SKSpriteNode(imageNamed: stoppedImage)
     }
 
-    func startCapybara(screenWidth: CGFloat, screenHeight: CGFloat) {
+    func start(screenWidth: CGFloat, screenHeight: CGFloat) {
         let scale = screenWidth * assetScale / sprite.size.width
         let texture = SKTexture(imageNamed: "capybara_stopped")
         sprite.physicsBody = SKPhysicsBody(texture: texture, size: texture.size())
@@ -34,6 +34,7 @@ class Capybara {
     }
     
     func stop() {
+        sprite.zRotation = 0
         let textures = [SKTexture(imageNamed: "capybara_stopped")]
         let action = SKAction.animate(with: textures,
                                       timePerFrame: 0.001,
@@ -44,6 +45,8 @@ class Capybara {
     }
 
     func walk() {
+        print(sprite.zRotation)
+        sprite.zRotation = 0
         
     }
 
