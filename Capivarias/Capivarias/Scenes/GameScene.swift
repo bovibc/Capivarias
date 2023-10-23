@@ -29,6 +29,9 @@ class GameScene: SKScene {
         background.position = CGPoint(x: frame.size.width / 2, y: frame.size.height / 2)
         background.xScale = frame.size.width / background.size.width
         background.yScale = frame.size.height / background.size.height
+        
+        
+        
         addChild(background)
     }
 
@@ -38,7 +41,7 @@ class GameScene: SKScene {
     }
 
     private func setupCapivara() {
-        self.capybara.startCapybara(screenWidth: view?.frame.width ?? 0, screenHeight: size.height)
+        self.capybara.startCapybara(screenWidth: size.width , screenHeight: size.height)
         addChild(capybara.sprite)
     }
 
