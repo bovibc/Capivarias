@@ -9,7 +9,7 @@ import Foundation
 import SpriteKit
 
 class Capybara {
-    
+    var isCapivaraWalking = false
     private var life: Float = 100
     private var breathTime: Float = 100
     private var speed: CGFloat = 3.0
@@ -54,46 +54,49 @@ class Capybara {
                                       timePerFrame: 1/TimeInterval(textures.count),
                                       resize: true,
                                       restore: true)
-            sprite.run(SKAction.repeatForever(action))
+        sprite.run(SKAction.repeatForever(action))
     }
     
-   
+    
+    
+    
+    func walk(positionX: CGFloat) {
         
         
-    func walk(isCapivaraWalking: Bool, positionX: CGFloat) {
-            
-            
-            print(sprite.zRotation)
-            sprite.zRotation = 0
-            let textures = Textures.getTextures(name: "", atlas: "Capybara_Walking")
-            let action = SKAction.animate(with: textures,
-                                          timePerFrame: 1/TimeInterval(textures.count),
-                                          resize: true,
-                                          restore: true)
-            
-            sprite.xScale = positionX > 0 ? abs(sprite.xScale) : -abs(sprite.xScale)
-        print(positionX)
-            
-            
-                sprite.removeAllActions()
-                sprite.run(SKAction.repeatForever(action))
-            
+        print(sprite.zRotation)
+        sprite.zRotation = 0
+        let textures = Textures.getTextures(name: "", atlas: "Capybara_Walking")
+        let action = SKAction.animate(with: textures,
+                                      timePerFrame: 1/TimeInterval(textures.count),
+                                      resize: true,
+                                      restore: true)
+        
+        sprite.xScale = positionX > 0 ? abs(sprite.xScale) : -abs(sprite.xScale)
+        
+        if !isCapivaraWalking {
+            isCapivaraWalking = true
+            sprite.removeAllActions()
+            sprite.run(SKAction.repeatForever(action))
         }
         
-        func goLeft() {
-            sprite.position.x += speed
-        }
         
-        func goRight() {
-            sprite.position.x -= speed
-        }
         
-        func goTop() {
-            sprite.position.y += speed
-        }
-        
-        func goBottom() {
-            sprite.position.y -= speed
-        }
     }
+    
+    func goLeft() {
+        sprite.position.x += speed
+    }
+    
+    func goRight() {
+        sprite.position.x -= speed
+    }
+    
+    func goTop() {
+        sprite.position.y += speed
+    }
+    
+    func goBottom() {
+        sprite.position.y -= speed
+    }
+}
 
