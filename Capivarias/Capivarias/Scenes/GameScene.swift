@@ -10,20 +10,17 @@ import GameplayKit
 import GameController
 
 class GameScene: SKScene {
-
-    var playerSprite = SKSpriteNode(imageNamed: "capybara_stopped")
-    var playerPositionX: CGFloat = 0
-    var playerPositionY: CGFloat = 0
     var isCapivaraWalking = false
     var virtualController: GCVirtualController?
     var background = SKSpriteNode(imageNamed: "dry")
-    var playerSpeed: CGFloat = 3
     let spriteScale = 0.07
+    var joystick = Joystick()
+    var capybara: Capybara = Capybara()
     
     override func didMove(to view: SKView) {
         setupBackground()
         setupScene()
-        //setupCapivara()
+        setupCapivara()
         connectController()
     }
 
@@ -32,6 +29,9 @@ class GameScene: SKScene {
         background.position = CGPoint(x: frame.size.width / 2, y: frame.size.height / 2)
         background.xScale = frame.size.width / background.size.width
         background.yScale = frame.size.height / background.size.height
+        
+        
+        
         addChild(background)
     }
 
@@ -41,55 +41,45 @@ class GameScene: SKScene {
     }
 
     private func setupCapivara() {
-        let screenWidth = view?.frame.width ?? 0
-        let scale = screenWidth * spriteScale / playerSprite.size.width
-        let texture = SKTexture(imageNamed: "capybara_stopped")
-        playerSprite.physicsBody = SKPhysicsBody(texture: texture, size: texture.size())
-        playerSprite.physicsBody?.affectedByGravity = false
-        playerSprite.position = CGPoint(x: 200, y: size.height/2)
-        playerSprite.zPosition = 10
-        playerSprite.setScale(scale)
-        addChild(playerSprite)
+        self.capybara.startCapybara(screenWidth: size.width , screenHeight: size.height)
+        addChild(capybara.sprite)
     }
-
 
     override func update(_ currentTime: TimeInterval) {
-        playerPositionX = CGFloat((virtualController?.controller?.extendedGamepad?.leftThumbstick.xAxis.value)!)
-        playerPositionY = CGFloat((virtualController?.controller?.extendedGamepad?.leftThumbstick.yAxis.value)!)
-        
 
-        print("x: \(playerPositionX)      Y: \(playerPositionY)")
-
-        if (playerPositionX < 0.005 && playerPositionX > -0.005) && (playerPositionY < 0.005 && playerPositionY > -0.005) {
+        if joystick.isJoystickStatic() {
+            capybara.stop()
             isCapivaraWalking = false
         } else {
-            
-        }
-
-        if playerPositionX >= 0.5 {
-            playerSprite.position.x += playerSpeed
-        }
-
-        if playerPositionX <= -0.5 {
-            playerSprite.position.x -= playerSpeed
-        }
-
-        if playerPositionY >= 0.5 {
-            playerSprite.position.y += playerSpeed
-        }
-
-        if playerPositionY <= -0.5 {
-            playerSprite.position.y -= playerSpeed
+            let direction = joystick.getDirection()
+            validateMovement(direction)
+            capybara.walk()
         }
     }
 
+    private func validateMovement(_ direction: Direction) {
+        switch direction.horizontal {
+        case .left:
+            capybara.goLeft()
+        case .right:
+            capybara.goRight()
+        case .none:
+            break
+        }
+
+        switch direction.vertical {
+        case .top:
+            capybara.goTop()
+        case .bottom:
+            capybara.goBottom()
+        case .none:
+            break
+        }
+    }
 
     func connectController() {
-        let controlConfig = GCVirtualController.Configuration()
-        controlConfig.elements = [GCInputLeftThumbstick, GCInputButtonX, GCInputButtonY]
-        
-        let controller = GCVirtualController(configuration: controlConfig)
-        controller.connect()
-        virtualController = controller
+        joystick.connectController { controller in
+            self.virtualController = controller
+        }
     }
 }
