@@ -35,20 +35,22 @@ class Joystick: SKScene {
     var positionX: CGFloat = 0
     var positionY: CGFloat = 0
     var virtualController: GCVirtualController?
-
+    
+    var controller2: GCController?
+    
     func isJoystickStatic() -> Bool {
         positionX = CGFloat((virtualController?.controller?.extendedGamepad?.leftThumbstick.xAxis.value)!)
         positionY = CGFloat((virtualController?.controller?.extendedGamepad?.leftThumbstick.yAxis.value)!)
-
+        
         return (positionX < 0.005 && positionX > -0.005) && (positionY < 0.005 && positionY > -0.005)
     }
-
+    
     func getDirection() -> Direction {
         positionX = CGFloat((virtualController?.controller?.extendedGamepad?.leftThumbstick.xAxis.value)!)
         positionY = CGFloat((virtualController?.controller?.extendedGamepad?.leftThumbstick.yAxis.value)!)
         var horizontal: HorizontalDirection
         var vertical: VerticalDirection
-
+        
         if positionX >= 0.5 {
             horizontal = .left
         } else if positionX <= -0.5 {
@@ -56,7 +58,7 @@ class Joystick: SKScene {
         } else {
             horizontal = .none
         }
-
+        
         if positionY >= 0.5 {
             vertical = .top
         } else if positionY <= -0.5 {
@@ -64,10 +66,10 @@ class Joystick: SKScene {
         } else {
             vertical = .none
         }
-
+        
         return Direction(horizontal, vertical)
     }
-
+    
     func connectController(connect: @escaping ((GCVirtualController) -> Void)) {
         let controlConfig = GCVirtualController.Configuration()
         controlConfig.elements = [GCInputLeftThumbstick, GCInputButtonX, GCInputButtonY]
@@ -76,5 +78,15 @@ class Joystick: SKScene {
         controller.connect()
         virtualController = controller
         connect(controller)
+        
+        guard let controller2 = GCController.controllers().first else { return }
+        
+        controller2.extendedGamepad?.buttonX.pressedChangedHandler = { button, value , pressed in
+            if pressed {
+                
+            }
+        }
+        
+        
     }
 }
