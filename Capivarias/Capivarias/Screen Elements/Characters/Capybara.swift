@@ -49,11 +49,24 @@ class Capybara {
         
     }
     
+    func hit() {
+        //carregar os assets da capivara batendo
+        //fazer com que quando apertar o botão "A", ocorra a animação prasente aqui na função hit
+        
+        let textures = Textures.getTextures(name: "", atlas: "Capybara_Hit")
+        let action = SKAction.animate(with: textures,
+                                      timePerFrame: 1/TimeInterval(textures.count),
+                                      resize: true,
+                                      restore: true)
+            sprite.run(SKAction.repeatForever(action))
+    }
     
    
         
         
-        func walk(isCapivaraWalking: Bool) {
+    func walk(isCapivaraWalking: Bool, positionX: CGFloat) {
+            
+            
             print(sprite.zRotation)
             sprite.zRotation = 0
             let textures = Textures.getTextures(name: "", atlas: "Capybara_Walking")
@@ -62,10 +75,13 @@ class Capybara {
                                           resize: true,
                                           restore: true)
             
-            if !isCapivaraWalking {
+            sprite.xScale = positionX > 0 ? abs(sprite.xScale) : -abs(sprite.xScale)
+        print(positionX)
+            
+            
                 sprite.removeAllActions()
                 sprite.run(SKAction.repeatForever(action))
-            }
+            
         }
         
         func goLeft() {

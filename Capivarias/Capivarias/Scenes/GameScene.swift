@@ -54,7 +54,7 @@ class GameScene: SKScene {
         addChild(capybara.sprite)
         if !isCapivaraWalking {
             isCapivaraWalking = true
-            capybara.walk(isCapivaraWalking: isCapivaraWalking)
+            capybara.walk(isCapivaraWalking: isCapivaraWalking, positionX: joystick.positionX)
         }
        
     }
@@ -69,7 +69,7 @@ class GameScene: SKScene {
             validateMovement(direction)
             if !isCapivaraWalking {
                 isCapivaraWalking = true
-                capybara.walk(isCapivaraWalking: isCapivaraWalking)
+               capybara.walk(isCapivaraWalking: isCapivaraWalking, positionX: joystick.positionX )
             }
         }
     }
@@ -86,7 +86,7 @@ class GameScene: SKScene {
 
         switch direction.vertical {
         case .top:
-            capybara.stop()
+            capybara.goTop()
         case .bottom:
             capybara.goBottom()
         case .none:
