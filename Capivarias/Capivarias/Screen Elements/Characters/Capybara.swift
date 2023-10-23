@@ -37,7 +37,7 @@ class Capybara {
     }
     
     func stop() {
-        
+        sprite.zRotation = 0
         let textures = [SKTexture(imageNamed: "capybara_stopped")]
         let action = SKAction.animate(with: textures,
                                       timePerFrame: 0.001,
@@ -49,6 +49,8 @@ class Capybara {
     }
 
     func walk() {
+        print(sprite.zRotation)
+        sprite.zRotation = 0
         
     }
 

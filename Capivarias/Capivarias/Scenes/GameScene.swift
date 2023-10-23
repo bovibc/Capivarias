@@ -15,6 +15,7 @@ class GameScene: SKScene {
     var background = SKSpriteNode(imageNamed: "dry")
     let spriteScale = 0.07
     var joystick = Joystick()
+    var alligator = Alligator()
     var capybara: Capybara = Capybara()
     var audioPlayer = AudioPlayer()
     
@@ -22,6 +23,7 @@ class GameScene: SKScene {
         setupBackground()
         setupScene()
         setupCapivara()
+        setupAlligator()
         connectController()
         audioPlayer.playEnviroment(sound: "ambient-forest", type: "mp3")
     }
@@ -37,6 +39,11 @@ class GameScene: SKScene {
         addChild(background)
     }
 
+    private func setupAlligator() {
+        alligator.start(screenWidth: view?.frame.width ?? 0)
+        addChild(alligator.sprite)
+    }
+
     private func setupScene() {
         scene?.anchorPoint = .zero
         scene?.size = CGSize(width: view?.scene?.size.width ?? 600, height: view?.scene?.size.height ?? 800)
@@ -48,7 +55,7 @@ class GameScene: SKScene {
     }
 
     override func update(_ currentTime: TimeInterval) {
-
+        alligator.follow(player: capybara.sprite.position)
         if joystick.isJoystickStatic() {
             capybara.stop()
             isCapivaraWalking = false
