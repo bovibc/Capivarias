@@ -36,9 +36,7 @@ class Alligator {
     }
 
     private func setPhysics() {
-        let texture = SKTexture(imageNamed: staticName)
-
-        sprite.physicsBody = SKPhysicsBody(texture: texture, size: texture.size())
+        sprite.physicsBody = SKPhysicsBody(rectangleOf: sprite.size)
         sprite.physicsBody?.affectedByGravity = false
         sprite.physicsBody?.isDynamic = true
         sprite.physicsBody?.usesPreciseCollisionDetection = true
