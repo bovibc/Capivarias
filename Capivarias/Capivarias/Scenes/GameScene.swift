@@ -59,7 +59,7 @@ class GameScene: SKScene {
     }
     
     override func update(_ currentTime: TimeInterval) {
-        //alligator.follow(player: capybara.sprite.position)
+        alligator.follow(player: capybara.sprite.position)
         if joystick.isJoystickStatic() {
 //            capybara.stop()
 //            capybara.isCapivaraWalking = false
@@ -68,8 +68,8 @@ class GameScene: SKScene {
             }
             
             else {
-                            capybara.stop()
-                            capybara.isCapivaraWalking = false
+                capybara.stop()
+                capybara.isCapivaraWalking = false
             }
             
         } else {
