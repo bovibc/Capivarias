@@ -25,6 +25,7 @@
 		F28B1D522AE2C34700F8E596 /* ambient-forest.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F28B1D4D2AE2C34600F8E596 /* ambient-forest.mp3 */; };
 		F28B1D532AE2C34700F8E596 /* capivara-sword-atack.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F28B1D4E2AE2C34600F8E596 /* capivara-sword-atack.mp3 */; };
 		F28B1D542AE2C34700F8E596 /* capivara-death-menu.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F28B1D4F2AE2C34700F8E596 /* capivara-death-menu.mp3 */; };
+		F2A77F832AE7E7A50030F197 /* AudioPlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A77F822AE7E7A50030F197 /* AudioPlayerController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		F28B1D4D2AE2C34600F8E596 /* ambient-forest.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "ambient-forest.mp3"; sourceTree = "<group>"; };
 		F28B1D4E2AE2C34600F8E596 /* capivara-sword-atack.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "capivara-sword-atack.mp3"; sourceTree = "<group>"; };
 		F28B1D4F2AE2C34700F8E596 /* capivara-death-menu.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "capivara-death-menu.mp3"; sourceTree = "<group>"; };
+		F2A77F822AE7E7A50030F197 /* AudioPlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				0813A2D62AD6DEFE00428484 /* GameViewController.swift */,
+				F2A77F822AE7E7A50030F197 /* AudioPlayerController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -245,6 +248,7 @@
 			files = (
 				08CEE5F62AE1651A00149B83 /* Constants.swift in Sources */,
 				08CEE5FC2AE1680800149B83 /* Joystick.swift in Sources */,
+				F2A77F832AE7E7A50030F197 /* AudioPlayerController.swift in Sources */,
 				0813A2D52AD6DEFE00428484 /* GameScene.swift in Sources */,
 				08CEE5FA2AE167E800149B83 /* Alligator.swift in Sources */,
 				08CEE5F42AE1643A00149B83 /* Textures.swift in Sources */,

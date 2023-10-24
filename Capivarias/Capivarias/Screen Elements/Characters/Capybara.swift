@@ -21,20 +21,34 @@ class Capybara {
     var sprite: SKSpriteNode
     
     init() {
-        self.sprite = SKSpriteNode(imageNamed: stoppedImage)
+        self.sprite = SKSpriteNode(imageNamed: staticName)
     }
 
-    func startCapybara(screenWidth: CGFloat, screenHeight: CGFloat) {
+    func start(screenWidth: CGFloat, screenHeight: CGFloat) {
         let scaleX = screenWidth * assetScale / sprite.size.width
         let scaleY = screenHeight * assetScale / sprite.size.height
-        let texture = SKTexture(imageNamed: "capybara_stopped")
-        
-        sprite.physicsBody = SKPhysicsBody(texture: texture, size: texture.size())
-        sprite.physicsBody?.affectedByGravity = false
-        sprite.position = CGPoint(x: screenWidth/8, y: screenHeight/2)
-        sprite.zPosition = 10
         sprite.xScale = scaleX
         sprite.yScale = scaleY
+        
+        setPhysics()
+        setPosition(screenWidth, screenHeight)
+        sprite.name = "capybara"
+    }
+
+    private func setPhysics() {
+        let texture = SKTexture(imageNamed: staticName)
+       
+        sprite.physicsBody = SKPhysicsBody(texture: texture, size: texture.size())
+        sprite.physicsBody?.affectedByGravity = false
+        sprite.physicsBody?.isDynamic = true
+        sprite.physicsBody?.usesPreciseCollisionDetection = true
+        sprite.physicsBody?.usesPreciseCollisionDetection = true
+        sprite.physicsBody?.contactTestBitMask = sprite.physicsBody!.collisionBitMask
+    }
+
+    private func setPosition(_ screenWidth: CGFloat, _ screenHeight: CGFloat) {        
+        sprite.position = CGPoint(x: screenWidth/8, y: screenHeight/2)
+        sprite.zPosition = 20
     }
     
     func stop() {
@@ -46,7 +60,7 @@ class Capybara {
                                       restore: true)
         sprite.removeAllActions()
         sprite.run(SKAction.repeatForever(action))
-        
+
     }
     
     func hit() {
