@@ -59,10 +59,19 @@ class GameScene: SKScene {
     }
     
     override func update(_ currentTime: TimeInterval) {
-        alligator.follow(player: capybara.sprite.position)
+        //alligator.follow(player: capybara.sprite.position)
         if joystick.isJoystickStatic() {
-            capybara.stop()
-            capybara.isCapivaraWalking = false
+//            capybara.stop()
+//            capybara.isCapivaraWalking = false
+            if ((joystick.controller2?.extendedGamepad?.buttonX.isPressed) != nil) {
+                capybara.hit()
+            }
+            
+            else {
+                            capybara.stop()
+                            capybara.isCapivaraWalking = false
+            }
+            
         } else {
             let direction = joystick.getDirection()
             validateMovement(direction)
@@ -71,6 +80,8 @@ class GameScene: SKScene {
             capybara.walk(positionX: joystick.positionX )
             
         }
+        
+        atack()
     }
     
     private func validateMovement(_ direction: Direction) {
@@ -92,6 +103,22 @@ class GameScene: SKScene {
             break
         }
     }
+    
+    func atack(){
+        
+        guard let controller2 = GCController.controllers().first else {
+           return
+        }
+        
+        controller2.extendedGamepad?.buttonX.pressedChangedHandler = { button, value, pressed in
+            if pressed {
+                print("Oi")
+                self.capybara.hit()
+            }
+            
+        }
+    }
+//        virtualController?.controller?.extendedGamepad?.buttonX.pressedChangedHandler
     
     func connectController() {
         joystick.connectController { controller in

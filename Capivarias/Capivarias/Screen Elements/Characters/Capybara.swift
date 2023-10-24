@@ -50,15 +50,17 @@ class Capybara {
     }
     
     func hit() {
-        //carregar os assets da capivara batendo
-        //fazer com que quando apertar o botão "A", ocorra a animação prasente aqui na função hit
-        
+       print("ataque")
         let textures = Textures.getTextures(name: "", atlas: "Capybara_Hit")
         let action = SKAction.animate(with: textures,
                                       timePerFrame: 1/TimeInterval(textures.count),
                                       resize: true,
                                       restore: true)
-        sprite.run(SKAction.repeatForever(action))
+   
+        sprite.removeAllActions()
+      //  sprite.run(SKAction.repeatForever(action))
+        sprite.run(SKAction.animate(with: textures, timePerFrame: 0.1))
+        
     }
     
     
