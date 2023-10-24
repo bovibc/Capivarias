@@ -9,6 +9,7 @@ import Foundation
 import SpriteKit
 
 class Capybara {
+    var isCapivaraHitting = false
     var isCapivaraWalking = false
     private var life: Float = 100
     private var breathTime: Float = 100
@@ -16,6 +17,7 @@ class Capybara {
     private var defense: Float = 100
     private var assetScale: CGFloat = 0.1
     private var stoppedImage: String = "capybara_stopped"
+    private var staticName: String = "capybara_stopped"
     //private var playerSprite = SKSpriteNode(imageNamed: "capybara_stopped")
     
     var sprite: SKSpriteNode
@@ -52,6 +54,8 @@ class Capybara {
     }
     
     func stop() {
+        self.isCapivaraHitting = false
+        self.isCapivaraWalking = false
         sprite.zRotation = 0
         let textures = [SKTexture(imageNamed: "capybara_stopped")]
         let action = SKAction.animate(with: textures,
@@ -64,7 +68,6 @@ class Capybara {
     }
     
     func hit() {
-       print("ataque")
         let textures = Textures.getTextures(name: "", atlas: "Capybara_Hit")
         let action = SKAction.animate(with: textures,
                                       timePerFrame: 1/TimeInterval(textures.count),
@@ -73,7 +76,14 @@ class Capybara {
    
         sprite.removeAllActions()
       //  sprite.run(SKAction.repeatForever(action))
-        sprite.run(SKAction.animate(with: textures, timePerFrame: 0.1))
+        isCapivaraWalking = false
+        isCapivaraHitting = true
+       // sprite.run(SKAction.animate(with: textures, timePerFrame: 0.1))
+        
+        sprite.run(SKAction.animate(with: textures, timePerFrame: 0.1)) {
+            self.isCapivaraHitting = false
+            self.stop()
+        }
         
     }
     

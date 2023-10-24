@@ -30,6 +30,7 @@ class GameScene: SKScene {
         connectController()
         setupAudio()
         setupContact()
+    //    setupController()
     }
     
     private func setupContact() {
@@ -75,27 +76,31 @@ class GameScene: SKScene {
     override func update(_ currentTime: TimeInterval) {
         alligator.follow(player: capybara.sprite.position)
         if joystick.isJoystickStatic() {
-//            capybara.stop()
-//            capybara.isCapivaraWalking = false
-            if ((joystick.controller2?.extendedGamepad?.buttonX.isPressed) != nil) {
-                capybara.hit()
+            
+            if !capybara.isCapivaraHitting {
+                capybara.stop()
             }
             
-            else {
-                capybara.stop()
-                capybara.isCapivaraWalking = false
-            }
+//            capybara.stop()
+////            capybara.isCapivaraWalking = false
+//            if ((joystick.controller2?.extendedGamepad?.buttonX.isPressed) == true) {
+////                capybara.hit()
+//            atack()
+//            }
+//            
+//            else {
+//                capybara.stop()
+//                capybara.isCapivaraWalking = false
+//            }
             
         } else {
             let direction = joystick.getDirection()
             validateMovement(direction)
-            
-            
             capybara.walk(positionX: joystick.positionX )
             
         }
         
-        atack()
+    
     }
     
     private func validateMovement(_ direction: Direction) {
@@ -118,25 +123,34 @@ class GameScene: SKScene {
         }
     }
     
-    func atack(){
+    func setupController(){
         
-        guard let controller2 = GCController.controllers().first else {
-           return
-        }
+//        guard let controller2 = GCController.controllers().first else {
+//            print("OPS!!!")
+//           return
+//        }
         
-        controller2.extendedGamepad?.buttonX.pressedChangedHandler = { button, value, pressed in
+        self.virtualController?.controller?.extendedGamepad?.buttonX.pressedChangedHandler = { button, value, pressed in
             if pressed {
-                print("Oi")
                 self.capybara.hit()
             }
-            
         }
+//        
+//        controller2.extendedGamepad?.buttonX.pressedChangedHandler = { button, value, pressed in
+//            print("Controller 2 \(pressed)")
+//            if pressed {
+//                print("Oi")
+//                self.capybara.hit()
+//            }
+//            
+//        }
     }
 //        virtualController?.controller?.extendedGamepad?.buttonX.pressedChangedHandler
     
     func connectController() {
         joystick.connectController { controller in
             self.virtualController = controller
+            self.setupController()
         }
     }
 }
