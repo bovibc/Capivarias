@@ -16,12 +16,14 @@ class GameScene: SKScene {
     let spriteScale = 0.07
     var joystick = Joystick()
     var capybara: Capybara = Capybara()
+    var audioPlayer = AudioPlayer()
     
     override func didMove(to view: SKView) {
         setupBackground()
         setupScene()
         setupCapivara()
         connectController()
+        audioPlayer.playEnviroment(sound: "ambient-forest", type: "mp3")
     }
 
     private func setupBackground() {
