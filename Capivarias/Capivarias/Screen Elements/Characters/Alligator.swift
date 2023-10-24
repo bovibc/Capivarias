@@ -11,29 +11,44 @@ import SpriteKit
 class Alligator {
     private var life: CGFloat = 100
     private var damage: CGFloat = 20
-    private var speed: CGFloat = 0.5
+    private var speed: CGFloat = 0.001
     private var attackSpeed: CGFloat = 1
-    private var scale: CGFloat = 0.09
+    private var scale: CGFloat = 0.1
     private let staticName: String = "alligator_stopped"
     private var isAlligatorWalking: Bool = false
     var isAlligatoraAttacking: Bool = false
     private let movementAliasName: String = "Alligator_Walking"
-   
     var sprite: SKSpriteNode
 
     init() {
         self.sprite = SKSpriteNode(imageNamed: staticName)
-        Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(attack), userInfo: nil, repeats: true)
     }
 
-    func start(screenWidth: CGFloat) {
-        let enemyScale = screenWidth * scale / sprite.size.width
+    func start(screenWidth: CGFloat, screenHeight: CGFloat) {
+        let scaleX = screenWidth * scale / sprite.size.width
+        let scaleY = screenHeight * scale / sprite.size.height
+        sprite.xScale = scaleX
+        sprite.yScale = scaleY
+
+        setPhysics()
+        setPosition(screenWidth, screenHeight)
+        sprite.name = "alligator"
+    }
+
+    private func setPhysics() {
         let texture = SKTexture(imageNamed: staticName)
+
         sprite.physicsBody = SKPhysicsBody(texture: texture, size: texture.size())
-        sprite.position = CGPoint(x: 500, y: 200)
-        sprite.zPosition = 10
         sprite.physicsBody?.affectedByGravity = false
-        sprite.setScale(enemyScale)
+        sprite.physicsBody?.isDynamic = true
+        sprite.physicsBody?.usesPreciseCollisionDetection = true
+        sprite.physicsBody?.usesPreciseCollisionDetection = true
+        sprite.physicsBody?.contactTestBitMask = sprite.physicsBody!.collisionBitMask
+    }
+
+    private func setPosition(_ screenWidth: CGFloat, _ screenHeight: CGFloat) {
+        sprite.position = CGPoint(x: screenWidth/4, y: screenHeight/2)
+        sprite.zPosition = 20
     }
 
     func walk() {
@@ -50,7 +65,6 @@ class Alligator {
     
     func stop() {
         isAlligatorWalking = false
-        
     }
 
     func follow(player: CGPoint) {
@@ -70,6 +84,7 @@ class Alligator {
     }
 
     @objc func attack() {
+        guard !isAlligatoraAttacking else { return }
         let startAction = SKAction.run {
             self.stop()
             self.attackAction()
