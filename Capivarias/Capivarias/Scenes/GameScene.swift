@@ -16,7 +16,10 @@ class GameScene: SKScene {
     let spriteScale = 0.07
     var joystick = Joystick()
     var alligator = Alligator()
-    var capybara: Capybara = Capybara()
+    var capybara = Capybara()
+    let ContactPlayer: UInt32 = 0x1 << 0
+    let ContactAlligator: UInt32 = 0x1 << 1
+    var i = 0
     
     override func didMove(to view: SKView) {
         setupBackground()
@@ -24,21 +27,27 @@ class GameScene: SKScene {
         setupCapivara()
         setupAlligator()
         connectController()
+        setupContact()
     }
     
+    private func setupContact() {
+        physicsWorld.contactDelegate = self
+        capybara.sprite.physicsBody?.categoryBitMask = ContactPlayer
+        alligator.sprite.physicsBody?.categoryBitMask = ContactAlligator
+        capybara.sprite.physicsBody?.collisionBitMask = 0
+        alligator.sprite.physicsBody?.collisionBitMask = 0
+    }
+
     private func setupBackground() {
         self.scaleMode = .fill
         background.position = CGPoint(x: frame.size.width / 2, y: frame.size.height / 2)
         background.xScale = frame.size.width / background.size.width
         background.yScale = frame.size.height / background.size.height
-        
-        
-        
         addChild(background)
     }
     
     private func setupAlligator() {
-        alligator.start(screenWidth: view?.frame.width ?? 0)
+        self.alligator.start(screenWidth: size.width , screenHeight: size.height)
         addChild(alligator.sprite)
     }
     
@@ -50,10 +59,6 @@ class GameScene: SKScene {
     private func setupCapivara() {
         self.capybara.start(screenWidth: size.width , screenHeight: size.height)
         addChild(capybara.sprite)
-        
-        capybara.walk(positionX: joystick.positionX)
-        
-        
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -95,5 +100,11 @@ class GameScene: SKScene {
         joystick.connectController { controller in
             self.virtualController = controller
         }
+    }
+}
+
+extension GameScene: SKPhysicsContactDelegate {
+    func didBegin(_ contact: SKPhysicsContact) {
+        //alligator.attack()
     }
 }

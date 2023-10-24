@@ -15,26 +15,40 @@ class Capybara {
     private var speed: CGFloat = 0.004
     private var defense: Float = 100
     private var assetScale: CGFloat = 0.1
-    private var stoppedImage: String = "capybara_stopped"
-    //private var playerSprite = SKSpriteNode(imageNamed: "capybara_stopped")
-    
+    private var staticName: String = "capybara_stopped"
+
     var sprite: SKSpriteNode
-    
+
     init() {
-        self.sprite = SKSpriteNode(imageNamed: stoppedImage)
+        self.sprite = SKSpriteNode(imageNamed: staticName)
     }
-    
+
     func start(screenWidth: CGFloat, screenHeight: CGFloat) {
         let scaleX = screenWidth * assetScale / sprite.size.width
         let scaleY = screenHeight * assetScale / sprite.size.height
-        let texture = SKTexture(imageNamed: "capybara_stopped")
-        
-        sprite.physicsBody = SKPhysicsBody(texture: texture, size: texture.size())
-        sprite.physicsBody?.affectedByGravity = false
-        sprite.position = CGPoint(x: screenWidth/8, y: screenHeight/2)
-        sprite.zPosition = 10
+        let texture = SKTexture(imageNamed: staticName)
         sprite.xScale = scaleX
         sprite.yScale = scaleY
+        
+        setPhysics()
+        setPosition(screenWidth, screenHeight)
+        sprite.name = "capybara"
+    }
+
+    private func setPhysics() {
+        let texture = SKTexture(imageNamed: staticName)
+       
+        sprite.physicsBody = SKPhysicsBody(texture: texture, size: texture.size())
+        sprite.physicsBody?.affectedByGravity = false
+        sprite.physicsBody?.isDynamic = true
+        sprite.physicsBody?.usesPreciseCollisionDetection = true
+        sprite.physicsBody?.usesPreciseCollisionDetection = true
+        sprite.physicsBody?.contactTestBitMask = sprite.physicsBody!.collisionBitMask
+    }
+
+    private func setPosition(_ screenWidth: CGFloat, _ screenHeight: CGFloat) {        
+        sprite.position = CGPoint(x: screenWidth/8, y: screenHeight/2)
+        sprite.zPosition = 20
     }
     
     func stop() {
@@ -46,7 +60,11 @@ class Capybara {
                                       restore: true)
         sprite.removeAllActions()
         sprite.run(SKAction.repeatForever(action))
-        
+
+    }
+
+    func walk() {
+        sprite.zRotation = 0
     }
     
     func hit() {
@@ -61,14 +79,7 @@ class Capybara {
         sprite.run(SKAction.repeatForever(action))
     }
     
-    
-    
-    
     func walk(positionX: CGFloat) {
-        
-        
-        print(sprite.zRotation)
-        sprite.zRotation = 0
         let textures = Textures.getTextures(name: "", atlas: "Capybara_Walking")
         let action = SKAction.animate(with: textures,
                                       timePerFrame: 1/TimeInterval(textures.count),
@@ -82,9 +93,6 @@ class Capybara {
             sprite.removeAllActions()
             sprite.run(SKAction.repeatForever(action))
         }
-        
-        
-        
     }
     
     func goLeft() {
@@ -103,4 +111,3 @@ class Capybara {
         sprite.position.y -= speed
     }
 }
-
