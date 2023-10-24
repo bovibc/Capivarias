@@ -42,8 +42,6 @@ class Alligator {
         sprite.physicsBody?.affectedByGravity = false
         sprite.physicsBody?.isDynamic = true
         sprite.physicsBody?.usesPreciseCollisionDetection = true
-        sprite.physicsBody?.usesPreciseCollisionDetection = true
-        sprite.physicsBody?.contactTestBitMask = sprite.physicsBody!.collisionBitMask
     }
 
     private func setPosition(_ screenWidth: CGFloat, _ screenHeight: CGFloat) {

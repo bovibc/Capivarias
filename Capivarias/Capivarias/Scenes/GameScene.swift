@@ -9,7 +9,7 @@ import SpriteKit
 import GameplayKit
 import GameController
 
-class GameScene: SKScene {
+class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var virtualController: GCVirtualController?
     var background = SKSpriteNode(imageNamed: "dry")
@@ -17,8 +17,6 @@ class GameScene: SKScene {
     var joystick = Joystick()
     var alligator = Alligator()
     var capybara = Capybara()
-    let ContactPlayer: UInt32 = 0x1 << 0
-    let ContactAlligator: UInt32 = 0x1 << 1
     var i = 0
     
     override func didMove(to view: SKView) {
@@ -32,8 +30,10 @@ class GameScene: SKScene {
     
     private func setupContact() {
         physicsWorld.contactDelegate = self
-        capybara.sprite.physicsBody?.categoryBitMask = ContactPlayer
-        alligator.sprite.physicsBody?.categoryBitMask = ContactAlligator
+        capybara.sprite.physicsBody?.categoryBitMask = 1
+        alligator.sprite.physicsBody?.categoryBitMask = 2
+        alligator.sprite.physicsBody?.contactTestBitMask = 1
+        
         capybara.sprite.physicsBody?.collisionBitMask = 0
         alligator.sprite.physicsBody?.collisionBitMask = 0
     }
@@ -101,10 +101,12 @@ class GameScene: SKScene {
             self.virtualController = controller
         }
     }
-}
-
-extension GameScene: SKPhysicsContactDelegate {
+    
     func didBegin(_ contact: SKPhysicsContact) {
-        //alligator.attack()
+        if contact.bodyA.categoryBitMask == 1 && contact.bodyB.categoryBitMask == 2 {
+            print(i)
+            i+=1
+            alligator.attack()
+        }
     }
 }

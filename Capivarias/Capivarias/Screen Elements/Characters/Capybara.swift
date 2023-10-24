@@ -26,7 +26,7 @@ class Capybara {
     func start(screenWidth: CGFloat, screenHeight: CGFloat) {
         let scaleX = screenWidth * assetScale / sprite.size.width
         let scaleY = screenHeight * assetScale / sprite.size.height
-        let texture = SKTexture(imageNamed: staticName)
+        
         sprite.xScale = scaleX
         sprite.yScale = scaleY
         
@@ -42,8 +42,6 @@ class Capybara {
         sprite.physicsBody?.affectedByGravity = false
         sprite.physicsBody?.isDynamic = true
         sprite.physicsBody?.usesPreciseCollisionDetection = true
-        sprite.physicsBody?.usesPreciseCollisionDetection = true
-        sprite.physicsBody?.contactTestBitMask = sprite.physicsBody!.collisionBitMask
     }
 
     private func setPosition(_ screenWidth: CGFloat, _ screenHeight: CGFloat) {        
