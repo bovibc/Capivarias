@@ -8,20 +8,31 @@
 import Foundation
 
 
-enum TypeWeapon {
- //   case 
+enum TypeWeapon: String {
+    case sword
+    case pear
+    case blowgun
 }
 
 
 
-class Weapons {
-    var typeWeapon = "sword"
-    var damage = 7
-    var range = 3.0
+struct Weapons {
+    var typeWeapon = TypeWeapon.sword
+    var damage: Int = 0
+    var range: Double = 0
     
     
-    
-    
-    func changeSword()
-    
+    mutating func changeWeapon(weapon: TypeWeapon) {
+        switch weapon {
+            case .sword:
+                damage = 7
+                range = 3.0
+            case .pear:
+                damage = 4
+                range = 6.5
+            case .blowgun:
+                damage = 5
+                range = 8
+        }
+    }
 }
