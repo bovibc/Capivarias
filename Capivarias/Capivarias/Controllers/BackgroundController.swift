@@ -12,9 +12,13 @@ class BackgroundController{
     
     func setupBackground(scene: SKScene, imageName: String) {
         let background = SKSpriteNode(imageNamed: imageName)
-        background.position = CGPoint(x: 1/2, y: 1/2)
+
+        scene.scaleMode = .fill
+        background.position = CGPoint(x: scene.size.width / 2, y: scene.size.height / 2)
         background.zPosition = -1
-        background.setScale(1/background.size.width)
+        background.xScale = scene.frame.size.width / background.size.width
+        background.yScale = scene.frame.size.height / background.size.height
+        
         scene.addChild(background)
     }
     
