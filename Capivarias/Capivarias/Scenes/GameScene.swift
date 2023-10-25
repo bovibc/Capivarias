@@ -20,15 +20,16 @@ class GameScene: SKScene {
     var capybara = Capybara()
     let ContactPlayer: UInt32 = 0x1 << 0
     let ContactAlligator: UInt32 = 0x1 << 1
+    let backgroundController = BackgroundController()
 
     
     override func didMove(to view: SKView) {
-        setupBackground()
+        backgroundController.setupBackground(scene: self, imageName: "dry")
         setupScene()
         setupCapivara()
         setupAlligator()
         connectController()
-        setupAudio()
+        audioPlayer.playEnviroment(sound: "ambient-forest", type: "mp3")
         setupContact()
     }
     
@@ -39,17 +40,7 @@ class GameScene: SKScene {
         capybara.sprite.physicsBody?.collisionBitMask = 0
         alligator.sprite.physicsBody?.collisionBitMask = 0
     }
-
-    private func setupAudio() {
-        audioPlayer.playEnviroment(sound: "ambient-forest", type: "mp3")
-    }
-    private func setupBackground() {
-        self.scaleMode = .fill
-        background.position = CGPoint(x: frame.size.width / 2, y: frame.size.height / 2)
-        background.xScale = frame.size.width / background.size.width
-        background.yScale = frame.size.height / background.size.height
-        addChild(background)
-    }
+    
     
     private func setupAlligator() {
         self.alligator.start(screenWidth: size.width , screenHeight: size.height)
