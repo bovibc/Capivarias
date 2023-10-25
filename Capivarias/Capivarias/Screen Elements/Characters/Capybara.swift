@@ -30,16 +30,17 @@ class Capybara {
         sprite.xScale = scaleX
         sprite.yScale = scaleY
         
-        setPhysics()
         setPosition(screenWidth, screenHeight)
+        setPhysics()
         sprite.name = "capybara"
     }
 
     private func setPhysics() {
         sprite.physicsBody = SKPhysicsBody(rectangleOf: sprite.size)
         sprite.physicsBody?.affectedByGravity = false
-        sprite.physicsBody?.isDynamic = true
-        sprite.physicsBody?.usesPreciseCollisionDetection = true
+        sprite.physicsBody?.categoryBitMask = 1
+//        sprite.physicsBody?.collisionBitMask = 1
+//        sprite.physicsBody?.contactTestBitMask = 1
     }
 
     private func setPosition(_ screenWidth: CGFloat, _ screenHeight: CGFloat) {        

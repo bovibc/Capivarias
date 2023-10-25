@@ -29,21 +29,21 @@ class Alligator {
         let scaleY = screenHeight * scale / sprite.size.height
         sprite.xScale = scaleX
         sprite.yScale = scaleY
-
-        setPhysics()
+        
         setPosition(screenWidth, screenHeight)
+        setPhysics()
         sprite.name = "alligator"
     }
 
     private func setPhysics() {
         sprite.physicsBody = SKPhysicsBody(rectangleOf: sprite.size)
         sprite.physicsBody?.affectedByGravity = false
-        sprite.physicsBody?.isDynamic = true
-        sprite.physicsBody?.usesPreciseCollisionDetection = true
+        sprite.physicsBody?.categoryBitMask = 2
+        sprite.physicsBody?.contactTestBitMask = 1
     }
 
     private func setPosition(_ screenWidth: CGFloat, _ screenHeight: CGFloat) {
-        sprite.position = CGPoint(x: screenWidth/4, y: screenHeight/2)
+        sprite.position = CGPoint(x: screenWidth, y: screenHeight/2)
         sprite.zPosition = 20
     }
 

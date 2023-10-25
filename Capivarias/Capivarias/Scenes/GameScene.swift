@@ -29,13 +29,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     private func setupContact() {
-        physicsWorld.contactDelegate = self
-        capybara.sprite.physicsBody?.categoryBitMask = 1
-        alligator.sprite.physicsBody?.categoryBitMask = 2
-        alligator.sprite.physicsBody?.contactTestBitMask = 1
-        
-        capybara.sprite.physicsBody?.collisionBitMask = 0
-        alligator.sprite.physicsBody?.collisionBitMask = 0
+        self.physicsWorld.contactDelegate = self
     }
 
     private func setupBackground() {
@@ -45,22 +39,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         background.yScale = frame.size.height / background.size.height
         addChild(background)
     }
-    
+
     private func setupAlligator() {
         self.alligator.start(screenWidth: size.width , screenHeight: size.height)
         addChild(alligator.sprite)
     }
-    
+
     private func setupScene() {
         scene?.anchorPoint = .zero
         scene?.size = CGSize(width: view?.scene?.size.width ?? 600, height: view?.scene?.size.height ?? 800)
     }
-    
+
     private func setupCapivara() {
         self.capybara.start(screenWidth: size.width , screenHeight: size.height)
         addChild(capybara.sprite)
     }
-    
+
     override func update(_ currentTime: TimeInterval) {
         alligator.follow(player: capybara.sprite.position)
         if joystick.isJoystickStatic() {
@@ -69,13 +63,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         } else {
             let direction = joystick.getDirection()
             validateMovement(direction)
-            
-            
+
             capybara.walk(positionX: joystick.positionX )
-            
         }
     }
-    
+
     private func validateMovement(_ direction: Direction) {
         switch direction.horizontal {
         case .left:
@@ -95,7 +87,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             break
         }
     }
-    
+
     func connectController() {
         joystick.connectController { controller in
             self.virtualController = controller
@@ -103,7 +95,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
+        print(contact.bodyA)
+        
         if contact.bodyA.categoryBitMask == 1 && contact.bodyB.categoryBitMask == 2 {
+            print(i)
+            i+=1
+            alligator.attack()
+        }
+        
+        if contact.bodyA.categoryBitMask == 2 && contact.bodyB.categoryBitMask == 1 {
             print(i)
             i+=1
             alligator.attack()
