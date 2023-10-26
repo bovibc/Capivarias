@@ -19,6 +19,8 @@ class Alligator {
     var isAlligatoraAttacking: Bool = false
     private let movementAliasName: String = "Alligator_Walking"
     var sprite: SKSpriteNode
+    var audioPlayer = AudioPlayer()
+
 
     init() {
         self.sprite = SKSpriteNode(imageNamed: staticName)
@@ -96,6 +98,8 @@ class Alligator {
         let action = SKAction.sequence([startAction, SKAction.wait(forDuration: 0.78), finishedAction])
         self.sprite.removeAllActions()
         self.sprite.run(action)
+        
+        audioPlayer.playEffect(effect: "alligator-axe-atack", type: "mp3", volume: 1.0)
     }
 
     private func attackAction() {

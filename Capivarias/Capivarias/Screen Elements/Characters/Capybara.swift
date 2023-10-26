@@ -17,6 +17,7 @@ class Capybara {
     private var defense: Float = 100
     private var assetScale: CGFloat = 0.1
     private var staticName: String = "capybara_stopped"
+    var audioPlayer = AudioPlayer()
 
     var sprite: SKSpriteNode
 
@@ -79,6 +80,7 @@ class Capybara {
             self.stop()
         }
         
+        audioPlayer.playEffect(effect: "capivara-sword-atack", type: "mp3", volume: 0.8)
     }
     
     

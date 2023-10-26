@@ -29,7 +29,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setupCapivara()
         setupAlligator()
         connectController()
-        audioPlayer.playEnviroment(sound: "ambient-forest", type: "mp3")
+        audioPlayer.playEnviroment(sound: "ambient-forest", type: "mp3", volume: 1.0)
         setupContact()
     //    setupController()
     }
