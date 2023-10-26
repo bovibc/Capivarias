@@ -81,9 +81,6 @@ class Capybara {
         
     }
     
-    
-    
-    
     func walk(positionX: CGFloat) {
         
         
@@ -102,9 +99,6 @@ class Capybara {
             sprite.removeAllActions()
             sprite.run(SKAction.repeatForever(action))
         }
-        
-        
-        
     }
     
     func goLeft() {
