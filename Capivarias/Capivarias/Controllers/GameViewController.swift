@@ -13,13 +13,7 @@ class GameViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Load 'GameScene.sks' as a GKScene. This provides gameplay related content
-//        // including entities and graphs.
-//        let scene = GKScene()
-//        scene.rootNode = GameScene()
-     
-        
+
         if let scene = GKScene(fileNamed: "GameScene") {
             
             // Get the SKScene from the loaded GKScene
@@ -33,7 +27,6 @@ class GameViewController: UIViewController {
                 // Present the scene
                 if let view = self.view as! SKView? {
                     view.presentScene(sceneNode)
-                    
                     view.ignoresSiblingOrder = true
                     view.showsPhysics = true
                     view.showsFPS = true

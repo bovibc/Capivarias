@@ -31,7 +31,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         connectController()
         audioPlayer.playEnviroment(sound: "ambient-forest", type: "mp3")
         setupContact()
-    //    setupController()
     }
     
     private func setupContact() {
@@ -113,28 +112,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func setupController(){
-        
-//        guard let controller2 = GCController.controllers().first else {
-//            print("OPS!!!")
-//           return
-//        }
-        
         self.virtualController?.controller?.extendedGamepad?.buttonX.pressedChangedHandler = { button, value, pressed in
             if pressed {
                 self.capybara.hit()
             }
         }
-//        
-//        controller2.extendedGamepad?.buttonX.pressedChangedHandler = { button, value, pressed in
-//            print("Controller 2 \(pressed)")
-//            if pressed {
-//                print("Oi")
-//                self.capybara.hit()
-//            }
-//            
-//        }
     }
-//        virtualController?.controller?.extendedGamepad?.buttonX.pressedChangedHandler
     
     func connectController() {
         joystick.connectController { controller in
