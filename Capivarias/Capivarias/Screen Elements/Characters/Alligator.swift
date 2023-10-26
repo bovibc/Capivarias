@@ -11,9 +11,9 @@ import SpriteKit
 class Alligator {
     private var life: CGFloat = 100
     private var damage: CGFloat = 20
-    private var speed: CGFloat = 2
+    private var speed: CGFloat = 1.5
     private var attackSpeed: CGFloat = 1
-    private var scale: CGFloat = 0.15
+    private var scale: CGFloat = 0.19
     private let staticName: String = "alligator_stopped"
     private var isAlligatorWalking: Bool = false
     var isAlligatoraAttacking: Bool = false
