@@ -11,7 +11,8 @@ import SpriteKit
 class Capybara {
     var isCapivaraHitting = false
     var isCapivaraWalking = false
-    private var life: Float = 100
+    var life: Float = 100
+    private var damage: Float = 20
     private var breathTime: Float = 100
     private var speed: CGFloat = 5
     private var defense: Float = 100
@@ -24,6 +25,19 @@ class Capybara {
     init() {
         self.sprite = SKSpriteNode(imageNamed: staticName)
     }
+    
+    func changeLife(damage: Float) {
+        life -= damage
+    }
+    
+    func getDamage() -> Float {
+        return damage
+    }
+    
+    
+
+    
+    
 
     func start(screenWidth: CGFloat, screenHeight: CGFloat) {
         let scaleX = screenWidth * assetScale / sprite.size.width
@@ -86,7 +100,7 @@ class Capybara {
     func walk(positionX: CGFloat) {
         
         
-        print(sprite.zRotation)
+     //   print(sprite.zRotation)
         sprite.zRotation = 0
         let textures = Textures.getTextures(name: "", atlas: "Capybara_Walking")
         let action = SKAction.animate(with: textures,
