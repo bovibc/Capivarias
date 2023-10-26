@@ -19,6 +19,7 @@
 		08CEE5F82AE1653C00149B83 /* Capybara.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CEE5F72AE1653C00149B83 /* Capybara.swift */; };
 		08CEE5FA2AE167E800149B83 /* Alligator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CEE5F92AE167E800149B83 /* Alligator.swift */; };
 		08CEE5FC2AE1680800149B83 /* Joystick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CEE5FB2AE1680800149B83 /* Joystick.swift */; };
+		08E8EE382AE961EC0076F4CE /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 08E8EE372AE961EC0076F4CE /* GameScene.sks */; };
 		F28B1D502AE2C34700F8E596 /* monkey-banana-atack.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F28B1D4B2AE2C34600F8E596 /* monkey-banana-atack.mp3 */; };
 		F28B1D512AE2C34700F8E596 /* jacare-axe-atack.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F28B1D4C2AE2C34600F8E596 /* jacare-axe-atack.mp3 */; };
 		F28B1D522AE2C34700F8E596 /* ambient-forest.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F28B1D4D2AE2C34600F8E596 /* ambient-forest.mp3 */; };
@@ -40,6 +41,7 @@
 		08CEE5F72AE1653C00149B83 /* Capybara.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Capybara.swift; sourceTree = "<group>"; };
 		08CEE5F92AE167E800149B83 /* Alligator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alligator.swift; sourceTree = "<group>"; };
 		08CEE5FB2AE1680800149B83 /* Joystick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Joystick.swift; sourceTree = "<group>"; };
+		08E8EE372AE961EC0076F4CE /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		F28B1D4B2AE2C34600F8E596 /* monkey-banana-atack.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "monkey-banana-atack.mp3"; sourceTree = "<group>"; };
 		F28B1D4C2AE2C34600F8E596 /* jacare-axe-atack.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "jacare-axe-atack.mp3"; sourceTree = "<group>"; };
 		F28B1D4D2AE2C34600F8E596 /* ambient-forest.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "ambient-forest.mp3"; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				0813A2D22AD6DEFE00428484 /* Actions.sks */,
+				08E8EE372AE961EC0076F4CE /* GameScene.sks */,
 			);
 			path = Documents;
 			sourceTree = "<group>";
@@ -226,6 +229,7 @@
 				F28B1D542AE2C34700F8E596 /* capivara-death-menu.mp3 in Resources */,
 				0813A2DC2AD6DEFF00428484 /* Assets.xcassets in Resources */,
 				F28B1D512AE2C34700F8E596 /* jacare-axe-atack.mp3 in Resources */,
+				08E8EE382AE961EC0076F4CE /* GameScene.sks in Resources */,
 				F28B1D502AE2C34700F8E596 /* monkey-banana-atack.mp3 in Resources */,
 				0813A2DF2AD6DEFF00428484 /* LaunchScreen.storyboard in Resources */,
 				0813A2D32AD6DEFE00428484 /* Actions.sks in Resources */,

@@ -77,7 +77,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         case .none:
             break
         }
-        
+
         switch direction.vertical {
         case .top:
             capybara.goTop()
@@ -95,14 +95,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
-        print(contact.bodyA)
-        
         if contact.bodyA.categoryBitMask == 1 && contact.bodyB.categoryBitMask == 2 {
             print(i)
             i+=1
             alligator.attack()
         }
-        
+
         if contact.bodyA.categoryBitMask == 2 && contact.bodyB.categoryBitMask == 1 {
             print(i)
             i+=1

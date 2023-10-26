@@ -11,7 +11,7 @@ import SpriteKit
 class Alligator {
     private var life: CGFloat = 100
     private var damage: CGFloat = 20
-    private var speed: CGFloat = 0.001
+    private var speed: CGFloat = 2
     private var attackSpeed: CGFloat = 1
     private var scale: CGFloat = 0.1
     private let staticName: String = "alligator_stopped"
@@ -98,6 +98,7 @@ class Alligator {
     }
 
     private func attackAction() {
+        sprite.zRotation = 0
         let textures = Textures.getTextures(name: "", atlas: "Alligator_Attacking")
         let action = SKAction.animate(with: textures,
                                       timePerFrame: 0.8/TimeInterval(textures.count),
