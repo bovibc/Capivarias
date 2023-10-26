@@ -12,7 +12,7 @@ class Capybara {
     var isCapivaraWalking = false
     private var life: Float = 100
     private var breathTime: Float = 100
-    private var speed: CGFloat = 0.004
+    private var speed: CGFloat = 5
     private var defense: Float = 100
     private var assetScale: CGFloat = 0.1
     private var staticName: String = "capybara_stopped"
@@ -29,20 +29,15 @@ class Capybara {
         sprite.xScale = scaleX
         sprite.yScale = scaleY
         
-        setPhysics()
         setPosition(screenWidth, screenHeight)
+        setPhysics()
         sprite.name = "capybara"
     }
 
     private func setPhysics() {
-        let texture = SKTexture(imageNamed: staticName)
-       
-        sprite.physicsBody = SKPhysicsBody(texture: texture, size: texture.size())
+        sprite.physicsBody = SKPhysicsBody(rectangleOf: sprite.size)
         sprite.physicsBody?.affectedByGravity = false
-        sprite.physicsBody?.isDynamic = true
-        sprite.physicsBody?.usesPreciseCollisionDetection = true
-        sprite.physicsBody?.usesPreciseCollisionDetection = true
-        sprite.physicsBody?.contactTestBitMask = sprite.physicsBody!.collisionBitMask
+        sprite.physicsBody?.categoryBitMask = 1
     }
 
     private func setPosition(_ screenWidth: CGFloat, _ screenHeight: CGFloat) {        
@@ -55,15 +50,10 @@ class Capybara {
         let textures = [SKTexture(imageNamed: "capybara_stopped")]
         let action = SKAction.animate(with: textures,
                                       timePerFrame: 0.001,
-                                      resize: true,
+                                      resize: false,
                                       restore: true)
         sprite.removeAllActions()
         sprite.run(SKAction.repeatForever(action))
-
-    }
-
-    func walk() {
-        sprite.zRotation = 0
     }
     
     func hit() {
@@ -73,16 +63,17 @@ class Capybara {
         let textures = Textures.getTextures(name: "", atlas: "Capybara_Hit")
         let action = SKAction.animate(with: textures,
                                       timePerFrame: 1/TimeInterval(textures.count),
-                                      resize: true,
+                                      resize: false,
                                       restore: true)
         sprite.run(SKAction.repeatForever(action))
     }
     
     func walk(positionX: CGFloat) {
+        sprite.zRotation = 0
         let textures = Textures.getTextures(name: "", atlas: "Capybara_Walking")
         let action = SKAction.animate(with: textures,
                                       timePerFrame: 1/TimeInterval(textures.count),
-                                      resize: true,
+                                      resize: false,
                                       restore: true)
         
         sprite.xScale = positionX > 0 ? abs(sprite.xScale) : -abs(sprite.xScale)
