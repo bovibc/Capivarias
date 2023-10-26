@@ -36,7 +36,8 @@ class Capybara {
     }
 
     private func setPhysics() {
-        sprite.physicsBody = SKPhysicsBody(rectangleOf: sprite.size)
+        let width = sprite.size.width - 0.55 * sprite.size.width
+        sprite.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: width, height: sprite.size.height), center: CGPoint(x: -25, y: 0))
         sprite.physicsBody?.affectedByGravity = false
         sprite.physicsBody?.categoryBitMask = 1
     }

@@ -13,7 +13,7 @@ class Alligator {
     private var damage: CGFloat = 20
     private var speed: CGFloat = 2
     private var attackSpeed: CGFloat = 1
-    private var scale: CGFloat = 0.1
+    private var scale: CGFloat = 0.15
     private let staticName: String = "alligator_stopped"
     private var isAlligatorWalking: Bool = false
     var isAlligatoraAttacking: Bool = false
@@ -36,7 +36,8 @@ class Alligator {
     }
 
     private func setPhysics() {
-        sprite.physicsBody = SKPhysicsBody(rectangleOf: sprite.size)
+        let width = sprite.size.width - 0.45 * sprite.size.width
+        sprite.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: width, height: sprite.size.height), center: CGPoint(x: -25, y: 0))
         sprite.physicsBody?.affectedByGravity = false
         sprite.physicsBody?.categoryBitMask = 2
         sprite.physicsBody?.contactTestBitMask = 1
