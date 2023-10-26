@@ -9,8 +9,8 @@ import SpriteKit
 import GameplayKit
 import GameController
 
-class GameScene: SKScene {
-    
+
+class GameScene: SKScene, SKPhysicsContactDelegate {
     var virtualController: GCVirtualController?
     var background = SKSpriteNode(imageNamed: "dry")
     let spriteScale = 0.07
@@ -21,7 +21,7 @@ class GameScene: SKScene {
     let ContactPlayer: UInt32 = 0x1 << 0
     let ContactAlligator: UInt32 = 0x1 << 1
     let backgroundController = BackgroundController()
-
+    var i = 0
     
     override func didMove(to view: SKView) {
         backgroundController.setupBackground(scene: self, imageName: "dry")
@@ -35,19 +35,22 @@ class GameScene: SKScene {
     }
     
     private func setupContact() {
-        physicsWorld.contactDelegate = self
-        capybara.sprite.physicsBody?.categoryBitMask = ContactPlayer
-        alligator.sprite.physicsBody?.categoryBitMask = ContactAlligator
-        capybara.sprite.physicsBody?.collisionBitMask = 0
-        alligator.sprite.physicsBody?.collisionBitMask = 0
+        self.physicsWorld.contactDelegate = self
     }
-    
-    
+
+    private func setupBackground() {
+        self.scaleMode = .fill
+        background.position = CGPoint(x: frame.size.width / 2, y: frame.size.height / 2)
+        background.xScale = frame.size.width / background.size.width
+        background.yScale = frame.size.height / background.size.height
+        addChild(background)
+    }
+
     private func setupAlligator() {
         self.alligator.start(screenWidth: size.width , screenHeight: size.height)
         addChild(alligator.sprite)
     }
-    
+
     private func setupScene() {
         scene?.anchorPoint = .zero
         scene?.size = CGSize(width: view?.scene?.size.width ?? 600, height: view?.scene?.size.height ?? 800)
@@ -58,10 +61,6 @@ class GameScene: SKScene {
     private func setupCapivara() {
         self.capybara.start(screenWidth: size.width , screenHeight: size.height)
         addChild(capybara.sprite)
-        
-        capybara.walk(positionX: joystick.positionX)
-        
-        
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -88,7 +87,6 @@ class GameScene: SKScene {
             let direction = joystick.getDirection()
             validateMovement(direction)
             capybara.walk(positionX: joystick.positionX )
-            
         }
         
     
@@ -144,10 +142,18 @@ class GameScene: SKScene {
             self.setupController()
         }
     }
-}
-
-extension GameScene: SKPhysicsContactDelegate {
+    
     func didBegin(_ contact: SKPhysicsContact) {
-        //alligator.attack()
+        if contact.bodyA.categoryBitMask == 1 && contact.bodyB.categoryBitMask == 2 {
+            print(i)
+            i+=1
+            alligator.attack()
+        }
+
+        if contact.bodyA.categoryBitMask == 2 && contact.bodyB.categoryBitMask == 1 {
+            print(i)
+            i+=1
+            alligator.attack()
+        }
     }
 }

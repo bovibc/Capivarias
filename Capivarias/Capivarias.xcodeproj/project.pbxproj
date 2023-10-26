@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0813A2CF2AD6DEFE00428484 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0813A2CE2AD6DEFE00428484 /* AppDelegate.swift */; };
-		0813A2D12AD6DEFE00428484 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0813A2D02AD6DEFE00428484 /* GameScene.sks */; };
 		0813A2D32AD6DEFE00428484 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0813A2D22AD6DEFE00428484 /* Actions.sks */; };
 		0813A2D52AD6DEFE00428484 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0813A2D42AD6DEFE00428484 /* GameScene.swift */; };
 		0813A2D72AD6DEFE00428484 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0813A2D62AD6DEFE00428484 /* GameViewController.swift */; };
@@ -20,6 +19,7 @@
 		08CEE5F82AE1653C00149B83 /* Capybara.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CEE5F72AE1653C00149B83 /* Capybara.swift */; };
 		08CEE5FA2AE167E800149B83 /* Alligator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CEE5F92AE167E800149B83 /* Alligator.swift */; };
 		08CEE5FC2AE1680800149B83 /* Joystick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CEE5FB2AE1680800149B83 /* Joystick.swift */; };
+		08E8EE382AE961EC0076F4CE /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 08E8EE372AE961EC0076F4CE /* GameScene.sks */; };
 		F28B1D502AE2C34700F8E596 /* monkey-banana-atack.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F28B1D4B2AE2C34600F8E596 /* monkey-banana-atack.mp3 */; };
 		F28B1D512AE2C34700F8E596 /* jacare-axe-atack.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F28B1D4C2AE2C34600F8E596 /* jacare-axe-atack.mp3 */; };
 		F28B1D522AE2C34700F8E596 /* ambient-forest.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F28B1D4D2AE2C34600F8E596 /* ambient-forest.mp3 */; };
@@ -32,7 +32,6 @@
 /* Begin PBXFileReference section */
 		0813A2CB2AD6DEFE00428484 /* Capivarias.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Capivarias.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0813A2CE2AD6DEFE00428484 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0813A2D02AD6DEFE00428484 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		0813A2D22AD6DEFE00428484 /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
 		0813A2D42AD6DEFE00428484 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		0813A2D62AD6DEFE00428484 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -44,6 +43,7 @@
 		08CEE5F72AE1653C00149B83 /* Capybara.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Capybara.swift; sourceTree = "<group>"; };
 		08CEE5F92AE167E800149B83 /* Alligator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alligator.swift; sourceTree = "<group>"; };
 		08CEE5FB2AE1680800149B83 /* Joystick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Joystick.swift; sourceTree = "<group>"; };
+		08E8EE372AE961EC0076F4CE /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		F28B1D4B2AE2C34600F8E596 /* monkey-banana-atack.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "monkey-banana-atack.mp3"; sourceTree = "<group>"; };
 		F28B1D4C2AE2C34600F8E596 /* jacare-axe-atack.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "jacare-axe-atack.mp3"; sourceTree = "<group>"; };
 		F28B1D4D2AE2C34600F8E596 /* ambient-forest.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "ambient-forest.mp3"; sourceTree = "<group>"; };
@@ -135,8 +135,8 @@
 		08CEE5F02AE1638F00149B83 /* Documents */ = {
 			isa = PBXGroup;
 			children = (
-				0813A2D02AD6DEFE00428484 /* GameScene.sks */,
 				0813A2D22AD6DEFE00428484 /* Actions.sks */,
+				08E8EE372AE961EC0076F4CE /* GameScene.sks */,
 			);
 			path = Documents;
 			sourceTree = "<group>";
@@ -233,9 +233,9 @@
 				F28B1D532AE2C34700F8E596 /* capivara-sword-atack.mp3 in Resources */,
 				0813A2DA2AD6DEFE00428484 /* Main.storyboard in Resources */,
 				F28B1D542AE2C34700F8E596 /* capivara-death-menu.mp3 in Resources */,
-				0813A2D12AD6DEFE00428484 /* GameScene.sks in Resources */,
 				0813A2DC2AD6DEFF00428484 /* Assets.xcassets in Resources */,
 				F28B1D512AE2C34700F8E596 /* jacare-axe-atack.mp3 in Resources */,
+				08E8EE382AE961EC0076F4CE /* GameScene.sks in Resources */,
 				F28B1D502AE2C34700F8E596 /* monkey-banana-atack.mp3 in Resources */,
 				0813A2DF2AD6DEFF00428484 /* LaunchScreen.storyboard in Resources */,
 				0813A2D32AD6DEFE00428484 /* Actions.sks in Resources */,
