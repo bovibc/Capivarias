@@ -18,8 +18,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var alligator = Alligator()
     var audioPlayer = AudioPlayer()
     var capybara = Capybara()
-    let ContactPlayer: UInt32 = 0x1 << 0
-    let ContactAlligator: UInt32 = 0x1 << 1
     let backgroundController = BackgroundController()
     var i = 0
     
