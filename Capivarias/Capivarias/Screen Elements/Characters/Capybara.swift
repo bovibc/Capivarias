@@ -37,9 +37,11 @@ class Capybara {
     }
 
     private func setPhysics() {
-        let width = sprite.size.width - 0.55 * sprite.size.width
-        sprite.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: width, height: sprite.size.height), center: CGPoint(x: -25, y: 0))
+        let width = 0.45 * sprite.size.width
+        let height = 0.25 * sprite.size.height
+        sprite.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: width, height: height), center: CGPoint(x: -25, y: -40))
         sprite.physicsBody?.affectedByGravity = false
+        sprite.physicsBody?.allowsRotation = false
         sprite.physicsBody?.categoryBitMask = 1
     }
 
@@ -51,7 +53,6 @@ class Capybara {
     func stop() {
         self.isCapivaraHitting = false
         self.isCapivaraWalking = false
-        sprite.zRotation = 0
         let textures = [SKTexture(imageNamed: "capybara_stopped")]
         let action = SKAction.animate(with: textures,
                                       timePerFrame: 0.001,
@@ -84,10 +85,6 @@ class Capybara {
     }
     
     func walk(positionX: CGFloat) {
-        
-        
-        print(sprite.zRotation)
-        sprite.zRotation = 0
         let textures = Textures.getTextures(name: "", atlas: "Capybara_Walking")
         let action = SKAction.animate(with: textures,
                                       timePerFrame: 1/TimeInterval(textures.count),
@@ -102,19 +99,19 @@ class Capybara {
             sprite.run(SKAction.repeatForever(action))
         }
     }
-    
+
     func goLeft() {
         sprite.position.x += speed
     }
-    
+
     func goRight() {
         sprite.position.x -= speed
     }
-    
+
     func goTop() {
         sprite.position.y += speed
     }
-    
+
     func goBottom() {
         sprite.position.y -= speed
     }

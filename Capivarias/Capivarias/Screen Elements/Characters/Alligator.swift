@@ -38,15 +38,17 @@ class Alligator {
     }
 
     private func setPhysics() {
-        let width = sprite.size.width - 0.45 * sprite.size.width
-        sprite.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: width, height: sprite.size.height), center: CGPoint(x: -25, y: 0))
+        let width = 0.55 * sprite.size.width
+        let height = 0.25 * sprite.size.height
+        sprite.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: width, height: height), center: CGPoint(x: -25, y: -40))
         sprite.physicsBody?.affectedByGravity = false
+        sprite.physicsBody?.allowsRotation = false
         sprite.physicsBody?.categoryBitMask = 2
         sprite.physicsBody?.contactTestBitMask = 1
     }
 
     private func setPosition(_ screenWidth: CGFloat, _ screenHeight: CGFloat) {
-        sprite.position = CGPoint(x: screenWidth, y: screenHeight/2)
+        sprite.position = CGPoint(x: 4 * screenWidth / 5, y: screenHeight/2)
         sprite.zPosition = 20
     }
 
@@ -79,7 +81,6 @@ class Alligator {
         sprite.position.y += vy
 
         sprite.xScale = dx > 0 ? abs(sprite.xScale) : -abs(sprite.xScale)
-        sprite.zRotation = 0
     }
 
     @objc func attack() {
@@ -103,7 +104,6 @@ class Alligator {
     }
 
     private func attackAction() {
-        sprite.zRotation = 0
         let textures = Textures.getTextures(name: "", atlas: "Alligator_Attacking")
         let action = SKAction.animate(with: textures,
                                       timePerFrame: 0.8/TimeInterval(textures.count),
