@@ -50,10 +50,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     private func setupScene() {
         scene?.anchorPoint = .zero
-        scene?.size = CGSize(width: view?.scene?.size.width ?? 600, height: view?.scene?.size.height ?? 800)
-       
-        
-    }
+        scene?.size = CGSize(width: view?.scene?.size.width ?? 600, height: view?.scene?.size.height ?? 800)}
+    
     
     private func setupCapivara() {
         self.capybara.start(screenWidth: size.width , screenHeight: size.height)
@@ -68,25 +66,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 capybara.stop()
             }
             
-//            capybara.stop()
-////            capybara.isCapivaraWalking = false
-//            if ((joystick.controller2?.extendedGamepad?.buttonX.isPressed) == true) {
-////                capybara.hit()
-//            atack()
-//            }
-//            
-//            else {
-//                capybara.stop()
-//                capybara.isCapivaraWalking = false
-//            }
-            
         } else {
             let direction = joystick.getDirection()
             validateMovement(direction)
             capybara.walk(positionX: joystick.positionX )
         }
         
-    
+        capybara.death()
+        if capybara.life <= 0 {
+            alligator.isFollowing = false
+        }
     }
     
     private func validateMovement(_ direction: Direction) {
@@ -126,28 +115,41 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func didBegin(_ contact: SKPhysicsContact) {
         if contact.bodyA.categoryBitMask == 1 && contact.bodyB.categoryBitMask == 2 {
-            //print(i)
             i+=1
             alligator.attack()
-            if alligator.isAlligatoraAttacking == false  {
+            if alligator.isAlligatoraAttacking == true  {
                 capybara.changeLife(damage: alligator.getDamage())
                 //Aqui, chamar animaçao da capivara tomando dano
                 print(capybara.life)
             }
             else {
-    
-                self.virtualController?.controller?.extendedGamepad?.buttonX.pressedChangedHandler = { button, value, pressed in
+                //print(alligator.life)
+                self.virtualController?.controller?.extendedGamepad?.buttonX.pressedChangedHandler = { [self] button, value, pressed in
                     if pressed {
                         self.capybara.hit()
                         self.alligator.changeLife(damage: self.capybara.getDamage())
                         //Aqui, chamar alimaçao do jacare tomando dano
+                        print(self.alligator.life)
+                    }
+                }
+                
+            }
+            
+            if alligator.isAlligatoraAttacking == false{
+    
+                self.virtualController?.controller?.extendedGamepad?.buttonX.pressedChangedHandler = { [self] button, value, pressed in
+                    if pressed {
+                        self.capybara.hit()
+                        self.alligator.changeLife(damage: self.capybara.getDamage())
+                        //Aqui, chamar alimaçao do jacare tomando dano
+                        print(self.alligator.life)
                     }
                 }
             }
+            else{print("hello")}
         }
         
         if contact.bodyA.categoryBitMask == 2 && contact.bodyB.categoryBitMask == 1 {
-            //print(i)
             i+=1
             alligator.attack()
             
