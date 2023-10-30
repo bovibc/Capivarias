@@ -20,6 +20,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var capybara = Capybara()
     let backgroundController = BackgroundController()
     var i = 0
+    var transactionScene = TrasactionsScenes()
     
     override func didMove(to view: SKView) {
         backgroundController.setupBackground(scene: self, imageName: "dry")
@@ -27,8 +28,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setupCapivara()
         setupAlligator()
         connectController()
+        
         audioPlayer.playEnviroment(sound: "ambient-forest", type: "mp3", volume: 1.0)
         setupContact()
+        
     }
     
     private func setupContact() {
@@ -51,8 +54,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private func setupScene() {
         scene?.anchorPoint = .zero
         scene?.size = CGSize(width: view?.scene?.size.width ?? 600, height: view?.scene?.size.height ?? 800)
-       
-        
     }
     
     private func setupCapivara() {
@@ -84,9 +85,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let direction = joystick.getDirection()
             validateMovement(direction)
             capybara.walk(positionX: joystick.positionX )
+            print(capybara.sprite.position.x)
         }
         
-    
+        if let view = self.view {
+            if capybara.sprite.position.x >= 1270 {
+                transactionScene.goToNextLevel(view: view, gameScene: SecondScene())
+            }
+        }    
     }
     
     private func validateMovement(_ direction: Direction) {
@@ -137,4 +143,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             alligator.attack()
         }
     }
+    
+    
+    
+//    func goToNextLevel(){
+//        let secondScene = SecondScene()
+//            
+//        let transition = SKTransition.fade(withDuration: 1.0)
+//        self.view?.presentScene(secondScene, transition: transition)
+//    }
+//        
+//    func nextLevel() {
+//        if capybara.sprite.position.x >= 1270 {
+//            goToNextLevel()
+//        }
+//    }
+    
 }
