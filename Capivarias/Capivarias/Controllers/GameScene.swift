@@ -34,7 +34,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private func setupContact() {
         self.physicsWorld.contactDelegate = self
     }
-
+    
     private func setupBackground() {
         self.scaleMode = .fill
         background.position = CGPoint(x: frame.size.width / 2, y: frame.size.height / 2)
@@ -42,12 +42,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         background.yScale = frame.size.height / background.size.height
         addChild(background)
     }
-
+    
     private func setupAlligator() {
         self.alligator.start(screenWidth: size.width , screenHeight: size.height)
         addChild(alligator.sprite)
     }
-
+    
     private func setupScene() {
         scene?.anchorPoint = .zero
         scene?.size = CGSize(width: view?.scene?.size.width ?? 600, height: view?.scene?.size.height ?? 800)}
@@ -117,10 +117,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if contact.bodyA.categoryBitMask == 1 && contact.bodyB.categoryBitMask == 2 {
             i+=1
             alligator.attack()
-            if alligator.isAlligatoraAttacking == true  {
-                capybara.changeLife(damage: alligator.getDamage())
-                //Aqui, chamar animaçao da capivara tomando dano
-                print(capybara.life)
+            if alligator.isAlligatoraAttacking == false  {
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    self.capybara.changeLife(damage: self.alligator.getDamage())
+                    //Aqui, chamar animaçao da capivara tomando dano
+                    print(self.capybara.life)
+                    print("hello")
+                }
+                
+
             }
             else {
                 //print(alligator.life)
@@ -134,9 +140,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
                 
             }
-            print("hello renan")
+            
             if alligator.isAlligatoraAttacking == false{
-    
+                
                 self.virtualController?.controller?.extendedGamepad?.buttonX.pressedChangedHandler = { [self] button, value, pressed in
                     if pressed {
                         self.capybara.hit()
@@ -146,7 +152,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     }
                 }
             }
-            else{print("hello")}
+            else{}
         }
         
         if contact.bodyA.categoryBitMask == 2 && contact.bodyB.categoryBitMask == 1 {
@@ -159,7 +165,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 print(capybara.life)
             }
             else {
-    
+                
                 self.virtualController?.controller?.extendedGamepad?.buttonX.pressedChangedHandler = { button, value, pressed in
                     if pressed {
                         self.capybara.hit()
@@ -177,9 +183,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
 //se os corpos estão em contato
 
-    //Se o jacaré está batendo
-        //vida capivara = vida da capivara - dano do jacaré
+//Se o jacaré está batendo
+//vida capivara = vida da capivara - dano do jacaré
 
 //Se o jacaré não está batendo && capivara está batendo (apertou o botão X)
-        //vida jacaré = vida da jacaré - dano da capivara
+//vida jacaré = vida da jacaré - dano da capivara
 

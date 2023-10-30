@@ -103,10 +103,10 @@ class Alligator {
 
     @objc func attack() {
         guard !isAlligatoraAttacking else { return }
+        self.isAlligatoraAttacking = true
         let startAction = SKAction.run {
             self.stop()
             self.attackAction()
-            self.isAlligatoraAttacking = true
         }
     
         let finishedAction = SKAction.run {
