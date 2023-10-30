@@ -134,7 +134,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
                 
             }
-            
+            print("hello renan")
             if alligator.isAlligatoraAttacking == false{
     
                 self.virtualController?.controller?.extendedGamepad?.buttonX.pressedChangedHandler = { [self] button, value, pressed in
