@@ -31,6 +31,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setupAlligator()
         connectController()
         setupAudio()
+        setObstacles()
         setupContact()
     }
 
@@ -40,6 +41,31 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     private func getDoor() {
         self.door = childNode(withName: "Door") as! SKSpriteNode
+    }
+
+    private func setObstacles() {
+        setLake()
+        setTree()
+    }
+
+    private func setTree() {
+        let tree = childNode(withName: "tree") as! SKSpriteNode
+        let treeTexture = SKTexture(imageNamed: "tree")
+
+        tree.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: tree.size.width, height: tree.size.height/3), center: CGPoint(x: 0, y: -tree.size.height/3))
+        tree.physicsBody?.isDynamic = false
+        tree.physicsBody?.allowsRotation = false
+        tree.physicsBody?.affectedByGravity = false
+    }
+
+    private func setLake() {
+        let lake = childNode(withName: "lake") as! SKSpriteNode
+        let lakeTexture = SKTexture(imageNamed: "lake")
+
+        lake.physicsBody = SKPhysicsBody(texture: lakeTexture, size: lake.size)
+        lake.physicsBody?.isDynamic = false
+        lake.physicsBody?.allowsRotation = false
+        lake.physicsBody?.affectedByGravity = false
     }
 
     private func setupAudio() {
@@ -131,6 +157,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             print(i)
             i+=1
             alligator.attack()
+            
+            if alligator.isAlligatoraAttacking == false {
+                capybara.changeLife(damage: alligator.getDamage())
+                //Aqui, chamar animaçao da capivara tomando dano
+                print(capybara.life)
+            }
+            else {
+    
+                self.virtualController?.controller?.extendedGamepad?.buttonX.pressedChangedHandler = { button, value, pressed in
+                    if pressed {
+                        self.capybara.hit()
+                        self.alligator.changeLife(damage: self.capybara.getDamage())
+                        //Aqui, chamar alimaçao do jacare tomando dano
+                    }
+                }
+            }
         }
     }
 }

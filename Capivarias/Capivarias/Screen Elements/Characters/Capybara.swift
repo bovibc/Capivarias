@@ -11,11 +11,12 @@ import SpriteKit
 class Capybara {
     var isCapivaraHitting = false
     var isCapivaraWalking = false
-    private var life: Float = 100
+    var life: Float = 100
     private var breathTime: Float = 100
     private var speed: CGFloat = 5
     private var defense: Float = 100
     private var assetScale: CGFloat = 0.1
+    private let damage: Float = 10.0
     private var staticName: String = "capybara_stopped"
     var audioPlayer = AudioPlayer()
 
@@ -23,6 +24,14 @@ class Capybara {
 
     init() {
         self.sprite = SKSpriteNode(imageNamed: staticName)
+    }
+    
+    func changeLife(damage: Float) {
+        life -= damage
+    }
+    
+    func getDamage() -> Float {
+        return damage
     }
 
     func start(screenWidth: CGFloat, screenHeight: CGFloat) {

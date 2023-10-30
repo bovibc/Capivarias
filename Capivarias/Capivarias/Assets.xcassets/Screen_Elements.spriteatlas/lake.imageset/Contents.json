@@ -1,6 +1,7 @@
 {
-  "colors" : [
+  "images" : [
     {
+      "filename" : "lake.svg",
       "idiom" : "universal"
     }
   ],
