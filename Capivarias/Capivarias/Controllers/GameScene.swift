@@ -20,6 +20,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let backgroundController = BackgroundController()
     var door = SKSpriteNode()
     var i = 0
+    var transactionScene = TrasactionsScenes()
 
     override func didMove(to view: SKView) {
         setupScene()
@@ -33,6 +34,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setupAudio()
         setObstacles()
         setupContact()
+        
     }
 
     private func setupBackground() {
@@ -106,9 +108,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let direction = joystick.getDirection()
             validateMovement(direction)
             capybara.walk(positionX: joystick.positionX )
+            print(capybara.sprite.position.x)
         }
         
-    
+        if let view = self.view {
+            if capybara.sprite.position.x >= 1400 {
+                transactionScene.goToNextLevel(view: view, gameScene: SecondScene())
+            }
+        }    
     }
 
     private func validateMovement(_ direction: Direction) {
@@ -190,6 +197,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
     }
+    
+    
+    
+//    func goToNextLevel(){
+//        let secondScene = SecondScene()
+//            
+//        let transition = SKTransition.fade(withDuration: 1.0)
+//        self.view?.presentScene(secondScene, transition: transition)
+//    }
+//        
+//    func nextLevel() {
+//        if capybara.sprite.position.x >= 1270 {
+//            goToNextLevel()
+//        }
+//    }
+    
 }
 
 //se os corpos estão em contato
