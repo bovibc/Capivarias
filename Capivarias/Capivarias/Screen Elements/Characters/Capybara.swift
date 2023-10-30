@@ -12,11 +12,11 @@ class Capybara {
     var isCapivaraHitting = false
     var isCapivaraWalking = false
     var life: Float = 100
+    private var damage: Float = 20
     private var breathTime: Float = 100
     private var speed: CGFloat = 5
     private var defense: Float = 100
     private var assetScale: CGFloat = 0.1
-    private let damage: Float = 10.0
     private var staticName: String = "capybara_stopped"
     var audioPlayer = AudioPlayer()
 

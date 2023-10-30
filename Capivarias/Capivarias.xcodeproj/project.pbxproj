@@ -20,6 +20,7 @@
 		08CEE5FA2AE167E800149B83 /* Alligator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CEE5F92AE167E800149B83 /* Alligator.swift */; };
 		08CEE5FC2AE1680800149B83 /* Joystick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CEE5FB2AE1680800149B83 /* Joystick.swift */; };
 		08E8EE382AE961EC0076F4CE /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 08E8EE372AE961EC0076F4CE /* GameScene.sks */; };
+		C0D60CA42AE80B910064C863 /* Weapons.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D60CA32AE80B910064C863 /* Weapons.swift */; };
 		F28B1D502AE2C34700F8E596 /* monkey-banana-atack.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F28B1D4B2AE2C34600F8E596 /* monkey-banana-atack.mp3 */; };
 		F28B1D512AE2C34700F8E596 /* alligator-axe-atack.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F28B1D4C2AE2C34600F8E596 /* alligator-axe-atack.mp3 */; };
 		F28B1D522AE2C34700F8E596 /* ambient-forest.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F28B1D4D2AE2C34600F8E596 /* ambient-forest.mp3 */; };
@@ -44,6 +45,7 @@
 		08CEE5F92AE167E800149B83 /* Alligator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alligator.swift; sourceTree = "<group>"; };
 		08CEE5FB2AE1680800149B83 /* Joystick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Joystick.swift; sourceTree = "<group>"; };
 		08E8EE372AE961EC0076F4CE /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		C0D60CA32AE80B910064C863 /* Weapons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weapons.swift; sourceTree = "<group>"; };
 		F28B1D4B2AE2C34600F8E596 /* monkey-banana-atack.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "monkey-banana-atack.mp3"; sourceTree = "<group>"; };
 		F28B1D4C2AE2C34600F8E596 /* alligator-axe-atack.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "alligator-axe-atack.mp3"; sourceTree = "<group>"; };
 		F28B1D4D2AE2C34600F8E596 /* ambient-forest.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "ambient-forest.mp3"; sourceTree = "<group>"; };
@@ -86,7 +88,6 @@
 			children = (
 				08CEE5EF2AE1633F00149B83 /* Auxiliary */,
 				08CEE5F22AE163AA00149B83 /* Controllers */,
-				08CEE5F12AE1639F00149B83 /* Scenes */,
 				08CEE5F02AE1638F00149B83 /* Documents */,
 				08CEE5EC2AE1631300149B83 /* Screen Elements */,
 				0813A2CE2AD6DEFE00428484 /* AppDelegate.swift */,
@@ -100,6 +101,7 @@
 		08CEE5EC2AE1631300149B83 /* Screen Elements */ = {
 			isa = PBXGroup;
 			children = (
+				C0D60CA22AE80B7B0064C863 /* Weapons */,
 				08CEE5EE2AE1632A00149B83 /* Characters */,
 				08CEE5ED2AE1632300149B83 /* Joystick */,
 			);
@@ -144,7 +146,6 @@
 		08CEE5F12AE1639F00149B83 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				0813A2D42AD6DEFE00428484 /* GameScene.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -154,9 +155,19 @@
 			children = (
 				0813A2D62AD6DEFE00428484 /* GameViewController.swift */,
 				F2C014B52AE81319000E9B87 /* BackgroundController.swift */,
+				08CEE5F12AE1639F00149B83 /* Scenes */,
 				F2A77F822AE7E7A50030F197 /* AudioPlayerController.swift */,
+				0813A2D42AD6DEFE00428484 /* GameScene.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		C0D60CA22AE80B7B0064C863 /* Weapons */ = {
+			isa = PBXGroup;
+			children = (
+				C0D60CA32AE80B910064C863 /* Weapons.swift */,
+			);
+			path = Weapons;
 			sourceTree = "<group>";
 		};
 		F28B1D482AE2AF6E00F8E596 /* Sounds */ = {
@@ -259,6 +270,7 @@
 				0813A2D72AD6DEFE00428484 /* GameViewController.swift in Sources */,
 				08CEE5F82AE1653C00149B83 /* Capybara.swift in Sources */,
 				0813A2CF2AD6DEFE00428484 /* AppDelegate.swift in Sources */,
+				C0D60CA42AE80B910064C863 /* Weapons.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

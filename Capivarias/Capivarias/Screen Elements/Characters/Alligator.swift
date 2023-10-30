@@ -13,7 +13,7 @@ class Alligator {
     private var damage: Float = 20
     private var speed: CGFloat = 2
     private var attackSpeed: CGFloat = 1
-    private var scale: CGFloat = 0.15
+    private var scale: CGFloat = 0.19
     private let staticName: String = "alligator_stopped"
     private var isAlligatorWalking: Bool = false
     var isAlligatoraAttacking: Bool = false
