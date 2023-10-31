@@ -9,7 +9,6 @@ import SpriteKit
 import GameplayKit
 import GameController
 
-
 class GameScene: SKScene, SKPhysicsContactDelegate {
     var virtualController: GCVirtualController?
     let spriteScale = 0.07
@@ -20,6 +19,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let backgroundController = BackgroundController()
     var door = SKSpriteNode()
     var i = 0
+    var isContact: Bool = false
+    var timeToAlligatorHit = 0
     var transactionScene = TrasactionsScenes()
 
     override func didMove(to view: SKView) {
@@ -34,9 +35,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setupAudio()
         setObstacles()
         setupContact()
-        
     }
-
+    
     private func setupBackground() {
         backgroundController.setupBackground(scene: self, imageName: "mapateste")
     }
@@ -53,7 +53,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private func setTree() {
         let tree = childNode(withName: "tree") as! SKSpriteNode
         let treeTexture = SKTexture(imageNamed: "tree")
-
+        
         tree.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: tree.size.width, height: tree.size.height/3), center: CGPoint(x: 0, y: -tree.size.height/3))
         tree.physicsBody?.isDynamic = false
         tree.physicsBody?.allowsRotation = false
@@ -63,7 +63,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private func setLake() {
         let lake = childNode(withName: "lake") as! SKSpriteNode
         let lakeTexture = SKTexture(imageNamed: "lake")
-
+        
         lake.physicsBody = SKPhysicsBody(texture: lakeTexture, size: lake.size)
         lake.physicsBody?.isDynamic = false
         lake.physicsBody?.allowsRotation = false
@@ -77,12 +77,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private func setupContact() {
         self.physicsWorld.contactDelegate = self
     }
-
+    
     private func setupAlligator() {
         self.alligator.start(screenWidth: size.width , screenHeight: size.height)
         addChild(alligator.sprite)
     }
-
+    
     private func setupScene() {
         scene?.anchorPoint = .zero
         scene?.size = CGSize(width: view?.scene?.size.width ?? 600, height: view?.scene?.size.height ?? 800)
@@ -104,18 +104,35 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if !capybara.isCapivaraHitting {
                 capybara.stop()
             }
+
         } else {
             let direction = joystick.getDirection()
             validateMovement(direction)
             capybara.walk(positionX: joystick.positionX )
-            print(capybara.sprite.position.x)
         }
-        
+
+        capybara.death()
+        if capybara.life <= 0 {
+            alligator.isFollowing = false
+            if (currentTime - alligator.finishAnimation) > 1 {
+                alligator.sprite.removeAllActions()
+            }
+        }
+
+        if isContact {
+            if (currentTime - alligator.lastHit) > 3 {
+                alligator.lastHit = currentTime
+                alligator.attack()
+                self.capybara.changeLife(damage: self.alligator.getDamage())
+                print(capybara.life)
+            }
+        }
+
         if let view = self.view {
             if capybara.sprite.position.x >= 1400 {
                 transactionScene.goToNextLevel(view: view, gameScene: SecondScene())
             }
-        }    
+        }
     }
 
     private func validateMovement(_ direction: Direction) {
@@ -140,7 +157,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     func setupController(){
         self.virtualController?.controller?.extendedGamepad?.buttonX.pressedChangedHandler = { button, value, pressed in
-            if pressed {
+            if pressed && self.isContact {
+                self.capybara.hit()
+                self.alligator.changeLife(damage: self.capybara.getDamage())
+
+            }
+            else {
                 self.capybara.hit()
             }
         }
@@ -153,10 +175,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
 
+    func didEnd(_ contact: SKPhysicsContact) {
+        isContact = false
+    }
+
     func didBegin(_ contact: SKPhysicsContact) {
         if contact.bodyA.categoryBitMask == 1 && contact.bodyB.categoryBitMask == 2 {
-            //print(i)
             i+=1
+            isContact = true
             alligator.attack()
             if alligator.isAlligatoraAttacking == false  {
                 capybara.changeLife(damage: alligator.getDamage())
@@ -164,7 +190,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 print(capybara.life)
             }
             else {
-    
                 self.virtualController?.controller?.extendedGamepad?.buttonX.pressedChangedHandler = { button, value, pressed in
                     if pressed {
                         self.capybara.hit()
@@ -174,10 +199,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
             }
         }
-        
+
         if contact.bodyA.categoryBitMask == 2 && contact.bodyB.categoryBitMask == 1 {
-            //print(i)
             i+=1
+            isContact = true
             alligator.attack()
             
             if alligator.isAlligatoraAttacking == false {
@@ -186,7 +211,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 print(capybara.life)
             }
             else {
-    
                 self.virtualController?.controller?.extendedGamepad?.buttonX.pressedChangedHandler = { button, value, pressed in
                     if pressed {
                         self.capybara.hit()
@@ -197,29 +221,4 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
     }
-    
-    
-    
-//    func goToNextLevel(){
-//        let secondScene = SecondScene()
-//            
-//        let transition = SKTransition.fade(withDuration: 1.0)
-//        self.view?.presentScene(secondScene, transition: transition)
-//    }
-//        
-//    func nextLevel() {
-//        if capybara.sprite.position.x >= 1270 {
-//            goToNextLevel()
-//        }
-//    }
-    
 }
-
-//se os corpos estão em contato
-
-    //Se o jacaré está batendo
-        //vida capivara = vida da capivara - dano do jacaré
-
-//Se o jacaré não está batendo && capivara está batendo (apertou o botão X)
-        //vida jacaré = vida da jacaré - dano da capivara
-

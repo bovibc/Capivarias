@@ -106,6 +106,16 @@ class Capybara {
             isCapivaraWalking = true
             sprite.removeAllActions()
             sprite.run(SKAction.repeatForever(action))
+            
+        }
+    }
+
+    func death() {
+    if  life <= 0 {
+        print("morreu")
+        //Está entrando no print, mas deveria chamar a animaçao dela morrendo
+        //não mudar essa textura
+        //cortar as movimetações na tela e deixar o joystick inúil
         }
     }
 

@@ -9,8 +9,8 @@ import Foundation
 import SpriteKit
 
 class Alligator {
-    private var life: Float = 100
-    private var damage: Float = 20
+    var life: Float = 100
+    private var damage: Float = 30
     private var speed: CGFloat = 2
     private var attackSpeed: CGFloat = 1
     private var scale: CGFloat = 0.19
@@ -20,7 +20,9 @@ class Alligator {
     private let movementAliasName: String = "Alligator_Walking"
     var sprite: SKSpriteNode
     var audioPlayer = AudioPlayer()
-
+    var isFollowing: Bool = true
+    var lastHit:TimeInterval = 0
+    var finishAnimation: TimeInterval = 0
 
     init() {
         self.sprite = SKSpriteNode(imageNamed: staticName)
@@ -77,31 +79,42 @@ class Alligator {
     }
 
     func follow(player: CGPoint) {
-        walk()
-        let dx = player.x - self.sprite.position.x
-        let dy = player.y - self.sprite.position.y
-        let angle = atan2(dy, dx)
-
-        let vx = cos(angle) * speed
-        let vy = sin(angle) * speed
-
-        sprite.position.x += vx
-        sprite.position.y += vy
-
-        sprite.xScale = dx > 0 ? abs(sprite.xScale) : -abs(sprite.xScale)
+        if isFollowing == true {
+            walk()
+            let dx = player.x - self.sprite.position.x
+            let dy = player.y - self.sprite.position.y
+            let angle = atan2(dy, dx)
+            
+            let vx = cos(angle) * speed
+            let vy = sin(angle) * speed
+            
+            sprite.position.x += vx
+            sprite.position.y += vy
+            
+            sprite.xScale = dx > 0 ? abs(sprite.xScale) : -abs(sprite.xScale)
+            sprite.zRotation = 0
+        }
+        else {
+            
+            //Aqui deveria, qunado terminasse toda a animação do jacaré batendo, chamar o sprite do jacaré parado (ele já está parando de seguir)
+            sprite = SKSpriteNode(imageNamed: "alligator_stopped")
+            
+            
+        }
     }
 
     @objc func attack() {
         guard !isAlligatoraAttacking else { return }
+        self.isAlligatoraAttacking = true
         let startAction = SKAction.run {
             self.stop()
             self.attackAction()
-            self.isAlligatoraAttacking = true
         }
     
         let finishedAction = SKAction.run {
-            self.isAlligatoraAttacking = false
             self.walk()
+            self.isAlligatoraAttacking = false
+            
         }
 
         let action = SKAction.sequence([startAction, SKAction.wait(forDuration: 0.78), finishedAction])
@@ -119,4 +132,18 @@ class Alligator {
                                       restore: true)
         self.sprite.run(SKAction.repeatForever(action))
     }
+    
+    func stopAll() {
+        stop()
+        sprite.removeAllActions()
+        let textures = Textures.getTextures(name: "", atlas: "Alligator_Stopped")
+        let action = SKAction.animate(with: textures,
+                                      timePerFrame: 0.8/TimeInterval(textures.count),
+                                      resize: true,
+                                      restore: true)
+        self.sprite.run(SKAction.repeatForever(action))
+    
+    }
+    
+    
 }
