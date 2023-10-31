@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "copa.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

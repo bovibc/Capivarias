@@ -22,7 +22,7 @@ class GameViewController: UIViewController {
                 // Copy gameplay related content over to the scene
                 
                 // Set the scale mode to scale to fit the window
-                sceneNode.scaleMode = .resizeFill
+                sceneNode.scaleMode = .aspectFill
                 
                 // Present the scene
                 if let view = self.view as! SKView? {

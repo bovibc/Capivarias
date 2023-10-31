@@ -9,7 +9,7 @@ import Foundation
 import SpriteKit
 
 class BackgroundController{
-    
+
     func setupBackground(scene: SKScene, imageName: String) {
         let background = SKSpriteNode(imageNamed: imageName)
 
@@ -21,5 +21,4 @@ class BackgroundController{
         
         scene.addChild(background)
     }
-    
 }
