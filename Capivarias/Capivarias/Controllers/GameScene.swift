@@ -77,6 +77,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         capybara.death()
         if capybara.life <= 0 {
             alligator.isFollowing = false
+            alligator.sprite.removeAllActions()
         }
         
         if isContact {

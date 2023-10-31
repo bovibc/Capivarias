@@ -34,7 +34,6 @@ class Capybara {
         return damage
     }
     
-
     func start(screenWidth: CGFloat, screenHeight: CGFloat) {
         let scaleX = screenWidth * assetScale / sprite.size.width
         let scaleY = screenHeight * assetScale / sprite.size.height
