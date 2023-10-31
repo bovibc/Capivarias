@@ -9,7 +9,6 @@ import SpriteKit
 import GameplayKit
 import GameController
 
-
 class GameScene: SKScene, SKPhysicsContactDelegate {
     var virtualController: GCVirtualController?
     let spriteScale = 0.07
@@ -34,7 +33,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setupAudio()
         setObstacles()
         setupContact()
-        
     }
 
     private func setupBackground() {
@@ -115,7 +113,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if capybara.sprite.position.x >= 1400 {
                 transactionScene.goToNextLevel(view: view, gameScene: SecondScene())
             }
-        }    
+        }
     }
 
     private func validateMovement(_ direction: Direction) {
@@ -174,19 +172,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
             }
         }
-        
+
         if contact.bodyA.categoryBitMask == 2 && contact.bodyB.categoryBitMask == 1 {
             //print(i)
             i+=1
             alligator.attack()
-            
+
             if alligator.isAlligatoraAttacking == false {
                 capybara.changeLife(damage: alligator.getDamage())
                 //Aqui, chamar animaçao da capivara tomando dano
                 print(capybara.life)
             }
             else {
-    
                 self.virtualController?.controller?.extendedGamepad?.buttonX.pressedChangedHandler = { button, value, pressed in
                     if pressed {
                         self.capybara.hit()
@@ -197,29 +194,3 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
     }
-    
-    
-    
-//    func goToNextLevel(){
-//        let secondScene = SecondScene()
-//            
-//        let transition = SKTransition.fade(withDuration: 1.0)
-//        self.view?.presentScene(secondScene, transition: transition)
-//    }
-//        
-//    func nextLevel() {
-//        if capybara.sprite.position.x >= 1270 {
-//            goToNextLevel()
-//        }
-//    }
-    
-}
-
-//se os corpos estão em contato
-
-    //Se o jacaré está batendo
-        //vida capivara = vida da capivara - dano do jacaré
-
-//Se o jacaré não está batendo && capivara está batendo (apertou o botão X)
-        //vida jacaré = vida da jacaré - dano da capivara
-

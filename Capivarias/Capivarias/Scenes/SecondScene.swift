@@ -10,7 +10,7 @@ import GameplayKit
 import GameController
 
 
-class SecondScene: SKScene { 
+class SecondScene: SKScene {
     override func didMove(to view: SKView) {
         setupScene()
     }
