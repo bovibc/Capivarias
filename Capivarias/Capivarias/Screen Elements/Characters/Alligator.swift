@@ -23,7 +23,6 @@ class Alligator {
     var isFollowing: Bool = true
     var lastHit:TimeInterval = 0
 
-
     init() {
         self.sprite = SKSpriteNode(imageNamed: staticName)
     }
