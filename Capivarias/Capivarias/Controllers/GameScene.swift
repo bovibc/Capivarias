@@ -20,6 +20,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var capybara = Capybara()
     let backgroundController = BackgroundController()
     var i = 0
+    var isContact: Bool = false
+    var timeToAlligatorHit = 0
     
     override func didMove(to view: SKView) {
         backgroundController.setupBackground(scene: self, imageName: "dry")
@@ -76,6 +78,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if capybara.life <= 0 {
             alligator.isFollowing = false
         }
+        
+        if isContact {
+            if (currentTime - alligator.lastHit) > 3 {
+                alligator.lastHit = currentTime
+                alligator.attack()
+                self.capybara.changeLife(damage: self.alligator.getDamage())
+                print(capybara.life)
+            }
+        }
+        
     }
     
     private func validateMovement(_ direction: Direction) {
@@ -100,7 +112,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func setupController(){
         self.virtualController?.controller?.extendedGamepad?.buttonX.pressedChangedHandler = { button, value, pressed in
-            if pressed {
+            if pressed && self.isContact {
+                self.capybara.hit()
+                self.alligator.changeLife(damage: self.capybara.getDamage())
+
+            }
+            else {
                 self.capybara.hit()
             }
         }
@@ -113,79 +130,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
+    
+    func didEnd(_ contact: SKPhysicsContact) {
+        isContact = false
+    }
+    
     func didBegin(_ contact: SKPhysicsContact) {
+        
+        
         if contact.bodyA.categoryBitMask == 1 && contact.bodyB.categoryBitMask == 2 {
             i+=1
-            alligator.attack()
-            if alligator.isAlligatoraAttacking == false  {
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                    self.capybara.changeLife(damage: self.alligator.getDamage())
-                    //Aqui, chamar animaçao da capivara tomando dano
-                    print(self.capybara.life)
-                    print("hello")
-                }
-                
-
-            }
-            else {
-                //print(alligator.life)
-                self.virtualController?.controller?.extendedGamepad?.buttonX.pressedChangedHandler = { [self] button, value, pressed in
-                    if pressed {
-                        self.capybara.hit()
-                        self.alligator.changeLife(damage: self.capybara.getDamage())
-                        //Aqui, chamar alimaçao do jacare tomando dano
-                        print(self.alligator.life)
-                    }
-                }
-                
-            }
-            
-            if alligator.isAlligatoraAttacking == false{
-                
-                self.virtualController?.controller?.extendedGamepad?.buttonX.pressedChangedHandler = { [self] button, value, pressed in
-                    if pressed {
-                        self.capybara.hit()
-                        self.alligator.changeLife(damage: self.capybara.getDamage())
-                        //Aqui, chamar alimaçao do jacare tomando dano
-                        print(self.alligator.life)
-                    }
-                }
-            }
-            else{}
+            isContact = true
+        
         }
         
         if contact.bodyA.categoryBitMask == 2 && contact.bodyB.categoryBitMask == 1 {
             i+=1
-            alligator.attack()
-            
-            if alligator.isAlligatoraAttacking == false {
-                capybara.changeLife(damage: alligator.getDamage())
-                //Aqui, chamar animaçao da capivara tomando dano
-                print(capybara.life)
-            }
-            else {
-                
-                self.virtualController?.controller?.extendedGamepad?.buttonX.pressedChangedHandler = { button, value, pressed in
-                    if pressed {
-                        self.capybara.hit()
-                        self.alligator.changeLife(damage: self.capybara.getDamage())
-                        //Aqui, chamar alimaçao do jacare tomando dano
-                    }
-                }
-            }
-            
-            
+            isContact = true
             
         }
     }
 }
-
-//se os corpos estão em contato
-
-//Se o jacaré está batendo
-//vida capivara = vida da capivara - dano do jacaré
-
-//Se o jacaré não está batendo && capivara está batendo (apertou o botão X)
-//vida jacaré = vida da jacaré - dano da capivara
-

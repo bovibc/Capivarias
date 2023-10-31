@@ -21,6 +21,7 @@ class Alligator {
     var sprite: SKSpriteNode
     var audioPlayer = AudioPlayer()
     var isFollowing: Bool = true
+    var lastHit:TimeInterval = 0
 
 
     init() {
