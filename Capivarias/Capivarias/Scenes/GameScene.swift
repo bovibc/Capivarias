@@ -9,7 +9,6 @@ import SpriteKit
 import GameplayKit
 import GameController
 
-
 class GameScene: SKScene, SKPhysicsContactDelegate {
     var virtualController: GCVirtualController?
     let spriteScale = 0.07
@@ -34,7 +33,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setupAudio()
         setObstacles()
         setupContact()
-        
     }
 
     private func setupBackground() {
@@ -53,7 +51,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private func setTree() {
         let tree = childNode(withName: "tree") as! SKSpriteNode
         let treeTexture = SKTexture(imageNamed: "tree")
-
+        
         tree.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: tree.size.width, height: tree.size.height/3), center: CGPoint(x: 0, y: -tree.size.height/3))
         tree.physicsBody?.isDynamic = false
         tree.physicsBody?.allowsRotation = false
@@ -63,7 +61,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private func setLake() {
         let lake = childNode(withName: "lake") as! SKSpriteNode
         let lakeTexture = SKTexture(imageNamed: "lake")
-
+        
         lake.physicsBody = SKPhysicsBody(texture: lakeTexture, size: lake.size)
         lake.physicsBody?.isDynamic = false
         lake.physicsBody?.allowsRotation = false
@@ -115,7 +113,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if capybara.sprite.position.x >= 1400 {
                 transactionScene.goToNextLevel(view: view, gameScene: SecondScene())
             }
-        }    
+        }
     }
 
     private func validateMovement(_ direction: Direction) {
@@ -164,7 +162,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 print(capybara.life)
             }
             else {
-    
                 self.virtualController?.controller?.extendedGamepad?.buttonX.pressedChangedHandler = { button, value, pressed in
                     if pressed {
                         self.capybara.hit()
@@ -174,7 +171,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
             }
         }
-        
+
         if contact.bodyA.categoryBitMask == 2 && contact.bodyB.categoryBitMask == 1 {
             //print(i)
             i+=1
@@ -186,7 +183,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 print(capybara.life)
             }
             else {
-    
                 self.virtualController?.controller?.extendedGamepad?.buttonX.pressedChangedHandler = { button, value, pressed in
                     if pressed {
                         self.capybara.hit()
@@ -197,29 +193,4 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
     }
-    
-    
-    
-//    func goToNextLevel(){
-//        let secondScene = SecondScene()
-//            
-//        let transition = SKTransition.fade(withDuration: 1.0)
-//        self.view?.presentScene(secondScene, transition: transition)
-//    }
-//        
-//    func nextLevel() {
-//        if capybara.sprite.position.x >= 1270 {
-//            goToNextLevel()
-//        }
-//    }
-    
 }
-
-//se os corpos estão em contato
-
-    //Se o jacaré está batendo
-        //vida capivara = vida da capivara - dano do jacaré
-
-//Se o jacaré não está batendo && capivara está batendo (apertou o botão X)
-        //vida jacaré = vida da jacaré - dano da capivara
-

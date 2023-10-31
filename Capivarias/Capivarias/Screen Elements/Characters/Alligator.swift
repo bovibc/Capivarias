@@ -21,7 +21,6 @@ class Alligator {
     var sprite: SKSpriteNode
     var audioPlayer = AudioPlayer()
 
-
     init() {
         self.sprite = SKSpriteNode(imageNamed: staticName)
     }
