@@ -22,6 +22,7 @@ class Alligator {
     var audioPlayer = AudioPlayer()
     var isFollowing: Bool = true
     var lastHit:TimeInterval = 0
+    var finishAnimation: TimeInterval = 0
 
 
     init() {
