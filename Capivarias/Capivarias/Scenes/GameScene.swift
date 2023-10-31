@@ -9,6 +9,7 @@ import SpriteKit
 import GameplayKit
 import GameController
 
+
 class GameScene: SKScene, SKPhysicsContactDelegate {
     var virtualController: GCVirtualController?
     let spriteScale = 0.07
@@ -20,7 +21,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var door = SKSpriteNode()
     var i = 0
     var transactionScene = TrasactionsScenes()
-    
+
     override func didMove(to view: SKView) {
         setupScene()
         setupBackground()
@@ -33,68 +34,69 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setupAudio()
         setObstacles()
         setupContact()
+        
     }
-    
+
     private func setupBackground() {
         backgroundController.setupBackground(scene: self, imageName: "mapateste")
     }
-    
+
     private func getDoor() {
         self.door = childNode(withName: "Door") as! SKSpriteNode
     }
-    
+
     private func setObstacles() {
         setLake()
         setTree()
     }
-    
+
     private func setTree() {
         let tree = childNode(withName: "tree") as! SKSpriteNode
         let treeTexture = SKTexture(imageNamed: "tree")
-        
+
         tree.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: tree.size.width, height: tree.size.height/3), center: CGPoint(x: 0, y: -tree.size.height/3))
         tree.physicsBody?.isDynamic = false
         tree.physicsBody?.allowsRotation = false
         tree.physicsBody?.affectedByGravity = false
     }
-    
+
     private func setLake() {
         let lake = childNode(withName: "lake") as! SKSpriteNode
         let lakeTexture = SKTexture(imageNamed: "lake")
-        
+
         lake.physicsBody = SKPhysicsBody(texture: lakeTexture, size: lake.size)
         lake.physicsBody?.isDynamic = false
         lake.physicsBody?.allowsRotation = false
         lake.physicsBody?.affectedByGravity = false
     }
-    
+
     private func setupAudio() {
         audioPlayer.playEnviroment(sound: "ambient-forest", type: "mp3", volume: 1.0)
     }
-    
+
     private func setupContact() {
         self.physicsWorld.contactDelegate = self
     }
-    
+
     private func setupAlligator() {
         self.alligator.start(screenWidth: size.width , screenHeight: size.height)
         addChild(alligator.sprite)
     }
-    
+
     private func setupScene() {
         scene?.anchorPoint = .zero
         scene?.size = CGSize(width: view?.scene?.size.width ?? 600, height: view?.scene?.size.height ?? 800)
     }
-    
+
     private func setupCapivara() {
         self.capybara.start(screenWidth: size.width , screenHeight: size.height)
         addChild(capybara.sprite)
     }
-    
+
     private func removeDoor() {
         door.removeFromParent()
     }
-    
+
     override func update(_ currentTime: TimeInterval) {
         alligator.follow(player: capybara.sprite.position)
         if joystick.isJoystickStatic() {
@@ -113,9 +115,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if capybara.sprite.position.x >= 1400 {
                 transactionScene.goToNextLevel(view: view, gameScene: SecondScene())
             }
-        }
+        }    
     }
-    
+
     private func validateMovement(_ direction: Direction) {
         switch direction.horizontal {
         case .left:
@@ -125,7 +127,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         case .none:
             break
         }
-        
+
         switch direction.vertical {
         case .top:
             capybara.goTop()
@@ -135,7 +137,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             break
         }
     }
-    
+
     func setupController(){
         self.virtualController?.controller?.extendedGamepad?.buttonX.pressedChangedHandler = { button, value, pressed in
             if pressed {
@@ -143,14 +145,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
     }
-    
+
     func connectController() {
         joystick.connectController { controller in
             self.virtualController = controller
             self.setupController()
         }
     }
-    
+
     func didBegin(_ contact: SKPhysicsContact) {
         if contact.bodyA.categoryBitMask == 1 && contact.bodyB.categoryBitMask == 2 {
             //print(i)
@@ -162,7 +164,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 print(capybara.life)
             }
             else {
-                
+    
                 self.virtualController?.controller?.extendedGamepad?.buttonX.pressedChangedHandler = { button, value, pressed in
                     if pressed {
                         self.capybara.hit()
@@ -184,6 +186,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 print(capybara.life)
             }
             else {
+    
                 self.virtualController?.controller?.extendedGamepad?.buttonX.pressedChangedHandler = { button, value, pressed in
                     if pressed {
                         self.capybara.hit()
@@ -194,4 +197,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
     }
+    
+    
+    
+//    func goToNextLevel(){
+//        let secondScene = SecondScene()
+//            
+//        let transition = SKTransition.fade(withDuration: 1.0)
+//        self.view?.presentScene(secondScene, transition: transition)
+//    }
+//        
+//    func nextLevel() {
+//        if capybara.sprite.position.x >= 1270 {
+//            goToNextLevel()
+//        }
+//    }
+    
 }
+
+//se os corpos estão em contato
+
+    //Se o jacaré está batendo
+        //vida capivara = vida da capivara - dano do jacaré
+
+//Se o jacaré não está batendo && capivara está batendo (apertou o botão X)
+        //vida jacaré = vida da jacaré - dano da capivara
+
