@@ -9,7 +9,6 @@ import SpriteKit
 import GameplayKit
 import GameController
 
-
 class GameScene: SKScene, SKPhysicsContactDelegate {
     var virtualController: GCVirtualController?
     let spriteScale = 0.07
@@ -36,7 +35,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setupAudio()
         setObstacles()
         setupContact()
-        
     }
     
     private func setupBackground() {
@@ -55,7 +53,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private func setTree() {
         let tree = childNode(withName: "tree") as! SKSpriteNode
         let treeTexture = SKTexture(imageNamed: "tree")
-
+        
         tree.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: tree.size.width, height: tree.size.height/3), center: CGPoint(x: 0, y: -tree.size.height/3))
         tree.physicsBody?.isDynamic = false
         tree.physicsBody?.allowsRotation = false
@@ -65,7 +63,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private func setLake() {
         let lake = childNode(withName: "lake") as! SKSpriteNode
         let lakeTexture = SKTexture(imageNamed: "lake")
-
+        
         lake.physicsBody = SKPhysicsBody(texture: lakeTexture, size: lake.size)
         lake.physicsBody?.isDynamic = false
         lake.physicsBody?.allowsRotation = false
@@ -180,33 +178,47 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func didEnd(_ contact: SKPhysicsContact) {
         isContact = false
     }
-    
+
     func didBegin(_ contact: SKPhysicsContact) {
         if contact.bodyA.categoryBitMask == 1 && contact.bodyB.categoryBitMask == 2 {
             i+=1
             isContact = true
-        
+            alligator.attack()
+            if alligator.isAlligatoraAttacking == false  {
+                capybara.changeLife(damage: alligator.getDamage())
+                //Aqui, chamar animaçao da capivara tomando dano
+                print(capybara.life)
+            }
+            else {
+                self.virtualController?.controller?.extendedGamepad?.buttonX.pressedChangedHandler = { button, value, pressed in
+                    if pressed {
+                        self.capybara.hit()
+                        self.alligator.changeLife(damage: self.capybara.getDamage())
+                        //Aqui, chamar alimaçao do jacare tomando dano
+                    }
+                }
+            }
         }
-        
+
         if contact.bodyA.categoryBitMask == 2 && contact.bodyB.categoryBitMask == 1 {
             i+=1
             isContact = true
+            alligator.attack()
+            
+            if alligator.isAlligatoraAttacking == false {
+                capybara.changeLife(damage: alligator.getDamage())
+                //Aqui, chamar animaçao da capivara tomando dano
+                print(capybara.life)
+            }
+            else {
+                self.virtualController?.controller?.extendedGamepad?.buttonX.pressedChangedHandler = { button, value, pressed in
+                    if pressed {
+                        self.capybara.hit()
+                        self.alligator.changeLife(damage: self.capybara.getDamage())
+                        //Aqui, chamar alimaçao do jacare tomando dano
+                    }
+                }
+            }
         }
     }
-    
-    
-    
-//    func goToNextLevel(){
-//        let secondScene = SecondScene()
-//            
-//        let transition = SKTransition.fade(withDuration: 1.0)
-//        self.view?.presentScene(secondScene, transition: transition)
-//    }
-//        
-//    func nextLevel() {
-//        if capybara.sprite.position.x >= 1270 {
-//            goToNextLevel()
-//        }
-//    }
-    
 }

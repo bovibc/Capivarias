@@ -24,7 +24,6 @@ class Alligator {
     var lastHit:TimeInterval = 0
     var finishAnimation: TimeInterval = 0
 
-
     init() {
         self.sprite = SKSpriteNode(imageNamed: staticName)
     }
