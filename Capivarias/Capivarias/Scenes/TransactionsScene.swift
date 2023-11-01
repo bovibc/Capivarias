@@ -16,4 +16,11 @@ class TrasactionsScenes: SKScene {
         let transition = SKTransition.fade(withDuration: 1.0)
         view.presentScene(scene as SKScene, transition: transition)
     }
+    
+    func gameOver(view: SKView, gameScene: SKScene){
+        let scene = gameScene
+        let transition = SKTransition.fade(withDuration: 1.0)
+        view.presentScene(scene as SKScene, transition: transition)
+    }
+    
 }
