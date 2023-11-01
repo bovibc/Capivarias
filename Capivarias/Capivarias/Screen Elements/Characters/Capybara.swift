@@ -73,24 +73,19 @@ class Capybara {
     }
     
     func hit() {
+        //audioPlayer.playEffect(effect: "capivara-sword-atack", type: "mp3", volume: 0.7)
         let textures = Textures.getTextures(name: "", atlas: "Capybara_Hit")
-        let action = SKAction.animate(with: textures,
-                                      timePerFrame: 1/TimeInterval(textures.count),
-                                      resize: true,
-                                      restore: true)
-   
-        sprite.removeAllActions()
-      //  sprite.run(SKAction.repeatForever(action))
+        let sound =  SKAction.playSoundFileNamed("capivara-sword-atack", waitForCompletion: false)
+        let animation = SKAction.animate(with: textures, timePerFrame: 0.07)
+        
         isCapivaraWalking = false
         isCapivaraHitting = true
-       // sprite.run(SKAction.animate(with: textures, timePerFrame: 0.1))
         
-        sprite.run(SKAction.animate(with: textures, timePerFrame: 0.1)) {
+        sprite.removeAllActions()
+        sprite.run(SKAction.sequence([sound, animation])) {
             self.isCapivaraHitting = false
             self.stop()
         }
-        
-        audioPlayer.playEffect(effect: "capivara-sword-atack", type: "mp3", volume: 0.8)
     }
     
     func walk(positionX: CGFloat) {
@@ -106,7 +101,6 @@ class Capybara {
             isCapivaraWalking = true
             sprite.removeAllActions()
             sprite.run(SKAction.repeatForever(action))
-            
         }
     }
 
