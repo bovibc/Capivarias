@@ -10,7 +10,7 @@ import SpriteKit
 
 class Alligator {
     var life: Float = 100
-    private var damage: Float = 30
+    private var damage: Float = 10
     private var speed: CGFloat = 2
     private var attackSpeed: CGFloat = 1
     private var scale: CGFloat = 0.19
@@ -106,6 +106,8 @@ class Alligator {
     @objc func attack() {
         guard !isAlligatoraAttacking else { return }
         self.isAlligatoraAttacking = true
+
+        let soundAction = SKAction.playSoundFileNamed("alligator-axe-atack", waitForCompletion: false)
         let startAction = SKAction.run {
             self.stop()
             self.attackAction()
@@ -117,11 +119,11 @@ class Alligator {
             
         }
 
-        let action = SKAction.sequence([startAction, SKAction.wait(forDuration: 0.78), finishedAction])
+        let action = SKAction.sequence([soundAction,startAction, SKAction.wait(forDuration: 0.78), finishedAction])
         self.sprite.removeAllActions()
         self.sprite.run(action)
         
-        audioPlayer.playEffect(effect: "alligator-axe-atack", type: "mp3", volume: 1.0)
+        //audioPlayer.playEffect(effect: "alligator-axe-atack", type: "mp3", volume: 1.0)
     }
 
     private func attackAction() {
@@ -132,7 +134,7 @@ class Alligator {
                                       restore: true)
         self.sprite.run(SKAction.repeatForever(action))
     }
-    
+
     func stopAll() {
         stop()
         sprite.removeAllActions()
@@ -142,8 +144,5 @@ class Alligator {
                                       resize: true,
                                       restore: true)
         self.sprite.run(SKAction.repeatForever(action))
-    
     }
-    
-    
 }

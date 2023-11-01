@@ -182,43 +182,34 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     func didBegin(_ contact: SKPhysicsContact) {
         if contact.bodyA.categoryBitMask == 1 && contact.bodyB.categoryBitMask == 2 {
-            i+=1
-            isContact = true
-            alligator.attack()
-            if alligator.isAlligatoraAttacking == false  {
-                capybara.changeLife(damage: alligator.getDamage())
-                //Aqui, chamar animaçao da capivara tomando dano
-                print(capybara.life)
-            }
-            else {
-                self.virtualController?.controller?.extendedGamepad?.buttonX.pressedChangedHandler = { button, value, pressed in
-                    if pressed {
-                        self.capybara.hit()
-                        self.alligator.changeLife(damage: self.capybara.getDamage())
-                        //Aqui, chamar alimaçao do jacare tomando dano
-                    }
-                }
-            }
+            contactAttack()
         }
-
         if contact.bodyA.categoryBitMask == 2 && contact.bodyB.categoryBitMask == 1 {
-            i+=1
-            isContact = true
-            alligator.attack()
-            
-            if alligator.isAlligatoraAttacking == false {
-                capybara.changeLife(damage: alligator.getDamage())
-                //Aqui, chamar animaçao da capivara tomando dano
-                print(capybara.life)
-            }
-            else {
-                self.virtualController?.controller?.extendedGamepad?.buttonX.pressedChangedHandler = { button, value, pressed in
-                    if pressed {
-                        self.capybara.hit()
-                        self.alligator.changeLife(damage: self.capybara.getDamage())
-                        //Aqui, chamar alimaçao do jacare tomando dano
-                    }
-                }
+            contactAttack()
+        }
+    }
+
+    private func contactAttack() {
+        i+=1
+        isContact = true
+        alligator.attack()
+
+        if alligator.isAlligatoraAttacking == false {
+            capybara.changeLife(damage: alligator.getDamage())
+            //Aqui, chamar animaçao da capivara tomando dano
+            print(capybara.life)
+        }
+        else {
+            setGamePadAction()
+        }
+    }
+
+    private func setGamePadAction() {
+        self.virtualController?.controller?.extendedGamepad?.buttonX.pressedChangedHandler = { button, value, pressed in
+            if pressed {
+                self.capybara.hit()
+                self.alligator.changeLife(damage: self.capybara.getDamage())
+                //Aqui, chamar alimaçao do jacare tomando dano
             }
         }
     }
