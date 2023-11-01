@@ -11,6 +11,7 @@ import SpriteKit
 class Capybara {
     var isCapivaraHitting = false
     var isCapivaraWalking = false
+    var isCapivaraTakingDamage = false
     var life: Float = 100
     private var damage: Float = 20
     private var breathTime: Float = 100
@@ -28,6 +29,8 @@ class Capybara {
     
     func changeLife(damage: Float) {
         life -= damage
+       // isCapivaraWalking = false
+        
     }
     
     func getDamage() -> Float {
@@ -62,6 +65,7 @@ class Capybara {
     func stop() {
         self.isCapivaraHitting = false
         self.isCapivaraWalking = false
+        self.isCapivaraTakingDamage = false
         let textures = [SKTexture(imageNamed: "capybara_stopped")]
         let action = SKAction.animate(with: textures,
                                       timePerFrame: 0.001,
@@ -116,9 +120,26 @@ class Capybara {
         //Está entrando no print, mas deveria chamar a animaçao dela morrendo
         //não mudar essa textura
         //cortar as movimetações na tela e deixar o joystick inúil
+
         }
     }
-
+    
+    func tankingDamage(){
+        
+        sprite.removeAllActions()
+        self.isCapivaraTakingDamage = true
+        let textures = Textures.getTextures(name: "", atlas: "Taking_Damage")
+        let action = SKAction.animate(with: textures,
+                                      timePerFrame:  1/TimeInterval(textures.count),
+                                      resize: false,
+                                      restore: true)
+        sprite.run(action) {
+            self.isCapivaraTakingDamage = false
+        }
+        //sprite.run(SKAction.repeatForever(action))
+    }
+    
+    
     func goLeft() {
         sprite.position.x += speed
     }

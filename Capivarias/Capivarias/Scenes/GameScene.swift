@@ -101,8 +101,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         alligator.follow(player: capybara.sprite.position)
         if joystick.isJoystickStatic() {
             
-            if !capybara.isCapivaraHitting {
-                capybara.stop()
+            if !capybara.isCapivaraHitting && !capybara.isCapivaraTakingDamage {
+               capybara.stop()
             }
 
         } else {
@@ -123,6 +123,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if (currentTime - alligator.lastHit) > 3 {
                 alligator.lastHit = currentTime
                 alligator.attack()
+                capybara.tankingDamage()
                 self.capybara.changeLife(damage: self.alligator.getDamage())
                 print(capybara.life)
             }
