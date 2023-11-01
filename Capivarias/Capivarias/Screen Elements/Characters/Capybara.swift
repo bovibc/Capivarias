@@ -61,7 +61,7 @@ class Capybara {
         sprite.position = CGPoint(x: screenWidth/8, y: screenHeight/2)
         sprite.zPosition = 20
     }
-    
+
     func stop() {
         self.isCapivaraHitting = false
         self.isCapivaraWalking = false
@@ -69,13 +69,12 @@ class Capybara {
         let textures = [SKTexture(imageNamed: "capybara_stopped")]
         let action = SKAction.animate(with: textures,
                                       timePerFrame: 0.001,
-                                      resize: false,
+                                      resize: true,
                                       restore: true)
         sprite.removeAllActions()
         sprite.run(SKAction.repeatForever(action))
-
     }
-    
+
     func hit() {
         //audioPlayer.playEffect(effect: "capivara-sword-atack", type: "mp3", volume: 0.7)
         let textures = Textures.getTextures(name: "", atlas: "Capybara_Hit")
@@ -84,23 +83,22 @@ class Capybara {
         
         isCapivaraWalking = false
         isCapivaraHitting = true
-        
+
         sprite.removeAllActions()
         sprite.run(SKAction.sequence([sound, animation])) {
-            self.isCapivaraHitting = false
             self.stop()
         }
     }
-    
+
     func walk(positionX: CGFloat) {
         let textures = Textures.getTextures(name: "", atlas: "Capybara_Walking")
         let action = SKAction.animate(with: textures,
                                       timePerFrame: 1/TimeInterval(textures.count),
-                                      resize: false,
+                                      resize: true,
                                       restore: true)
         
         sprite.xScale = positionX > 0 ? abs(sprite.xScale) : -abs(sprite.xScale)
-        
+
         if !isCapivaraWalking {
             isCapivaraWalking = true
             sprite.removeAllActions()
@@ -117,20 +115,20 @@ class Capybara {
 
         }
     }
-    
+
     func tankingDamage(){
-        
-        sprite.removeAllActions()
         self.isCapivaraTakingDamage = true
         let textures = Textures.getTextures(name: "", atlas: "Taking_Damage")
         let action = SKAction.animate(with: textures,
                                       timePerFrame:  1/TimeInterval(textures.count),
-                                      resize: false,
+                                      resize: true,
                                       restore: true)
+        
+        sprite.removeAllActions()
         sprite.run(action) {
             self.isCapivaraTakingDamage = false
+            self.stop()
         }
-        //sprite.run(SKAction.repeatForever(action))
     }
     
     

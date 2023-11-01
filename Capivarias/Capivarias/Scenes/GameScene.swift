@@ -100,15 +100,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func update(_ currentTime: TimeInterval) {
         alligator.follow(player: capybara.sprite.position)
         if joystick.isJoystickStatic() {
-            
             if !capybara.isCapivaraHitting && !capybara.isCapivaraTakingDamage {
-               capybara.stop()
+                capybara.stop()
             }
 
         } else {
             let direction = joystick.getDirection()
             validateMovement(direction)
-            capybara.walk(positionX: joystick.positionX )
+            if !capybara.isCapivaraHitting && !capybara.isCapivaraTakingDamage {
+                capybara.walk(positionX: joystick.positionX )
+            }
         }
 
         capybara.death()
@@ -125,7 +126,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 alligator.attack()
                 capybara.tankingDamage()
                 self.capybara.changeLife(damage: self.alligator.getDamage())
-                print(capybara.life)
+               // print(capybara.life)
             }
         }
 
@@ -197,7 +198,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if alligator.isAlligatoraAttacking == false {
             capybara.changeLife(damage: alligator.getDamage())
             //Aqui, chamar animaçao da capivara tomando dano
-            print(capybara.life)
+           // print(capybara.life)
         }
         else {
             setGamePadAction()
