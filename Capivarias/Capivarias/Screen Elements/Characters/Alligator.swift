@@ -10,7 +10,7 @@ import SpriteKit
 
 class Alligator {
     var life: Float = 100
-    private var damage: Float = 60
+    private var damage: Float = 20
     private var speed: CGFloat = 2
     private var attackSpeed: CGFloat = 1
     private var scale: CGFloat = 0.19

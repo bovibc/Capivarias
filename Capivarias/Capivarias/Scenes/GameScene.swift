@@ -53,9 +53,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     private func setTree() {
         let tree = childNode(withName: "tree") as! SKSpriteNode
-        let treeTexture = SKTexture(imageNamed: "tree")
         
-        tree.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: tree.size.width, height: tree.size.height/3), center: CGPoint(x: 0, y: -tree.size.height/3))
+        tree.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: tree.size.width/18, height: tree.size.height/6), center: CGPoint(x: 0, y: -tree.size.height/2.4))
         tree.physicsBody?.isDynamic = false
         tree.physicsBody?.allowsRotation = false
         tree.physicsBody?.affectedByGravity = false
