@@ -49,15 +49,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private func setObstacles() {
         setLake()
         setTree()
+        setRock()
     }
 
     private func setTree() {
         let tree = childNode(withName: "tree") as! SKSpriteNode
+        let treeTexture = SKTexture(imageNamed: "tronco")
         
-        tree.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: tree.size.width/18, height: tree.size.height/6), center: CGPoint(x: 0, y: -tree.size.height/2.4))
+        tree.physicsBody = SKPhysicsBody(texture: treeTexture, size: tree.size)
         tree.physicsBody?.isDynamic = false
         tree.physicsBody?.allowsRotation = false
         tree.physicsBody?.affectedByGravity = false
+    }
+
+    private func setRock() {
+        let rock = childNode(withName: "rock") as! SKSpriteNode
+        let rockTexture = SKTexture(imageNamed: "rock")
+
+        rock.physicsBody = SKPhysicsBody(texture: rockTexture, size: rock.size)
+        rock.physicsBody?.isDynamic = false
+        rock.physicsBody?.allowsRotation = false
+        rock.physicsBody?.affectedByGravity = false
     }
 
     private func setLake() {

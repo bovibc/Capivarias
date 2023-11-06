@@ -19,7 +19,7 @@ class Capybara {
     private var defense: Float = 100
     private var assetScale: CGFloat = 0.1
     private var staticName: String = "capybara_stopped"
-    var audioPlayer = AudioPlayer()
+  //  var audioPlayer = AudioPlayer()
 
     var sprite: SKSpriteNode
 
