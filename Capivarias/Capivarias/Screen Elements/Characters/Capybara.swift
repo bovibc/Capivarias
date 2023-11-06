@@ -26,13 +26,11 @@ class Capybara {
     init() {
         self.sprite = SKSpriteNode(imageNamed: staticName)
     }
-    
+
     func changeLife(damage: Float) {
         life -= damage
-       // isCapivaraWalking = false
-        
     }
-    
+
     func getDamage() -> Float {
         return damage
     }
@@ -76,7 +74,8 @@ class Capybara {
     }
 
     func hit() {
-        //audioPlayer.playEffect(effect: "capivara-sword-atack", type: "mp3", volume: 0.7)
+        guard !isCapivaraHitting else { return }
+        //audioPlayer.playEffect(effect: "capivara-sword-atack", type: "mp3", volume: 0.1)
         let textures = Textures.getTextures(name: "", atlas: "Capybara_Hit")
         let sound =  SKAction.playSoundFileNamed("capivara-sword-atack", waitForCompletion: false)
         let animation = SKAction.animate(with: textures, timePerFrame: 0.07)

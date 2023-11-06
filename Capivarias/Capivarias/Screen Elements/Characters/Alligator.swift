@@ -106,7 +106,7 @@ class Alligator {
     @objc func attack() {
         guard !isAlligatoraAttacking else { return }
         self.isAlligatoraAttacking = true
-
+        //audioPlayer.playEffect(effect: "alligator-axe-atack", type: "mp3", volume: 1.0)
         let soundAction = SKAction.playSoundFileNamed("alligator-axe-atack", waitForCompletion: false)
         let startAction = SKAction.run {
             self.stop()
@@ -119,11 +119,9 @@ class Alligator {
             
         }
 
-        let action = SKAction.sequence([soundAction,startAction, SKAction.wait(forDuration: 0.78), finishedAction])
+        let action = SKAction.sequence([soundAction, startAction, SKAction.wait(forDuration: 0.78), finishedAction])
         self.sprite.removeAllActions()
         self.sprite.run(action)
-        
-        //audioPlayer.playEffect(effect: "alligator-axe-atack", type: "mp3", volume: 1.0)
     }
 
     private func attackAction() {

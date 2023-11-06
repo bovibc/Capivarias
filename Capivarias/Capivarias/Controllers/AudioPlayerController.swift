@@ -35,6 +35,8 @@ class AudioPlayer: ObservableObject {
     func playEffect(effect: String, type: String, volume: Float){
         if let path = Bundle.main.path(forResource: effect, ofType: type) {
             do {
+                try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
+                try AVAudioSession.sharedInstance().setActive(true)
                 effectPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
                 effectPlayer?.volume = effectsVolume * volume
                 effectPlayer?.prepareToPlay()
