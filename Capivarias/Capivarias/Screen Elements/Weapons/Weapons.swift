@@ -14,8 +14,6 @@ enum TypeWeapon: String {
     case blowgun
 }
 
-
-
 struct Weapons {
     var typeWeapon = TypeWeapon.sword
     var damage: Int = 0

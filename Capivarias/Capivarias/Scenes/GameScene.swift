@@ -22,6 +22,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var isContact: Bool = false
     var timeToAlligatorHit = 0
     var transactionScene = TrasactionsScenes()
+    var gameOver: TimeInterval = 0
 
     override func didMove(to view: SKView) {
         setupScene()
@@ -118,6 +119,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if (currentTime - alligator.finishAnimation) > 1 {
                 alligator.sprite.removeAllActions()
             }
+            
+            if (currentTime - gameOver) > 4 {
+                if let view = self.view {
+                    transactionScene.gameOver(view: view, gameScene: GameOver())
+                    
+                }
+            }
+            
         }
 
         if isContact {

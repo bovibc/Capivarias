@@ -89,4 +89,17 @@ class Joystick: SKScene {
         
         
     }
+
+    
+    func disconnectController() {
+        let controlConfig = GCVirtualController.Configuration()
+        
+        let controller = GCVirtualController(configuration: controlConfig)
+    
+    }
+
+    
+    
+    
+    
 }
