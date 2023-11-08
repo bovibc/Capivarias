@@ -75,7 +75,6 @@
 		0813A2C22AD6DEFE00428484 = {
 			isa = PBXGroup;
 			children = (
-				328080702AF26F71009650E3 /* GameOverGameScene.swift */,
 				F28B1D482AE2AF6E00F8E596 /* Sounds */,
 				0813A2CD2AD6DEFE00428484 /* Capivarias */,
 				0813A2CC2AD6DEFE00428484 /* Products */,
@@ -109,6 +108,7 @@
 		084E31182AF1323B000C71A8 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				328080702AF26F71009650E3 /* GameOverGameScene.swift */,
 				084E31192AF1326C000C71A8 /* GameScene.swift */,
 				084E311B2AF1327D000C71A8 /* SecondScene.swift */,
 				084E311D2AF132A4000C71A8 /* TransactionsScene.swift */,

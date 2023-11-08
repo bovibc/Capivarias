@@ -40,7 +40,7 @@ class GameOverGameScene: SKScene {
         setupBackground()
         addCenterButton()
         addPlayAgainButton()
-        addGoToMenuButton()
+       // addGoToMenuButton()
     
     }
     
