@@ -26,10 +26,13 @@ class SKButtonNode: SKSpriteNode {
 }
 
 
-class GameOver: SKScene {
+class GameOverGameScene: SKScene {
     
     let backgroundController = BackgroundController()
-    var joystick = Joystick()
+    var alligator = Alligator()
+    var capybara = Capybara()
+    var transactionScene = TrasactionsScenes()
+    
     
     
     override func didMove(to view: SKView) {
@@ -38,7 +41,6 @@ class GameOver: SKScene {
         addCenterButton()
         addPlayAgainButton()
         addGoToMenuButton()
-        joystick.disconnectController()
     
     }
     
@@ -106,7 +108,15 @@ class GameOver: SKScene {
             ])
             
             button.run(scaleAction)
-            // Adicione aqui as ações que deseja executar quando o botão for tocado.
+
+            
+            if let scene = GKScene(fileNamed: "GameScene") {
+                if let sceneNode = scene.rootNode as? GameScene {
+                    if let view = self.view {
+                        self.transactionScene.goToNextLevel(view: view, gameScene: sceneNode)
+                    }
+                }
+            }
         }
     }
     

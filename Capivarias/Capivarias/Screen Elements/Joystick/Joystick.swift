@@ -75,7 +75,9 @@ class Joystick: SKScene {
         controlConfig.elements = [GCInputLeftThumbstick, GCInputButtonX, GCInputButtonY]
         
         let controller = GCVirtualController(configuration: controlConfig)
+        
         controller.connect()
+        
         virtualController = controller
         connect(controller)
         
@@ -89,17 +91,4 @@ class Joystick: SKScene {
         
         
     }
-
-    
-    func disconnectController() {
-        let controlConfig = GCVirtualController.Configuration()
-        
-        let controller = GCVirtualController(configuration: controlConfig)
-    
-    }
-
-    
-    
-    
-    
 }
