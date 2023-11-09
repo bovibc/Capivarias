@@ -4,7 +4,7 @@ Política de Privacidade do Aplicativo Zépivarias
 
 Última atualização: 09/11/2023
 
-Obrigado por escolher o aplicativo "Zépivarias" ("nós", "nosso" ou "aplicativo") e por confiar em nós para cuidar de suas informações pessoais. Esta Política de Privacidade tem como objetivo informar como coletamos, usamos, compartilhamos e protegemos suas informações quando você utiliza nosso aplicativo.
+Obrigado por escolher o aplicativo "Zépivarias" e por confiar em nós para cuidar de suas informações pessoais. Esta Política de Privacidade tem como objetivo informar como coletamos, usamos, compartilhamos e protegemos suas informações quando você utiliza nosso aplicativo.
 
 1. Informações Coletadas
 
@@ -58,6 +58,6 @@ Podemos atualizar esta Política de Privacidade ocasionalmente. A data da últim
 
 7. Contato
 
-Se você tiver alguma dúvida, preocupação ou solicitação relacionada à nossa Política de Privacidade, entre em contato conosco pelo seguinte endereço de e-mail: [Seu endereço de e-mail de suporte].
+Se você tiver alguma dúvida, preocupação ou solicitação relacionada à nossa Política de Privacidade, entre em contato conosco pelo seguinte endereço de e-mail: c195744@dac.unicamp.br.
 
 Ao continuar a usar o nosso aplicativo, você concorda com os termos desta Política de Privacidade. Obrigado por escolher "Zépivarias"!
