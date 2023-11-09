@@ -23,6 +23,7 @@ class Alligator {
     var isFollowing: Bool = true
     var lastHit:TimeInterval = 0
     var finishAnimation: TimeInterval = 0
+    var isAlligatorTakingDamage: Bool = false
 
     init() {
         self.sprite = SKSpriteNode(imageNamed: staticName)
@@ -132,6 +133,24 @@ class Alligator {
                                       restore: true)
         self.sprite.run(SKAction.repeatForever(action))
     }
+    
+    func takingDamage(){
+        self.isAlligatorTakingDamage = true
+        let textures = Textures.getTextures(name: "", atlas: "Jacare-tomando-dano")
+        let action = SKAction.animate(with: textures,
+                                      timePerFrame:  1/TimeInterval(textures.count),
+                                      resize: true,
+                                      restore: true)
+        
+        sprite.removeAllActions()
+        sprite.run(action) {
+            self.isAlligatorTakingDamage = false
+            self.stop()
+        }
+    }
+    
+    
+    
 
     func stopAll() {
         stop()

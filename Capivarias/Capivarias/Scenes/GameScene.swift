@@ -150,7 +150,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 alligator.attack()
                 capybara.tankingDamage()
                 self.capybara.changeLife(damage: self.alligator.getDamage())
-               // print(capybara.life)
+//                print(capybara.life)
             }
         }
 
@@ -159,6 +159,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 transactionScene.goToNextLevel(view: view, gameScene: SecondScene())
             }
         }
+        
+        //print(alligator.life)
+        
     }
 
     private func validateMovement(_ direction: Direction) {
@@ -186,6 +189,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if pressed && self.isContact {
                 self.capybara.hit()
                 self.alligator.changeLife(damage: self.capybara.getDamage())
+                
+                
 
             }
             else {
@@ -234,7 +239,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if pressed {
                 self.capybara.hit()
                 self.alligator.changeLife(damage: self.capybara.getDamage())
-                //Aqui, chamar alimaçao do jacare tomando dano
+                self.alligator.takingDamage()
+                print(self.alligator.life)
+                //Aqui, chamar animaçao do jacare tomando dano 09/11 9:22 achei o problema aqui
             }
         }
     }
