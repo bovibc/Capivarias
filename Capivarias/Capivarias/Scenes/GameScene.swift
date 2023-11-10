@@ -17,8 +17,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var audioPlayer = AudioPlayer()
     var capybara = Capybara()
     let backgroundController = BackgroundController()
-    //var door = SKSpriteNode()
-    var i = 0
+    var door = SKSpriteNode()
     var isContact: Bool = false
     var timeToAlligatorHit = 0
     var transactionScene = TrasactionsScenes()
@@ -28,8 +27,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setupScene()
         setupBackground()
         setupCapivara()
-        //removeDoor()
-        //getDoor()
+        getDoor()
+        removeDoor()
         setupAlligator()
         connectController()
         setupAudio()
@@ -41,9 +40,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         backgroundController.setupBackground(scene: self, imageName: "mapateste")
     }
 
-//    private func getDoor() {
-//        self.door = childNode(withName: "Door") as! SKSpriteNode
-//    }
+    private func getDoor() {
+        self.door = childNode(withName: "Door") as! SKSpriteNode
+    }
 
     private func setObstacles() {
         setLake()
@@ -104,9 +103,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(capybara.sprite)
     }
 
-//    private func removeDoor() {
-//        door.removeFromParent()
-//    }
+    private func removeDoor() {
+        door.removeFromParent()
+    }
 
     override func update(_ currentTime: TimeInterval) {
         alligator.follow(player: capybara.sprite.position)
@@ -133,12 +132,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if (currentTime - gameOver) > 4 {
                 
                 if let view = self.view {
-                    //Aqui, chamar algo que tire o Joystick na tela
-                    
                     virtualController?.disconnect()
                     transactionScene.gameOver(view: view, gameScene: GameOverGameScene())
-                    
-                    
                 }
             }
             
@@ -150,12 +145,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 alligator.attack()
                 capybara.tankingDamage()
                 self.capybara.changeLife(damage: self.alligator.getDamage())
-               // print(capybara.life)
             }
         }
 
         if let view = self.view {
             if capybara.sprite.position.x >= 1400 {
+                virtualController?.disconnect()
                 transactionScene.goToNextLevel(view: view, gameScene: SecondScene())
             }
         }
@@ -215,14 +210,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     private func contactAttack() {
-        i+=1
         isContact = true
         alligator.attack()
 
         if alligator.isAlligatoraAttacking == false {
             capybara.changeLife(damage: alligator.getDamage())
             //Aqui, chamar animaçao da capivara tomando dano
-           // print(capybara.life)
         }
         else {
             setGamePadAction()
