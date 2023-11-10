@@ -138,11 +138,11 @@ class Alligator {
         self.isAlligatorTakingDamage = true
         let textures = Textures.getTextures(name: "", atlas: "Jacare-tomando-dano")
         let action = SKAction.animate(with: textures,
-                                      timePerFrame:  1/TimeInterval(textures.count),
+                                      timePerFrame:  0.5/TimeInterval(textures.count),
                                       resize: true,
                                       restore: true)
         
-        sprite.removeAllActions()
+        //sprite.removeAllActions()
         sprite.run(action) {
             self.isAlligatorTakingDamage = false
             self.stop()
