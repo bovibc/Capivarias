@@ -11,8 +11,8 @@ import GameplayKit
 import GameController
 
 class TrasactionsScenes: SKScene {
-    func goToNextLevel(view: SKView, gameScene: SKScene){
-        let scene = GKScene(fileNamed: "SecondScene")
+    func goToNextLevel(view: SKView, gameScene: String){
+        let scene = GKScene(fileNamed: gameScene)
         let transition = SKTransition.fade(withDuration: 1.0)
         view.presentScene(scene?.rootNode as! SKScene, transition: transition)
     }
