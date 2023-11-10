@@ -12,7 +12,6 @@ import GameController
 class SecondScene: SKScene, SKPhysicsContactDelegate {
 
     var virtualController: GCVirtualController?
-    let spriteScale = 0.07
     var joystick = Joystick()
     var alligator = Alligator()
     var audioPlayer = AudioPlayer()
@@ -20,7 +19,6 @@ class SecondScene: SKScene, SKPhysicsContactDelegate {
     let backgroundController = BackgroundController()
     var door = SKSpriteNode()
     var isContact: Bool = false
-    var timeToAlligatorHit = 0
     var transactionScene = TrasactionsScenes()
     var gameOver: TimeInterval = 0
 
