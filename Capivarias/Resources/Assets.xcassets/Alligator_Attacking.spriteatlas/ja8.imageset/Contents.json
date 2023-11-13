@@ -1,8 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "ja8.svg",
-      "idiom" : "universal"
+      "filename" : "ja8.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
     }
   ],
   "info" : {
