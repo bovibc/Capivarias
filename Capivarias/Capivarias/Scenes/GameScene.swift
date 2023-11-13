@@ -46,39 +46,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 //    }
 
     private func setObstacles() {
-        setLake()
-        setTree()
-        setRock()
+        setNode(nodeName: "tree", textureName: "tronco")
+        setNode(nodeName: "rock", textureName: "rock")
+        setNode(nodeName: "lake", textureName: "lake")
     }
 
-    private func setTree() {
-        let tree = childNode(withName: "tree") as! SKSpriteNode
-        let treeTexture = SKTexture(imageNamed: "tronco")
+    private func setNode(nodeName: String, textureName: String) {
+        let node = childNode(withName: nodeName) as! SKSpriteNode
+        let texture = SKTexture(imageNamed: textureName)
         
-        tree.physicsBody = SKPhysicsBody(texture: treeTexture, size: tree.size)
-        tree.physicsBody?.isDynamic = false
-        tree.physicsBody?.allowsRotation = false
-        tree.physicsBody?.affectedByGravity = false
-    }
-
-    private func setRock() {
-        let rock = childNode(withName: "rock") as! SKSpriteNode
-        let rockTexture = SKTexture(imageNamed: "rock")
-
-        rock.physicsBody = SKPhysicsBody(texture: rockTexture, size: rock.size)
-        rock.physicsBody?.isDynamic = false
-        rock.physicsBody?.allowsRotation = false
-        rock.physicsBody?.affectedByGravity = false
-    }
-
-    private func setLake() {
-        let lake = childNode(withName: "lake") as! SKSpriteNode
-        let lakeTexture = SKTexture(imageNamed: "lake")
-        
-        lake.physicsBody = SKPhysicsBody(texture: lakeTexture, size: lake.size)
-        lake.physicsBody?.isDynamic = false
-        lake.physicsBody?.allowsRotation = false
-        lake.physicsBody?.affectedByGravity = false
+        node.physicsBody = SKPhysicsBody(texture: texture, size: node.size)
+        node.physicsBody?.isDynamic = false
+        node.physicsBody?.allowsRotation = false
+        node.physicsBody?.affectedByGravity = false
     }
 
     private func setupAudio() {
@@ -137,8 +117,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     
                     virtualController?.disconnect()
                     transactionScene.gameOver(view: view, gameScene: GameOverGameScene())
-                    
-                    
                 }
             }
             
@@ -215,7 +193,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     private func contactAttack() {
-        i+=1
         isContact = true
         alligator.attack()
 
