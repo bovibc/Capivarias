@@ -23,6 +23,7 @@
 		08CEE5FC2AE1680800149B83 /* Joystick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CEE5FB2AE1680800149B83 /* Joystick.swift */; };
 		08E8EE382AE961EC0076F4CE /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 08E8EE372AE961EC0076F4CE /* GameScene.sks */; };
 		328080712AF26F71009650E3 /* GameOverGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328080702AF26F71009650E3 /* GameOverGameScene.swift */; };
+		C060153D2AFE5A91001CDE0C /* Monkey.swift in Sources */ = {isa = PBXBuildFile; fileRef = C060153C2AFE5A91001CDE0C /* Monkey.swift */; };
 		C0D60CA42AE80B910064C863 /* Weapons.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D60CA32AE80B910064C863 /* Weapons.swift */; };
 		F28B1D502AE2C34700F8E596 /* monkey-banana-atack.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F28B1D4B2AE2C34600F8E596 /* monkey-banana-atack.mp3 */; };
 		F28B1D512AE2C34700F8E596 /* alligator-axe-atack.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F28B1D4C2AE2C34600F8E596 /* alligator-axe-atack.mp3 */; };
@@ -52,6 +53,7 @@
 		08CEE5FB2AE1680800149B83 /* Joystick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Joystick.swift; sourceTree = "<group>"; };
 		08E8EE372AE961EC0076F4CE /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		328080702AF26F71009650E3 /* GameOverGameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverGameScene.swift; sourceTree = "<group>"; };
+		C060153C2AFE5A91001CDE0C /* Monkey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Monkey.swift; sourceTree = "<group>"; };
 		C0D60CA32AE80B910064C863 /* Weapons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weapons.swift; sourceTree = "<group>"; };
 		F28B1D4B2AE2C34600F8E596 /* monkey-banana-atack.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "monkey-banana-atack.mp3"; sourceTree = "<group>"; };
 		F28B1D4C2AE2C34600F8E596 /* alligator-axe-atack.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "alligator-axe-atack.mp3"; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 			children = (
 				08CEE5F72AE1653C00149B83 /* Capybara.swift */,
 				08CEE5F92AE167E800149B83 /* Alligator.swift */,
+				C060153C2AFE5A91001CDE0C /* Monkey.swift */,
 			);
 			path = Characters;
 			sourceTree = "<group>";
@@ -285,6 +288,7 @@
 				0813A2CF2AD6DEFE00428484 /* AppDelegate.swift in Sources */,
 				C0D60CA42AE80B910064C863 /* Weapons.swift in Sources */,
 				084E311E2AF132A4000C71A8 /* TransactionsScene.swift in Sources */,
+				C060153D2AFE5A91001CDE0C /* Monkey.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
