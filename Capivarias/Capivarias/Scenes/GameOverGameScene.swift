@@ -32,7 +32,8 @@ class GameOverGameScene: SKScene {
     var alligator = Alligator()
     var capybara = Capybara()
     var transactionScene = TrasactionsScenes()
-    
+    var audioPlayer = AudioPlayer()
+    let sounds = Sounds()
     
     
     override func didMove(to view: SKView) {
@@ -40,6 +41,7 @@ class GameOverGameScene: SKScene {
         setupBackground()
         addCenterButton()
         addPlayAgainButton()
+        audioPlayer.playEffect(effect: sounds.deathMenu, type: "mp3", volume: 1.0)
        // addGoToMenuButton()
     
     }

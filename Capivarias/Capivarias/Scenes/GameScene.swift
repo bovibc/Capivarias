@@ -10,6 +10,7 @@ import GameplayKit
 import GameController
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
+    var sounds = Sounds()
     var virtualController: GCVirtualController?
     let spriteScale = 0.07
     var joystick = Joystick()
@@ -32,9 +33,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //getDoor()
         setupAlligator()
         connectController()
-        setupAudio()
         setObstacles()
         setupContact()
+        audioPlayer.playEnviroment(sound: sounds.ambient, type: "mp3", volume: 0.7)
     }
     
     private func setupBackground() {
@@ -79,10 +80,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         lake.physicsBody?.isDynamic = false
         lake.physicsBody?.allowsRotation = false
         lake.physicsBody?.affectedByGravity = false
-    }
-
-    private func setupAudio() {
-        audioPlayer.playEnviroment(sound: "ambient-forest", type: "mp3", volume: 1.0)
     }
 
     private func setupContact() {

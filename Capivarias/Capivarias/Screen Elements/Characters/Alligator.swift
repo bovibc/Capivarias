@@ -23,6 +23,7 @@ class Alligator {
     var isFollowing: Bool = true
     var lastHit:TimeInterval = 0
     var finishAnimation: TimeInterval = 0
+    let sounds = Sounds()
 
     init() {
         self.sprite = SKSpriteNode(imageNamed: staticName)
@@ -106,8 +107,7 @@ class Alligator {
     @objc func attack() {
         guard !isAlligatoraAttacking else { return }
         self.isAlligatoraAttacking = true
-        //audioPlayer.playEffect(effect: "alligator-axe-atack", type: "mp3", volume: 1.0)
-        let soundAction = SKAction.playSoundFileNamed("alligator-axe-atack", waitForCompletion: false)
+        audioPlayer.playEffect(effect: sounds.swordAttack, type: "mp3", volume: 1.0)
         let startAction = SKAction.run {
             self.stop()
             self.attackAction()
@@ -119,7 +119,7 @@ class Alligator {
             
         }
 
-        let action = SKAction.sequence([soundAction, startAction, SKAction.wait(forDuration: 0.78), finishedAction])
+        let action = SKAction.sequence([startAction, SKAction.wait(forDuration: 0.78), finishedAction])
         self.sprite.removeAllActions()
         self.sprite.run(action)
     }

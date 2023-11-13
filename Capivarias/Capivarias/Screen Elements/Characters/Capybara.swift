@@ -19,7 +19,8 @@ class Capybara {
     private var defense: Float = 100
     private var assetScale: CGFloat = 0.1
     private var staticName: String = "capybara_stopped"
-  // var audioPlayer = AudioPlayer()
+    var audioPlayer = AudioPlayer()
+    var sounds = Sounds()
 
     var sprite: SKSpriteNode
 
@@ -75,16 +76,15 @@ class Capybara {
 
     func hit() {
         guard !isCapivaraHitting else { return }
-        //audioPlayer.playEffect(effect: "capivara-sword-atack", type: "mp3", volume: 0.1)
+        audioPlayer.playEffect(effect: sounds.swordAttack, type: "mp3", volume: 0.1)
         let textures = Textures.getTextures(name: "", atlas: "Capybara_Hit")
-        let sound =  SKAction.playSoundFileNamed("capivara-sword-atack", waitForCompletion: false)
         let animation = SKAction.animate(with: textures, timePerFrame: 0.07)
         
         isCapivaraWalking = false
         isCapivaraHitting = true
 
         sprite.removeAllActions()
-        sprite.run(SKAction.sequence([sound, animation])) {
+        sprite.run(SKAction.sequence([ animation])) {
             self.stop()
         }
     }
