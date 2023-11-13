@@ -34,6 +34,7 @@ class GameOverGameScene: SKScene {
     var transactionScene = TrasactionsScenes()
     var audioPlayer = AudioPlayer()
     let sounds = Sounds()
+    let assets = Assets()
     
     
     override func didMove(to view: SKView) {
@@ -47,7 +48,7 @@ class GameOverGameScene: SKScene {
     }
     
     private func setupBackground() {
-        backgroundController.setupBackground(scene: self, imageName: "Mapa Game Over Final")
+        backgroundController.setupBackground(scene: self, imageName: assets.gameOverMap)
     }
     
     private func setupScene() {

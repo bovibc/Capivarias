@@ -24,6 +24,7 @@ class Alligator {
     var lastHit:TimeInterval = 0
     var finishAnimation: TimeInterval = 0
     let sounds = Sounds()
+    var assets = Assets()
 
     init() {
         self.sprite = SKSpriteNode(imageNamed: staticName)
@@ -65,7 +66,7 @@ class Alligator {
 
     func walk() {
         guard !isAlligatorWalking && !isAlligatoraAttacking else { return }
-        let textures = Textures.getTextures(name: "", atlas: "Alligator_Walking")
+        let textures = Textures.getTextures(name: "", atlas: assets.alligatorWalk)
         let action = SKAction.animate(with: textures,
                                       timePerFrame: 1/TimeInterval(textures.count),
                                       resize: true,
@@ -98,7 +99,7 @@ class Alligator {
         else {
             
             //Aqui deveria, qunado terminasse toda a animação do jacaré batendo, chamar o sprite do jacaré parado (ele já está parando de seguir)
-            sprite = SKSpriteNode(imageNamed: "alligator_stopped")
+            sprite = SKSpriteNode(imageNamed: assets.alligatorStop)
             
             
         }
@@ -125,7 +126,7 @@ class Alligator {
     }
 
     private func attackAction() {
-        let textures = Textures.getTextures(name: "", atlas: "Alligator_Attacking")
+        let textures = Textures.getTextures(name: "", atlas: assets.alligatorAttack)
         let action = SKAction.animate(with: textures,
                                       timePerFrame: 0.8/TimeInterval(textures.count),
                                       resize: true,
@@ -136,7 +137,7 @@ class Alligator {
     func stopAll() {
         stop()
         sprite.removeAllActions()
-        let textures = Textures.getTextures(name: "", atlas: "Alligator_Stopped")
+        let textures = Textures.getTextures(name: "", atlas: assets.alligatorStop)
         let action = SKAction.animate(with: textures,
                                       timePerFrame: 0.8/TimeInterval(textures.count),
                                       resize: true,

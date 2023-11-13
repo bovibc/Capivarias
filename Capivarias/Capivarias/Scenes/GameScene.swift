@@ -24,6 +24,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var timeToAlligatorHit = 0
     var transactionScene = TrasactionsScenes()
     var gameOver: TimeInterval = 0
+    let assets = Assets()
 
     override func didMove(to view: SKView) {
         setupScene()
@@ -39,7 +40,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     private func setupBackground() {
-        backgroundController.setupBackground(scene: self, imageName: "mapateste")
+        backgroundController.setupBackground(scene: self, imageName: assets.map3)
     }
 
 //    private func getDoor() {

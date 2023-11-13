@@ -21,6 +21,7 @@ class Capybara {
     private var staticName: String = "capybara_stopped"
     var audioPlayer = AudioPlayer()
     var sounds = Sounds()
+    let assets = Assets()
 
     var sprite: SKSpriteNode
 
@@ -77,7 +78,7 @@ class Capybara {
     func hit() {
         guard !isCapivaraHitting else { return }
         audioPlayer.playEffect(effect: sounds.swordAttack, type: "mp3", volume: 0.1)
-        let textures = Textures.getTextures(name: "", atlas: "Capybara_Hit")
+        let textures = Textures.getTextures(name: "", atlas: assets.capybaraAttack)
         let animation = SKAction.animate(with: textures, timePerFrame: 0.07)
         
         isCapivaraWalking = false
@@ -90,7 +91,7 @@ class Capybara {
     }
 
     func walk(positionX: CGFloat) {
-        let textures = Textures.getTextures(name: "", atlas: "Capybara_Walking")
+        let textures = Textures.getTextures(name: "", atlas: assets.capybaraWalk)
         let action = SKAction.animate(with: textures,
                                       timePerFrame: 1/TimeInterval(textures.count),
                                       resize: true,
@@ -117,7 +118,7 @@ class Capybara {
 
     func tankingDamage(){
         self.isCapivaraTakingDamage = true
-        let textures = Textures.getTextures(name: "", atlas: "Taking_Damage")
+        let textures = Textures.getTextures(name: "", atlas: assets.capybaraDamage)
         let action = SKAction.animate(with: textures,
                                       timePerFrame:  1/TimeInterval(textures.count),
                                       resize: true,
