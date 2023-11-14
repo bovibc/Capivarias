@@ -18,7 +18,6 @@ class Alligator {
     private var isAlligatorWalking: Bool = false
     var isAlligatoraAttacking: Bool = false
     private let movementAliasName: String = "Alligator_Walking"
-    var sprite: SKSpriteNode
     var audioPlayer = AudioPlayer()
     var isFollowing: Bool = true
     var lastHit:TimeInterval = 0
@@ -27,6 +26,7 @@ class Alligator {
     var assets = Assets()
     let attackTextures:[SKTexture]
     let walkTextures:[SKTexture]
+    var sprite: SKSpriteNode
 
     init() {
         self.sprite = SKSpriteNode(imageNamed: staticName)
@@ -70,9 +70,8 @@ class Alligator {
 
     func walk() {
         guard !isAlligatorWalking && !isAlligatoraAttacking else { return }
-        let textures = Textures.getTextures(name: "", atlas: assets.alligatorWalk)
-        let action = SKAction.animate(with: textures,
-                                      timePerFrame: 1/TimeInterval(textures.count),
+        let action = SKAction.animate(with: walkTextures,
+                                      timePerFrame: 1/TimeInterval(walkTextures.count),
                                       resize: true,
                                       restore: true)
         isAlligatorWalking = true
