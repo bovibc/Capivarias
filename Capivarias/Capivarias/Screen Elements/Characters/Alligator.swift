@@ -25,9 +25,13 @@ class Alligator {
     var finishAnimation: TimeInterval = 0
     let sounds = Sounds()
     var assets = Assets()
+    let attackTextures:[SKTexture]
+    let walkTextures:[SKTexture]
 
     init() {
         self.sprite = SKSpriteNode(imageNamed: staticName)
+        attackTextures = Textures.getTextures(name: "", atlas: assets.alligatorAttack)
+        walkTextures = Textures.getTextures(name: "", atlas: assets.alligatorWalk)
     }
     
     func changeLife(damage: Float) {
@@ -126,9 +130,8 @@ class Alligator {
     }
 
     private func attackAction() {
-        let textures = Textures.getTextures(name: "", atlas: assets.alligatorAttack)
-        let action = SKAction.animate(with: textures,
-                                      timePerFrame: 0.8/TimeInterval(textures.count),
+        let action = SKAction.animate(with: attackTextures,
+                                      timePerFrame: 0.8/TimeInterval(attackTextures.count),
                                       resize: true,
                                       restore: true)
         self.sprite.run(SKAction.repeatForever(action))
@@ -137,9 +140,8 @@ class Alligator {
     func stopAll() {
         stop()
         sprite.removeAllActions()
-        let textures = Textures.getTextures(name: "", atlas: assets.alligatorStop)
-        let action = SKAction.animate(with: textures,
-                                      timePerFrame: 0.8/TimeInterval(textures.count),
+        let action = SKAction.animate(with: walkTextures,
+                                      timePerFrame: 0.8/TimeInterval(walkTextures.count),
                                       resize: true,
                                       restore: true)
         self.sprite.run(SKAction.repeatForever(action))
