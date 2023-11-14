@@ -10,14 +10,26 @@ import AVKit
 import AVFoundation
 
 
+
 class AudioPlayer: ObservableObject {
     
     @Published var enviromentPlayer: AVAudioPlayer?
     @Published var effectPlayer: AVAudioPlayer?
-    
-    @Published var enviromentVolume: Float = 0.0
-    @Published var effectsVolume: Float = 1.0
-    
+        
+    @Published
+    var enviromentVolume: Float = 1.0 {
+        didSet {
+            enviromentPlayer?.volume = enviromentVolume
+        }
+    }
+
+    @Published
+    var effectsVolume: Float = 1.0 {
+        didSet {
+            effectPlayer?.volume = effectsVolume
+        }
+    }
+
     func playEnviroment(sound: String, type: String, volume: Float){
                 
         if let path = Bundle.main.path(forResource: sound, ofType: type) {
@@ -46,4 +58,6 @@ class AudioPlayer: ObservableObject {
             }
         }
     }
+    
 }
+

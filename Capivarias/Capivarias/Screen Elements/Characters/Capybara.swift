@@ -19,12 +19,19 @@ class Capybara {
     private var defense: Float = 100
     private var assetScale: CGFloat = 0.1
     private var staticName: String = "capybara_stopped"
-  // var audioPlayer = AudioPlayer()
-
+    var audioPlayer = AudioPlayer()
+    var sounds = Sounds()
+    let assets = Assets()
+    let attackTexture:[SKTexture]
+    let walkTexture:[SKTexture]
+    let damageTexture:[SKTexture]
     var sprite: SKSpriteNode
 
     init() {
         self.sprite = SKSpriteNode(imageNamed: staticName)
+        attackTexture = Textures.getTextures(name: "", atlas: assets.capybaraAttack)
+        walkTexture = Textures.getTextures(name: "", atlas: assets.capybaraWalk)
+        damageTexture = Textures.getTextures(name: "", atlas: assets.capybaraDamage)
     }
 
     func changeLife(damage: Float) {
@@ -75,24 +82,22 @@ class Capybara {
 
     func hit() {
         guard !isCapivaraHitting else { return }
-        //audioPlayer.playEffect(effect: "capivara-sword-atack", type: "mp3", volume: 0.1)
-        let textures = Textures.getTextures(name: "", atlas: "Capybara_Hit")
-        let sound =  SKAction.playSoundFileNamed("capivara-sword-atack", waitForCompletion: false)
-        let animation = SKAction.animate(with: textures, timePerFrame: 0.07)
+        audioPlayer.playEffect(effect: sounds.swordAttack, type: "mp3", volume: 0.1)
+        
+        let animation = SKAction.animate(with: attackTexture, timePerFrame: 0.07)
         
         isCapivaraWalking = false
         isCapivaraHitting = true
 
         sprite.removeAllActions()
-        sprite.run(SKAction.sequence([sound, animation])) {
+        sprite.run(SKAction.sequence([ animation])) {
             self.stop()
         }
     }
 
     func walk(positionX: CGFloat) {
-        let textures = Textures.getTextures(name: "", atlas: "Capybara_Walking")
-        let action = SKAction.animate(with: textures,
-                                      timePerFrame: 1/TimeInterval(textures.count),
+        let action = SKAction.animate(with: walkTexture,
+                                      timePerFrame: 1/TimeInterval(walkTexture.count),
                                       resize: true,
                                       restore: true)
         
@@ -117,9 +122,8 @@ class Capybara {
 
     func tankingDamage(){
         self.isCapivaraTakingDamage = true
-        let textures = Textures.getTextures(name: "", atlas: "Taking_Damage")
-        let action = SKAction.animate(with: textures,
-                                      timePerFrame:  1/TimeInterval(textures.count),
+        let action = SKAction.animate(with: damageTexture,
+                                      timePerFrame:  1/TimeInterval(damageTexture.count),
                                       resize: true,
                                       restore: true)
         
