@@ -12,7 +12,7 @@ class Capybara {
     var isCapivaraHitting = false
     var isCapivaraWalking = false
     var isCapivaraTakingDamage = false
-    var life: Float = 100
+    private var life: Float = 100
     private var damage: Float = 20
     private var breathTime: Float = 100
     private var speed: CGFloat = 5
@@ -29,6 +29,10 @@ class Capybara {
 
     func changeLife(damage: Float) {
         life -= damage
+    }
+
+    func getLife() -> Float {
+        return life
     }
 
     func getDamage() -> Float {
@@ -115,7 +119,7 @@ class Capybara {
         }
     }
 
-    func tankingDamage(){
+    func takingDamage(){
         self.isCapivaraTakingDamage = true
         let textures = Textures.getTextures(name: "", atlas: "Taking_Damage")
         let action = SKAction.animate(with: textures,

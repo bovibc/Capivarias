@@ -142,16 +142,12 @@ class GameOverGameScene: SKScene {
         addChild(button)
         
         button.setButtonAction {
-            print("Botão foi tocado!")
-            
-            // Realizar a animação de escala (pode ajustar os valores)
             let scaleAction = SKAction.sequence([
                 SKAction.scale(to: 1.2, duration: 0.1),
                 SKAction.scale(to: 1.0, duration: 0.1)
             ])
-            
+
             button.run(scaleAction)
-            // Adicione aqui as ações que deseja executar quando o botão for tocado.
         }
     }
     
