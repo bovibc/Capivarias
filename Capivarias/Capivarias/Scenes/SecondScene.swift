@@ -10,9 +10,10 @@ import GameplayKit
 import GameController
 
 class SecondScene: SKScene, SKPhysicsContactDelegate {
+
     var virtualController: GCVirtualController?
     var joystick = Joystick()
-    var monkey = Monkey()
+    var alligator = Alligator()
     var audioPlayer = AudioPlayer()
     var capybara = Capybara()
     let backgroundController = BackgroundController()
@@ -28,7 +29,7 @@ class SecondScene: SKScene, SKPhysicsContactDelegate {
         setupCapivara()
         getDoor()
         removeDoor()
-        setupMonkey()
+        setupAlligator()
         setupAudio()
         setObstacles()
         setupContact()
@@ -86,9 +87,9 @@ class SecondScene: SKScene, SKPhysicsContactDelegate {
         self.physicsWorld.contactDelegate = self
     }
     
-    private func setupMonkey() {
-        self.monkey.start(screenWidth: size.width , screenHeight: size.height)
-        addChild(monkey.sprite)
+    private func setupAlligator() {
+        self.alligator.start(screenWidth: size.width , screenHeight: size.height)
+        addChild(alligator.sprite)
     }
     
     private func setupScene() {
@@ -106,8 +107,7 @@ class SecondScene: SKScene, SKPhysicsContactDelegate {
     }
 
     override func update(_ currentTime: TimeInterval) {
-        monkey.attack(capyX: capybara.sprite.position.x, capyY: capybara.sprite.position.y)
-        monkey.follow(player: capybara.sprite.position)
+        alligator.follow(player: capybara.sprite.position)
         if joystick.isJoystickStatic() {
             if !capybara.isCapivaraHitting && !capybara.isCapivaraTakingDamage {
                 capybara.stop()
@@ -123,10 +123,10 @@ class SecondScene: SKScene, SKPhysicsContactDelegate {
 
         capybara.death()
         if capybara.life <= 0 {
-//            alligator.isFollowing = false
-//            if (currentTime - alligator.finishAnimation) > 1 {
-//                alligator.sprite.removeAllActions()
-//            }
+            alligator.isFollowing = false
+            if (currentTime - alligator.finishAnimation) > 1 {
+                alligator.sprite.removeAllActions()
+            }
             
             if (currentTime - gameOver) > 4 {
                 
@@ -137,14 +137,14 @@ class SecondScene: SKScene, SKPhysicsContactDelegate {
             }
         }
 
-//        if isContact {
-//            if (currentTime - alligator.lastHit) > 3 {
-//                alligator.lastHit = currentTime
-//                alligator.attack()
-//                capybara.tankingDamage()
-//                self.capybara.changeLife(damage: self.alligator.getDamage())
-//            }
-//        }
+        if isContact {
+            if (currentTime - alligator.lastHit) > 3 {
+                alligator.lastHit = currentTime
+                alligator.attack()
+                capybara.tankingDamage()
+                self.capybara.changeLife(damage: self.alligator.getDamage())
+            }
+        }
 
         if let view = self.view {
             if capybara.sprite.position.x >= 1400 {
@@ -173,23 +173,23 @@ class SecondScene: SKScene, SKPhysicsContactDelegate {
         }
     }
 
-//    func setupController(){
-//        self.virtualController?.controller?.extendedGamepad?.buttonX.pressedChangedHandler = { button, value, pressed in
-//            if pressed && self.isContact {
-//                self.capybara.hit()
-//                self.alligator.changeLife(damage: self.capybara.getDamage())
-//
-//            }
-//            else {
-//                self.capybara.hit()
-//            }
-//        }
-//    }
+    func setupController(){
+        self.virtualController?.controller?.extendedGamepad?.buttonX.pressedChangedHandler = { button, value, pressed in
+            if pressed && self.isContact {
+                self.capybara.hit()
+                self.alligator.changeLife(damage: self.capybara.getDamage())
+
+            }
+            else {
+                self.capybara.hit()
+            }
+        }
+    }
 
     func connectController() {
         joystick.connectController { controller in
             self.virtualController = controller
-           // self.setupController()
+            self.setupController()
         }
     }
 
@@ -197,33 +197,33 @@ class SecondScene: SKScene, SKPhysicsContactDelegate {
         isContact = false
     }
 
-//    func didBegin(_ contact: SKPhysicsContact) {
-//        if contact.bodyA.categoryBitMask == 1 && contact.bodyB.categoryBitMask == 2 {
-//            contactAttack()
-//        }
-//        if contact.bodyA.categoryBitMask == 2 && contact.bodyB.categoryBitMask == 1 {
-//            contactAttack()
-//        }
-//    }
+    func didBegin(_ contact: SKPhysicsContact) {
+        if contact.bodyA.categoryBitMask == 1 && contact.bodyB.categoryBitMask == 2 {
+            contactAttack()
+        }
+        if contact.bodyA.categoryBitMask == 2 && contact.bodyB.categoryBitMask == 1 {
+            contactAttack()
+        }
+    }
 
-//    private func contactAttack() {
-//        isContact = true
-//        alligator.attack()
-//
-//        if alligator.isAlligatoraAttacking == false {
-//            capybara.changeLife(damage: alligator.getDamage())
-//            //Aqui, chamar animaçao da capivara tomando dano
-//        }
-//        else {
-//            setGamePadAction()
-//        }
-//    }
+    private func contactAttack() {
+        isContact = true
+        alligator.attack()
+
+        if alligator.isAlligatoraAttacking == false {
+            capybara.changeLife(damage: alligator.getDamage())
+            //Aqui, chamar animaçao da capivara tomando dano
+        }
+        else {
+            setGamePadAction()
+        }
+    }
 
     private func setGamePadAction() {
         self.virtualController?.controller?.extendedGamepad?.buttonX.pressedChangedHandler = { button, value, pressed in
             if pressed {
                 self.capybara.hit()
-               // self.alligator.changeLife(damage: self.capybara.getDamage())
+                self.alligator.changeLife(damage: self.capybara.getDamage())
                 //Aqui, chamar alimaçao do jacare tomando dano
             }
         }

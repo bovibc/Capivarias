@@ -10,6 +10,7 @@ import GameplayKit
 import GameController
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
+    var sounds = Sounds()
     var virtualController: GCVirtualController?
     var joystick = Joystick()
     var alligator = Alligator()
@@ -20,6 +21,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var isContact: Bool = false
     var transactionScene = TrasactionsScenes()
     var gameOver: TimeInterval = 0
+    let assets = Assets()
+    var weapon: Bool = true
 
     override func didMove(to view: SKView) {
         setupScene()
@@ -29,13 +32,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         removeDoor()
         setupAlligator()
         connectController()
-        setupAudio()
         setObstacles()
         setupContact()
+        audioPlayer.playEnviroment(sound: sounds.ambient, type: "mp3", volume: 0.7)
     }
     
     private func setupBackground() {
-        backgroundController.setupBackground(scene: self, imageName: "mapateste")
+        backgroundController.setupBackground(scene: self, imageName: assets.map3)
     }
 
     private func getDoor() {
@@ -78,10 +81,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         lake.physicsBody?.affectedByGravity = false
     }
 
-    private func setupAudio() {
-        audioPlayer.playEnviroment(sound: "ambient-forest", type: "mp3", volume: 1.0)
-    }
-
     private func setupContact() {
         self.physicsWorld.contactDelegate = self
     }
@@ -109,14 +108,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         alligator.follow(player: capybara.sprite.position)
         if joystick.isJoystickStatic() {
             if !capybara.isCapivaraHitting && !capybara.isCapivaraTakingDamage {
-                capybara.stop()
+                if weapon == true {
+                    capybara.stop()
+                }
+                else {
+                    capybara.stopZarabatana()
+                }
             }
 
         } else {
             let direction = joystick.getDirection()
             validateMovement(direction)
             if !capybara.isCapivaraHitting && !capybara.isCapivaraTakingDamage {
-                capybara.walk(positionX: joystick.positionX )
+                //Aqui, colocar uma condiçao de que dependendo do valor do booleano "weapon"selecionado, vai chamar ou ela walk com espada ou ela walk com zarabatana
+                if weapon == true {
+                    capybara.walk(positionX: joystick.positionX )
+                } else {
+                    capybara.walkZarabatana(positionX: joystick.positionX )
+                }
             }
         }
 
@@ -152,6 +161,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 transactionScene.goToNextLevel(view: view, gameScene: "SecondScene")
             }
         }
+        
+        //print(alligator.life)
+        
     }
 
     private func validateMovement(_ direction: Direction) {
@@ -176,15 +188,42 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     func setupController(){
         self.virtualController?.controller?.extendedGamepad?.buttonX.pressedChangedHandler = { button, value, pressed in
-            if pressed && self.isContact {
-                self.capybara.hit()
-                self.alligator.changeLife(damage: self.capybara.getDamage())
-
+            
+            
+            
+            if self.weapon == true{
+                if pressed && self.isContact {
+                    self.capybara.hit()
+                    self.alligator.changeLife(damage: self.capybara.getDamage())
+                }
+                else {
+                    self.capybara.hit()
+                }
+                
+            }
+            
+            else {
+                print("Atirando com a zarabanana")
+                self.capybara.shootZarabatana(capybara: self.capybara.sprite,
+                                         alligator: self.alligator.sprite)
+            }
+            
+            
+            
+        }
+        
+        
+        self.virtualController?.controller?.extendedGamepad?.buttonY.pressedChangedHandler = { button, value, pressed in
+            if pressed {
+                self.weapon.toggle()
+                print("hello")
             }
             else {
-                self.capybara.hit()
             }
         }
+        
+        
+        
     }
 
     func connectController() {
@@ -204,6 +243,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         if contact.bodyA.categoryBitMask == 2 && contact.bodyB.categoryBitMask == 1 {
             contactAttack()
+        }
+        
+        if contact.bodyA.categoryBitMask == 2 && contact.bodyB.categoryBitMask == 3 {
+            print("bateu")
+            alligator.changeLife(damage: capybara.getDamageZarabatana())
+            print(alligator.life)
+            
+            //tirar a vida do jacare baseado no dano da
         }
     }
 
@@ -225,8 +272,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if pressed {
                 self.capybara.hit()
                 self.alligator.changeLife(damage: self.capybara.getDamage())
-                //Aqui, chamar alimaçao do jacare tomando dano
+                self.alligator.takingDamage()
+                print(self.alligator.life)
+                //Aqui, chamar animaçao do jacare tomando dano 09/11 9:22 achei o problema aqui
             }
         }
+        
+
+
+        
     }
 }
+
+
+
+//como fazer para a capivara ficar parada com a zarabatana na mao ?

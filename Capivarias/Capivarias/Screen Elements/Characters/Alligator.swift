@@ -17,15 +17,21 @@ class Alligator {
     private let staticName: String = "a1"
     private var isAlligatorWalking: Bool = false
     var isAlligatoraAttacking: Bool = false
-    private let movementAliasName: String = "Alligator_Walking"
-    var sprite: SKSpriteNode
     var audioPlayer = AudioPlayer()
     var isFollowing: Bool = true
     var lastHit:TimeInterval = 0
     var finishAnimation: TimeInterval = 0
+    var isAlligatorTakingDamage: Bool = false
+    let sounds = Sounds()
+    var assets = Assets()
+    let attackTextures:[SKTexture]
+    let walkTextures:[SKTexture]
+    var sprite: SKSpriteNode
 
     init() {
         self.sprite = SKSpriteNode(imageNamed: staticName)
+        attackTextures = Textures.getTextures(name: "", atlas: assets.alligatorAttack)
+        walkTextures = Textures.getTextures(name: "", atlas: assets.alligatorWalk)
     }
     
     func changeLife(damage: Float) {
@@ -55,6 +61,7 @@ class Alligator {
         sprite.physicsBody?.allowsRotation = false
         sprite.physicsBody?.categoryBitMask = 2
         sprite.physicsBody?.contactTestBitMask = 1
+        //voce é classe 2 e avisa se tiver em contato com classe 1
     }
 
     private func setPosition(_ screenWidth: CGFloat, _ screenHeight: CGFloat) {
@@ -64,9 +71,8 @@ class Alligator {
 
     func walk() {
         guard !isAlligatorWalking && !isAlligatoraAttacking else { return }
-        let textures = Textures.getTextures(name: "", atlas: "Alligator_Walking")
-        let action = SKAction.animate(with: textures,
-                                      timePerFrame: 1/TimeInterval(textures.count),
+        let action = SKAction.animate(with: walkTextures,
+                                      timePerFrame: 1/TimeInterval(walkTextures.count),
                                       resize: true,
                                       restore: true)
         isAlligatorWalking = true
@@ -97,7 +103,7 @@ class Alligator {
         else {
             
             //Aqui deveria, qunado terminasse toda a animação do jacaré batendo, chamar o sprite do jacaré parado (ele já está parando de seguir)
-            sprite = SKSpriteNode(imageNamed: "alligator_stopped")
+            sprite = SKSpriteNode(imageNamed: assets.alligatorStop)
             
             
         }
@@ -106,8 +112,7 @@ class Alligator {
     @objc func attack() {
         guard !isAlligatoraAttacking else { return }
         self.isAlligatoraAttacking = true
-        //audioPlayer.playEffect(effect: "alligator-axe-atack", type: "mp3", volume: 1.0)
-        let soundAction = SKAction.playSoundFileNamed("alligator-axe-atack", waitForCompletion: false)
+        audioPlayer.playEffect(effect: sounds.swordAttack, type: "mp3", volume: 1.0)
         let startAction = SKAction.run {
             self.stop()
             self.attackAction()
@@ -119,26 +124,42 @@ class Alligator {
             
         }
 
-        let action = SKAction.sequence([soundAction, startAction, SKAction.wait(forDuration: 0.78), finishedAction])
+        let action = SKAction.sequence([startAction, SKAction.wait(forDuration: 0.78), finishedAction])
         self.sprite.removeAllActions()
         self.sprite.run(action)
     }
 
     private func attackAction() {
-        let textures = Textures.getTextures(name: "", atlas: "Alligator_Attacking")
-        let action = SKAction.animate(with: textures,
-                                      timePerFrame: 0.8/TimeInterval(textures.count),
+        let action = SKAction.animate(with: attackTextures,
+                                      timePerFrame: 0.8/TimeInterval(attackTextures.count),
                                       resize: true,
                                       restore: true)
         self.sprite.run(SKAction.repeatForever(action))
     }
+    
+    func takingDamage(){
+        self.isAlligatorTakingDamage = true
+        let textures = Textures.getTextures(name: "", atlas: "Jacare-tomando-dano")
+        let action = SKAction.animate(with: textures,
+                                      timePerFrame:  0.5/TimeInterval(textures.count),
+                                      resize: true,
+                                      restore: true)
+        
+        //sprite.removeAllActions()
+        sprite.run(action) {
+            self.isAlligatorTakingDamage = false
+            self.stop()
+        }
+    }
+    
+    
+    
 
     func stopAll() {
         stop()
         sprite.removeAllActions()
-        let textures = Textures.getTextures(name: "", atlas: "Alligator_Stopped")
-        let action = SKAction.animate(with: textures,
-                                      timePerFrame: 0.8/TimeInterval(textures.count),
+        let action = SKAction.animate(with: walkTextures,
+                                      timePerFrame: 0.8/TimeInterval(walkTextures.count),
                                       resize: true,
                                       restore: true)
         self.sprite.run(SKAction.repeatForever(action))
