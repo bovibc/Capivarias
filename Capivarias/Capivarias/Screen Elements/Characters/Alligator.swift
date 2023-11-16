@@ -61,6 +61,7 @@ class Alligator {
         sprite.physicsBody?.allowsRotation = false
         sprite.physicsBody?.categoryBitMask = 2
         sprite.physicsBody?.contactTestBitMask = 1
+        //voce é classe 2 e avisa se tiver em contato com classe 1
     }
 
     private func setPosition(_ screenWidth: CGFloat, _ screenHeight: CGFloat) {
