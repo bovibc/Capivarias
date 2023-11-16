@@ -13,9 +13,11 @@
 		0813A2DA2AD6DEFE00428484 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0813A2D82AD6DEFE00428484 /* Main.storyboard */; };
 		0813A2DC2AD6DEFF00428484 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0813A2DB2AD6DEFF00428484 /* Assets.xcassets */; };
 		0813A2DF2AD6DEFF00428484 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0813A2DD2AD6DEFF00428484 /* LaunchScreen.storyboard */; };
+		083A14A52AFE5A7300B4F9EE /* SecondScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 083A14A42AFE5A7300B4F9EE /* SecondScene.sks */; };
 		084E311A2AF1326C000C71A8 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084E31192AF1326C000C71A8 /* GameScene.swift */; };
-		084E311C2AF1327D000C71A8 /* SecondScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084E311B2AF1327D000C71A8 /* SecondScene.swift */; };
+		084E311C2AF1327D000C71A8 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		084E311E2AF132A4000C71A8 /* TransactionsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084E311D2AF132A4000C71A8 /* TransactionsScene.swift */; };
+		0875D0FC2B0248BE007B84C6 /* SecondScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875D0FB2B0248BE007B84C6 /* SecondScene.swift */; };
 		08CEE5F42AE1643A00149B83 /* Textures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CEE5F32AE1643A00149B83 /* Textures.swift */; };
 		08CEE5F62AE1651A00149B83 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CEE5F52AE1651A00149B83 /* Constants.swift */; };
 		08CEE5F82AE1653C00149B83 /* Capybara.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CEE5F72AE1653C00149B83 /* Capybara.swift */; };
@@ -43,9 +45,10 @@
 		0813A2DB2AD6DEFF00428484 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0813A2DE2AD6DEFF00428484 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		082ED83D2AFCFFD300AB1C67 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		083A14A42AFE5A7300B4F9EE /* SecondScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SecondScene.sks; sourceTree = "<group>"; };
 		084E31192AF1326C000C71A8 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
-		084E311B2AF1327D000C71A8 /* SecondScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondScene.swift; sourceTree = "<group>"; };
 		084E311D2AF132A4000C71A8 /* TransactionsScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsScene.swift; sourceTree = "<group>"; };
+		0875D0FB2B0248BE007B84C6 /* SecondScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondScene.swift; sourceTree = "<group>"; };
 		08CEE5F32AE1643A00149B83 /* Textures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Textures.swift; sourceTree = "<group>"; };
 		08CEE5F52AE1651A00149B83 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		08CEE5F72AE1653C00149B83 /* Capybara.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Capybara.swift; sourceTree = "<group>"; };
@@ -114,8 +117,8 @@
 			children = (
 				328080702AF26F71009650E3 /* GameOverGameScene.swift */,
 				084E31192AF1326C000C71A8 /* GameScene.swift */,
-				084E311B2AF1327D000C71A8 /* SecondScene.swift */,
 				084E311D2AF132A4000C71A8 /* TransactionsScene.swift */,
+				0875D0FB2B0248BE007B84C6 /* SecondScene.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -162,6 +165,7 @@
 			children = (
 				0813A2D22AD6DEFE00428484 /* Actions.sks */,
 				08E8EE372AE961EC0076F4CE /* GameScene.sks */,
+				083A14A42AFE5A7300B4F9EE /* SecondScene.sks */,
 			);
 			path = Documents;
 			sourceTree = "<group>";
@@ -262,6 +266,7 @@
 				F28B1D512AE2C34700F8E596 /* alligator-axe-atack.mp3 in Resources */,
 				08E8EE382AE961EC0076F4CE /* GameScene.sks in Resources */,
 				F28B1D502AE2C34700F8E596 /* monkey-banana-atack.mp3 in Resources */,
+				083A14A52AFE5A7300B4F9EE /* SecondScene.sks in Resources */,
 				0813A2DF2AD6DEFF00428484 /* LaunchScreen.storyboard in Resources */,
 				0813A2D32AD6DEFE00428484 /* Actions.sks in Resources */,
 			);
@@ -280,7 +285,8 @@
 				F2C014B62AE81319000E9B87 /* BackgroundController.swift in Sources */,
 				08CEE5FA2AE167E800149B83 /* Alligator.swift in Sources */,
 				084E311A2AF1326C000C71A8 /* GameScene.swift in Sources */,
-				084E311C2AF1327D000C71A8 /* SecondScene.swift in Sources */,
+				0875D0FC2B0248BE007B84C6 /* SecondScene.swift in Sources */,
+				084E311C2AF1327D000C71A8 /* (null) in Sources */,
 				08CEE5F42AE1643A00149B83 /* Textures.swift in Sources */,
 				0813A2D72AD6DEFE00428484 /* GameViewController.swift in Sources */,
 				328080712AF26F71009650E3 /* GameOverGameScene.swift in Sources */,
