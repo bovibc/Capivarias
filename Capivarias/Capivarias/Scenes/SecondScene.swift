@@ -18,6 +18,7 @@ class SecondScene: SKScene, SKPhysicsContactDelegate {
     var capybara = Capybara()
     let backgroundController = BackgroundController()
     var door = SKSpriteNode()
+    let assets = Assets()
     var isContact: Bool = false
     var transactionScene = TrasactionsScenes()
     var gameOver: TimeInterval = 0
@@ -36,7 +37,7 @@ class SecondScene: SKScene, SKPhysicsContactDelegate {
     }
     
     private func setupBackground() {
-        backgroundController.setupBackground(scene: self, imageName: "mapateste")
+        backgroundController.setupBackground(scene: self, imageName: assets.map3)
     }
 
     private func getDoor() {
