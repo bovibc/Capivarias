@@ -16,6 +16,7 @@
 		084E311A2AF1326C000C71A8 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084E31192AF1326C000C71A8 /* GameScene.swift */; };
 		084E311C2AF1327D000C71A8 /* SecondScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084E311B2AF1327D000C71A8 /* SecondScene.swift */; };
 		084E311E2AF132A4000C71A8 /* TransactionsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084E311D2AF132A4000C71A8 /* TransactionsScene.swift */; };
+		085A2ECF2B063A9D00307D15 /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085A2ECE2B063A9D00307D15 /* Position.swift */; };
 		08CEE5F42AE1643A00149B83 /* Textures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CEE5F32AE1643A00149B83 /* Textures.swift */; };
 		08CEE5F62AE1651A00149B83 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CEE5F52AE1651A00149B83 /* Constants.swift */; };
 		08CEE5F82AE1653C00149B83 /* Capybara.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CEE5F72AE1653C00149B83 /* Capybara.swift */; };
@@ -45,6 +46,7 @@
 		084E31192AF1326C000C71A8 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		084E311B2AF1327D000C71A8 /* SecondScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondScene.swift; sourceTree = "<group>"; };
 		084E311D2AF132A4000C71A8 /* TransactionsScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsScene.swift; sourceTree = "<group>"; };
+		085A2ECE2B063A9D00307D15 /* Position.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Position.swift; sourceTree = "<group>"; };
 		08CEE5F32AE1643A00149B83 /* Textures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Textures.swift; sourceTree = "<group>"; };
 		08CEE5F52AE1651A00149B83 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		08CEE5F72AE1653C00149B83 /* Capybara.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Capybara.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 			children = (
 				08CEE5F32AE1643A00149B83 /* Textures.swift */,
 				08CEE5F52AE1651A00149B83 /* Constants.swift */,
+				085A2ECE2B063A9D00307D15 /* Position.swift */,
 			);
 			path = Auxiliary;
 			sourceTree = "<group>";
@@ -284,6 +287,7 @@
 				08CEE5F82AE1653C00149B83 /* Capybara.swift in Sources */,
 				0813A2CF2AD6DEFE00428484 /* AppDelegate.swift in Sources */,
 				C0D60CA42AE80B910064C863 /* Weapons.swift in Sources */,
+				085A2ECF2B063A9D00307D15 /* Position.swift in Sources */,
 				084E311E2AF132A4000C71A8 /* TransactionsScene.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

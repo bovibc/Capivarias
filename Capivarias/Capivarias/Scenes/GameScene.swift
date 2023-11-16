@@ -11,7 +11,6 @@ import GameController
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     var virtualController: GCVirtualController?
-    let spriteScale = 0.07
     var joystick = Joystick()
     var enemies: [Alligator] = [Alligator()]
     var audioPlayer = AudioPlayer()
@@ -28,7 +27,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setupScene()
         setupBackground()
         setupCapivara()
-        removeDoor()
         getDoor()
         setupAlligator()
         connectController()
@@ -75,33 +73,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.enemies[i].start(
                 screenWidth: size.width,
                 screenHeight: size.height,
-                spawnPosition: randomPosition(),
+                spawnPosition: Position.randomize(size),
                 mask: i+2)
             addChild(enemies[i].sprite)
-        }
-    }
-
-    private func randomPosition() -> CGPoint {
-        let random = Int.random(in: 0..<8)
-        switch random {
-        case 0:
-            return CGPoint(x: size.width/2, y: size.height/3)
-        case 1:
-            return CGPoint(x: size.width/2, y: size.height/4)
-        case 2:
-            return CGPoint(x: size.width/1.5, y: size.height/4)
-        case 3:
-            return CGPoint(x: size.width/2, y: size.height/2)
-        case 4:
-            return CGPoint(x: size.width/5, y: size.height/5)
-        case 5:
-            return CGPoint(x: size.width/5, y: size.height/1.5)
-        case 6:
-            return CGPoint(x: size.width/4, y: size.height/3)
-        case 7:
-            return CGPoint(x: size.width/1.5, y: size.height/1.5)
-        default:
-            return CGPoint(x: size.width/5, y: size.height/5)
         }
     }
 
@@ -201,7 +175,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if pressed && self.isContact {
                 self.capybara.hit()
                 self.enemies[self.lastEnemyIndex].changeLife(damage: self.capybara.getDamage())
-
+                if self.enemies[self.lastEnemyIndex].getLife() <= 0 {
+                    self.enemyDied()
+                }
             }
             else {
                 self.capybara.hit()
@@ -236,13 +212,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private func contactAttack(_ bodyA: UInt32, _ bodyB: UInt32) {
         lastEnemyIndex = getEnemy(bodyA, bodyB)
         isContact = true
-        enemies[lastEnemyIndex].attack()
 
         if enemies[lastEnemyIndex].isAlligatoraAttacking == false {
             capybara.changeLife(damage: enemies[lastEnemyIndex].getDamage())
-        }
-        else {
-            setGamePadAction()
         }
     }
 
@@ -258,12 +230,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         return index
     }
 
-    private func setGamePadAction() {
-        self.virtualController?.controller?.extendedGamepad?.buttonX.pressedChangedHandler = { button, value, pressed in
-            if pressed {
-                self.capybara.hit()
-                self.enemies[self.lastEnemyIndex].changeLife(damage: self.capybara.getDamage())
-            }
+    private func enemyDied() {
+        self.enemies[self.lastEnemyIndex].sprite.removeFromParent()
+        self.enemies.remove(at: self.lastEnemyIndex)
+        self.isContact = false
+        isEnemiesEmpty()
+    }
+
+    private func isEnemiesEmpty() {
+        if enemies.isEmpty {
+            removeDoor()
         }
     }
 }
