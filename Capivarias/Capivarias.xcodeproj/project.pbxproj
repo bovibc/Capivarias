@@ -18,6 +18,11 @@
 		084E311E2AF132A4000C71A8 /* TransactionsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084E311D2AF132A4000C71A8 /* TransactionsScene.swift */; };
 		0875D0FC2B0248BE007B84C6 /* SecondScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875D0FB2B0248BE007B84C6 /* SecondScene.swift */; };
 		08AD31122B064B5B009F3A58 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08AD31112B064B5B009F3A58 /* Assets.xcassets */; };
+		08AD311A2B064C82009F3A58 /* monkey-banana-atack.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 08AD31152B064C82009F3A58 /* monkey-banana-atack.mp3 */; };
+		08AD311B2B064C82009F3A58 /* alligator-axe-atack.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 08AD31162B064C82009F3A58 /* alligator-axe-atack.mp3 */; };
+		08AD311C2B064C82009F3A58 /* death-menu-sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 08AD31172B064C82009F3A58 /* death-menu-sound.mp3 */; };
+		08AD311D2B064C82009F3A58 /* capivara-sword-atack.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 08AD31182B064C82009F3A58 /* capivara-sword-atack.mp3 */; };
+		08AD311E2B064C82009F3A58 /* ambient-forest.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 08AD31192B064C82009F3A58 /* ambient-forest.mp3 */; };
 		08CEE5F42AE1643A00149B83 /* Textures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CEE5F32AE1643A00149B83 /* Textures.swift */; };
 		08CEE5F62AE1651A00149B83 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CEE5F52AE1651A00149B83 /* Constants.swift */; };
 		08CEE5F82AE1653C00149B83 /* Capybara.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CEE5F72AE1653C00149B83 /* Capybara.swift */; };
@@ -45,6 +50,11 @@
 		084E311D2AF132A4000C71A8 /* TransactionsScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsScene.swift; sourceTree = "<group>"; };
 		0875D0FB2B0248BE007B84C6 /* SecondScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondScene.swift; sourceTree = "<group>"; };
 		08AD31112B064B5B009F3A58 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		08AD31152B064C82009F3A58 /* monkey-banana-atack.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "monkey-banana-atack.mp3"; sourceTree = "<group>"; };
+		08AD31162B064C82009F3A58 /* alligator-axe-atack.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "alligator-axe-atack.mp3"; sourceTree = "<group>"; };
+		08AD31172B064C82009F3A58 /* death-menu-sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "death-menu-sound.mp3"; sourceTree = "<group>"; };
+		08AD31182B064C82009F3A58 /* capivara-sword-atack.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "capivara-sword-atack.mp3"; sourceTree = "<group>"; };
+		08AD31192B064C82009F3A58 /* ambient-forest.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "ambient-forest.mp3"; sourceTree = "<group>"; };
 		08CEE5F32AE1643A00149B83 /* Textures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Textures.swift; sourceTree = "<group>"; };
 		08CEE5F52AE1651A00149B83 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		08CEE5F72AE1653C00149B83 /* Capybara.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Capybara.swift; sourceTree = "<group>"; };
@@ -126,6 +136,11 @@
 		08AD31142B064BF6009F3A58 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				08AD31162B064C82009F3A58 /* alligator-axe-atack.mp3 */,
+				08AD31192B064C82009F3A58 /* ambient-forest.mp3 */,
+				08AD31182B064C82009F3A58 /* capivara-sword-atack.mp3 */,
+				08AD31172B064C82009F3A58 /* death-menu-sound.mp3 */,
+				08AD31152B064C82009F3A58 /* monkey-banana-atack.mp3 */,
 			);
 			path = Sounds;
 			sourceTree = "<group>";
@@ -254,11 +269,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08AD311B2B064C82009F3A58 /* alligator-axe-atack.mp3 in Resources */,
 				0813A2DA2AD6DEFE00428484 /* Main.storyboard in Resources */,
+				08AD311D2B064C82009F3A58 /* capivara-sword-atack.mp3 in Resources */,
+				08AD311C2B064C82009F3A58 /* death-menu-sound.mp3 in Resources */,
+				08AD311A2B064C82009F3A58 /* monkey-banana-atack.mp3 in Resources */,
 				08E8EE382AE961EC0076F4CE /* GameScene.sks in Resources */,
 				083A14A52AFE5A7300B4F9EE /* SecondScene.sks in Resources */,
 				0813A2DF2AD6DEFF00428484 /* LaunchScreen.storyboard in Resources */,
 				08AD31122B064B5B009F3A58 /* Assets.xcassets in Resources */,
+				08AD311E2B064C82009F3A58 /* ambient-forest.mp3 in Resources */,
 				0813A2D32AD6DEFE00428484 /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
