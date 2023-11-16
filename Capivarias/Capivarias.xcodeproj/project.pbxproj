@@ -11,13 +11,13 @@
 		0813A2D32AD6DEFE00428484 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 0813A2D22AD6DEFE00428484 /* Actions.sks */; };
 		0813A2D72AD6DEFE00428484 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0813A2D62AD6DEFE00428484 /* GameViewController.swift */; };
 		0813A2DA2AD6DEFE00428484 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0813A2D82AD6DEFE00428484 /* Main.storyboard */; };
-		0813A2DC2AD6DEFF00428484 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0813A2DB2AD6DEFF00428484 /* Assets.xcassets */; };
 		0813A2DF2AD6DEFF00428484 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0813A2DD2AD6DEFF00428484 /* LaunchScreen.storyboard */; };
 		083A14A52AFE5A7300B4F9EE /* SecondScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 083A14A42AFE5A7300B4F9EE /* SecondScene.sks */; };
 		084E311A2AF1326C000C71A8 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084E31192AF1326C000C71A8 /* GameScene.swift */; };
 		084E311C2AF1327D000C71A8 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		084E311E2AF132A4000C71A8 /* TransactionsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084E311D2AF132A4000C71A8 /* TransactionsScene.swift */; };
 		0875D0FC2B0248BE007B84C6 /* SecondScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0875D0FB2B0248BE007B84C6 /* SecondScene.swift */; };
+		08AD31122B064B5B009F3A58 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08AD31112B064B5B009F3A58 /* Assets.xcassets */; };
 		08CEE5F42AE1643A00149B83 /* Textures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CEE5F32AE1643A00149B83 /* Textures.swift */; };
 		08CEE5F62AE1651A00149B83 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CEE5F52AE1651A00149B83 /* Constants.swift */; };
 		08CEE5F82AE1653C00149B83 /* Capybara.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CEE5F72AE1653C00149B83 /* Capybara.swift */; };
@@ -27,11 +27,6 @@
 		328080712AF26F71009650E3 /* GameOverGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328080702AF26F71009650E3 /* GameOverGameScene.swift */; };
 		C0D60CA42AE80B910064C863 /* Weapons.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D60CA32AE80B910064C863 /* Weapons.swift */; };
 		F20BC15C2B0280A9009D9B65 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20BC15B2B0280A9009D9B65 /* Assets.swift */; };
-		F28B1D502AE2C34700F8E596 /* monkey-banana-atack.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F28B1D4B2AE2C34600F8E596 /* monkey-banana-atack.mp3 */; };
-		F28B1D512AE2C34700F8E596 /* alligator-axe-atack.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F28B1D4C2AE2C34600F8E596 /* alligator-axe-atack.mp3 */; };
-		F28B1D522AE2C34700F8E596 /* ambient-forest.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F28B1D4D2AE2C34600F8E596 /* ambient-forest.mp3 */; };
-		F28B1D532AE2C34700F8E596 /* capivara-sword-atack.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F28B1D4E2AE2C34600F8E596 /* capivara-sword-atack.mp3 */; };
-		F28B1D542AE2C34700F8E596 /* death-menu-sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F28B1D4F2AE2C34700F8E596 /* death-menu-sound.mp3 */; };
 		F2A77F832AE7E7A50030F197 /* AudioPlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A77F822AE7E7A50030F197 /* AudioPlayerController.swift */; };
 		F2C014B62AE81319000E9B87 /* BackgroundController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C014B52AE81319000E9B87 /* BackgroundController.swift */; };
 		F2E112C52AFE782F00B76955 /* Sounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E112C42AFE782F00B76955 /* Sounds.swift */; };
@@ -43,13 +38,13 @@
 		0813A2D22AD6DEFE00428484 /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
 		0813A2D62AD6DEFE00428484 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		0813A2D92AD6DEFE00428484 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		0813A2DB2AD6DEFF00428484 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0813A2DE2AD6DEFF00428484 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		082ED83D2AFCFFD300AB1C67 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		083A14A42AFE5A7300B4F9EE /* SecondScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SecondScene.sks; sourceTree = "<group>"; };
 		084E31192AF1326C000C71A8 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		084E311D2AF132A4000C71A8 /* TransactionsScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsScene.swift; sourceTree = "<group>"; };
 		0875D0FB2B0248BE007B84C6 /* SecondScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondScene.swift; sourceTree = "<group>"; };
+		08AD31112B064B5B009F3A58 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		08CEE5F32AE1643A00149B83 /* Textures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Textures.swift; sourceTree = "<group>"; };
 		08CEE5F52AE1651A00149B83 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		08CEE5F72AE1653C00149B83 /* Capybara.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Capybara.swift; sourceTree = "<group>"; };
@@ -59,11 +54,6 @@
 		328080702AF26F71009650E3 /* GameOverGameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverGameScene.swift; sourceTree = "<group>"; };
 		C0D60CA32AE80B910064C863 /* Weapons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weapons.swift; sourceTree = "<group>"; };
 		F20BC15B2B0280A9009D9B65 /* Assets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
-		F28B1D4B2AE2C34600F8E596 /* monkey-banana-atack.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "monkey-banana-atack.mp3"; sourceTree = "<group>"; };
-		F28B1D4C2AE2C34600F8E596 /* alligator-axe-atack.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "alligator-axe-atack.mp3"; sourceTree = "<group>"; };
-		F28B1D4D2AE2C34600F8E596 /* ambient-forest.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "ambient-forest.mp3"; sourceTree = "<group>"; };
-		F28B1D4E2AE2C34600F8E596 /* capivara-sword-atack.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "capivara-sword-atack.mp3"; sourceTree = "<group>"; };
-		F28B1D4F2AE2C34700F8E596 /* death-menu-sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "death-menu-sound.mp3"; sourceTree = "<group>"; };
 		F2A77F822AE7E7A50030F197 /* AudioPlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerController.swift; sourceTree = "<group>"; };
 		F2C014B52AE81319000E9B87 /* BackgroundController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundController.swift; sourceTree = "<group>"; };
 		F2E112C42AFE782F00B76955 /* Sounds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sounds.swift; sourceTree = "<group>"; };
@@ -83,7 +73,6 @@
 		0813A2C22AD6DEFE00428484 = {
 			isa = PBXGroup;
 			children = (
-				F2E112C32AFE77ED00B76955 /* Resources */,
 				0813A2CD2AD6DEFE00428484 /* Capivarias */,
 				0813A2CC2AD6DEFE00428484 /* Products */,
 			);
@@ -100,6 +89,7 @@
 		0813A2CD2AD6DEFE00428484 /* Capivarias */ = {
 			isa = PBXGroup;
 			children = (
+				08AD31102B064B05009F3A58 /* Resources */,
 				082ED83D2AFCFFD300AB1C67 /* Info.plist */,
 				084E31182AF1323B000C71A8 /* Scenes */,
 				08CEE5EF2AE1633F00149B83 /* Auxiliary */,
@@ -122,6 +112,22 @@
 				0875D0FB2B0248BE007B84C6 /* SecondScene.swift */,
 			);
 			path = Scenes;
+			sourceTree = "<group>";
+		};
+		08AD31102B064B05009F3A58 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				08AD31142B064BF6009F3A58 /* Sounds */,
+				08AD31112B064B5B009F3A58 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		08AD31142B064BF6009F3A58 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 		08CEE5EC2AE1631300149B83 /* Screen Elements */ = {
@@ -190,27 +196,6 @@
 			path = Weapons;
 			sourceTree = "<group>";
 		};
-		F28B1D482AE2AF6E00F8E596 /* Sounds */ = {
-			isa = PBXGroup;
-			children = (
-				F28B1D4D2AE2C34600F8E596 /* ambient-forest.mp3 */,
-				F28B1D4F2AE2C34700F8E596 /* death-menu-sound.mp3 */,
-				F28B1D4E2AE2C34600F8E596 /* capivara-sword-atack.mp3 */,
-				F28B1D4C2AE2C34600F8E596 /* alligator-axe-atack.mp3 */,
-				F28B1D4B2AE2C34600F8E596 /* monkey-banana-atack.mp3 */,
-			);
-			path = Sounds;
-			sourceTree = "<group>";
-		};
-		F2E112C32AFE77ED00B76955 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				0813A2DB2AD6DEFF00428484 /* Assets.xcassets */,
-				F28B1D482AE2AF6E00F8E596 /* Sounds */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -269,16 +254,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F28B1D522AE2C34700F8E596 /* ambient-forest.mp3 in Resources */,
-				F28B1D532AE2C34700F8E596 /* capivara-sword-atack.mp3 in Resources */,
 				0813A2DA2AD6DEFE00428484 /* Main.storyboard in Resources */,
-				F28B1D542AE2C34700F8E596 /* death-menu-sound.mp3 in Resources */,
-				0813A2DC2AD6DEFF00428484 /* Assets.xcassets in Resources */,
-				F28B1D512AE2C34700F8E596 /* alligator-axe-atack.mp3 in Resources */,
 				08E8EE382AE961EC0076F4CE /* GameScene.sks in Resources */,
-				F28B1D502AE2C34700F8E596 /* monkey-banana-atack.mp3 in Resources */,
 				083A14A52AFE5A7300B4F9EE /* SecondScene.sks in Resources */,
 				0813A2DF2AD6DEFF00428484 /* LaunchScreen.storyboard in Resources */,
+				08AD31122B064B5B009F3A58 /* Assets.xcassets in Resources */,
 				0813A2D32AD6DEFE00428484 /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

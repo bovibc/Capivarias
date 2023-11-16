@@ -90,7 +90,7 @@ class Capybara {
         isCapivaraHitting = true
 
         sprite.removeAllActions()
-        sprite.run(SKAction.sequence([ animation])) {
+        sprite.run(SKAction.sequence([animation])) {
             self.stop()
         }
     }

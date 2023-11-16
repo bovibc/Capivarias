@@ -17,7 +17,6 @@ class Alligator {
     private let staticName: String = "a1"
     private var isAlligatorWalking: Bool = false
     var isAlligatoraAttacking: Bool = false
-    private let movementAliasName: String = "Alligator_Walking"
     var audioPlayer = AudioPlayer()
     var isFollowing: Bool = true
     var lastHit:TimeInterval = 0
