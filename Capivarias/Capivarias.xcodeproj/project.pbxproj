@@ -32,6 +32,7 @@
 		328080712AF26F71009650E3 /* GameOverGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328080702AF26F71009650E3 /* GameOverGameScene.swift */; };
 		C0D60CA42AE80B910064C863 /* Weapons.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D60CA32AE80B910064C863 /* Weapons.swift */; };
 		F20BC15C2B0280A9009D9B65 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20BC15B2B0280A9009D9B65 /* Assets.swift */; };
+		F27320612B0787200038AF22 /* blow-gun.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F27320602B0787200038AF22 /* blow-gun.mp3 */; };
 		F2A77F832AE7E7A50030F197 /* AudioPlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A77F822AE7E7A50030F197 /* AudioPlayerController.swift */; };
 		F2C014B62AE81319000E9B87 /* BackgroundController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C014B52AE81319000E9B87 /* BackgroundController.swift */; };
 		F2E112C52AFE782F00B76955 /* Sounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E112C42AFE782F00B76955 /* Sounds.swift */; };
@@ -64,6 +65,7 @@
 		328080702AF26F71009650E3 /* GameOverGameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverGameScene.swift; sourceTree = "<group>"; };
 		C0D60CA32AE80B910064C863 /* Weapons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weapons.swift; sourceTree = "<group>"; };
 		F20BC15B2B0280A9009D9B65 /* Assets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
+		F27320602B0787200038AF22 /* blow-gun.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "blow-gun.mp3"; sourceTree = "<group>"; };
 		F2A77F822AE7E7A50030F197 /* AudioPlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerController.swift; sourceTree = "<group>"; };
 		F2C014B52AE81319000E9B87 /* BackgroundController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundController.swift; sourceTree = "<group>"; };
 		F2E112C42AFE782F00B76955 /* Sounds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sounds.swift; sourceTree = "<group>"; };
@@ -138,6 +140,7 @@
 			children = (
 				08AD31162B064C82009F3A58 /* alligator-axe-atack.mp3 */,
 				08AD31192B064C82009F3A58 /* ambient-forest.mp3 */,
+				F27320602B0787200038AF22 /* blow-gun.mp3 */,
 				08AD31182B064C82009F3A58 /* capivara-sword-atack.mp3 */,
 				08AD31172B064C82009F3A58 /* death-menu-sound.mp3 */,
 				08AD31152B064C82009F3A58 /* monkey-banana-atack.mp3 */,
@@ -278,6 +281,7 @@
 				083A14A52AFE5A7300B4F9EE /* SecondScene.sks in Resources */,
 				0813A2DF2AD6DEFF00428484 /* LaunchScreen.storyboard in Resources */,
 				08AD31122B064B5B009F3A58 /* Assets.xcassets in Resources */,
+				F27320612B0787200038AF22 /* blow-gun.mp3 in Resources */,
 				08AD311E2B064C82009F3A58 /* ambient-forest.mp3 in Resources */,
 				0813A2D32AD6DEFE00428484 /* Actions.sks in Resources */,
 			);

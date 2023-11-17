@@ -149,7 +149,9 @@ class Capybara {
             banana2.run(combine)
         
         let textures = Textures.getTextures(name: "", atlas: "Capybara_ShootingZarabatana")
-        let sound =  SKAction.playSoundFileNamed("capivara-sword-atack", waitForCompletion: false)
+        
+        audioPlayer.playEffect(effect: "blow-gun", type: ".mp3", volume: 0.8)
+        
         let animation = SKAction.animate(with: textures, timePerFrame: 0.07,
                                          resize: true,
                                          restore: true)
@@ -158,7 +160,7 @@ class Capybara {
         isCapivaraHitting = true
 
         sprite.removeAllActions()
-        sprite.run(SKAction.sequence([sound, animation])) {
+        sprite.run(SKAction.sequence([animation])) {
             self.stop()
         }
         
