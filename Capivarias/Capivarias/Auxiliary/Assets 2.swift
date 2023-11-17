@@ -19,5 +19,4 @@ struct Assets {
     let map3 = "Mapa dos Jacares"
     let gameOverMap = "Game Over"
     let stoppedZarabatana = "alligator_stopped 1"
-    let monkeyWalking = "Monkey_Waking"
 }

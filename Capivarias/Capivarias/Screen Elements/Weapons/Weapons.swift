@@ -24,7 +24,7 @@ struct Weapons {
         switch weapon {
             case .sword:
                 damage = 7
-                range = 3.0
+                range = 0
             case .pear:
                 damage = 4
                 range = 6.5
