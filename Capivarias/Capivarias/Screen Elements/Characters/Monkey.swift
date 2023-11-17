@@ -15,17 +15,20 @@ class Monkey {
     private var speed: CGFloat = 2
     private var attackSpeed: CGFloat = 1
     private let staticName: String = "m1"
+    var assets = Assets()
     private var isMonkeyWalking: Bool = false
-    private let movementMonkeyName: String = "Monkey_Waking"
     private let speedAtack: Float = 3.0
     var isFollowing: Bool = true
     private var scale: CGFloat = 0.19
     var sprite: SKSpriteNode
     var rangeX: Double = 500
     var rangeY: Double = 500
+    var monkeyWalkTextures:[SKTexture]
+   
     
     init() {
         self.sprite = SKSpriteNode(imageNamed: staticName)
+        monkeyWalkTextures = Textures.getTextures(name: "", atlas: assets.monkeyWalking)
     }
     
     func start(screenWidth: CGFloat, screenHeight: CGFloat) {
@@ -79,9 +82,8 @@ class Monkey {
     
     func walk() {
         guard !isMonkeyWalking else { return }
-        let textures = Textures.getTextures(name: "", atlas: "Monkey_Waking")
-        let action = SKAction.animate(with: textures,
-                                      timePerFrame: 1/TimeInterval(textures.count),
+        let action = SKAction.animate(with: monkeyWalkTextures,
+                                      timePerFrame: 1/TimeInterval(monkeyWalkTextures.count),
                                       resize: true,
                                       restore: true)
         isMonkeyWalking = true

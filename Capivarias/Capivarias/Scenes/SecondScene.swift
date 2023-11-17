@@ -13,7 +13,7 @@ class SecondScene: SKScene, SKPhysicsContactDelegate {
 
     var virtualController: GCVirtualController?
     var joystick = Joystick()
-    var alligator = Alligator()
+    var monkey = Monkey()
     var audioPlayer = AudioPlayer()
     var capybara = Capybara()
     let backgroundController = BackgroundController()
@@ -30,7 +30,7 @@ class SecondScene: SKScene, SKPhysicsContactDelegate {
         setupCapivara()
         getDoor()
         removeDoor()
-        setupAlligator()
+        setupMonkey()
         setupAudio()
         setObstacles()
         setupContact()
@@ -88,9 +88,9 @@ class SecondScene: SKScene, SKPhysicsContactDelegate {
         self.physicsWorld.contactDelegate = self
     }
     
-    private func setupAlligator() {
-        self.alligator.start(screenWidth: size.width , screenHeight: size.height)
-        addChild(alligator.sprite)
+    private func setupMonkey() {
+        self.monkey.start(screenWidth: size.width , screenHeight: size.height)
+        addChild(monkey.sprite)
     }
     
     private func setupScene() {
@@ -108,7 +108,8 @@ class SecondScene: SKScene, SKPhysicsContactDelegate {
     }
 
     override func update(_ currentTime: TimeInterval) {
-        alligator.follow(player: capybara.sprite.position)
+        monkey.follow(player: capybara.sprite.position)
+        monkey.attack(capyX: capybara.sprite.position.x, capyY: capybara.sprite.position.y)
         if joystick.isJoystickStatic() {
             if !capybara.isCapivaraHitting && !capybara.isCapivaraTakingDamage {
                 capybara.stop()
@@ -124,10 +125,10 @@ class SecondScene: SKScene, SKPhysicsContactDelegate {
 
         capybara.death()
         if capybara.life <= 0 {
-            alligator.isFollowing = false
-            if (currentTime - alligator.finishAnimation) > 1 {
-                alligator.sprite.removeAllActions()
-            }
+//            alligator.isFollowing = false
+//            if (currentTime - alligator.finishAnimation) > 1 {
+//                alligator.sprite.removeAllActions()
+//            }
             
             if (currentTime - gameOver) > 4 {
                 
@@ -139,12 +140,12 @@ class SecondScene: SKScene, SKPhysicsContactDelegate {
         }
 
         if isContact {
-            if (currentTime - alligator.lastHit) > 3 {
-                alligator.lastHit = currentTime
-                alligator.attack()
-                capybara.tankingDamage()
-                self.capybara.changeLife(damage: self.alligator.getDamage())
-            }
+//            if (currentTime - alligator.lastHit) > 3 {
+//                alligator.lastHit = currentTime
+//                alligator.attack()
+//                capybara.tankingDamage()
+//                self.capybara.changeLife(damage: self.alligator.getDamage())
+//            }
         }
 
         if let view = self.view {
@@ -178,7 +179,7 @@ class SecondScene: SKScene, SKPhysicsContactDelegate {
         self.virtualController?.controller?.extendedGamepad?.buttonX.pressedChangedHandler = { button, value, pressed in
             if pressed && self.isContact {
                 self.capybara.hit()
-                self.alligator.changeLife(damage: self.capybara.getDamage())
+               // self.alligator.changeLife(damage: self.capybara.getDamage())
 
             }
             else {
@@ -209,22 +210,22 @@ class SecondScene: SKScene, SKPhysicsContactDelegate {
 
     private func contactAttack() {
         isContact = true
-        alligator.attack()
+        //monkey.attack()
 
-        if alligator.isAlligatoraAttacking == false {
-            capybara.changeLife(damage: alligator.getDamage())
-            //Aqui, chamar animaçao da capivara tomando dano
-        }
-        else {
-            setGamePadAction()
-        }
+//        if alligator.isAlligatoraAttacking == false {
+//            capybara.changeLife(damage: alligator.getDamage())
+//            //Aqui, chamar animaçao da capivara tomando dano
+//        }
+//        else {
+//            setGamePadAction()
+//        }
     }
 
     private func setGamePadAction() {
         self.virtualController?.controller?.extendedGamepad?.buttonX.pressedChangedHandler = { button, value, pressed in
             if pressed {
                 self.capybara.hit()
-                self.alligator.changeLife(damage: self.capybara.getDamage())
+               // self.alligator.changeLife(damage: self.capybara.getDamage())
                 //Aqui, chamar alimaçao do jacare tomando dano
             }
         }
