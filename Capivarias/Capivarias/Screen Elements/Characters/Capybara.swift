@@ -31,9 +31,9 @@ class Capybara {
 
     init() {
         self.sprite = SKSpriteNode(imageNamed: staticName)
-        attackTexture = Textures.getTextures(name: "", atlas: assets.capybaraAttack)
-        walkTexture = Textures.getTextures(name: "", atlas: assets.capybaraWalk)
-        damageTexture = Textures.getTextures(name: "", atlas: assets.capybaraDamage)
+        attackTexture = Textures.getTextures(atlas: assets.capybaraAttack)
+        walkTexture = Textures.getTextures(atlas: assets.capybaraWalk)
+        damageTexture = Textures.getTextures(atlas: assets.capybaraDamage)
     }
 
     func changeLife(damage: Float) {
@@ -152,7 +152,7 @@ class Capybara {
             let combine = SKAction.sequence([moveAction, deleteAction])
             banana2.run(combine)
         
-        let textures = Textures.getTextures(name: "", atlas: "Capybara_ShootingZarabatana")
+        let textures = Textures.getTextures(atlas: "Capybara_ShootingZarabatana")
         let sound =  SKAction.playSoundFileNamed("capivara-sword-atack", waitForCompletion: false)
         let animation = SKAction.animate(with: textures, timePerFrame: 0.07,
                                          resize: true,
@@ -191,7 +191,7 @@ class Capybara {
     
     
     func walkZarabatana(positionX: CGFloat) {
-        let textures = Textures.getTextures(name: "", atlas: "Alligator_Walking")
+        let textures = Textures.getTextures(atlas: "Alligator_Walking")
         let action = SKAction.animate(with: textures,
                                       timePerFrame: 1/TimeInterval(textures.count),
                                       resize: true,

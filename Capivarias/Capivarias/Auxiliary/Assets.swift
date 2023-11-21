@@ -11,6 +11,7 @@ struct Assets {
     let alligatorAttack = "Alligator_Attacking"
     let alligatorStop = "Alligator_Stopped"
     let alligatorWalk = "Alligator_Walking"
+    let alligatorDying = "Alligator_Dying"
     
     let capybaraAttack = "Capybara_Hit"
     let capybaraWalk = "Capybara_Walking"

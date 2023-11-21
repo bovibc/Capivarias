@@ -30,8 +30,8 @@ class Alligator {
 
     init() {
         self.sprite = SKSpriteNode(imageNamed: staticName)
-        attackTextures = Textures.getTextures(name: "", atlas: assets.alligatorAttack)
-        walkTextures = Textures.getTextures(name: "", atlas: assets.alligatorWalk)
+        attackTextures = Textures.getTextures(atlas: assets.alligatorAttack)
+        walkTextures = Textures.getTextures(atlas: assets.alligatorWalk)
     }
     
     func changeLife(damage: Float) {
@@ -82,6 +82,26 @@ class Alligator {
         isAlligatorWalking = true
         sprite.removeAllActions()
         sprite.run(SKAction.repeatForever(action))
+    }
+    
+    func die() {
+        let textures = Textures.getTextures(atlas: assets.alligatorDying)
+        let startAction = SKAction.animate(with: textures,
+                                           timePerFrame: 0.5/TimeInterval(textures.count),
+                                      resize: true,
+                                      restore: true)
+        
+        let finishedAction = SKAction.run {
+            self.sprite.removeFromParent()
+        }
+        
+        isAlligatorWalking = true
+        sprite.removeAllActions()
+        sprite.run(SKAction.sequence([startAction, finishedAction]))
+    }
+    
+    func remove() {
+        sprite.removeFromParent()
     }
     
     func stop() {
@@ -139,7 +159,7 @@ class Alligator {
     
     func takingDamage(){
         self.isAlligatorTakingDamage = true
-        let textures = Textures.getTextures(name: "", atlas: "Jacare-tomando-dano")
+        let textures = Textures.getTextures(atlas: "Jacare-tomando-dano")
         let action = SKAction.animate(with: textures,
                                       timePerFrame:  0.5/TimeInterval(textures.count),
                                       resize: true,

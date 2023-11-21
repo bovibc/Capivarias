@@ -260,7 +260,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         private func enemyDied() {
-            self.enemies[self.lastEnemyIndex].sprite.removeFromParent()
+            self.enemies[self.lastEnemyIndex].die()
             self.enemies.remove(at: self.lastEnemyIndex)
             self.isContact = false
             isEnemiesEmpty()
