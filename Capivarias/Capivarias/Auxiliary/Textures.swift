@@ -10,7 +10,7 @@ import SpriteKit
 
 struct Textures {
 
-    static func getTextures(name: String, atlas: String) -> [SKTexture] {
+    static func getTextures(atlas: String) -> [SKTexture] {
         let atlas = SKTextureAtlas(named: atlas)
         var textures: [SKTexture] = []
         let name = atlas.textureNames.sorted { name1, name2 in

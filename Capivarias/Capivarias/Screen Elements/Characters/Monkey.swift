@@ -28,7 +28,7 @@ class Monkey {
     
     init() {
         self.sprite = SKSpriteNode(imageNamed: staticName)
-        monkeyWalkTextures = Textures.getTextures(name: "", atlas: assets.monkeyWalking)
+        monkeyWalkTextures = Textures.getTextures(atlas: assets.monkeyWalking)
     }
     
     func start(screenWidth: CGFloat, screenHeight: CGFloat) {

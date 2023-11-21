@@ -9,9 +9,9 @@ import Foundation
 import SpriteKit
 
 class Alligator {
-    var life: Float = 100
+    private var life: Float = 100
     private var damage: Float = 20
-    private var speed: CGFloat = 2
+    private var speed: CGFloat = 1.5
     private var attackSpeed: CGFloat = 1
     private var scale: CGFloat = 0.19
     private let staticName: String = "a1"
@@ -30,42 +30,46 @@ class Alligator {
 
     init() {
         self.sprite = SKSpriteNode(imageNamed: staticName)
-        attackTextures = Textures.getTextures(name: "", atlas: assets.alligatorAttack)
-        walkTextures = Textures.getTextures(name: "", atlas: assets.alligatorWalk)
+        attackTextures = Textures.getTextures(atlas: assets.alligatorAttack)
+        walkTextures = Textures.getTextures(atlas: assets.alligatorWalk)
     }
     
     func changeLife(damage: Float) {
         life -= damage
     }
-    
+
+    func getLife() -> Float {
+        return life
+    }
+
     func getDamage() -> Float {
         return damage
     }
 
-    func start(screenWidth: CGFloat, screenHeight: CGFloat) {
+    func start(screenWidth: CGFloat, screenHeight: CGFloat, spawnPosition: CGPoint, mask: Int) {
         let scaleX = screenWidth * scale / sprite.size.width
         let scaleY = screenHeight * scale / sprite.size.height
         sprite.xScale = scaleX
         sprite.yScale = scaleY
 
-        setPosition(screenWidth, screenHeight)
-        setPhysics()
+        setPosition( spawnPosition)
+        setPhysics(mask)
         sprite.name = "alligator"
     }
 
-    private func setPhysics() {
+    private func setPhysics(_ mask: Int) {
         let width = 0.55 * sprite.size.width
         let height = 0.25 * sprite.size.height
         sprite.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: width, height: height), center: CGPoint(x: -25, y: -40))
         sprite.physicsBody?.affectedByGravity = false
         sprite.physicsBody?.allowsRotation = false
-        sprite.physicsBody?.categoryBitMask = 2
+        sprite.physicsBody?.categoryBitMask = UInt32(mask)
         sprite.physicsBody?.contactTestBitMask = 1
         //voce é classe 2 e avisa se tiver em contato com classe 1
     }
 
-    private func setPosition(_ screenWidth: CGFloat, _ screenHeight: CGFloat) {
-        sprite.position = CGPoint(x: 4 * screenWidth / 5, y: screenHeight/2)
+    private func setPosition(_ spawnPosition: CGPoint) {
+        sprite.position = spawnPosition
         sprite.zPosition = 20
     }
 
@@ -78,6 +82,26 @@ class Alligator {
         isAlligatorWalking = true
         sprite.removeAllActions()
         sprite.run(SKAction.repeatForever(action))
+    }
+    
+    func die() {
+        let textures = Textures.getTextures(atlas: assets.alligatorDying)
+        let startAction = SKAction.animate(with: textures,
+                                           timePerFrame: 0.5/TimeInterval(textures.count),
+                                      resize: true,
+                                      restore: true)
+        
+        let finishedAction = SKAction.run {
+            self.sprite.removeFromParent()
+        }
+        
+        isAlligatorWalking = true
+        sprite.removeAllActions()
+        sprite.run(SKAction.sequence([startAction, finishedAction]))
+    }
+    
+    func remove() {
+        sprite.removeFromParent()
     }
     
     func stop() {
@@ -101,11 +125,7 @@ class Alligator {
             sprite.zRotation = 0
         }
         else {
-            
-            //Aqui deveria, qunado terminasse toda a animação do jacaré batendo, chamar o sprite do jacaré parado (ele já está parando de seguir)
             sprite = SKSpriteNode(imageNamed: assets.alligatorStop)
-            
-            
         }
     }
 
@@ -139,7 +159,7 @@ class Alligator {
     
     func takingDamage(){
         self.isAlligatorTakingDamage = true
-        let textures = Textures.getTextures(name: "", atlas: "Jacare-tomando-dano")
+        let textures = Textures.getTextures(atlas: "Jacare-tomando-dano")
         let action = SKAction.animate(with: textures,
                                       timePerFrame:  0.5/TimeInterval(textures.count),
                                       resize: true,

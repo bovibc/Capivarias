@@ -13,7 +13,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var sounds = Sounds()
     var virtualController: GCVirtualController?
     var joystick = Joystick()
-    var alligator = Alligator()
+    var enemies: [Alligator] = [Alligator()]
     var audioPlayer = AudioPlayer()
     var capybara = Capybara()
     let backgroundController = BackgroundController()
@@ -21,15 +21,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var isContact: Bool = false
     var transactionScene = TrasactionsScenes()
     var gameOver: TimeInterval = 0
+    var lastEnemyIndex: Int = 0
     let assets = Assets()
     var weapon: Bool = true
-
+    
     override func didMove(to view: SKView) {
         setupScene()
         setupBackground()
         setupCapivara()
         getDoor()
-        removeDoor()
         setupAlligator()
         connectController()
         setObstacles()
@@ -40,72 +40,69 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private func setupBackground() {
         backgroundController.setupBackground(scene: self, imageName: assets.map3)
     }
-
+    
     private func getDoor() {
         self.door = childNode(withName: "Door") as! SKSpriteNode
     }
-
+    
     private func setObstacles() {
-        setLake()
-        setTree()
-        setRock()
+        setNode(nodeName: "tree", textureName: "tronco")
+        setNode(nodeName: "rock", textureName: "rock")
+        setNode(nodeName: "lake", textureName: "lake")
     }
-
-    private func setTree() {
-        let tree = childNode(withName: "tree") as! SKSpriteNode
-        let treeTexture = SKTexture(imageNamed: "tronco")
+    
+    private func setNode(nodeName: String, textureName: String) {
+        let node = childNode(withName: nodeName) as! SKSpriteNode
+        let texture = SKTexture(imageNamed: textureName)
         
-        tree.physicsBody = SKPhysicsBody(texture: treeTexture, size: tree.size)
-        tree.physicsBody?.isDynamic = false
-        tree.physicsBody?.allowsRotation = false
-        tree.physicsBody?.affectedByGravity = false
+        node.physicsBody = SKPhysicsBody(texture: texture, size: node.size)
+        node.physicsBody?.isDynamic = false
+        node.physicsBody?.allowsRotation = false
+        node.physicsBody?.affectedByGravity = false
     }
-
-    private func setRock() {
-        let rock = childNode(withName: "rock") as! SKSpriteNode
-        let rockTexture = SKTexture(imageNamed: "rock")
-
-        rock.physicsBody = SKPhysicsBody(texture: rockTexture, size: rock.size)
-        rock.physicsBody?.isDynamic = false
-        rock.physicsBody?.allowsRotation = false
-        rock.physicsBody?.affectedByGravity = false
-    }
-
-    private func setLake() {
-        let lake = childNode(withName: "lake") as! SKSpriteNode
-        let lakeTexture = SKTexture(imageNamed: "lake")
-        
-        lake.physicsBody = SKPhysicsBody(texture: lakeTexture, size: lake.size)
-        lake.physicsBody?.isDynamic = false
-        lake.physicsBody?.allowsRotation = false
-        lake.physicsBody?.affectedByGravity = false
-    }
-
+    
     private func setupContact() {
         self.physicsWorld.contactDelegate = self
     }
     
     private func setupAlligator() {
-        self.alligator.start(screenWidth: size.width , screenHeight: size.height)
-        addChild(alligator.sprite)
+        generateEnemies()
+        for i in 0..<enemies.count {
+            self.enemies[i].start(
+                screenWidth: size.width,
+                screenHeight: size.height,
+                spawnPosition: Position.randomize(size),
+                mask: i+2)
+            addChild(enemies[i].sprite)
+        }
+    }
+    
+    private func generateEnemies() {
+        let plusEnemieNumber = Int.random(in: 0..<4)
+        for _ in 0..<plusEnemieNumber {
+            enemies.append(Alligator())
+        }
     }
     
     private func setupScene() {
         scene?.anchorPoint = .zero
         scene?.size = CGSize(width: view?.scene?.size.width ?? 600, height: view?.scene?.size.height ?? 800)
     }
-
+    
     private func setupCapivara() {
         self.capybara.start(screenWidth: size.width , screenHeight: size.height)
         addChild(capybara.sprite)
     }
-
+    
     private func removeDoor() {
         door.removeFromParent()
     }
-
+    
     override func update(_ currentTime: TimeInterval) {
-        alligator.follow(player: capybara.sprite.position)
+        for i in 0..<enemies.count {
+            enemies[i].follow(player: capybara.sprite.position)
+        }
+        
         if joystick.isJoystickStatic() {
             if !capybara.isCapivaraHitting && !capybara.isCapivaraTakingDamage {
                 if weapon == true {
@@ -115,7 +112,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     capybara.stopZarabatana()
                 }
             }
-
+            
         } else {
             let direction = joystick.getDirection()
             validateMovement(direction)
@@ -128,12 +125,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
             }
         }
-
+        
         capybara.death()
-        if capybara.life <= 0 {
-            alligator.isFollowing = false
-            if (currentTime - alligator.finishAnimation) > 1 {
-                alligator.sprite.removeAllActions()
+        if capybara.getLife() <= 0 {
+            enemies[lastEnemyIndex].isFollowing = false
+            if (currentTime - enemies[lastEnemyIndex].finishAnimation) > 1 {
+                enemies[lastEnemyIndex].sprite.removeAllActions()
             }
             
             if (currentTime - gameOver) > 4 {
@@ -143,147 +140,135 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     transactionScene.gameOver(view: view, gameScene: GameOverGameScene())
                 }
             }
-            
         }
-
+        
         if isContact {
-            if (currentTime - alligator.lastHit) > 3 {
-                alligator.lastHit = currentTime
-                alligator.attack()
-                capybara.tankingDamage()
-                self.capybara.changeLife(damage: self.alligator.getDamage())
+            if (currentTime - enemies[lastEnemyIndex].lastHit) > 3 {
+                enemies[lastEnemyIndex].lastHit = currentTime
+                enemies[lastEnemyIndex].attack()
+                capybara.takingDamage()
+                self.capybara.changeLife(damage: self.enemies[lastEnemyIndex].getDamage())
             }
         }
-
+        
         if let view = self.view {
             if capybara.sprite.position.x >= 1400 {
                 virtualController?.disconnect()
                 transactionScene.goToNextLevel(view: view, gameScene: "SecondScene")
             }
         }
-        
-        //print(alligator.life)
-        
     }
-
-    private func validateMovement(_ direction: Direction) {
-        switch direction.horizontal {
-        case .left:
-            capybara.goLeft()
-        case .right:
-            capybara.goRight()
-        case .none:
-            break
+        
+        private func validateMovement(_ direction: Direction) {
+            switch direction.horizontal {
+            case .left:
+                capybara.goLeft()
+            case .right:
+                capybara.goRight()
+            case .none:
+                break
+            }
+            
+            switch direction.vertical {
+            case .top:
+                capybara.goTop()
+            case .bottom:
+                capybara.goBottom()
+            case .none:
+                break
+            }
         }
-
-        switch direction.vertical {
-        case .top:
-            capybara.goTop()
-        case .bottom:
-            capybara.goBottom()
-        case .none:
-            break
-        }
-    }
-
-    func setupController(){
-        self.virtualController?.controller?.extendedGamepad?.buttonX.pressedChangedHandler = { button, value, pressed in
-            
-            
-            
-            if self.weapon == true{
-                if pressed && self.isContact {
-                    self.capybara.hit()
-                    self.alligator.changeLife(damage: self.capybara.getDamage())
+        
+        func setupController(){
+            self.virtualController?.controller?.extendedGamepad?.buttonX.pressedChangedHandler = { button, value, pressed in
+                if self.weapon == true{
+                    if pressed && self.isContact {
+                        self.capybara.hit()
+                        self.enemies[self.lastEnemyIndex].changeLife(damage: self.capybara.getDamage())
+                        if self.enemies[self.lastEnemyIndex].getLife() <= 0 {
+                            self.enemyDied()
+                        }
+                    }
+                    else {
+                        self.capybara.hit()
+                    }
                 }
                 else {
-                    self.capybara.hit()
+                    print("Atirando com a zarabanana")
+                    self.capybara.shootZarabatana(capybara: self.capybara.sprite,
+                                                  alligator: self.enemies[self.lastEnemyIndex].sprite)
                 }
-                
             }
-            
-            else {
-                print("Atirando com a zarabanana")
-                self.capybara.shootZarabatana(capybara: self.capybara.sprite,
-                                         alligator: self.alligator.sprite)
-            }
-            
-            
-            
-        }
-        
-        
-        self.virtualController?.controller?.extendedGamepad?.buttonY.pressedChangedHandler = { button, value, pressed in
-            if pressed {
-                self.weapon.toggle()
-                print("hello")
-            }
-            else {
+            self.virtualController?.controller?.extendedGamepad?.buttonY.pressedChangedHandler = { button, value, pressed in
+                if pressed {
+                    self.weapon.toggle()
+                    print("hello")
+                }
+                else {
+                }
             }
         }
         
-        
-        
-    }
-
-    func connectController() {
-        joystick.connectController { controller in
-            self.virtualController = controller
-            self.setupController()
-        }
-    }
-
-    func didEnd(_ contact: SKPhysicsContact) {
-        isContact = false
-    }
-
-    func didBegin(_ contact: SKPhysicsContact) {
-        if contact.bodyA.categoryBitMask == 1 && contact.bodyB.categoryBitMask == 2 {
-            contactAttack()
-        }
-        if contact.bodyA.categoryBitMask == 2 && contact.bodyB.categoryBitMask == 1 {
-            contactAttack()
-        }
-        
-        if contact.bodyA.categoryBitMask == 2 && contact.bodyB.categoryBitMask == 3 {
-            print("bateu")
-            alligator.changeLife(damage: capybara.getDamageZarabatana())
-            print(alligator.life)
-            
-            //tirar a vida do jacare baseado no dano da
-        }
-    }
-
-    private func contactAttack() {
-        isContact = true
-        alligator.attack()
-
-        if alligator.isAlligatoraAttacking == false {
-            capybara.changeLife(damage: alligator.getDamage())
-            //Aqui, chamar animaçao da capivara tomando dano
-        }
-        else {
-            setGamePadAction()
-        }
-    }
-
-    private func setGamePadAction() {
-        self.virtualController?.controller?.extendedGamepad?.buttonX.pressedChangedHandler = { button, value, pressed in
-            if pressed {
-                self.capybara.hit()
-                self.alligator.changeLife(damage: self.capybara.getDamage())
-                self.alligator.takingDamage()
-                print(self.alligator.life)
-                //Aqui, chamar animaçao do jacare tomando dano 09/11 9:22 achei o problema aqui
+        func connectController() {
+            joystick.connectController { controller in
+                self.virtualController = controller
+                self.setupController()
             }
         }
         
-
-
+        func didEnd(_ contact: SKPhysicsContact) {
+            isContact = false
+        }
         
-    }
+        func didBegin(_ contact: SKPhysicsContact) {
+            let bodyA = contact.bodyA.categoryBitMask
+            let bodyB = contact.bodyB.categoryBitMask
+            let alligatorMaskA = (bodyA == 2 || bodyA == 3 || bodyA == 4)
+            let alligatorMaskB = (bodyB == 2 || bodyB == 3 || bodyB == 4)
+            if bodyA == 1 && alligatorMaskB {
+                contactAttack(bodyA, bodyB)
+            }
+            if alligatorMaskA && bodyB == 1 {
+                contactAttack(bodyA, bodyB)
+            }
+            
+            if contact.bodyA.categoryBitMask == 2 && contact.bodyB.categoryBitMask == 3 {
+                print("bateu")
+                enemies[self.lastEnemyIndex].changeLife(damage: capybara.getDamageZarabatana())
+            }
+        }
+        
+        private func contactAttack(_ bodyA: UInt32, _ bodyB: UInt32) {
+            lastEnemyIndex = getEnemy(bodyA, bodyB)
+            isContact = true
+            
+            if enemies[lastEnemyIndex].isAlligatoraAttacking == false {
+                capybara.changeLife(damage: enemies[lastEnemyIndex].getDamage())
+            }
+        }
+        
+        private func getEnemy(_ bodyA: UInt32, _ bodyB: UInt32) -> Int {
+            var index = 0
+            let body = (bodyA == 1) ? bodyB : bodyA
+            for i in enemies {
+                if body == i.sprite.physicsBody?.categoryBitMask {
+                    index = enemies.firstIndex{$0 === i} ?? 0
+                    break
+                }
+            }
+            return index
+        }
+        
+        private func enemyDied() {
+            self.enemies[self.lastEnemyIndex].die()
+            self.enemies.remove(at: self.lastEnemyIndex)
+            self.isContact = false
+            isEnemiesEmpty()
+        }
+        
+        private func isEnemiesEmpty() {
+            if enemies.isEmpty {
+                removeDoor()
+            }
+        }
 }
-
-
-
-//como fazer para a capivara ficar parada com a zarabatana na mao ?

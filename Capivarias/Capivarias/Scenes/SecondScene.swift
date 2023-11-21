@@ -140,12 +140,7 @@ class SecondScene: SKScene, SKPhysicsContactDelegate {
         }
 
         if isContact {
-//            if (currentTime - alligator.lastHit) > 3 {
-//                alligator.lastHit = currentTime
-//                alligator.attack()
-//                capybara.tankingDamage()
-//                self.capybara.changeLife(damage: self.alligator.getDamage())
-//            }
+
         }
 
         if let view = self.view {
