@@ -32,7 +32,9 @@ class GameOverGameScene: SKScene {
     var alligator = Alligator()
     var capybara = Capybara()
     var transactionScene = TrasactionsScenes()
-    
+    var audioPlayer = AudioPlayer()
+    let sounds = Sounds()
+    let assets = Assets()
     
     
     override func didMove(to view: SKView) {
@@ -40,12 +42,13 @@ class GameOverGameScene: SKScene {
         setupBackground()
         addCenterButton()
         addPlayAgainButton()
+        audioPlayer.playEffect(effect: sounds.deathMenu, type: "mp3", volume: 1.0)
        // addGoToMenuButton()
     
     }
     
     private func setupBackground() {
-        backgroundController.setupBackground(scene: self, imageName: "Mapa Game Over Final")
+        backgroundController.setupBackground(scene: self, imageName: assets.gameOverMap)
     }
     
     private func setupScene() {
@@ -113,7 +116,7 @@ class GameOverGameScene: SKScene {
             if let scene = GKScene(fileNamed: "GameScene") {
                 if let sceneNode = scene.rootNode as? GameScene {
                     if let view = self.view {
-                        self.transactionScene.goToNextLevel(view: view, gameScene: sceneNode)
+                        self.transactionScene.goToNextLevel(view: view, gameScene: "GameScene")
                     }
                 }
             }
