@@ -47,7 +47,7 @@ class Capybara {
     func getDamage() -> Float {
         return damage
     }
-    
+
     func getDamageZarabatana() -> Float {
         return damageZarabatana
     }
@@ -89,7 +89,7 @@ class Capybara {
         sprite.removeAllActions()
         sprite.run(SKAction.repeatForever(action))
     }
-    
+
     func stopZarabatana() {
         self.isCapivaraHitting = false
         self.isCapivaraWalking = false
@@ -117,8 +117,7 @@ class Capybara {
             self.stop()
         }
     }
-    
-    
+
     func shootZarabatana(capybara: SKSpriteNode, alligator: SKSpriteNode) {
         //Colocar algo para essa funçao retornar
         
@@ -166,13 +165,7 @@ class Capybara {
         sprite.run(SKAction.sequence([animation])) {
             self.stop()
         }
-        
-        
-        
     }
-    
-
-    
 
     func walk(positionX: CGFloat) {
         let action = SKAction.animate(with: walkTexture,
@@ -188,9 +181,7 @@ class Capybara {
             sprite.run(SKAction.repeatForever(action))
         }
     }
-    
-    
-    
+
     func walkZarabatana(positionX: CGFloat) {
         let textures = Textures.getTextures(atlas: "Alligator_Walking")
         let action = SKAction.animate(with: textures,
@@ -206,9 +197,6 @@ class Capybara {
             sprite.run(SKAction.repeatForever(action))
         }
     }
-
-    
-    
 
     func death() {
     if  life <= 0 {
@@ -233,7 +221,6 @@ class Capybara {
             self.stop()
         }
     }
-    
     
     func goLeft() {
         sprite.position.x += speed
