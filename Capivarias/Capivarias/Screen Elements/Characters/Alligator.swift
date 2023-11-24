@@ -10,7 +10,7 @@ import SpriteKit
 
 class Alligator {
     var life: Float = 100
-    private var damage: Float = 20
+    private var damage: Float = 100
     private var speed: CGFloat = 2
     private var attackSpeed: CGFloat = 1
     private var scale: CGFloat = 0.19
@@ -19,7 +19,8 @@ class Alligator {
     var isAlligatoraAttacking: Bool = false
     var audioPlayer = AudioPlayer()
     var isFollowing: Bool = true
-    var lastHit:TimeInterval = 0
+    var lastHit: TimeInterval = 0
+    var gameOver: TimeInterval = 0
     var finishAnimation: TimeInterval = 0
     var isAlligatorTakingDamage: Bool = false
     let sounds = Sounds()
@@ -27,6 +28,8 @@ class Alligator {
     let attackTextures:[SKTexture]
     let walkTextures:[SKTexture]
     var sprite: SKSpriteNode
+    var needToAttack: Bool = true
+    
 
     init() {
         self.sprite = SKSpriteNode(imageNamed: staticName)
@@ -111,22 +114,40 @@ class Alligator {
 
     @objc func attack() {
         guard !isAlligatoraAttacking else { return }
+        
+//        guard needToAttack else {
+//            self.sprite.removeAllActions()
+//            return
+//        }
+        
         self.isAlligatoraAttacking = true
         audioPlayer.playEffect(effect: sounds.swordAttack, type: "mp3", volume: 1.0)
         let startAction = SKAction.run {
             self.stop()
             self.attackAction()
         }
-    
+        
         let finishedAction = SKAction.run {
             self.walk()
             self.isAlligatoraAttacking = false
             
         }
-
+        
         let action = SKAction.sequence([startAction, SKAction.wait(forDuration: 0.78), finishedAction])
         self.sprite.removeAllActions()
-        self.sprite.run(action)
+        self.sprite.run(action) {
+        
+            if self.needToAttack == true {
+                print("Atacando!")
+            
+        } else {
+            print("Parei de atacar!")
+            self.sprite.removeAllActions()
+        }
+    }
+        
+        
+        
     }
 
     private func attackAction() {

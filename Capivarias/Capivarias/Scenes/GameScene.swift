@@ -20,7 +20,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var door = SKSpriteNode()
     var isContact: Bool = false
     var transactionScene = TrasactionsScenes()
-    var gameOver: TimeInterval = 0
+    //var gameOver: TimeInterval = 0
     let assets = Assets()
     var weapon: Bool = true
 
@@ -132,12 +132,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         capybara.death()
         if capybara.life <= 0 {
             alligator.isFollowing = false
-            if (currentTime - alligator.finishAnimation) > 1 {
-                alligator.sprite.removeAllActions()
-            }
+            alligator.needToAttack = false
+//            if (currentTime - alligator.finishAnimation) > 1 {
+//                alligator.sprite.removeAllActions()
+//            }
             
-            if (currentTime - gameOver) > 4 {
-                
+            if capybara.lifeIsZero == true {
                 if let view = self.view {
                     virtualController?.disconnect()
                     transactionScene.gameOver(view: view, gameScene: GameOverGameScene())
@@ -152,6 +152,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 alligator.attack()
                 capybara.tankingDamage()
                 self.capybara.changeLife(damage: self.alligator.getDamage())
+                print("d")
             }
         }
 
@@ -250,7 +251,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             alligator.changeLife(damage: capybara.getDamageZarabatana())
             print(alligator.life)
             
-            //tirar a vida do jacare baseado no dano da
+        
         }
     }
 

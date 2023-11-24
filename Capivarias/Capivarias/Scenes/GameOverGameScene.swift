@@ -12,12 +12,12 @@ import GameController
 
 class SKButtonNode: SKSpriteNode {
     var action: (() -> Void)?
-
+    
     func setButtonAction(target: @escaping () -> Void) {
         self.isUserInteractionEnabled = true
         self.action = target
     }
-
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let action = action {
             action()
@@ -43,8 +43,8 @@ class GameOverGameScene: SKScene {
         addCenterButton()
         addPlayAgainButton()
         audioPlayer.playEffect(effect: sounds.deathMenu, type: "mp3", volume: 1.0)
-       // addGoToMenuButton()
-    
+        // addGoToMenuButton()
+        
     }
     
     private func setupBackground() {
@@ -68,13 +68,13 @@ class GameOverGameScene: SKScene {
         button.position = CGPoint(x: size.width / 2, y: size.height - size.height / 4)
         
         
-
+        
         button.name = "playButton"
         addChild(button)
         
         button.setButtonAction {
             print("Botão foi tocado!")
-
+            
             // Adicione aqui as ações que deseja executar quando o botão for tocado.
         }
     }
@@ -97,7 +97,7 @@ class GameOverGameScene: SKScene {
         let scaleDown = SKAction.scale(to: 1.0, duration: 0.1) // Reduz o tamanho de volta ao tamanho original
         let buttonAction = SKAction.sequence([scaleUp, scaleDown])
         
-
+        
         button.name = "playAgainButton"
         addChild(button)
         
@@ -111,7 +111,7 @@ class GameOverGameScene: SKScene {
             ])
             
             button.run(scaleAction)
-
+            
             
             if let scene = GKScene(fileNamed: "GameScene") {
                 if let sceneNode = scene.rootNode as? GameScene {
@@ -140,7 +140,7 @@ class GameOverGameScene: SKScene {
         let scaleDown = SKAction.scale(to: 1.0, duration: 0.1) // Reduz o tamanho de volta ao tamanho original
         let buttonAction = SKAction.sequence([scaleUp, scaleDown])
         
-
+        
         button.name = "playAgainButton"
         addChild(button)
         
@@ -158,15 +158,6 @@ class GameOverGameScene: SKScene {
         }
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }
-        
-        
+
+

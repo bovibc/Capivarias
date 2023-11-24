@@ -28,6 +28,8 @@ class Capybara {
     let damageTexture:[SKTexture]
     var sprite: SKSpriteNode
     var shoot = SKSpriteNode()
+    var lifeIsZero: Bool = false
+    var isDying = false
 
     init() {
         self.sprite = SKSpriteNode(imageNamed: staticName)
@@ -74,6 +76,9 @@ class Capybara {
     }
 
     func stop() {
+        guard !isDying else { return }
+        print("Stop!" )
+        
         self.isCapivaraHitting = false
         self.isCapivaraWalking = false
         self.isCapivaraTakingDamage = false
@@ -82,11 +87,13 @@ class Capybara {
                                       timePerFrame: 0.001,
                                       resize: true,
                                       restore: true)
-        sprite.removeAllActions()
+       // sprite.removeAllActions()
         sprite.run(SKAction.repeatForever(action))
     }
     
     func stopZarabatana() {
+        guard !isDying else { return }
+        
         self.isCapivaraHitting = false
         self.isCapivaraWalking = false
         self.isCapivaraTakingDamage = false
@@ -119,6 +126,7 @@ class Capybara {
         //Colocar algo para essa funçao retornar
         
         guard !isCapivaraHitting else { return }
+        guard !isDying else { return }
         
         print("Entrei")
 
@@ -170,6 +178,9 @@ class Capybara {
     
 
     func walk(positionX: CGFloat) {
+        
+        guard !isDying else { return }
+        
         let action = SKAction.animate(with: walkTexture,
                                       timePerFrame: 1/TimeInterval(walkTexture.count),
                                       resize: true,
@@ -187,6 +198,8 @@ class Capybara {
     
     
     func walkZarabatana(positionX: CGFloat) {
+        guard !isDying else { return }
+        
         let textures = Textures.getTextures(name: "", atlas: "Alligator_Walking")
         let action = SKAction.animate(with: textures,
                                       timePerFrame: 1/TimeInterval(textures.count),
@@ -207,15 +220,35 @@ class Capybara {
 
     func death() {
     if  life <= 0 {
-        print("morreu")
-        //Está entrando no print, mas deveria chamar a animaçao dela morrendo
-        //não mudar essa textura
-        //cortar as movimetações na tela e deixar o joystick inúil
+        if !isDying {
+            print("morreu")
+            let textures = Textures.getTextures(name: "", atlas: "Capybar_death")
+            let action = SKAction.animate(with: textures,
+                                          timePerFrame:  1/TimeInterval(textures.count),
+                                          resize: true,
+                                          restore: true)
+            
+            //sprite.removeAllActions()
+            //  sprite.run(action)
+            isDying = true
+            sprite.run(action) {
+                //Post animation logic
+                self.lifeIsZero = true
+                
+            }
+            
+    
+            
+            
+        }
+        
 
         }
     }
 
     func tankingDamage(){
+        guard !isDying else { return }
+        
         self.isCapivaraTakingDamage = true
         let action = SKAction.animate(with: damageTexture,
                                       timePerFrame:  1/TimeInterval(damageTexture.count),
