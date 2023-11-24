@@ -119,37 +119,27 @@ class Capybara {
     }
 
     func shootZarabatana(capybara: SKSpriteNode, alligator: SKSpriteNode) {
-        //Colocar algo para essa funçao retornar
         
         guard !isCapivaraHitting else { return }
         
-        print("Entrei")
-
-        let banana2 = SKSpriteNode(imageNamed: "banana2")
-        banana2.position = CGPoint(x: capybara.position.x + capybara.size.width / 2.0,
+        let seedBullet = SKSpriteNode(imageNamed: assets.seedBullet)
+        seedBullet.position = CGPoint(x: capybara.position.x + capybara.size.width / 2.0,
                                    y: capybara.position.y)
-        banana2.setScale(0.3)
-        banana2.zPosition = 3
-        
-        // Configurar a física para a "banana2"
-            banana2.physicsBody = SKPhysicsBody(rectangleOf: banana2.size)
-            banana2.physicsBody?.isDynamic = false
-            banana2.physicsBody?.categoryBitMask = 3 // Defina a categoria da física conforme necessário
-        
-//            banana2.physicsBody?.contactTestBitMask = 2 // Defina a categoria de teste da física conforme necessário
-//            banana2.physicsBody?.collisionBitMask = 0 // Se necessário, defina a categoria de colisão da física
-        
+        seedBullet.setScale(0.3)
+        seedBullet.zPosition = 3
+        seedBullet.zRotation = angleBetweenPoints(point1: capybara.position, point2: alligator.position)
+        seedBullet.physicsBody = SKPhysicsBody(rectangleOf: seedBullet.size)
+        seedBullet.physicsBody?.isDynamic = false
+        seedBullet.physicsBody?.categoryBitMask = 3 // Defina a categoria da física conforme necessário
 
-        capybara.parent?.addChild(banana2)
-        
+        capybara.parent?.addChild(seedBullet)
         
         let moveAction = SKAction.move(to: CGPoint(x: alligator.position.x,
                                                    y: alligator.position.y), duration: 0.8)
-            print("Posicao \(alligator.position)")
 
-            let deleteAction = SKAction.removeFromParent()
-            let combine = SKAction.sequence([moveAction, deleteAction])
-            banana2.run(combine)
+        let deleteAction = SKAction.removeFromParent()
+        let combine = SKAction.sequence([moveAction, deleteAction])
+        seedBullet.run(combine)
         
         let textures = Textures.getTextures(atlas: "Capybara_ShootingZarabatana")
         
@@ -157,7 +147,7 @@ class Capybara {
         let animation = SKAction.animate(with: textures, timePerFrame: 0.07,
                                          resize: true,
                                          restore: true)
-        
+
         isCapivaraWalking = false
         isCapivaraHitting = true
 
@@ -166,7 +156,14 @@ class Capybara {
             self.stop()
         }
     }
-
+    
+    func angleBetweenPoints(point1: CGPoint, point2: CGPoint) -> CGFloat {
+        let distanceX = CGFloat(point1.x - point2.x)
+        let distanceY = CGFloat(point1.y - point2.y)
+        let tangent = distanceY / distanceX
+        return tangent
+    }
+    
     func walk(positionX: CGFloat) {
         let action = SKAction.animate(with: walkTexture,
                                       timePerFrame: 1/TimeInterval(walkTexture.count),
@@ -183,7 +180,7 @@ class Capybara {
     }
 
     func walkZarabatana(positionX: CGFloat) {
-        let textures = Textures.getTextures(atlas: "Alligator_Walking")
+        let textures = Textures.getTextures(atlas: "Capybara_Walking")
         let action = SKAction.animate(with: textures,
                                       timePerFrame: 1/TimeInterval(textures.count),
                                       resize: true,
