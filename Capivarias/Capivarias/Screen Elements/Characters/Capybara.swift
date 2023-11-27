@@ -141,19 +141,29 @@ class Capybara {
         let combine = SKAction.sequence([moveAction, deleteAction])
         seedBullet.run(combine)
         
-        let textures = Textures.getTextures(atlas: "Capybara_ShootingZarabatana")
+        let textures = Textures.getTextures(atlas: assets.capybaraAttackZarabatana)
         
         audioPlayer.playEffect(effect: "blow-gun", type: ".mp3", volume: 0.8)
         let animation = SKAction.animate(with: textures, timePerFrame: 0.07,
                                          resize: true,
                                          restore: true)
-
+        faceEnemy(enemy: alligator)
+        
         isCapivaraWalking = false
         isCapivaraHitting = true
 
         sprite.removeAllActions()
         sprite.run(SKAction.sequence([animation])) {
             self.stop()
+        }
+    }
+    
+    func faceEnemy(enemy: SKSpriteNode) {
+        let deltaX = enemy.position.x - sprite.position.x
+        if deltaX > 0 {
+            sprite.xScale = abs(sprite.xScale)
+        } else if deltaX < 0{
+            sprite.xScale = -abs(sprite.xScale)
         }
     }
     
