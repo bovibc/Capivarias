@@ -49,6 +49,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setNode(nodeName: "tree", textureName: "tronco")
         setNode(nodeName: "rock", textureName: "rock")
         setNode(nodeName: "lake", textureName: "lake")
+        setNode(nodeName: "lake-rock", textureName: "lake-rock")
+        setNode(nodeName: "rock1", textureName: "Rock1")
+
     }
     
     private func setNode(nodeName: String, textureName: String) {

@@ -1,7 +1,6 @@
 {
-  "images" : [
+  "colors" : [
     {
-      "filename" : "lake.png",
       "idiom" : "universal"
     }
   ],
