@@ -10,6 +10,7 @@ import GameplayKit
 import GameController
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
+    var  lifeBar = LifeBar()
     var sounds = Sounds()
     var virtualController: GCVirtualController?
     var joystick = Joystick()
@@ -24,6 +25,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var lastEnemyIndex: Int = 0
     let assets = Assets()
     var weapon: Bool = true
+    var maxLife: CGFloat = 100
+    var weaponSelection = WeaponSelection()
     
     override func didMove(to view: SKView) {
         setupScene()
@@ -35,7 +38,33 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setObstacles()
         setupContact()
         audioPlayer.playEnviroment(sound: sounds.ambient, type: "mp3", volume: 0.7)
+        setupLifeBar()
+        setupWeaponSelection()
+        
     }
+    
+    private func setupLifeBar() {
+        addChild(lifeBar)
+        lifeBar.position = .init(x: 300, y: 960)
+        lifeBar.zPosition = 99
+        lifeBar.xScale = 0.7
+        lifeBar.yScale = 0.7
+    }
+
+    private func setupWeaponSelection() {
+        addChild(weaponSelection)
+        weaponSelection.position = .init(x: 100, y: 902)
+        weaponSelection.zPosition = 99
+        weaponSelection.xScale = 0.7
+        weaponSelection.yScale = 0.7
+    }
+    
+    
+    
+    func changeLifeBar() {
+        
+    }
+    
     
     private func setupBackground() {
         backgroundController.setupBackground(scene: self, imageName: assets.map3)
@@ -44,6 +73,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private func getDoor() {
         self.door = childNode(withName: "Door") as! SKSpriteNode
     }
+    
     
     private func setObstacles() {
         setNode(nodeName: "tree", textureName: "tronco")
@@ -157,6 +187,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 transactionScene.goToNextLevel(view: view, gameScene: "SecondScene")
             }
         }
+        
+        lifeBar.updateProgress(capybara.life / Float(maxLife))
+        
+        
     }
         
         private func validateMovement(_ direction: Direction) {
@@ -182,6 +216,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         func setupController(){
             self.virtualController?.controller?.extendedGamepad?.buttonX.pressedChangedHandler = { button, value, pressed in
                 if self.weapon == true{
+                    
                     if pressed && self.isContact {
                         self.capybara.hit()
                         self.enemies[self.lastEnemyIndex].changeLife(damage: self.capybara.getDamage())
@@ -202,6 +237,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.virtualController?.controller?.extendedGamepad?.buttonY.pressedChangedHandler = { button, value, pressed in
                 if pressed {
                     self.weapon.toggle()
+                    self.weaponSelection.changeWeapon(weapon: self.weapon)
                     print("hello")
                 }
                 else {

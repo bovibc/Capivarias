@@ -30,7 +30,9 @@
 		08CEE5FA2AE167E800149B83 /* Alligator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CEE5F92AE167E800149B83 /* Alligator.swift */; };
 		08CEE5FC2AE1680800149B83 /* Joystick.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08CEE5FB2AE1680800149B83 /* Joystick.swift */; };
 		08E8EE382AE961EC0076F4CE /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 08E8EE372AE961EC0076F4CE /* GameScene.sks */; };
+		320C13BB2B14BBD500877993 /* LifeBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320C13BA2B14BBD500877993 /* LifeBar.swift */; };
 		328080712AF26F71009650E3 /* GameOverGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328080702AF26F71009650E3 /* GameOverGameScene.swift */; };
+		32F443582B16138E00E0D208 /* WeaponSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F443572B16138E00E0D208 /* WeaponSelection.swift */; };
 		C060153D2AFE5A91001CDE0C /* Monkey.swift in Sources */ = {isa = PBXBuildFile; fileRef = C060153C2AFE5A91001CDE0C /* Monkey.swift */; };
 		C0D60CA42AE80B910064C863 /* Weapons.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D60CA32AE80B910064C863 /* Weapons.swift */; };
 		F20BC15C2B0280A9009D9B65 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20BC15B2B0280A9009D9B65 /* Assets.swift */; };
@@ -65,7 +67,9 @@
 		08CEE5F92AE167E800149B83 /* Alligator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alligator.swift; sourceTree = "<group>"; };
 		08CEE5FB2AE1680800149B83 /* Joystick.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Joystick.swift; sourceTree = "<group>"; };
 		08E8EE372AE961EC0076F4CE /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		320C13BA2B14BBD500877993 /* LifeBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeBar.swift; sourceTree = "<group>"; };
 		328080702AF26F71009650E3 /* GameOverGameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverGameScene.swift; sourceTree = "<group>"; };
+		32F443572B16138E00E0D208 /* WeaponSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponSelection.swift; sourceTree = "<group>"; };
 		C060153C2AFE5A91001CDE0C /* Monkey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Monkey.swift; sourceTree = "<group>"; };
 		C0D60CA32AE80B910064C863 /* Weapons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weapons.swift; sourceTree = "<group>"; };
 		F20BC15B2B0280A9009D9B65 /* Assets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
@@ -89,6 +93,8 @@
 		0813A2C22AD6DEFE00428484 = {
 			isa = PBXGroup;
 			children = (
+				320C13BA2B14BBD500877993 /* LifeBar.swift */,
+				32F443572B16138E00E0D208 /* WeaponSelection.swift */,
 				0813A2CD2AD6DEFE00428484 /* Capivarias */,
 				0813A2CC2AD6DEFE00428484 /* Products */,
 			);
@@ -313,8 +319,10 @@
 				328080712AF26F71009650E3 /* GameOverGameScene.swift in Sources */,
 				F20BC15C2B0280A9009D9B65 /* Assets.swift in Sources */,
 				08CEE5F82AE1653C00149B83 /* Capybara.swift in Sources */,
+				320C13BB2B14BBD500877993 /* LifeBar.swift in Sources */,
 				0813A2CF2AD6DEFE00428484 /* AppDelegate.swift in Sources */,
 				F2E112C52AFE782F00B76955 /* Sounds.swift in Sources */,
+				32F443582B16138E00E0D208 /* WeaponSelection.swift in Sources */,
 				C0D60CA42AE80B910064C863 /* Weapons.swift in Sources */,
 				085A2ECF2B063A9D00307D15 /* Position.swift in Sources */,
 				084E311E2AF132A4000C71A8 /* TransactionsScene.swift in Sources */,
