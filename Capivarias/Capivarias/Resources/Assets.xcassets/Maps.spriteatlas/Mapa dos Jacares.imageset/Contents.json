@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "Mapa dos Jacares.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
