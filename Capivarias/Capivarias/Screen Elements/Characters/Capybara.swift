@@ -69,6 +69,7 @@ class Capybara {
         sprite.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: width, height: height), center: CGPoint(x: -25, y: -40))
         sprite.physicsBody?.affectedByGravity = false
         sprite.physicsBody?.allowsRotation = false
+        sprite.physicsBody?.isDynamic = true
         sprite.physicsBody?.categoryBitMask = 1
     }
 

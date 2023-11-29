@@ -78,7 +78,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     private func generateEnemies() {
-        let plusEnemieNumber = Int.random(in: 0..<4)
+        let plusEnemieNumber = 0
         for _ in 0..<plusEnemieNumber {
             enemies.append(Alligator())
         }
@@ -100,7 +100,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func update(_ currentTime: TimeInterval) {
         for i in 0..<enemies.count {
-            enemies[i].follow(player: capybara.sprite.position)
+            if !enemies[i].isInContact {
+                enemies[i].follow(player: capybara.sprite.position)
+            }
+            enemyAutomaticAttack(i, currentTime)
         }
         
         if joystick.isJoystickStatic() {
@@ -112,12 +115,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     capybara.stopZarabatana()
                 }
             }
-            
         } else {
             let direction = joystick.getDirection()
             validateMovement(direction)
             if !capybara.isCapivaraHitting && !capybara.isCapivaraTakingDamage {
-                //Aqui, colocar uma condiçao de que dependendo do valor do booleano "weapon"selecionado, vai chamar ou ela walk com espada ou ela walk com zarabatana
                 if weapon == true {
                     capybara.walk(positionX: joystick.positionX )
                 } else {
@@ -125,29 +126,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
             }
         }
-        
+
         capybara.death()
         if capybara.getLife() <= 0 {
-            enemies[lastEnemyIndex].isFollowing = false
             if (currentTime - enemies[lastEnemyIndex].finishAnimation) > 1 {
                 enemies[lastEnemyIndex].sprite.removeAllActions()
             }
             
             if (currentTime - gameOver) > 4 {
-                
                 if let view = self.view {
                     virtualController?.disconnect()
                     transactionScene.gameOver(view: view, gameScene: GameOverGameScene())
                 }
-            }
-        }
-        
-        if isContact {
-            if (currentTime - enemies[lastEnemyIndex].lastHit) > 3 {
-                enemies[lastEnemyIndex].lastHit = currentTime
-                enemies[lastEnemyIndex].attack()
-                capybara.takingDamage()
-                self.capybara.changeLife(damage: self.enemies[lastEnemyIndex].getDamage())
             }
         }
         
@@ -158,117 +148,147 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
     }
-        
-        private func validateMovement(_ direction: Direction) {
-            switch direction.horizontal {
-            case .left:
-                capybara.goLeft()
-            case .right:
-                capybara.goRight()
-            case .none:
-                break
-            }
-            
-            switch direction.vertical {
-            case .top:
-                capybara.goTop()
-            case .bottom:
-                capybara.goBottom()
-            case .none:
-                break
+    
+    private func enemyAutomaticAttack(_ i: Int, _ currentTime: TimeInterval) {
+        if enemies[i].isInContact {
+            if ((currentTime - enemies[i].lastHit) > 3 && !enemies[i].isAlligatorTakingDamage) {
+                enemies[i].lastHit = currentTime
+                enemies[i].attack()
+                capybara.takingDamage()
+                self.capybara.changeLife(damage: self.enemies[lastEnemyIndex].getDamage())
             }
         }
+    }
         
-        func setupController(){
-            self.virtualController?.controller?.extendedGamepad?.buttonX.pressedChangedHandler = { button, value, pressed in
-                if self.weapon == true{
-                    if pressed && self.isContact {
-                        self.capybara.hit()
-                        self.enemies[self.lastEnemyIndex].changeLife(damage: self.capybara.getDamage())
-                        if self.enemies[self.lastEnemyIndex].getLife() <= 0 {
-                            self.enemyDied()
-                        }
-                    }
-                    else {
-                        self.capybara.hit()
-                    }
+    private func validateMovement(_ direction: Direction) {
+        switch direction.horizontal {
+        case .left:
+            capybara.goLeft()
+        case .right:
+            capybara.goRight()
+        case .none:
+            break
+        }
+        
+        switch direction.vertical {
+        case .top:
+            capybara.goTop()
+        case .bottom:
+            capybara.goBottom()
+        case .none:
+            break
+        }
+    }
+    
+    func setupController(){
+        self.virtualController?.controller?.extendedGamepad?.buttonX.pressedChangedHandler = { button, value, pressed in
+            if self.weapon == true {
+                if pressed && self.isContact {
+                    self.capybara.hit()
+                    self.playerAttack()
                 }
                 else {
-                    print("Atirando com a zarabanana")
-                    self.capybara.shootZarabatana(capybara: self.capybara.sprite,
-                                                  alligator: self.enemies[self.lastEnemyIndex].sprite)
+                    self.capybara.hit()
+                }
+            } else {
+                self.capybara.shootZarabatana(capybara: self.capybara.sprite,
+                                              alligator: self.enemies[self.lastEnemyIndex].sprite)
+            }
+        }
+        changeWeapon()
+    }
+
+    func connectController() {
+        joystick.connectController { controller in
+            self.virtualController = controller
+            self.setupController()
+        }
+    }
+    
+    func didEnd(_ contact: SKPhysicsContact) {
+        let bodyA = contact.bodyA.categoryBitMask
+        let bodyB = contact.bodyB.categoryBitMask
+        let enemyIndex = getEnemy(bodyA, bodyB)
+        enemies[enemyIndex].isInContact = false
+        isContact = false
+    }
+
+    func didBegin(_ contact: SKPhysicsContact) {
+        let bodyA = contact.bodyA.categoryBitMask
+        let bodyB = contact.bodyB.categoryBitMask
+        let alligatorMaskA = isEnemyMask(bodyA)
+        let alligatorMaskB = isEnemyMask(bodyB)
+        
+        if bodyA == 1 && alligatorMaskB {
+            contactAttack(bodyA, bodyB)
+        }
+        if alligatorMaskA && bodyB == 1 {
+            contactAttack(bodyA, bodyB)
+        }
+        
+        if contact.bodyA.categoryBitMask == 2 && contact.bodyB.categoryBitMask == 3 {
+            enemies[self.lastEnemyIndex].changeLife(damage: capybara.getDamageZarabatana())
+        }
+    }
+
+    private func contactAttack(_ bodyA: UInt32, _ bodyB: UInt32) {
+        lastEnemyIndex = getEnemy(bodyA, bodyB)
+        enemies[lastEnemyIndex].isInContact = true
+        isContact = true
+        
+        if enemies[lastEnemyIndex].isAlligatoraAttacking == false {
+            capybara.changeLife(damage: enemies[lastEnemyIndex].getDamage())
+        }
+    }
+    
+    private func getEnemy(_ bodyA: UInt32, _ bodyB: UInt32) -> Int {
+        var index = 0
+        let body = (bodyA == 1) ? bodyB : bodyA
+        for i in enemies {
+            if body == i.sprite.physicsBody?.categoryBitMask {
+                index = enemies.firstIndex{$0 === i} ?? 0
+                break
+            }
+        }
+        return index
+    }
+
+    private func isEnemyMask(_ mask: UInt32) -> Bool {
+        return (mask == 2 || mask == 3 || mask == 4)
+    }
+
+    private func enemyDied(_ index: Int) {
+        self.enemies[index].die()
+        self.enemies.remove(at: index)
+        isEnemiesEmpty()
+    }
+
+    private func isEnemiesEmpty() {
+        if enemies.isEmpty {
+            removeDoor()
+        }
+    }
+
+    private func changeWeapon() {
+        self.virtualController?.controller?.extendedGamepad?.buttonY.pressedChangedHandler = { button, value, pressed in
+            if pressed {
+                self.weapon.toggle()
+            }
+            else {
+            }
+        }
+    }
+
+    private func playerAttack() {
+        for i in 0..<enemies.count {
+            if enemies[i].isInContact && enemies[i].isInFrontOfCapybara(position: capybara.sprite.position, xScale: capybara.sprite.xScale) {
+                enemies[i].changeLife(damage: self.capybara.getDamage())
+                if enemies[i].getLife() <= 0 {
+                    self.enemyDied(i)
+                } else {
+                    enemies[i].takingDamage()
                 }
             }
-            self.virtualController?.controller?.extendedGamepad?.buttonY.pressedChangedHandler = { button, value, pressed in
-                if pressed {
-                    self.weapon.toggle()
-                    print("hello")
-                }
-                else {
-                }
-            }
         }
-        
-        func connectController() {
-            joystick.connectController { controller in
-                self.virtualController = controller
-                self.setupController()
-            }
-        }
-        
-        func didEnd(_ contact: SKPhysicsContact) {
-            isContact = false
-        }
-        
-        func didBegin(_ contact: SKPhysicsContact) {
-            let bodyA = contact.bodyA.categoryBitMask
-            let bodyB = contact.bodyB.categoryBitMask
-            let alligatorMaskA = (bodyA == 2 || bodyA == 3 || bodyA == 4)
-            let alligatorMaskB = (bodyB == 2 || bodyB == 3 || bodyB == 4)
-            if bodyA == 1 && alligatorMaskB {
-                contactAttack(bodyA, bodyB)
-            }
-            if alligatorMaskA && bodyB == 1 {
-                contactAttack(bodyA, bodyB)
-            }
-            
-            if contact.bodyA.categoryBitMask == 2 && contact.bodyB.categoryBitMask == 3 {
-                print("bateu")
-                enemies[self.lastEnemyIndex].changeLife(damage: capybara.getDamageZarabatana())
-            }
-        }
-        
-        private func contactAttack(_ bodyA: UInt32, _ bodyB: UInt32) {
-            lastEnemyIndex = getEnemy(bodyA, bodyB)
-            isContact = true
-            
-            if enemies[lastEnemyIndex].isAlligatoraAttacking == false {
-                capybara.changeLife(damage: enemies[lastEnemyIndex].getDamage())
-            }
-        }
-        
-        private func getEnemy(_ bodyA: UInt32, _ bodyB: UInt32) -> Int {
-            var index = 0
-            let body = (bodyA == 1) ? bodyB : bodyA
-            for i in enemies {
-                if body == i.sprite.physicsBody?.categoryBitMask {
-                    index = enemies.firstIndex{$0 === i} ?? 0
-                    break
-                }
-            }
-            return index
-        }
-        
-        private func enemyDied() {
-            self.enemies[self.lastEnemyIndex].die()
-            self.enemies.remove(at: self.lastEnemyIndex)
-            self.isContact = false
-            isEnemiesEmpty()
-        }
-        
-        private func isEnemiesEmpty() {
-            if enemies.isEmpty {
-                removeDoor()
-            }
-        }
+    }
 }
