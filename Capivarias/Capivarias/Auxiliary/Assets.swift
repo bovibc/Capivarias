@@ -15,6 +15,7 @@ struct Assets {
     let capybaraAttack = "Capybara_Hit"
     let capybaraWalk = "Capybara_Walking"
     let capybaraDamage = "Taking_Damage"
+    let capybaraDeath = "Capybara_death"
 
     let map3 = "Mapa dos Jacares"
     let gameOverMap = "Game Over"

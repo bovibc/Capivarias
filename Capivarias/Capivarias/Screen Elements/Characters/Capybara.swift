@@ -26,6 +26,7 @@ class Capybara {
     let attackTexture:[SKTexture]
     let walkTexture:[SKTexture]
     let damageTexture:[SKTexture]
+    let deathTexture:[SKTexture]
     var sprite: SKSpriteNode
     var shoot = SKSpriteNode()
     var lifeIsZero: Bool = false
@@ -35,7 +36,9 @@ class Capybara {
         self.sprite = SKSpriteNode(imageNamed: staticName)
         attackTexture = Textures.getTextures(name: "", atlas: assets.capybaraAttack)
         walkTexture = Textures.getTextures(name: "", atlas: assets.capybaraWalk)
-        damageTexture = Textures.getTextures(name: "", atlas: assets.capybaraDamage)
+        damageTexture = Textures.getTextures(name: "", atlas: assets.alligatorAttack)
+        deathTexture = Textures.getTextures(name: "", atlas: assets.capybaraDeath)
+
     }
 
     func changeLife(damage: Float) {
@@ -87,7 +90,7 @@ class Capybara {
                                       timePerFrame: 0.001,
                                       resize: true,
                                       restore: true)
-       // sprite.removeAllActions()
+        sprite.removeAllActions()
         sprite.run(SKAction.repeatForever(action))
     }
     
@@ -219,30 +222,17 @@ class Capybara {
     
 
     func death() {
-    if  life <= 0 {
         if !isDying {
-            print("morreu")
-            let textures = Textures.getTextures(name: "", atlas: "Capybar_death")
-            let action = SKAction.animate(with: textures,
-                                          timePerFrame:  1/TimeInterval(textures.count),
+            isDying = true
+            sprite.removeAllActions()
+            let action = SKAction.animate(with: deathTexture,
+                                          timePerFrame:  1/TimeInterval(deathTexture.count),
                                           resize: true,
                                           restore: true)
-            
-            //sprite.removeAllActions()
-            //  sprite.run(action)
-            isDying = true
             sprite.run(action) {
-                //Post animation logic
                 self.lifeIsZero = true
-                
+                self.sprite.removeAllActions()
             }
-            
-    
-            
-            
-        }
-        
-
         }
     }
 
@@ -250,6 +240,7 @@ class Capybara {
         guard !isDying else { return }
         
         self.isCapivaraTakingDamage = true
+        print("DISPARANDO DAMAGE!")
         let action = SKAction.animate(with: damageTexture,
                                       timePerFrame:  1/TimeInterval(damageTexture.count),
                                       resize: true,
@@ -258,7 +249,6 @@ class Capybara {
         sprite.removeAllActions()
         sprite.run(action) {
             self.isCapivaraTakingDamage = false
-            self.stop()
         }
     }
     

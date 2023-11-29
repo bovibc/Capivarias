@@ -107,8 +107,7 @@ class Alligator {
             
             //Aqui deveria, qunado terminasse toda a animação do jacaré batendo, chamar o sprite do jacaré parado (ele já está parando de seguir)
             sprite = SKSpriteNode(imageNamed: assets.alligatorStop)
-            
-            
+            sprite.name = "jacarezinho, avião"
         }
     }
 

@@ -106,6 +106,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     override func update(_ currentTime: TimeInterval) {
         alligator.follow(player: capybara.sprite.position)
+                
         if joystick.isJoystickStatic() {
             if !capybara.isCapivaraHitting && !capybara.isCapivaraTakingDamage {
                 if weapon == true {
@@ -129,13 +130,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
 
-        capybara.death()
         if capybara.life <= 0 {
+            capybara.death()
+
             alligator.isFollowing = false
             alligator.needToAttack = false
-//            if (currentTime - alligator.finishAnimation) > 1 {
-//                alligator.sprite.removeAllActions()
-//            }
             
             if capybara.lifeIsZero == true {
                 if let view = self.view {
@@ -143,16 +142,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     transactionScene.gameOver(view: view, gameScene: GameOverGameScene())
                 }
             }
-            
         }
 
         if isContact {
             if (currentTime - alligator.lastHit) > 3 {
-                alligator.lastHit = currentTime
-                alligator.attack()
-                capybara.tankingDamage()
-                self.capybara.changeLife(damage: self.alligator.getDamage())
-                print("d")
+                if !capybara.lifeIsZero {
+                    alligator.lastHit = currentTime
+                    alligator.attack()
+                    capybara.tankingDamage()
+                    self.capybara.changeLife(damage: self.alligator.getDamage())
+                    print("d")
+                } else {
+                    alligator.sprite.removeAllActions()
+                }
             }
         }
 
