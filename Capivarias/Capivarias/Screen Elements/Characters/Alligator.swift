@@ -181,6 +181,10 @@ class Alligator {
             return true
         } else if (dx <= 0 && xScale < 0) {
             return true
+        } else if (dx <= 0 && dx >= -40 && xScale > 0) {
+            return true
+        } else if(dx >= 0 && dx <= 40 && xScale < 0) {
+            return true
         } else {
             return false
         }
