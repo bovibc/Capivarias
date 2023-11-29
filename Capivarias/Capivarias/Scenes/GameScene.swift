@@ -111,7 +111,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     private func generateEnemies() {
-        let plusEnemieNumber = 0
+        let plusEnemieNumber = Int.random(in: 0..<3)
         for _ in 0..<plusEnemieNumber {
             enemies.append(Alligator())
         }
