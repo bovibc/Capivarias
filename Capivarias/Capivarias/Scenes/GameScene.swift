@@ -10,6 +10,7 @@ import GameplayKit
 import GameController
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
+    var  lifeBar = LifeBar()
     var sounds = Sounds()
     var virtualController: GCVirtualController?
     var joystick = Joystick()
@@ -24,6 +25,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var lastEnemyIndex: Int = 0
     let assets = Assets()
     var weapon: Bool = true
+    var maxLife: CGFloat = 100
+    var weaponSelection = WeaponSelection()
     
     override func didMove(to view: SKView) {
         setupScene()
@@ -35,7 +38,33 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setObstacles()
         setupContact()
         audioPlayer.playEnviroment(sound: sounds.ambient, type: "mp3", volume: 0.7)
+        setupLifeBar()
+        setupWeaponSelection()
+        
     }
+    
+    private func setupLifeBar() {
+        addChild(lifeBar)
+        lifeBar.position = .init(x: 300, y: 960)
+        lifeBar.zPosition = 99
+        lifeBar.xScale = 0.7
+        lifeBar.yScale = 0.7
+    }
+
+    private func setupWeaponSelection() {
+        addChild(weaponSelection)
+        weaponSelection.position = .init(x: 100, y: 902)
+        weaponSelection.zPosition = 99
+        weaponSelection.xScale = 0.7
+        weaponSelection.yScale = 0.7
+    }
+    
+    
+    
+    func changeLifeBar() {
+        
+    }
+    
     
     private func setupBackground() {
         backgroundController.setupBackground(scene: self, imageName: assets.map3)
@@ -45,10 +74,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.door = childNode(withName: "Door") as! SKSpriteNode
     }
     
+    
     private func setObstacles() {
         setNode(nodeName: "tree", textureName: "tronco")
         setNode(nodeName: "rock", textureName: "rock")
         setNode(nodeName: "lake", textureName: "lake")
+        setNode(nodeName: "lake-rock", textureName: "lake-rock")
+        setNode(nodeName: "rock1", textureName: "Rock1")
+
     }
     
     private func setNode(nodeName: String, textureName: String) {
@@ -147,6 +180,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 transactionScene.goToNextLevel(view: view, gameScene: "SecondScene")
             }
         }
+        
+        lifeBar.updateProgress(capybara.life / Float(maxLife))
+        
+        
     }
     
     private func enemyAutomaticAttack(_ i: Int, _ currentTime: TimeInterval) {
@@ -273,6 +310,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.virtualController?.controller?.extendedGamepad?.buttonY.pressedChangedHandler = { button, value, pressed in
             if pressed {
                 self.weapon.toggle()
+                self.weaponSelection.changeWeapon(weapon: self.weapon)
             }
             else {
             }
