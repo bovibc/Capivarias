@@ -319,6 +319,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     private func playerAttack() {
         for i in 0..<enemies.count {
+            if i >= enemies.count { return }
             if enemies[i].isInContact && enemies[i].isInFrontOfCapybara(position: capybara.sprite.position, xScale: capybara.sprite.xScale) {
                 enemies[i].changeLife(damage: self.capybara.getDamage())
                 if enemies[i].getLife() <= 0 {
