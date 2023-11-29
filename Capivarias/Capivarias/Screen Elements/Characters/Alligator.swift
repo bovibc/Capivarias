@@ -66,6 +66,7 @@ class Alligator {
         sprite.physicsBody?.allowsRotation = false
         sprite.physicsBody?.categoryBitMask = UInt32(mask)
         sprite.physicsBody?.contactTestBitMask = 1
+        sprite.physicsBody?.collisionBitMask = 1
         //voce é classe 2 e avisa se tiver em contato com classe 1
     }
 
