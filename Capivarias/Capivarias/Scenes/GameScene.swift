@@ -27,7 +27,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var weapon: Bool = true
     var maxLife: CGFloat = 100
     var weaponSelection = WeaponSelection()
-    
+
     override func didMove(to view: SKView) {
         setupScene()
         setupBackground()
@@ -42,7 +42,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setupWeaponSelection()
         
     }
-    
+
     private func setupLifeBar() {
         addChild(lifeBar)
         lifeBar.position = .init(x: 300, y: 960)
@@ -58,14 +58,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         weaponSelection.xScale = 0.7
         weaponSelection.yScale = 0.7
     }
-    
-    
-    
+
     func changeLifeBar() {
-        
     }
-    
-    
+
     private func setupBackground() {
         backgroundController.setupBackground(scene: self, imageName: assets.map3)
     }
@@ -73,8 +69,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private func getDoor() {
         self.door = childNode(withName: "Door") as! SKSpriteNode
     }
-    
-    
+
     private func setObstacles() {
         setNode(nodeName: "tree", textureName: "tronco")
         setNode(nodeName: "rock", textureName: "rock")
@@ -83,7 +78,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setNode(nodeName: "rock1", textureName: "Rock1")
 
     }
-    
+
     private func setNode(nodeName: String, textureName: String) {
         let node = childNode(withName: nodeName) as! SKSpriteNode
         let texture = SKTexture(imageNamed: textureName)
@@ -93,11 +88,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         node.physicsBody?.allowsRotation = false
         node.physicsBody?.affectedByGravity = false
     }
-    
+
     private func setupContact() {
         self.physicsWorld.contactDelegate = self
     }
-    
+
     private func setupAlligator() {
         generateEnemies()
         for i in 0..<enemies.count {
@@ -109,19 +104,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             addChild(enemies[i].sprite)
         }
     }
-    
+
     private func generateEnemies() {
         let plusEnemieNumber = Int.random(in: 0..<3)
         for _ in 0..<plusEnemieNumber {
             enemies.append(Alligator())
         }
     }
-    
+
     private func setupScene() {
         scene?.anchorPoint = .zero
         scene?.size = CGSize(width: view?.scene?.size.width ?? 600, height: view?.scene?.size.height ?? 800)
     }
-    
+
     private func setupCapivara() {
         self.capybara.start(screenWidth: size.width , screenHeight: size.height)
         addChild(capybara.sprite)
@@ -130,7 +125,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private func removeDoor() {
         door.removeFromParent()
     }
-    
+
     override func update(_ currentTime: TimeInterval) {
         for i in 0..<enemies.count {
             if !enemies[i].isInContact {
@@ -138,7 +133,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             enemyAutomaticAttack(i, currentTime)
         }
-        
+
         if joystick.isJoystickStatic() {
             if !capybara.isCapivaraHitting && !capybara.isCapivaraTakingDamage {
                 if weapon == true {
@@ -165,7 +160,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if (currentTime - enemies[lastEnemyIndex].finishAnimation) > 1 {
                 enemies[lastEnemyIndex].sprite.removeAllActions()
             }
-            
+
             if (currentTime - gameOver) > 4 {
                 if let view = self.view {
                     virtualController?.disconnect()
@@ -173,17 +168,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
             }
         }
-        
+
         if let view = self.view {
             if capybara.sprite.position.x >= 1400 {
                 virtualController?.disconnect()
                 transactionScene.goToNextLevel(view: view, gameScene: "SecondScene")
             }
         }
-        
+
         lifeBar.updateProgress(capybara.life / Float(maxLife))
-        
-        
     }
     
     private func enemyAutomaticAttack(_ i: Int, _ currentTime: TimeInterval) {
@@ -196,7 +189,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
     }
-        
+
     private func validateMovement(_ direction: Direction) {
         switch direction.horizontal {
         case .left:
@@ -206,7 +199,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         case .none:
             break
         }
-        
+
         switch direction.vertical {
         case .top:
             capybara.goTop()
@@ -216,7 +209,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             break
         }
     }
-    
+
     func setupController(){
         self.virtualController?.controller?.extendedGamepad?.buttonX.pressedChangedHandler = { button, value, pressed in
             if self.weapon == true {
@@ -241,7 +234,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.setupController()
         }
     }
-    
+
     func didEnd(_ contact: SKPhysicsContact) {
         let bodyA = contact.bodyA.categoryBitMask
         let bodyB = contact.bodyB.categoryBitMask
@@ -255,14 +248,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let bodyB = contact.bodyB.categoryBitMask
         let alligatorMaskA = isEnemyMask(bodyA)
         let alligatorMaskB = isEnemyMask(bodyB)
-        
+
         if bodyA == 1 && alligatorMaskB {
             contactAttack(bodyA, bodyB)
         }
         if alligatorMaskA && bodyB == 1 {
             contactAttack(bodyA, bodyB)
         }
-        
+
         if contact.bodyA.categoryBitMask == 2 && contact.bodyB.categoryBitMask == 3 {
             enemies[self.lastEnemyIndex].changeLife(damage: capybara.getDamageZarabatana())
         }
@@ -277,7 +270,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             capybara.changeLife(damage: enemies[lastEnemyIndex].getDamage())
         }
     }
-    
+
     private func getEnemy(_ bodyA: UInt32, _ bodyB: UInt32) -> Int {
         var index = 0
         let body = (bodyA == 1) ? bodyB : bodyA
