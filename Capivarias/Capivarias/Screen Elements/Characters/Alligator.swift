@@ -177,9 +177,9 @@ class Alligator {
 
     func isInFrontOfCapybara(position: CGPoint, xScale: CGFloat) -> Bool {
         let dx = self.sprite.position.x - position.x
-        if (dx > 0 && xScale > 0) {
+        if (dx >= 0 && xScale > 0) {
             return true
-        } else if (dx < 0 && xScale < 0) {
+        } else if (dx <= 0 && xScale < 0) {
             return true
         } else {
             return false
