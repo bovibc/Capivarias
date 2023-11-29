@@ -13,25 +13,35 @@ import AVFoundation
 
 class AudioPlayer: ObservableObject {
     
-    @Published var enviromentPlayer: AVAudioPlayer?
-    @Published var effectPlayer: AVAudioPlayer?
-        
+    var songs = Sounds()
+    
+    var enviromentPlayer: AVAudioPlayer?
+    var effectPlayer: AVAudioPlayer?
+    
+    @Published var enviromentSong: Bool = true
+    
     @Published
     var enviromentVolume: Float = 1.0 {
         didSet {
             enviromentPlayer?.volume = enviromentVolume
         }
     }
-
+    
     @Published
     var effectsVolume: Float = 1.0 {
         didSet {
             effectPlayer?.volume = effectsVolume
         }
     }
-
+    
+    
+    static let shared = AudioPlayer()
+    
+    
+    private init() {}
+    
     func playEnviroment(sound: String, type: String, volume: Float){
-                
+        
         if let path = Bundle.main.path(forResource: sound, ofType: type) {
             do {
                 enviromentPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
@@ -43,7 +53,7 @@ class AudioPlayer: ObservableObject {
             }
         }
     }
-
+    
     func playEffect(effect: String, type: String, volume: Float){
         if let path = Bundle.main.path(forResource: effect, ofType: type) {
             do {
@@ -57,6 +67,20 @@ class AudioPlayer: ObservableObject {
                 print ("Audio Player ERROR")
             }
         }
+    }
+    
+    func stopBackGroundMusic(){
+        enviromentPlayer?.stop()
+    }
+    
+    
+    func EnviromentSong(){
+        if !AudioPlayer.shared.enviromentSong {
+            AudioPlayer.shared.stopBackGroundMusic()
+        } else {
+            AudioPlayer.shared.playEnviroment(sound: songs.ambient, type: "mp3", volume: 1.0)
+        }
+        
     }
     
 }

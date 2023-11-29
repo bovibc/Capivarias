@@ -17,7 +17,7 @@ class Alligator {
     private let staticName: String = "a1"
     private var isAlligatorWalking: Bool = false
     var isAlligatoraAttacking: Bool = false
-    var audioPlayer = AudioPlayer()
+    //var audioPlayer = AudioPlayer()
     var isFollowing: Bool = true
     var lastHit:TimeInterval = 0
     var finishAnimation: TimeInterval = 0
@@ -132,7 +132,7 @@ class Alligator {
     @objc func attack() {
         guard !isAlligatoraAttacking else { return }
         self.isAlligatoraAttacking = true
-        audioPlayer.playEffect(effect: sounds.swordAttack, type: "mp3", volume: 1.0)
+        //AudioPlayer.shared.playEffect(effect: sounds.swordAttack, type: "mp3", volume: 1.0)
         let startAction = SKAction.run {
             self.stop()
             self.attackAction()
