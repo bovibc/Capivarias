@@ -162,6 +162,11 @@ class Capybara {
     }
     
     func closestEnemyAsLast(enemy: inout [Alligator]){
+        
+        guard !enemy.isEmpty else {
+            return
+        }
+        
         var closestDistance = Double.infinity
         var closestEnemyIndex = 0
         
@@ -171,7 +176,6 @@ class Capybara {
             if distance < closestDistance{
                 closestDistance = distance
                 closestEnemyIndex = index
-                
             }
         }
         
