@@ -175,6 +175,7 @@ class Alligator {
         self.sprite.run(SKAction.repeatForever(action))
     }
 
+
     func isInFrontOfCapybara(position: CGPoint, xScale: CGFloat) -> Bool {
         let dx = self.sprite.position.x - position.x
         if (dx >= 0 && xScale > 0) {

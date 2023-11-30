@@ -10,7 +10,7 @@ import GameplayKit
 import GameController
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
-    var  lifeBar = LifeBar()
+    var lifeBar = LifeBar()
     var sounds = Sounds()
     var virtualController: GCVirtualController?
     var joystick = Joystick()
@@ -155,6 +155,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
 
+        capybara.closestEnemyAsLast(enemy: &enemies)
         capybara.death()
         if capybara.getLife() <= 0 {
             if (currentTime - enemies[lastEnemyIndex].finishAnimation) > 1 {

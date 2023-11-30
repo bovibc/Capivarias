@@ -13,12 +13,13 @@ class Capybara {
     var isCapivaraWalking = false
     var isCapivaraTakingDamage = false
     var life: Float = 100
-    private var damage: Float = 20   //Aqui, é o dano da espada
+    private var damageSword: Float = 20   //Aqui, é o dano da espada
     private var damageZarabatana: Float = 5
     private var breathTime: Float = 100
     private var speed: CGFloat = 5
     private var defense: Float = 100
     private var assetScale: CGFloat = 0.1
+    private var zarabatanaBulletSpeed = 600.0
     private var staticName: String = "capybara_stopped"
     var audioPlayer = AudioPlayer()
     var sounds = Sounds()
@@ -45,7 +46,7 @@ class Capybara {
     }
 
     func getDamage() -> Float {
-        return damage
+        return damageSword
     }
 
     func getDamageZarabatana() -> Float {
@@ -124,6 +125,8 @@ class Capybara {
         guard !isCapivaraHitting else { return }
         
         let seedBullet = SKSpriteNode(imageNamed: assets.seedBullet)
+        let bulletTravelTime = distanceBetweenPoints(capybara.position, alligator.position)/zarabatanaBulletSpeed
+        
         seedBullet.position = CGPoint(x: capybara.position.x + capybara.size.width / 2.0,
                                    y: capybara.position.y)
         seedBullet.setScale(0.3)
@@ -134,9 +137,8 @@ class Capybara {
         seedBullet.physicsBody?.categoryBitMask = 3 // Defina a categoria da física conforme necessário
 
         capybara.parent?.addChild(seedBullet)
-        
         let moveAction = SKAction.move(to: CGPoint(x: alligator.position.x,
-                                                   y: alligator.position.y), duration: 0.8)
+                                                   y: alligator.position.y), duration: bulletTravelTime)
 
         let deleteAction = SKAction.removeFromParent()
         let combine = SKAction.sequence([moveAction, deleteAction])
@@ -159,6 +161,24 @@ class Capybara {
         }
     }
     
+    func closestEnemyAsLast(enemy: inout [Alligator]){
+        var closestDistance = Double.infinity
+        var closestEnemyIndex = 0
+        
+        for (index, enemy) in enemy.enumerated(){
+            let distance = distanceBetweenPoints(sprite.position, enemy.sprite.position)
+            
+            if distance < closestDistance{
+                closestDistance = distance
+                closestEnemyIndex = index
+                
+            }
+        }
+        
+        let closestEnemy = enemy.remove(at: closestEnemyIndex)
+        enemy.append(closestEnemy)
+    }
+    
     func faceEnemy(enemy: SKSpriteNode) {
         let deltaX = enemy.position.x - sprite.position.x
         if deltaX > 0 {
@@ -173,6 +193,14 @@ class Capybara {
         let distanceY = CGFloat(point1.y - point2.y)
         let tangent = distanceY / distanceX
         return tangent
+    }
+    
+    func distanceBetweenPoints(_ point1: CGPoint, _ point2: CGPoint) -> Double {
+        let deltaX = point2.x - point1.x
+        let deltaY = point2.y - point1.y
+        let distancia = sqrt(pow(deltaX, 2) + pow(deltaY, 2))
+        
+        return Double(distancia)
     }
     
     func walk(positionX: CGFloat) {

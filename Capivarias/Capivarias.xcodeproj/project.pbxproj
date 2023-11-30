@@ -93,8 +93,6 @@
 		0813A2C22AD6DEFE00428484 = {
 			isa = PBXGroup;
 			children = (
-				320C13BA2B14BBD500877993 /* LifeBar.swift */,
-				32F443572B16138E00E0D208 /* WeaponSelection.swift */,
 				0813A2CD2AD6DEFE00428484 /* Capivarias */,
 				0813A2CC2AD6DEFE00428484 /* Products */,
 			);
@@ -161,6 +159,7 @@
 		08CEE5EC2AE1631300149B83 /* Screen Elements */ = {
 			isa = PBXGroup;
 			children = (
+				F299BA3E2B181A14003F72AD /* HUD */,
 				C0D60CA22AE80B7B0064C863 /* Weapons */,
 				08CEE5EE2AE1632A00149B83 /* Characters */,
 				08CEE5ED2AE1632300149B83 /* Joystick */,
@@ -224,6 +223,15 @@
 				C0D60CA32AE80B910064C863 /* Weapons.swift */,
 			);
 			path = Weapons;
+			sourceTree = "<group>";
+		};
+		F299BA3E2B181A14003F72AD /* HUD */ = {
+			isa = PBXGroup;
+			children = (
+				320C13BA2B14BBD500877993 /* LifeBar.swift */,
+				32F443572B16138E00E0D208 /* WeaponSelection.swift */,
+			);
+			path = HUD;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
