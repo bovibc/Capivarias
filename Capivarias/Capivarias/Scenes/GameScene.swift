@@ -53,10 +53,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     private func setupWeaponSelection() {
         addChild(weaponSelection)
-        weaponSelection.position = .init(x: 100, y: 902)
+        weaponSelection.position = .init(x: 77, y: 902)
         weaponSelection.zPosition = 99
-        weaponSelection.xScale = 0.7
-        weaponSelection.yScale = 0.7
+        weaponSelection.xScale = 0.4
+        weaponSelection.yScale = 0.4
     }
 
     func changeLifeBar() {

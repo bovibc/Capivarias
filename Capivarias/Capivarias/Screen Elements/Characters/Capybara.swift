@@ -13,8 +13,8 @@ class Capybara {
     var isCapivaraWalking = false
     var isCapivaraTakingDamage = false
     var life: Float = 100
-    private var damageSword: Float = 20   //Aqui, é o dano da espada
-    private var damageZarabatana: Float = 5
+    private var damageSword: Float = 20
+    private var damageZarabatana: Float = 500
     private var breathTime: Float = 100
     private var speed: CGFloat = 5
     private var defense: Float = 100
@@ -131,7 +131,6 @@ class Capybara {
                                    y: capybara.position.y)
         seedBullet.setScale(0.3)
         seedBullet.zPosition = 3
-        seedBullet.zRotation = angleBetweenPoints(point1: capybara.position, point2: alligator.position)
         seedBullet.physicsBody = SKPhysicsBody(rectangleOf: seedBullet.size)
         seedBullet.physicsBody?.isDynamic = false
         seedBullet.physicsBody?.categoryBitMask = 3 // Defina a categoria da física conforme necessário
@@ -190,13 +189,6 @@ class Capybara {
         } else if deltaX < 0{
             sprite.xScale = -abs(sprite.xScale)
         }
-    }
-    
-    func angleBetweenPoints(point1: CGPoint, point2: CGPoint) -> CGFloat {
-        let distanceX = CGFloat(point1.x - point2.x)
-        let distanceY = CGFloat(point1.y - point2.y)
-        let tangent = distanceY / distanceX
-        return tangent
     }
     
     func distanceBetweenPoints(_ point1: CGPoint, _ point2: CGPoint) -> Double {
