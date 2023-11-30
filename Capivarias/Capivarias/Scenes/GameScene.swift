@@ -221,7 +221,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 else {
                     self.capybara.hit()
                 }
-            } else {
+            } else if !self.enemies.isEmpty {
                 self.capybara.shootZarabatana(capybara: self.capybara.sprite,
                                               alligator: self.enemies[self.lastEnemyIndex].sprite)
             }
