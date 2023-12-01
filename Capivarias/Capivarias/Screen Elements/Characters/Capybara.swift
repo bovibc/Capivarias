@@ -253,7 +253,7 @@ class Capybara {
                 death()
                 self.sprite.removeFromParent()
             }
-            
+
             let action = SKAction.sequence([startAction, SKAction.wait(forDuration: 0.7), finishAction, SKAction.wait(forDuration: 0.5), callback])
             self.sprite.removeAllActions()
             self.sprite.run(action)
@@ -276,7 +276,7 @@ class Capybara {
                                       timePerFrame: 0.001,
                                       resize: true,
                                       restore: true)
-   
+
         sprite.run(SKAction.repeatForever(action))
     }
 
