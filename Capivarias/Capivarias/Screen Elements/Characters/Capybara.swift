@@ -155,9 +155,8 @@ class Capybara {
         isCapivaraWalking = false
         isCapivaraHitting = true
 
-        sprite.removeAllActions()
-        sprite.run(SKAction.sequence([animation])) {
-            self.stop()
+        sprite.run(animation) {
+            self.stopZarabatana()
         }
     }
     
