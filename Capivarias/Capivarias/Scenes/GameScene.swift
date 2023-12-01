@@ -156,18 +156,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
 
         capybara.closestEnemyAsLast(enemy: &enemies)
-        capybara.death()
-        if capybara.getLife() <= 0 {
-            if (currentTime - enemies[lastEnemyIndex].finishAnimation) > 1 {
-                enemies[lastEnemyIndex].sprite.removeAllActions()
-            }
-
-            if (currentTime - gameOver) > 4 {
-                if let view = self.view {
-                    virtualController?.disconnect()
-                    transactionScene.gameOver(view: view, gameScene: GameOverGameScene())
-                }
-            }
+        capybara.death() {
+            self.gameOverActions(currentTime)
         }
 
         if let view = self.view {
@@ -178,6 +168,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
 
         lifeBar.updateProgress(capybara.life / Float(maxLife))
+    }
+    
+    private func gameOverActions(_ currentTime: TimeInterval) {
+        if (currentTime - enemies[lastEnemyIndex].finishAnimation) > 1 {
+            enemies[lastEnemyIndex].sprite.removeAllActions()
+        }
+
+        if (currentTime - gameOver) > 4 {
+            if let view = self.view {
+                virtualController?.disconnect()
+                transactionScene.gameOver(view: view, gameScene: GameOverGameScene())
+            }
+        }
     }
     
     private func enemyAutomaticAttack(_ i: Int, _ currentTime: TimeInterval) {
