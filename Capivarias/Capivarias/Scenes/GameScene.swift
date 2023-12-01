@@ -224,8 +224,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             } else if !self.enemies.isEmpty {
                 //MARK: animaçao da zarabatana
                 self.capybara.shootZarabatanaAnimation(capybara: self.capybara.sprite,
-                                              alligator: self.enemies[self.lastEnemyIndex].sprite)
-                print(self.enemies[self.lastEnemyIndex].getLife())
+                                              alligator: self.enemies[self.enemies.count-1].sprite)
+                print(self.enemies[self.enemies.count-1].getLife())
             }
         }
         changeWeapon()
@@ -344,7 +344,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     self.enemyDied(i)
                 } else {
                     enemies[i].takingDamage()
-                    enemies[self.lastEnemyIndex].changeLife(damage: capybara.getDamageZarabatana())
+                    enemies[self.enemies.count-1].changeLife(damage: capybara.getDamageZarabatana())
                 }
             }
         }
