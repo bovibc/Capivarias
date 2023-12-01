@@ -260,7 +260,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             contactAttack(bodyA, bodyB)
         }
 
-        if contact.bodyA.categoryBitMask == 2 && contact.bodyB.categoryBitMask == 3 {
+        if bodyA == 6 && alligatorMaskB {
+            enemies[self.lastEnemyIndex].changeLife(damage: capybara.getDamageZarabatana())
+        }
+
+        if alligatorMaskA && bodyB == 6 {
             enemies[self.lastEnemyIndex].changeLife(damage: capybara.getDamageZarabatana())
         }
     }
@@ -288,7 +292,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     private func isEnemyMask(_ mask: UInt32) -> Bool {
-        return (mask == 2 || mask == 3 || mask == 4)
+        return (mask == 2 || mask == 3 || mask == 4 || mask == 5)
     }
 
     private func enemyDied(_ index: Int) {
