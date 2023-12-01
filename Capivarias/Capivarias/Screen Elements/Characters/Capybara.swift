@@ -105,7 +105,7 @@ class Capybara {
         sprite.run(SKAction.repeatForever(action))
     }
 
-    func hit() {
+    func swordAttackAnimation() {
         guard !isCapivaraHitting else { return }
         audioPlayer.playEffect(effect: sounds.swordAttack, type: "mp3", volume: 0.1)
         
@@ -120,7 +120,7 @@ class Capybara {
         }
     }
 
-    func shootZarabatana(capybara: SKSpriteNode, alligator: SKSpriteNode) {
+    func shootZarabatanaAnimation(capybara: SKSpriteNode, alligator: SKSpriteNode) {
         
         guard !isCapivaraHitting else { return }
         

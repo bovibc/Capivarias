@@ -173,12 +173,12 @@ class SecondScene: SKScene, SKPhysicsContactDelegate {
     func setupController(){
         self.virtualController?.controller?.extendedGamepad?.buttonX.pressedChangedHandler = { button, value, pressed in
             if pressed && self.isContact {
-                self.capybara.hit()
+                self.capybara.swordAttackAnimation()
                // self.alligator.changeLife(damage: self.capybara.getDamage())
 
             }
             else {
-                self.capybara.hit()
+                self.capybara.swordAttackAnimation()
             }
         }
     }
@@ -219,7 +219,7 @@ class SecondScene: SKScene, SKPhysicsContactDelegate {
     private func setGamePadAction() {
         self.virtualController?.controller?.extendedGamepad?.buttonX.pressedChangedHandler = { button, value, pressed in
             if pressed {
-                self.capybara.hit()
+                self.capybara.swordAttackAnimation()
                // self.alligator.changeLife(damage: self.capybara.getDamage())
                 //Aqui, chamar alimaçao do jacare tomando dano
             }
