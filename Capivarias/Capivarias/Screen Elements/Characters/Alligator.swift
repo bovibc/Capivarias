@@ -46,25 +46,25 @@ class Alligator {
         return damage
     }
 
-    func start(screenWidth: CGFloat, screenHeight: CGFloat, spawnPosition: CGPoint, mask: Int) {
+    func start(screenWidth: CGFloat, screenHeight: CGFloat, spawnPosition: CGPoint, name: Int) {
         let scaleX = screenWidth * scale / sprite.size.width
         let scaleY = screenHeight * scale / sprite.size.height
         sprite.xScale = scaleX
         sprite.yScale = scaleY
 
         setPosition( spawnPosition)
-        setPhysics(mask)
-        sprite.name = "alligator"
+        setPhysics()
+        sprite.name = "\(name)"
     }
 
-    private func setPhysics(_ mask: Int) {
+    private func setPhysics() {
         let width = 0.55 * sprite.size.width
         let height = 0.25 * sprite.size.height
         sprite.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: width, height: height), center: CGPoint(x: -25, y: -40))
         sprite.physicsBody?.affectedByGravity = false
         sprite.physicsBody?.isDynamic = true
         sprite.physicsBody?.allowsRotation = false
-        sprite.physicsBody?.categoryBitMask = UInt32(mask)
+        sprite.physicsBody?.categoryBitMask = 2
         sprite.physicsBody?.contactTestBitMask = 1
         sprite.physicsBody?.collisionBitMask = 1
         //voce é classe 2 e avisa se tiver em contato com classe 1

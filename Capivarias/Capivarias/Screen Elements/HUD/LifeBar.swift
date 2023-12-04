@@ -18,7 +18,7 @@ class LifeBar: SKNode {
     
     
     override init() {
-        self.borderNode = SKSpriteNode(imageNamed: "novabarra8")
+        self.borderNode = SKSpriteNode(imageNamed: "novabarra")
         self.barNode = SKSpriteNode(imageNamed: "bar")
         super.init()
         setup()
