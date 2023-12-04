@@ -11,9 +11,9 @@ enum CapybaraStates {
 
     case none
     
-    case idleSpade
-    case runSpade
-    case attackSpade
+    case idleSword
+    case runSword
+    case attackSword
     
     case idleZarabatana
     case runZarabatana
