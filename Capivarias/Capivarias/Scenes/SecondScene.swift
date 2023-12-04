@@ -123,18 +123,12 @@ class SecondScene: SKScene, SKPhysicsContactDelegate {
             }
         }
 
-        capybara.death()
-        if capybara.life <= 0 {
-//            alligator.isFollowing = false
-//            if (currentTime - alligator.finishAnimation) > 1 {
-//                alligator.sprite.removeAllActions()
-//            }
-            
-            if (currentTime - gameOver) > 4 {
+        capybara.death() {
+            if (currentTime - self.gameOver) > 4 {
                 
                 if let view = self.view {
-                    virtualController?.disconnect()
-                    transactionScene.gameOver(view: view, gameScene: GameOverGameScene())
+                    self.virtualController?.disconnect()
+                    self.transactionScene.gameOver(view: view, gameScene: GameOverGameScene())
                 }
             }
         }

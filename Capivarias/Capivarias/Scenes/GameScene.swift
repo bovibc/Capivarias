@@ -100,13 +100,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 screenWidth: size.width,
                 screenHeight: size.height,
                 spawnPosition: Position.randomize(size),
-                mask: i+2)
+                name: i+2)
             addChild(enemies[i].sprite)
         }
     }
 
     private func generateEnemies() {
-        let plusEnemieNumber = Int.random(in: 0..<3)
+        let plusEnemieNumber = Int.random(in: 0..<4)
         for _ in 0..<plusEnemieNumber {
             enemies.append(Alligator())
         }
@@ -156,18 +156,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
 
         capybara.closestEnemyAsLast(enemy: &enemies)
-        capybara.death()
-        if capybara.getLife() <= 0 {
-            if (currentTime - enemies[lastEnemyIndex].finishAnimation) > 1 {
-                enemies[lastEnemyIndex].sprite.removeAllActions()
-            }
-
-            if (currentTime - gameOver) > 4 {
-                if let view = self.view {
-                    virtualController?.disconnect()
-                    transactionScene.gameOver(view: view, gameScene: GameOverGameScene())
-                }
-            }
+        capybara.death() {
+            self.gameOverActions(currentTime)
         }
 
         if let view = self.view {
@@ -180,13 +170,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         lifeBar.updateProgress(capybara.life / Float(maxLife))
     }
     
+    private func gameOverActions(_ currentTime: TimeInterval) {
+        if (currentTime - enemies[lastEnemyIndex].finishAnimation) > 1 {
+            enemies[lastEnemyIndex].sprite.removeAllActions()
+        }
+
+        if (currentTime - gameOver) > 4 {
+            if let view = self.view {
+                virtualController?.disconnect()
+                transactionScene.gameOver(view: view, gameScene: GameOverGameScene())
+            }
+        }
+    }
+    
     private func enemyAutomaticAttack(_ i: Int, _ currentTime: TimeInterval) {
         if enemies[i].isInContact {
             if ((currentTime - enemies[i].lastHit) > 3 && !enemies[i].isAlligatorTakingDamage) {
                 enemies[i].lastHit = currentTime
                 enemies[i].attack()
                 capybara.takingDamage()
-                self.capybara.changeLife(damage: self.enemies[lastEnemyIndex].getDamage())
+                self.capybara.changeLife(damage: self.enemies[i].getDamage())
             }
         }
     }
@@ -242,9 +245,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         guard !enemies.isEmpty else {
             return
         }
-        
-        let bodyA = contact.bodyA.categoryBitMask
-        let bodyB = contact.bodyB.categoryBitMask
+
+        let bodyA = contact.bodyA.node?.name
+        let bodyB = contact.bodyB.node?.name
         let enemyIndex = getEnemy(bodyA, bodyB)
         enemies[enemyIndex].isInContact = false
         isContact = false
@@ -253,23 +256,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func didBegin(_ contact: SKPhysicsContact) {
         let bodyA = contact.bodyA.categoryBitMask
         let bodyB = contact.bodyB.categoryBitMask
-        let alligatorMaskA = isEnemyMask(bodyA)
-        let alligatorMaskB = isEnemyMask(bodyB)
 
-        if bodyA == 1 && alligatorMaskB {
-            contactAttack(bodyA, bodyB)
+        let nameA = contact.bodyA.node?.name
+        let nameB = contact.bodyB.node?.name
+
+        if bodyA == 1 && bodyB == 2 {
+            contactAttack(nameA, nameB)
         }
-        if alligatorMaskA && bodyB == 1 {
-            contactAttack(bodyA, bodyB)
+        if bodyA == 2  && bodyB == 1 {
+            contactAttack(nameA, nameB)
         }
 
-        if contact.bodyA.categoryBitMask == 2 && contact.bodyB.categoryBitMask == 3 {
-            //MARK: dano da zarabatana
-            playerZarabatanaAttack()
+        if bodyA == 6 && bodyB == 2  {
+            enemies[self.lastEnemyIndex].changeLife(damage: capybara.getDamageZarabatana())
+        }
+
+        if bodyA == 2  && bodyB == 6 {
+            enemies[self.lastEnemyIndex].changeLife(damage: capybara.getDamageZarabatana())
         }
     }
 
-    private func contactAttack(_ bodyA: UInt32, _ bodyB: UInt32) {
+    private func contactAttack(_ bodyA: String?, _ bodyB: String?) {
         guard !enemies.isEmpty else {
             return
         }
@@ -283,21 +290,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
 
-    private func getEnemy(_ bodyA: UInt32, _ bodyB: UInt32) -> Int {
-        
+    private func getEnemy(_ bodyA: String?, _ bodyB: String?) -> Int {
+        guard let bodyA = bodyA, let bodyB = bodyB else { return 0 }
         var index = 0
-        let body = (bodyA == 1) ? bodyB : bodyA
+        let body = (bodyA == "capybara") ? bodyB : bodyA
         for i in enemies {
-            if body == i.sprite.physicsBody?.categoryBitMask {
+            if body == i.sprite.name {
                 index = enemies.firstIndex{$0 === i} ?? 0
                 break
             }
         }
         return index
-    }
-
-    private func isEnemyMask(_ mask: UInt32) -> Bool {
-        return (mask == 2 || mask == 3 || mask == 4)
     }
 
     private func enemyDied(_ index: Int) {

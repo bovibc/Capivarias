@@ -20,6 +20,7 @@ class Capybara {
     private var defense: Float = 100
     private var assetScale: CGFloat = 0.1
     private var zarabatanaBulletSpeed = 600.0
+    private var isDead = false
     private var staticName: String = "capybara_stopped"
     var audioPlayer = AudioPlayer()
     var sounds = Sounds()
@@ -85,7 +86,7 @@ class Capybara {
         self.isCapivaraHitting = false
         self.isCapivaraWalking = false
         self.isCapivaraTakingDamage = false
-        let textures = [SKTexture(imageNamed: "capybara_stopped")]
+        let textures = [SKTexture(imageNamed: staticName)]
         let action = SKAction.animate(with: textures,
                                       timePerFrame: 0.001,
                                       resize: true,
@@ -135,7 +136,7 @@ class Capybara {
         seedBullet.zPosition = 3
         seedBullet.physicsBody = SKPhysicsBody(rectangleOf: seedBullet.size)
         seedBullet.physicsBody?.isDynamic = false
-        seedBullet.physicsBody?.categoryBitMask = 3 // Defina a categoria da física conforme necessário
+        seedBullet.physicsBody?.categoryBitMask = 6 // Defina a categoria da física conforme necessário
 
         capybara.parent?.addChild(seedBullet)
         let moveAction = SKAction.move(to: CGPoint(x: alligator.position.x,
@@ -156,9 +157,8 @@ class Capybara {
         isCapivaraWalking = false
         isCapivaraHitting = true
 
-        sprite.removeAllActions()
-        sprite.run(SKAction.sequence([animation])) {
-            self.stop()
+        sprite.run(animation) {
+            self.stopZarabatana()
         }
     }
     
@@ -231,15 +231,49 @@ class Capybara {
         }
     }
 
-    func death() {
-    if  life <= 0 {
-        //Está entrando no print, mas deveria chamar a animaçao dela morrendo
-        //não mudar essa textura
-        //cortar as movimetações na tela e deixar o joystick inúil
+    func death(_ death: @escaping ()-> Void) {
+        guard !isDead else  { return }
+        if  life <= 0 {
+            isDead = true
+            let startAction = SKAction.run {
+                self.dyingAction()
+            }
+            let finishAction = SKAction.run {
+                self.stayingDeadAction()
+            }
+            let callback = SKAction.run {
+                death()
+                self.sprite.removeFromParent()
+            }
+
+            let action = SKAction.sequence([startAction, SKAction.wait(forDuration: 0.7), finishAction, SKAction.wait(forDuration: 0.5), callback])
+            self.sprite.removeAllActions()
+            self.sprite.run(action)
         }
     }
 
+    private func dyingAction() {
+        let textures = Textures.getTextures(atlas: assets.capybaraDying)
+        let action = SKAction.animate(with: textures,
+                                      timePerFrame: 0.7/TimeInterval(textures.count),
+                                      resize: true,
+                                      restore: true)
+
+        sprite.run(action)
+    }
+
+    private func stayingDeadAction() {
+        let textures = Textures.getTextures(atlas: assets.deadCapybara )
+        let action = SKAction.animate(with: textures,
+                                      timePerFrame: 0.001,
+                                      resize: true,
+                                      restore: true)
+
+        sprite.run(SKAction.repeatForever(action))
+    }
+
     func takingDamage(){
+        guard !isDead else { return }
         self.isCapivaraTakingDamage = true
         let action = SKAction.animate(with: damageTexture,
                                       timePerFrame:  1/TimeInterval(damageTexture.count),
