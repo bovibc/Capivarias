@@ -18,6 +18,7 @@ struct Assets {
     let capybaraWalk = "Capybara_Walking"
     let capybaraDamage = "Taking_Damage"
     let stoppedZarabatana = "ShootingZarabatana9"
+    let capybaraZarabanataWalking = "Capybara_zarabatana_walking"
 
     let seedBullet = "seed"
     let capybaraAttackZarabatana = "Capybara_ShootingZarabatana"

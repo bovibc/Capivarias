@@ -25,15 +25,17 @@ class Capybara {
     var sounds = Sounds()
     let assets = Assets()
     let attackTexture:[SKTexture]
-    let walkTexture:[SKTexture]
+    let walkSpadeTexture:[SKTexture]
     let damageTexture:[SKTexture]
+    let walkZarabatanaTexture:[SKTexture]
     var sprite: SKSpriteNode
     var shoot = SKSpriteNode()
 
     init() {
         self.sprite = SKSpriteNode(imageNamed: staticName)
         attackTexture = Textures.getTextures(atlas: assets.capybaraAttack)
-        walkTexture = Textures.getTextures(atlas: assets.capybaraWalk)
+        walkSpadeTexture = Textures.getTextures(atlas: assets.capybaraWalk)
+        walkZarabatanaTexture = Textures.getTextures(atlas: assets.capybaraZarabanataWalking)
         damageTexture = Textures.getTextures(atlas: assets.capybaraDamage)
     }
 
@@ -200,8 +202,8 @@ class Capybara {
     }
     
     func walk(positionX: CGFloat) {
-        let action = SKAction.animate(with: walkTexture,
-                                      timePerFrame: 1/TimeInterval(walkTexture.count),
+        let action = SKAction.animate(with: walkSpadeTexture,
+                                      timePerFrame: 1/TimeInterval(walkSpadeTexture.count),
                                       resize: true,
                                       restore: true)
         
@@ -215,9 +217,8 @@ class Capybara {
     }
 
     func walkZarabatana(positionX: CGFloat) {
-        let textures = Textures.getTextures(atlas: "Capybara_Walking")
-        let action = SKAction.animate(with: textures,
-                                      timePerFrame: 1/TimeInterval(textures.count),
+        let action = SKAction.animate(with: walkZarabatanaTexture,
+                                      timePerFrame: 1/TimeInterval(walkZarabatanaTexture.count),
                                       resize: true,
                                       restore: true)
         
