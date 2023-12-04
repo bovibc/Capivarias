@@ -137,6 +137,7 @@ class Capybara {
         seedBullet.physicsBody = SKPhysicsBody(rectangleOf: seedBullet.size)
         seedBullet.physicsBody?.isDynamic = false
         seedBullet.physicsBody?.categoryBitMask = 6 // Defina a categoria da física conforme necessário
+        seedBullet.physicsBody?.contactTestBitMask = 2
 
         capybara.parent?.addChild(seedBullet)
         let moveAction = SKAction.move(to: CGPoint(x: alligator.position.x,
