@@ -35,11 +35,7 @@
 		32F443582B16138E00E0D208 /* WeaponSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F443572B16138E00E0D208 /* WeaponSelection.swift */; };
 		C060153D2AFE5A91001CDE0C /* Monkey.swift in Sources */ = {isa = PBXBuildFile; fileRef = C060153C2AFE5A91001CDE0C /* Monkey.swift */; };
 		C0D60CA42AE80B910064C863 /* Weapons.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D60CA32AE80B910064C863 /* Weapons.swift */; };
-		F208C8012B1A67CC006DCAD1 /* PlayerRunSpade.swift in Sources */ = {isa = PBXBuildFile; fileRef = F208C8002B1A67CC006DCAD1 /* PlayerRunSpade.swift */; };
-		F208C8032B1A67EE006DCAD1 /* PlayerIdleSpade.swift in Sources */ = {isa = PBXBuildFile; fileRef = F208C8022B1A67EE006DCAD1 /* PlayerIdleSpade.swift */; };
-		F208C8052B1A67FC006DCAD1 /* PlayerDieSpade.swift in Sources */ = {isa = PBXBuildFile; fileRef = F208C8042B1A67FC006DCAD1 /* PlayerDieSpade.swift */; };
-		F208C8072B1A680E006DCAD1 /* PlayerAttackSpade.swift in Sources */ = {isa = PBXBuildFile; fileRef = F208C8062B1A680E006DCAD1 /* PlayerAttackSpade.swift */; };
-		F208C8092B1A6865006DCAD1 /* PlayerDamageSpade.swift in Sources */ = {isa = PBXBuildFile; fileRef = F208C8082B1A6865006DCAD1 /* PlayerDamageSpade.swift */; };
+		F208C80B2B1E0240006DCAD1 /* CapybaraStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = F208C80A2B1E0240006DCAD1 /* CapybaraStates.swift */; };
 		F20BC15C2B0280A9009D9B65 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20BC15B2B0280A9009D9B65 /* Assets.swift */; };
 		F27320612B0787200038AF22 /* blow-gun.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F27320602B0787200038AF22 /* blow-gun.mp3 */; };
 		F2A77F832AE7E7A50030F197 /* AudioPlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A77F822AE7E7A50030F197 /* AudioPlayerController.swift */; };
@@ -77,11 +73,7 @@
 		32F443572B16138E00E0D208 /* WeaponSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponSelection.swift; sourceTree = "<group>"; };
 		C060153C2AFE5A91001CDE0C /* Monkey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Monkey.swift; sourceTree = "<group>"; };
 		C0D60CA32AE80B910064C863 /* Weapons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weapons.swift; sourceTree = "<group>"; };
-		F208C8002B1A67CC006DCAD1 /* PlayerRunSpade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerRunSpade.swift; sourceTree = "<group>"; };
-		F208C8022B1A67EE006DCAD1 /* PlayerIdleSpade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerIdleSpade.swift; sourceTree = "<group>"; };
-		F208C8042B1A67FC006DCAD1 /* PlayerDieSpade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDieSpade.swift; sourceTree = "<group>"; };
-		F208C8062B1A680E006DCAD1 /* PlayerAttackSpade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerAttackSpade.swift; sourceTree = "<group>"; };
-		F208C8082B1A6865006DCAD1 /* PlayerDamageSpade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDamageSpade.swift; sourceTree = "<group>"; };
+		F208C80A2B1E0240006DCAD1 /* CapybaraStates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapybaraStates.swift; sourceTree = "<group>"; };
 		F20BC15B2B0280A9009D9B65 /* Assets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
 		F27320602B0787200038AF22 /* blow-gun.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "blow-gun.mp3"; sourceTree = "<group>"; };
 		F2A77F822AE7E7A50030F197 /* AudioPlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerController.swift; sourceTree = "<group>"; };
@@ -239,11 +231,7 @@
 		F208C7FF2B1A678C006DCAD1 /* State Machine */ = {
 			isa = PBXGroup;
 			children = (
-				F208C8002B1A67CC006DCAD1 /* PlayerRunSpade.swift */,
-				F208C8022B1A67EE006DCAD1 /* PlayerIdleSpade.swift */,
-				F208C8042B1A67FC006DCAD1 /* PlayerDieSpade.swift */,
-				F208C8062B1A680E006DCAD1 /* PlayerAttackSpade.swift */,
-				F208C8082B1A6865006DCAD1 /* PlayerDamageSpade.swift */,
+				F208C80A2B1E0240006DCAD1 /* CapybaraStates.swift */,
 			);
 			path = "State Machine";
 			sourceTree = "<group>";
@@ -341,25 +329,21 @@
 				08CEE5FC2AE1680800149B83 /* Joystick.swift in Sources */,
 				F2A77F832AE7E7A50030F197 /* AudioPlayerController.swift in Sources */,
 				F2C014B62AE81319000E9B87 /* BackgroundController.swift in Sources */,
-				F208C8072B1A680E006DCAD1 /* PlayerAttackSpade.swift in Sources */,
 				08CEE5FA2AE167E800149B83 /* Alligator.swift in Sources */,
 				084E311A2AF1326C000C71A8 /* GameScene.swift in Sources */,
 				0875D0FC2B0248BE007B84C6 /* SecondScene.swift in Sources */,
 				084E311C2AF1327D000C71A8 /* (null) in Sources */,
 				08CEE5F42AE1643A00149B83 /* Textures.swift in Sources */,
-				F208C8052B1A67FC006DCAD1 /* PlayerDieSpade.swift in Sources */,
 				0813A2D72AD6DEFE00428484 /* GameViewController.swift in Sources */,
 				328080712AF26F71009650E3 /* GameOverGameScene.swift in Sources */,
 				F20BC15C2B0280A9009D9B65 /* Assets.swift in Sources */,
+				F208C80B2B1E0240006DCAD1 /* CapybaraStates.swift in Sources */,
 				08CEE5F82AE1653C00149B83 /* Capybara.swift in Sources */,
-				F208C8032B1A67EE006DCAD1 /* PlayerIdleSpade.swift in Sources */,
 				320C13BB2B14BBD500877993 /* LifeBar.swift in Sources */,
-				F208C8092B1A6865006DCAD1 /* PlayerDamageSpade.swift in Sources */,
 				0813A2CF2AD6DEFE00428484 /* AppDelegate.swift in Sources */,
 				F2E112C52AFE782F00B76955 /* Sounds.swift in Sources */,
 				32F443582B16138E00E0D208 /* WeaponSelection.swift in Sources */,
 				C0D60CA42AE80B910064C863 /* Weapons.swift in Sources */,
-				F208C8012B1A67CC006DCAD1 /* PlayerRunSpade.swift in Sources */,
 				085A2ECF2B063A9D00307D15 /* Position.swift in Sources */,
 				084E311E2AF132A4000C71A8 /* TransactionsScene.swift in Sources */,
 				C060153D2AFE5A91001CDE0C /* Monkey.swift in Sources */,

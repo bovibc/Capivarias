@@ -28,30 +28,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var maxLife: CGFloat = 100
     var weaponSelection = WeaponSelection()
     
-    var stateMachine: GKStateMachine?
-    
-    override func sceneDidLoad() {
-        
-        let run = PlayerRunSpade()
-        run.gameScene = self
-        
-        let idle = PlayerIdleSpade()
-        idle.gameScene = self
-        
-        let die = PlayerDieSpade()
-        die.gameScene = self
-        
-        let attack = PlayerAttackSpade()
-        attack.gameScene = self
-        
-        let damage = PlayerDamageSpade()
-        damage.gameScene = self
-        
-        let states = [run, idle, die, attack, damage]
-        
-        stateMachine = GKStateMachine(states: states)
-    }
-
     override func didMove(to view: SKView) {
         setupScene()
         setupBackground()
