@@ -11,9 +11,11 @@ import SpriteKit
 class Capybara {
     var currentState = CapybaraStates.none
     
-    var isCapivaraHitting = false
-    var isCapivaraWalking = false
-    var isCapivaraTakingDamage = false
+//    var isCapivaraHitting = false
+//    var isCapivaraWalking = false
+//    var isCapivaraTakingDamage = false
+//    private var isDead = false
+
     var life: Float = 100
     private var damageSword: Float = 20
     private var damageZarabatana: Float = 500
@@ -22,12 +24,11 @@ class Capybara {
     private var defense: Float = 100
     private var assetScale: CGFloat = 0.1
     private var zarabatanaBulletSpeed = 600.0
-    private var isDead = false
     private var staticName: String = "capybara_stopped"
     var audioPlayer = AudioPlayer()
     var sounds = Sounds()
     let assets = Assets()
-    
+
     var sprite: SKSpriteNode
     let idleSwordTexture:[SKTexture]
     let attackSwordTexture:[SKTexture]
@@ -344,7 +345,7 @@ class Capybara {
         currentState = nextState
         switch currentState {
         case .none:
-            <#code#>
+            print("None case")
             
         case .idleSword:
             spriteAnimation(textures: idleSwordTexture, timePerFrame: 0.001)
@@ -389,3 +390,14 @@ class Capybara {
     
 
 }
+
+//class GameLogic {
+//    func distanceBetweenPoints(_ point1: CGPoint, _ point2: CGPoint) -> Double {
+//        let deltaX = point2.x - point1.x
+//        let deltaY = point2.y - point1.y
+//        let distancia = sqrt(pow(deltaX, 2) + pow(deltaY, 2))
+//        
+//        return Double(distancia)
+//    }
+//}
+
