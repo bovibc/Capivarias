@@ -26,15 +26,17 @@ class Capybara {
     var sounds = Sounds()
     let assets = Assets()
     let attackTexture:[SKTexture]
-    let walkTexture:[SKTexture]
+    let walkSpadeTexture:[SKTexture]
     let damageTexture:[SKTexture]
+    let walkZarabatanaTexture:[SKTexture]
     var sprite: SKSpriteNode
     var shoot = SKSpriteNode()
 
     init() {
         self.sprite = SKSpriteNode(imageNamed: staticName)
         attackTexture = Textures.getTextures(atlas: assets.capybaraAttack)
-        walkTexture = Textures.getTextures(atlas: assets.capybaraWalk)
+        walkSpadeTexture = Textures.getTextures(atlas: assets.capybaraWalk)
+        walkZarabatanaTexture = Textures.getTextures(atlas: assets.capybaraZarabanataWalking)
         damageTexture = Textures.getTextures(atlas: assets.capybaraDamage)
     }
 
@@ -106,7 +108,7 @@ class Capybara {
         sprite.run(SKAction.repeatForever(action))
     }
 
-    func hit() {
+    func swordAttackAnimation() {
         guard !isCapivaraHitting else { return }
         audioPlayer.playEffect(effect: sounds.swordAttack, type: "mp3", volume: 0.1)
         
@@ -121,7 +123,7 @@ class Capybara {
         }
     }
 
-    func shootZarabatana(capybara: SKSpriteNode, alligator: SKSpriteNode) {
+    func shootZarabatanaAnimation(capybara: SKSpriteNode, alligator: SKSpriteNode) {
         
         guard !isCapivaraHitting else { return }
         
@@ -135,6 +137,7 @@ class Capybara {
         seedBullet.physicsBody = SKPhysicsBody(rectangleOf: seedBullet.size)
         seedBullet.physicsBody?.isDynamic = false
         seedBullet.physicsBody?.categoryBitMask = 6 // Defina a categoria da física conforme necessário
+        seedBullet.physicsBody?.contactTestBitMask = 2
 
         capybara.parent?.addChild(seedBullet)
         let moveAction = SKAction.move(to: CGPoint(x: alligator.position.x,
@@ -200,8 +203,8 @@ class Capybara {
     }
     
     func walk(positionX: CGFloat) {
-        let action = SKAction.animate(with: walkTexture,
-                                      timePerFrame: 1/TimeInterval(walkTexture.count),
+        let action = SKAction.animate(with: walkSpadeTexture,
+                                      timePerFrame: 1/TimeInterval(walkSpadeTexture.count),
                                       resize: true,
                                       restore: true)
         
@@ -215,9 +218,8 @@ class Capybara {
     }
 
     func walkZarabatana(positionX: CGFloat) {
-        let textures = Textures.getTextures(atlas: assets.capybaraWalk)
-        let action = SKAction.animate(with: textures,
-                                      timePerFrame: 1/TimeInterval(textures.count),
+        let action = SKAction.animate(with: walkZarabatanaTexture,
+                                      timePerFrame: 1/TimeInterval(walkZarabatanaTexture.count),
                                       resize: true,
                                       restore: true)
         
