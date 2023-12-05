@@ -133,6 +133,8 @@ class Alligator {
         guard !isAlligatoraAttacking else { return }
         self.isAlligatoraAttacking = true
         //AudioPlayer.shared.playEffect(effect: sounds.swordAttack, type: "mp3", volume: 1.0)
+        AudioPlayer.shared.playerEffectSong(songs: sounds.swordAttack)
+       
         let startAction = SKAction.run {
             self.stop()
             self.attackAction()

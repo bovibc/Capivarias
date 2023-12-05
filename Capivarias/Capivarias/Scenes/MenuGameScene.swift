@@ -16,28 +16,22 @@ class MenuGameScene: SKScene {
     var alligator = Alligator()
     var capybara = Capybara()
     var transactionScene = TrasactionsScenes()
-    //var audioPlayer = AudioPlayer()
     let sounds = Sounds()
     let assets = Assets()
     
     
     override func didMove(to view: SKView) {
         setupScene()
-        //setupBackground()
-        cancelSong()
+        setupBackground()
         cancelMusic()
+        cancelEffect()
         credits()
         addPlayAgainButton()
-        //audioPlayer.playEffect(effect: sounds.deathMenu, type: "mp3", volume: 1.0)
-       // addGoToMenuButton()
-        //AudioPlayer.shared.playEnviroment(sound: sounds.ambient, type: "mp3", volume: 1.0)
-       
         AudioPlayer.shared.EnviromentSong()
     }
     
-
     private func setupBackground() {
-        backgroundController.setupBackground(scene: self, imageName: assets.map3)
+        backgroundController.setupBackground(scene: self, imageName: assets.backgroundMenu)
     }
     
     private func setupScene() {
@@ -45,151 +39,123 @@ class MenuGameScene: SKScene {
         scene?.size = CGSize(width: view?.scene?.size.width ?? 600, height: view?.scene?.size.height ?? 800)
     }
     
-    
-
-    
-    
     private func addPlayAgainButton() {
-        let buttonTexture = SKTexture(imageNamed: "ButtonPlayAgain")
+        let buttonTexture = SKTexture(imageNamed: "Jogar")
         let button = SKButtonNode(texture: buttonTexture)
         
-        
-        let buttonSize = CGSize(width: 250, height: 80) // Substitua pelos valores desejados
+        let buttonSize = CGSize(width: 250, height: 125)
         button.size = buttonSize
-        
-        // Configurar a posição do botão no meio da tela
-        button.position = CGPoint(x: size.width / 2, y: size.height - size.height / 3)
-        
-        // Configurar a ação de animação ao tocar no botão
-        let scaleUp = SKAction.scale(to: 1.1, duration: 0.1) // Aumenta o tamanho do botão em 10%
-        let scaleDown = SKAction.scale(to: 1.0, duration: 0.1) // Reduz o tamanho de volta ao tamanho original
+  
+        button.position = CGPoint(x: size.width / 2, y: size.height - size.height / 1.74)
+
+        let scaleUp = SKAction.scale(to: 1.1, duration: 0.1)
+        let scaleDown = SKAction.scale(to: 1.0, duration: 0.1)
         var buttonAction = SKAction.sequence([scaleUp, scaleDown])
         
-
-        button.name = "playAgainButton"
+        
+        button.name = "Jogar"
         addChild(button)
         
         button.setButtonAction {
             print("Botão foi tocado!")
-            
-            // Realizar a animação de escala (pode ajustar os valores)
+
             let scaleAction = SKAction.sequence([
                 SKAction.scale(to: 1.2, duration: 0.1),
                 SKAction.scale(to: 1.0, duration: 0.1)
             ])
             
             button.run(scaleAction)
-
             
-            if let scene = GKScene(fileNamed: "GameScene") {
-                if let sceneNode = scene.rootNode as? GameScene {
+            if let view = self.view {
+                self.transactionScene.goToNextLevel(view: view, gameScene: "GameScene")
+            }
+            
+        }
+    }
+    
+    private func cancelMusic() {
+        let buttonTexture = SKTexture(imageNamed: "Musica")
+        let button = SKButtonNode(texture: buttonTexture)
+        var playingMusic: Bool = false
+        
+        let buttonSize = CGSize(width: 115, height: 170)
+        button.size = buttonSize
+        
+        button.position = CGPoint(x: size.width / 1.7, y: size.height - size.height / 1.4)
+
+        button.name = "Musicas"
+        addChild(button)
+        
+        button.setButtonAction {
+            print("Botão foi tocado!")
+            
+            AudioPlayer.shared.enviromentSong.toggle()
+            AudioPlayer.shared.EnviromentSong()
+            if playingMusic {
+                let buttonTexture = SKTexture(imageNamed: "Musica")
+                button.texture = buttonTexture
+                playingMusic.toggle()
+            } else {
+                let buttonTexture = SKTexture(imageNamed: "SemMusica")
+                button.texture = buttonTexture
+                playingMusic.toggle()
+            }
+
+        }
+    }
+    
+    private func cancelEffect() {
+        let buttonTexture = SKTexture(imageNamed: "Efeitos")
+        let button = SKButtonNode(texture: buttonTexture)
+        var playingEffect: Bool = false
+        
+        let buttonSize = CGSize(width: 115, height: 170)
+        button.size = buttonSize
+  
+        button.position = CGPoint(x: size.width / 2.4, y: size.height - size.height / 1.4)
+        
+        
+        button.name = "Efeitos"
+        addChild(button)
+        
+        button.setButtonAction  {
+            print("Botão foi tocado!")
+            AudioPlayer.shared.effectPlayerSong.toggle()
+            if playingEffect {
+                let buttonTexture = SKTexture(imageNamed: "Efeitos")
+                button.texture = buttonTexture
+                playingEffect.toggle()
+            } else {
+                let buttonTexture = SKTexture(imageNamed: "SemEfeitos")
+                button.texture = buttonTexture
+                playingEffect.toggle()
+            }
+        }
+    }
+    
+    private func credits() {
+        let buttonTexture = SKTexture(imageNamed: "Creditos")
+        let button = SKButtonNode(texture: buttonTexture)
+        
+        let buttonSize = CGSize(width: 250, height: 125)
+        button.size = buttonSize
+        
+        button.position = CGPoint(x: size.width / 2, y: size.height - size.height / 1.17)
+        
+        button.name = "Creditos"
+        addChild(button)
+        
+        button.setButtonAction {
+            print("Botão foi tocado!")
+            if let scene = GKScene(fileNamed: "CreditsScene") {
+                if let sceneNode = scene.rootNode as? CreditsScene {
                     if let view = self.view {
-                        //self.transactionScene.goToNextLevel(view: view., gameScene: "GameScene")
                         view.presentScene(sceneNode)
                     }
                 }
             }
         }
     }
-    
-    
-    private func cancelSong() {
-        let buttonTexture = SKTexture(imageNamed: "ButtonGameOver")
-        let button = SKButtonNode(texture: buttonTexture)
-        
-        let buttonSize = CGSize(width: 125, height: 80) // Substitua pelos valores desejados
-        button.size = buttonSize
-        
-        // Configurar a posição do botão no meio da tela
-        button.position = CGPoint(x: size.width / 1.7, y: size.height - size.height / 2)
-        
-
-        button.name = "playButton"
-        addChild(button)
-        
-        button.setButtonAction { 
-            print("Botão foi tocado!")
-            AudioPlayer.shared.enviromentSong.toggle()
-            AudioPlayer.shared.EnviromentSong()
-            
-            // Adicione aqui as ações que deseja executar quando o botão for tocado.
-        }
-    }
-    
-    private func cancelMusic() {
-        let buttonTexture = SKTexture(imageNamed: "ButtonGameOver")
-        let button = SKButtonNode(texture: buttonTexture)
-        
-        let buttonSize = CGSize(width: 125, height: 80) // Substitua pelos valores desejados
-        button.size = buttonSize
-        
-        // Configurar a posição do botão no meio da tela
-        button.position = CGPoint(x: size.width / 2.5, y: size.height - size.height / 2)
-        
-
-        button.name = "playButton"
-        addChild(button)
-        
-        button.setButtonAction  { [weak self] in
-            print("Botão foi tocado!")
-            
-            // Adicione aqui as ações que deseja executar quando o botão for tocado.
-        }
-    }
-    
-    
-    private func credits() {
-        let buttonTexture = SKTexture(imageNamed: "ButtonGameOver")
-        let button = SKButtonNode(texture: buttonTexture)
-        
-        let buttonSize = CGSize(width: 250, height: 80) // Substitua pelos valores desejados
-        button.size = buttonSize
-        
-        // Configurar a posição do botão no meio da tela
-        button.position = CGPoint(x: size.width / 2, y: size.height - size.height / 1.5)
-
-        button.name = "playButton"
-        addChild(button)
-        
-        button.setButtonAction {
-            print("Botão foi tocado!")
-
-            // Adicione aqui as ações que deseja executar quando o botão for tocado.
-        }
-    }
-    
-    
-    
-    private func addGoToMenuButton() {
-        let buttonTexture = SKTexture(imageNamed: "ButtonGoToMenu")
-        let button = SKButtonNode(texture: buttonTexture)
-        
-        
-        let buttonSize = CGSize(width: 500, height: 160) // Substitua pelos valores desejados
-        button.size = buttonSize
-        
-        // Configurar a posição do botão no meio da tela
-        button.position = CGPoint(x: size.width / 2, y: size.height - size.height / 2)
-        
-        // Configurar a ação de animação ao tocar no botão
-        let scaleUp = SKAction.scale(to: 1.1, duration: 0.1) // Aumenta o tamanho do botão em 10%
-        let scaleDown = SKAction.scale(to: 1.0, duration: 0.1) // Reduz o tamanho de volta ao tamanho original
-        var buttonAction = SKAction.sequence([scaleUp, scaleDown])
-        
-
-        button.name = "playAgainButton"
-        addChild(button)
-        
-        button.setButtonAction {
-            let scaleAction = SKAction.sequence([
-                SKAction.scale(to: 1.2, duration: 0.1),
-                SKAction.scale(to: 1.0, duration: 0.1)
-            ])
-
-            button.run(scaleAction)
-        }
-    }
-    
 }
-        
-        
+
+

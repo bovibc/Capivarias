@@ -19,6 +19,7 @@ class AudioPlayer: ObservableObject {
     var effectPlayer: AVAudioPlayer?
     
     @Published var enviromentSong: Bool = true
+    @Published var effectPlayerSong: Bool = true
     
     @Published
     var enviromentVolume: Float = 1.0 {
@@ -46,7 +47,7 @@ class AudioPlayer: ObservableObject {
             do {
                 enviromentPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
                 enviromentPlayer?.volume = enviromentVolume * volume
-                enviromentPlayer?.numberOfLoops = -1
+                enviromentPlayer?.numberOfLoops = -1 //loops sound
                 enviromentPlayer?.play()
             } catch {
                 print ("Audio Player ERROR")
@@ -69,18 +70,31 @@ class AudioPlayer: ObservableObject {
         }
     }
     
-    func stopBackGroundMusic(){
-        enviromentPlayer?.stop()
+    func stopMusic(songEnviroment: AVAudioPlayer){
+        songEnviroment.stop()
     }
     
     
     func EnviromentSong(){
         if !AudioPlayer.shared.enviromentSong {
-            AudioPlayer.shared.stopBackGroundMusic()
+            guard let enviromentPlayer else {return}
+            AudioPlayer.shared.stopMusic(songEnviroment: enviromentPlayer)
         } else {
             AudioPlayer.shared.playEnviroment(sound: songs.ambient, type: "mp3", volume: 1.0)
         }
-        
+    }
+    
+    
+    func playerEffectSong(songs: String){
+       
+        if !AudioPlayer.shared.effectPlayerSong {
+            guard let effectPlayer else {return}
+            AudioPlayer.shared.stopMusic(songEnviroment: effectPlayer)
+           
+        } else {
+            AudioPlayer.shared.playEffect(effect: songs, type: "mp3", volume: 1.0)
+        }
+    
     }
     
 }
