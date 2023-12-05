@@ -140,7 +140,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     capybara.stop()
                 }
                 else {
-                    capybara.stopZarabatana()
+                    capybara.idleZarabatana()
                 }
             }
         } else {

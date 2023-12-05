@@ -27,10 +27,12 @@ class Capybara {
     var audioPlayer = AudioPlayer()
     var sounds = Sounds()
     let assets = Assets()
+    
     var sprite: SKSpriteNode
+    let idleSwordTexture:[SKTexture]
     let attackSwordTexture:[SKTexture]
     let runSwordTexture:[SKTexture]
-    let damageTexture:[SKTexture]
+    let takingDamageTexture:[SKTexture]
     let dyingTexture:[SKTexture]
     let idleZarabatanaTexture:[SKTexture]
     let attackZarabatanaTexture:[SKTexture]
@@ -41,7 +43,7 @@ class Capybara {
 
     init() {
         self.sprite = SKSpriteNode(imageNamed: assets.idleCapybara)
-
+        idleSwordTexture = [SKTexture(imageNamed: staticName)]
         attackSwordTexture = Textures.getTextures(atlas: assets.capybaraAttack)
         runSwordTexture = Textures.getTextures(atlas: assets.capybaraWalk)
         
@@ -49,11 +51,9 @@ class Capybara {
         attackZarabatanaTexture = Textures.getTextures(atlas: assets.capybaraAttackZarabatana)
         walkZarabatanaTexture = Textures.getTextures(atlas: assets.capybaraZarabanataWalking)
 
-        damageTexture = Textures.getTextures(atlas: assets.capybaraDamage)
+        takingDamageTexture = Textures.getTextures(atlas: assets.capybaraDamage)
         dyingTexture = Textures.getTextures(atlas: assets.capybaraDying)
         deadTexture = Textures.getTextures(atlas: assets.deadCapybara )
-
-
     }
 
     func changeLife(damage: Float) {
@@ -99,7 +99,7 @@ class Capybara {
     }
 
     func stop() {
-        managerState(nextState: .idleSword)
+        stateManager(nextState: .idleSword)
 //        self.isCapivaraHitting = false
 //        self.isCapivaraWalking = false
 //        self.isCapivaraTakingDamage = false
@@ -112,8 +112,8 @@ class Capybara {
 //        sprite.run(SKAction.repeatForever(action))
     }
 
-    func stopZarabatana() {
-        managerState(nextState: .idleZarabatana)
+    func idleZarabatana() {
+        stateManager(nextState: .idleZarabatana)
 //        self.isCapivaraHitting = false
 //        self.isCapivaraWalking = false
 //        self.isCapivaraTakingDamage = false
@@ -127,18 +127,19 @@ class Capybara {
     }
 
     func swordAttackAnimation() {
-        guard !isCapivaraHitting else { return }
+//        guard !isCapivaraHitting else { return }
+        stateManager(nextState: .attackSword)
         audioPlayer.playEffect(effect: sounds.swordAttack, type: "mp3", volume: 0.1)
         
-        let animation = SKAction.animate(with: attackSwordTexture, timePerFrame: 0.07)
-        
-        isCapivaraWalking = false
-        isCapivaraHitting = true
-
-        sprite.removeAllActions()
-        sprite.run(SKAction.sequence([animation])) {
-            self.stop()
-        }
+//        let animation = SKAction.animate(with: attackSwordTexture, timePerFrame: 0.07)
+//        
+//        isCapivaraWalking = false
+//        isCapivaraHitting = true
+//
+//        sprite.removeAllActions()
+//        sprite.run(SKAction.sequence([animation])) {
+//            self.stop()
+//        }
     }
 
     func shootZarabatanaAnimation(capybara: SKSpriteNode, alligator: SKSpriteNode) {
@@ -167,6 +168,7 @@ class Capybara {
         
         audioPlayer.playEffect(effect: "blow-gun", type: ".mp3", volume: 0.8)
 
+        stateManager(nextState: .attackZarabatana)
 //        let textures = Textures.getTextures(atlas: assets.capybaraAttackZarabatana)
 //        
 //        let animation = SKAction.animate(with: textures, timePerFrame: 0.07,
@@ -221,6 +223,7 @@ class Capybara {
     }
     
     func walk(positionX: CGFloat) {
+        stateManager(nextState: .runSword)
 //        let action = SKAction.animate(with: runSwordTexture,
 //                                      timePerFrame: 1/TimeInterval(runSwordTexture.count),
 //                                      resize: true,
@@ -236,42 +239,44 @@ class Capybara {
     }
 
     func walkZarabatana(positionX: CGFloat) {
-        let action = SKAction.animate(with: walkZarabatanaTexture,
-                                      timePerFrame: 1/TimeInterval(walkZarabatanaTexture.count),
-                                      resize: true,
-                                      restore: true)
-        
+        stateManager(nextState: .runZarabatana)
+//        let action = SKAction.animate(with: walkZarabatanaTexture,
+//                                      timePerFrame: 1/TimeInterval(walkZarabatanaTexture.count),
+//                                      resize: true,
+//                                      restore: true)
+//        
         sprite.xScale = positionX > 0 ? abs(sprite.xScale) : -abs(sprite.xScale)
-
-        if !isCapivaraWalking {
-            isCapivaraWalking = true
-            sprite.removeAllActions()
-            sprite.run(SKAction.repeatForever(action))
-        }
+//
+//        if !isCapivaraWalking {
+//            isCapivaraWalking = true
+//            sprite.removeAllActions()
+//            sprite.run(SKAction.repeatForever(action))
+//        }
     }
 
     func death(_ death: @escaping ()-> Void) {
-        guard !isDead else  { return }
-        if  life <= 0 {
-            isDead = true
-            let startAction = SKAction.run {
-                self.dyingAction()
-            }
-            let finishAction = SKAction.run {
-                self.stayingDeadAction()
-            }
-            let callback = SKAction.run {
-                death()
-                self.sprite.removeFromParent()
-            }
+        stateManager(nextState: .die)
+//        guard !isDead else  { return }
+//        if  life <= 0 {
+//            isDead = true
+//            let startAction = SKAction.run {
+//                self.dyingAction()
+//            }
+//            let finishAction = SKAction.run {
+//                self.stayingDeadAction()
+//            }
+//            let callback = SKAction.run {
+//                death()
+//                self.sprite.removeFromParent()
+//            }
 
-            let action = SKAction.sequence([startAction, SKAction.wait(forDuration: 0.7), finishAction, SKAction.wait(forDuration: 0.5), callback])
-            self.sprite.removeAllActions()
-            self.sprite.run(action)
+//            let action = SKAction.sequence([startAction, SKAction.wait(forDuration: 0.7), finishAction, SKAction.wait(forDuration: 0.5), callback])
+//            self.sprite.removeAllActions()
+//            self.sprite.run(action)
         }
-    }
 
     private func dyingAction() {
+        stateManager(nextState: .die)
 //        let textures = Textures.getTextures(atlas: assets.capybaraDying)
 //        let action = SKAction.animate(with: textures,
 //                                      timePerFrame: 0.7/TimeInterval(textures.count),
@@ -281,7 +286,7 @@ class Capybara {
 //        sprite.run(action)
     }
 
-    private func stayingDeadAction() {
+//    private func stayingDeadAction() {
 //        let textures = Textures.getTextures(atlas: assets.deadCapybara )
 //        let action = SKAction.animate(with: textures,
 //                                      timePerFrame: 0.001,
@@ -289,10 +294,11 @@ class Capybara {
 //                                      restore: true)
 //
 //        sprite.run(SKAction.repeatForever(action))
-    }
+//    }
 
     func takingDamage(){
-////        self.isCapivaraTakingDamage = true
+        stateManager(nextState: .takingDamage)
+//        self.isCapivaraTakingDamage = true
 //        let action = SKAction.animate(with: damageTexture,
 //                                      timePerFrame:  1/TimeInterval(damageTexture.count),
 //                                      resize: true,
@@ -321,15 +327,15 @@ class Capybara {
         sprite.position.y -= speed
     }
     
-    func spriteAnimation(textures: [SKTexture], time: Double){
+    func spriteAnimation(textures: [SKTexture], timePerFrame: Double){
         let action = SKAction.animate(with: textures,
-                                      timePerFrame: time,
+                                      timePerFrame: timePerFrame,
                                       resize: true,
                                       restore: true)
         sprite.run(SKAction.repeatForever(action))
     }
     
-    func managerState(nextState: CapybaraStates){
+    func stateManager(nextState: CapybaraStates){
         exitState()
         enterState(nextState: nextState)
     }
@@ -339,22 +345,34 @@ class Capybara {
         switch currentState {
         case .none:
             <#code#>
+            
         case .idleSword:
-            <#code#>
+            spriteAnimation(textures: idleSwordTexture, timePerFrame: 0.001)
+            
         case .runSword:
-            spriteAnimation(textures: runSwordTexture, time: 1/TimeInterval(runSwordTexture.count))
+            spriteAnimation(textures: runSwordTexture, timePerFrame: 1/TimeInterval(runSwordTexture.count))
+            
         case .attackSword:
-            spriteAnimation(textures: attackSwordTexture, time: 1/TimeInterval(attackSwordTexture.count))
+            spriteAnimation(textures: attackSwordTexture, timePerFrame: 1/TimeInterval(attackSwordTexture.count))
+            
         case .idleZarabatana:
-            spriteAnimation(textures: idleZarabatanaTexture, time: 0.001)
+            spriteAnimation(textures: idleZarabatanaTexture, timePerFrame: 0.001)
+            
         case .runZarabatana:
-            <#code#>
+            let action = SKAction.animate(with: walkZarabatanaTexture,
+                                          timePerFrame: 1/TimeInterval(walkZarabatanaTexture.count),
+                                          resize: true,
+                                          restore: true)
+            sprite.run(SKAction.repeatForever(action))
+            
         case .attackZarabatana:
-            spriteAnimation(textures: attackZarabatanaTexture, time: 1/TimeInterval(attackZarabatanaTexture.count))
+            spriteAnimation(textures: attackZarabatanaTexture, timePerFrame: 1/TimeInterval(attackZarabatanaTexture.count))
+            
         case .takingDamage:
-            spriteAnimation(textures: damageTexture, time: 1/TimeInterval(damageTexture.count))
+            spriteAnimation(textures: takingDamageTexture, timePerFrame: 1/TimeInterval(takingDamageTexture.count))
+            
         case .die:
-            spriteAnimation(textures: dyingTexture, time: 0.7/TimeInterval(dyingTexture.count))
+            spriteAnimation(textures: dyingTexture, timePerFrame: 0.7/TimeInterval(dyingTexture.count))
             sprite.removeAllActions()
             let action = SKAction.animate(with: deadTexture,
                                           timePerFrame: 0.001,

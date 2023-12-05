@@ -41,6 +41,7 @@
 		F2A77F832AE7E7A50030F197 /* AudioPlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A77F822AE7E7A50030F197 /* AudioPlayerController.swift */; };
 		F2C014B62AE81319000E9B87 /* BackgroundController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C014B52AE81319000E9B87 /* BackgroundController.swift */; };
 		F2E112C52AFE782F00B76955 /* Sounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E112C42AFE782F00B76955 /* Sounds.swift */; };
+		F2E5ECE42B1E4B4F006E0477 /* StateMachine.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E5ECE32B1E4B4F006E0477 /* StateMachine.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,6 +80,7 @@
 		F2A77F822AE7E7A50030F197 /* AudioPlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerController.swift; sourceTree = "<group>"; };
 		F2C014B52AE81319000E9B87 /* BackgroundController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundController.swift; sourceTree = "<group>"; };
 		F2E112C42AFE782F00B76955 /* Sounds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sounds.swift; sourceTree = "<group>"; };
+		F2E5ECE32B1E4B4F006E0477 /* StateMachine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateMachine.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -232,6 +234,7 @@
 			isa = PBXGroup;
 			children = (
 				F208C80A2B1E0240006DCAD1 /* CapybaraStates.swift */,
+				F2E5ECE32B1E4B4F006E0477 /* StateMachine.swift */,
 			);
 			path = "State Machine";
 			sourceTree = "<group>";
@@ -337,6 +340,7 @@
 				0813A2D72AD6DEFE00428484 /* GameViewController.swift in Sources */,
 				328080712AF26F71009650E3 /* GameOverGameScene.swift in Sources */,
 				F20BC15C2B0280A9009D9B65 /* Assets.swift in Sources */,
+				F2E5ECE42B1E4B4F006E0477 /* StateMachine.swift in Sources */,
 				F208C80B2B1E0240006DCAD1 /* CapybaraStates.swift in Sources */,
 				08CEE5F82AE1653C00149B83 /* Capybara.swift in Sources */,
 				320C13BB2B14BBD500877993 /* LifeBar.swift in Sources */,
