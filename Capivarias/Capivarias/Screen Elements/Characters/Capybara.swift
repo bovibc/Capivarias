@@ -14,7 +14,7 @@ class Capybara {
     var isCapivaraTakingDamage = false
     var life: Float = 100
     private var damageSword: Float = 20
-    private var damageZarabatana: Float = 500
+    private var damageZarabatana: Float = 1
     private var breathTime: Float = 100
     private var speed: CGFloat = 5
     private var defense: Float = 100

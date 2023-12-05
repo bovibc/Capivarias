@@ -9,7 +9,7 @@ import Foundation
 import SpriteKit
 
 class Alligator {
-    private var life: Float = 100
+    var life: Float = 100
     private var damage: Float = 10
     private var speed: CGFloat = 1.5
     private var attackSpeed: CGFloat = 1
@@ -27,6 +27,8 @@ class Alligator {
     private let attackTextures:[SKTexture]
     private let walkTextures:[SKTexture]
     var sprite: SKSpriteNode
+    var lifeLabel = SKLabelNode()
+    var lifeLabelBackground = SKSpriteNode()
 
     init() {
         self.sprite = SKSpriteNode(imageNamed: staticName)
@@ -36,6 +38,7 @@ class Alligator {
     
     func changeLife(damage: Float) {
         life -= damage
+        print("enemy life is \(life)")
     }
 
     func getLife() -> Float {

@@ -92,6 +92,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private func setupContact() {
         self.physicsWorld.contactDelegate = self
     }
+    
+    func setupEnemyLifeBar(sprite: Alligator){
+        addChild(sprite.lifeLabel)
+        sprite.lifeLabel.position = CGPoint(x: sprite.sprite.position.x, y: sprite.sprite.position.y + 50)
+        sprite.lifeLabel.zPosition = 99
+        sprite.lifeLabel.fontColor = .red
+        sprite.lifeLabel.fontSize = 30
+    }
+    
+    private func removeEnemyLifeBar(_ index: Int) {
+        enemies[index].lifeLabel.removeFromParent()
+    }
 
     private func setupAlligator() {
         generateEnemies()
@@ -101,6 +113,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 screenHeight: size.height,
                 spawnPosition: Position.randomize(size),
                 name: i+2)
+            setupEnemyLifeBar(sprite: enemies[i])
+        
             addChild(enemies[i].sprite)
         }
     }
@@ -128,6 +142,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     override func update(_ currentTime: TimeInterval) {
         for i in 0..<enemies.count {
+            enemies[i].lifeLabel.position = CGPoint(x: enemies[i].sprite.position.x, y: enemies[i].sprite.position.y + 50)
+            enemies[i].lifeLabel.text = "\(Int(enemies[i].life))"
+            
             if !enemies[i].isInContact {
                 enemies[i].follow(player: capybara.sprite.position)
             }
@@ -228,7 +245,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 //MARK: animaçao da zarabatana
                 self.capybara.shootZarabatanaAnimation(capybara: self.capybara.sprite,
                                               alligator: self.enemies[self.enemies.count-1].sprite)
-                print(self.enemies[self.enemies.count-1].getLife())
             }
         }
         changeWeapon()
@@ -254,6 +270,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
 
     func didBegin(_ contact: SKPhysicsContact) {
+        //categoria1 = Capybara
+        //categoria2 = Jacare
+        //Categoria6 = Semente
         let bodyA = contact.bodyA.categoryBitMask
         let bodyB = contact.bodyB.categoryBitMask
 
@@ -261,6 +280,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let nameB = contact.bodyB.node?.name
 
         if bodyA == 1 && bodyB == 2 {
+            print("")
             contactAttack(nameA, nameB)
         }
         if bodyA == 2  && bodyB == 1 {
@@ -305,6 +325,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
     private func enemyDied(_ index: Int) {
         self.enemies[index].die()
+        removeEnemyLifeBar(index)
         self.enemies.remove(at: index)
         isEnemiesEmpty()
     }
