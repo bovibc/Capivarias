@@ -17,9 +17,9 @@ class Alligator {
     private let staticName: String = "a1"
     private var isAlligatorWalking: Bool = false
     var isAlligatoraAttacking: Bool = false
-    private var audioPlayer = AudioPlayer()
     var isInContact: Bool = false
     var lastHit: TimeInterval = 0
+    var isFollowing: Bool = true
     var finishAnimation: TimeInterval = 0
     var isAlligatorTakingDamage: Bool = false
     private let sounds = Sounds()
@@ -128,7 +128,8 @@ class Alligator {
     @objc func attack() {
         guard !isAlligatoraAttacking && !isAlligatorTakingDamage else { return }
         self.isAlligatoraAttacking = true
-        audioPlayer.playEffect(effect: sounds.swordAttack, type: "mp3", volume: 1.0)
+        AudioPlayer.shared.playerEffectSong(songs: sounds.swordAttack)
+       
         let startAction = SKAction.run {
             self.stop()
             self.attackAction()

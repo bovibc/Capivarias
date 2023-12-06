@@ -24,11 +24,9 @@ struct Assets {
 
     let seedBullet = "seed"
     let capybaraAttackZarabatana = "Capybara_ShootingZarabatana"
-
-
     let map3 = "Mapa dos Jacares"
     let gameOverMap = "Game Over"
-    
     let monkeyWalking = "Monkey_Waking"
-    
+    let backgroundMenu = "Background Menu"
+    let backgroundCredits = "BackgroundCredits"
 }
