@@ -135,7 +135,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
 
         if joystick.isJoystickStatic() {
-            if !capybara.isCapivaraHitting && !capybara.isCapivaraTakingDamage {
+            
+            
+            if capybara.isAttacking() && capybara.currentState != .takingDamage {
                 if weapon == true {
                     capybara.stop()
                 }
@@ -146,7 +148,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         } else {
             let direction = joystick.getDirection()
             validateMovement(direction)
-            if !capybara.isCapivaraHitting && !capybara.isCapivaraTakingDamage {
+            if capybara.isAttacking() && capybara.currentState != .takingDamage {
                 if weapon == true {
                     capybara.walk(positionX: joystick.positionX )
                 } else {

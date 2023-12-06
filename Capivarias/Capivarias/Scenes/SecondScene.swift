@@ -111,14 +111,16 @@ class SecondScene: SKScene, SKPhysicsContactDelegate {
         monkey.follow(player: capybara.sprite.position)
         monkey.attack(capyX: capybara.sprite.position.x, capyY: capybara.sprite.position.y)
         if joystick.isJoystickStatic() {
-            if !capybara.isCapivaraHitting && !capybara.isCapivaraTakingDamage {
+            if capybara.currentState != .attackSword && capybara.currentState != .attackZarabatana &&
+                capybara.currentState != .takingDamage {
                 capybara.stop()
             }
 
         } else {
             let direction = joystick.getDirection()
             validateMovement(direction)
-            if !capybara.isCapivaraHitting && !capybara.isCapivaraTakingDamage {
+            
+            if capybara.currentState != .attackSword && capybara.currentState != .attackZarabatana && capybara.currentState != .takingDamage {
                 capybara.walk(positionX: joystick.positionX )
             }
         }
@@ -131,10 +133,6 @@ class SecondScene: SKScene, SKPhysicsContactDelegate {
                     self.transactionScene.gameOver(view: view, gameScene: GameOverGameScene())
                 }
             }
-        }
-
-        if isContact {
-
         }
 
         if let view = self.view {
