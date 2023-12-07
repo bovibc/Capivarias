@@ -28,6 +28,8 @@ struct Assets {
 
     let map3 = "Mapa dos Jacares"
     let gameOverMap = "Game Over"
+    let firstMapGround = "FirstMapGround"
+    let lakeObjects = "FirstMapGround"
     
     let monkeyWalking = "Monkey_Waking"
     
