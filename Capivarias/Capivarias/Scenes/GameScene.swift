@@ -279,23 +279,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let nameB = contact.bodyB.node?.name
 
         if bodyA == 1 && bodyB == 2 {
-            guard !enemies.isEmpty else {return}
-            print("")
             contactAttack(nameA, nameB)
         }
         if bodyA == 2  && bodyB == 1 {
-            guard !enemies.isEmpty else {return}
             contactAttack(nameA, nameB)
         }
 
         if bodyA == 6 && bodyB == 2  {
-            guard !enemies.isEmpty else {return}
-            enemies[self.lastEnemyIndex].changeLife(damage: capybara.getDamageZarabatana())
+            if lastEnemyIndex >= 0 && lastEnemyIndex < enemies.count {
+                enemies[self.lastEnemyIndex].changeLife(damage: capybara.getDamageZarabatana())
+            }
         }
 
         if bodyA == 2  && bodyB == 6 {
-            guard !enemies.isEmpty else {return}
-            enemies[self.lastEnemyIndex].changeLife(damage: capybara.getDamageZarabatana())
+            if lastEnemyIndex >= 0 && lastEnemyIndex < enemies.count {
+                enemies[self.lastEnemyIndex].changeLife(damage: capybara.getDamageZarabatana())
+            }
         }
     }
 
