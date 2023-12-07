@@ -219,8 +219,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 if pressed && self.isContact && !self.capybara.isCapivaraHitting {
                     self.capybara.swordAttackAnimation()
                     self.playerSwordAttack()
-                }
-                else {
+                } else {
                     self.capybara.swordAttackAnimation()
                 }
             } else if !self.enemies.isEmpty {
