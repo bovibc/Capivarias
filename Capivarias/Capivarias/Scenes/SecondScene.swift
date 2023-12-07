@@ -45,39 +45,24 @@ class SecondScene: SKScene, SKPhysicsContactDelegate {
     }
 
     private func setObstacles() {
-        setLake()
-        setTree()
-        setRock()
+        setNode(nodeName: "tronco1", textureName: "tronco1")
+        setNode(nodeName: "tronco2", textureName: "tronco2")
+        setNode(nodeName: "tronco3", textureName: "tronco3")
+        setNode(nodeName: "tronco4", textureName: "tronco4")
+        setNode(nodeName: "tronco5", textureName: "tronco5")
+        setNode(nodeName: "tronco6", textureName: "tronco6")
+        setNode(nodeName: "tronco7", textureName: "tronco7")
+
     }
 
-    private func setTree() {
-        let tree = childNode(withName: "tree") as! SKSpriteNode
-        let treeTexture = SKTexture(imageNamed: "tronco")
+    private func setNode(nodeName: String, textureName: String) {
+        let node = childNode(withName: nodeName) as! SKSpriteNode
+        let texture = SKTexture(imageNamed: textureName)
         
-        tree.physicsBody = SKPhysicsBody(texture: treeTexture, size: tree.size)
-        tree.physicsBody?.isDynamic = false
-        tree.physicsBody?.allowsRotation = false
-        tree.physicsBody?.affectedByGravity = false
-    }
-
-    private func setRock() {
-        let rock = childNode(withName: "rock") as! SKSpriteNode
-        let rockTexture = SKTexture(imageNamed: "rock")
-
-        rock.physicsBody = SKPhysicsBody(texture: rockTexture, size: rock.size)
-        rock.physicsBody?.isDynamic = false
-        rock.physicsBody?.allowsRotation = false
-        rock.physicsBody?.affectedByGravity = false
-    }
-
-    private func setLake() {
-        let lake = childNode(withName: "lake") as! SKSpriteNode
-        let lakeTexture = SKTexture(imageNamed: "lake")
-        
-        lake.physicsBody = SKPhysicsBody(texture: lakeTexture, size: lake.size)
-        lake.physicsBody?.isDynamic = false
-        lake.physicsBody?.allowsRotation = false
-        lake.physicsBody?.affectedByGravity = false
+        node.physicsBody = SKPhysicsBody(texture: texture, size: node.size)
+        node.physicsBody?.isDynamic = false
+        node.physicsBody?.allowsRotation = false
+        node.physicsBody?.affectedByGravity = false
     }
 
     private func setupAudio() {
