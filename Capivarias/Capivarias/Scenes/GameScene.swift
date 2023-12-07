@@ -26,6 +26,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var weapon: Bool = true
     var maxLife: CGFloat = 100
     var weaponSelection = WeaponSelection()
+    var enemyTargetBlowgun: Int = 0
 
     override func didMove(to view: SKView) {
         setupScene()
@@ -39,7 +40,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setupLifeBar()
         setupWeaponSelection()
         AudioPlayer.shared.EnviromentSong()
-        
     }
 
     private func setupLifeBar() {
@@ -112,7 +112,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 screenHeight: size.height,
                 spawnPosition: Position.randomize(size),
                 name: i+2)
-            setupEnemyLifeBar(sprite: enemies[i])
+//            setupEnemyLifeBar(sprite: enemies[i])
         
             addChild(enemies[i].sprite)
         }
@@ -241,8 +241,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
             } else if !self.enemies.isEmpty {
                 //MARK: animaçao da zarabatana
+                self.enemyTargetBlowgun = self.enemies.count-1
+
                 self.capybara.shootZarabatanaAnimation(capybara: self.capybara.sprite,
-                                              alligator: self.enemies[self.enemies.count-1].sprite)
+                                                       alligator: self.enemies[self.enemyTargetBlowgun].sprite)
+                self.playerZarabatanaAttack()
             }
         }
         changeWeapon()
@@ -278,18 +281,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let nameB = contact.bodyB.node?.name
 
         if bodyA == 1 && bodyB == 2 {
+            guard !enemies.isEmpty else {return}
             print("")
             contactAttack(nameA, nameB)
         }
         if bodyA == 2  && bodyB == 1 {
+            guard !enemies.isEmpty else {return}
             contactAttack(nameA, nameB)
         }
 
         if bodyA == 6 && bodyB == 2  {
+            guard !enemies.isEmpty else {return}
             enemies[self.lastEnemyIndex].changeLife(damage: capybara.getDamageZarabatana())
         }
 
         if bodyA == 2  && bodyB == 6 {
+            guard !enemies.isEmpty else {return}
             enemies[self.lastEnemyIndex].changeLife(damage: capybara.getDamageZarabatana())
         }
     }
@@ -360,14 +367,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     private func playerZarabatanaAttack() {
-        for i in 0..<enemies.count {
-            if i >= enemies.count { return }
-                if enemies[i].getLife() <= 0 {
-                    self.enemyDied(i)
-                } else {
-                    enemies[i].takingDamage()
-                    enemies[self.enemies.count-1].changeLife(damage: capybara.getDamageZarabatana())
-                }
-            }
+         if enemies[enemyTargetBlowgun].getLife() <= 0 {
+            self.enemyDied(enemyTargetBlowgun)
+        } else {
+            enemies[enemyTargetBlowgun].takingDamage()
+            enemies[enemyTargetBlowgun].changeLife(damage: capybara.getDamageZarabatana())
         }
+    }
 }
