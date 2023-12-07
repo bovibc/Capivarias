@@ -11,9 +11,11 @@ import GameController
 
 class SecondScene: SKScene, SKPhysicsContactDelegate {
 
+    var lifeBar = LifeBar()
     var virtualController: GCVirtualController?
     var joystick = Joystick()
     var monkey = Monkey()
+    var enemies: [Monkey] = [Monkey()]
     var audioPlayer = AudioPlayer()
     var capybara = Capybara()
     let backgroundController = BackgroundController()
@@ -22,6 +24,13 @@ class SecondScene: SKScene, SKPhysicsContactDelegate {
     var isContact: Bool = false
     var transactionScene = TrasactionsScenes()
     var gameOver: TimeInterval = 0
+    var weapon: Bool = true
+    var weaponSelection = WeaponSelection()
+    var maxLife: CGFloat = 100
+    var timeToChangePosition: TimeInterval = 0
+    var lastEnemyIndex: Int = 0
+
+    
 
     override func didMove(to view: SKView) {
         connectController()
@@ -34,6 +43,24 @@ class SecondScene: SKScene, SKPhysicsContactDelegate {
         setupAudio()
         setObstacles()
         setupContact()
+        setupLifeBar()
+        setupWeaponSelection()
+    }
+    
+    private func setupLifeBar() {
+        addChild(lifeBar)
+        lifeBar.position = .init(x: 300, y: 960)
+        lifeBar.zPosition = 99
+        lifeBar.xScale = 0.7
+        lifeBar.yScale = 0.7
+    }
+    
+    private func setupWeaponSelection() {
+        addChild(weaponSelection)
+        weaponSelection.position = .init(x: 100, y: 902)
+        weaponSelection.zPosition = 99
+        weaponSelection.xScale = 0.7
+        weaponSelection.yScale = 0.7
     }
     
     private func setupBackground() {
@@ -83,14 +110,30 @@ class SecondScene: SKScene, SKPhysicsContactDelegate {
     private func setupAudio() {
         audioPlayer.playEnviroment(sound: "ambient-forest", type: "mp3", volume: 1.0)
     }
+    
+
 
     private func setupContact() {
         self.physicsWorld.contactDelegate = self
     }
     
-    private func setupMonkey() {
-        self.monkey.start(screenWidth: size.width , screenHeight: size.height)
-        addChild(monkey.sprite)
+    func setupMonkey() {
+        generateEnemies()
+        for i in 0..<enemies.count {
+            self.enemies[i].start(
+                screenWidth: size.width,
+                screenHeight: size.height,
+                spawnPosition: Position.randomize(size),
+                mask: i+2)
+            addChild(enemies[i].sprite)
+        }
+    }
+
+    private func generateEnemies() {
+        let plusEnemieNumber = Int.random(in: 0..<3)
+        for _ in 0..<plusEnemieNumber {
+            enemies.append(Monkey())
+        }
     }
     
     private func setupScene() {
@@ -106,29 +149,68 @@ class SecondScene: SKScene, SKPhysicsContactDelegate {
     private func removeDoor() {
         door.removeFromParent()
     }
+    
+    
+    private func timeToChangePosition(_ i: Int, _ currentTime: TimeInterval) {
+        if ((currentTime - enemies[i].lastChangedPosition) > 4) {
+                enemies[i].lastChangedPosition = currentTime
+                enemies[i].changePosition(size: size, capyX: capybara.sprite.position.x, capyY: capybara.sprite.position.y, monkey: enemies[i].sprite, capybara: capybara.sprite)
+            }
+    }
+    
+//    private func timeToAttack(_ i: Int, _ currentTime: TimeInterval) {
+//        if ((currentTime - enemies[i].lastAttack) > 3) {
+//            enemies[i].lastAttack = currentTime
+//            enemies[i].attack(capyX: capybara.sprite.position.x, capyY: capybara.sprite.position.y, monkey: enemies[i].sprite, capybara: capybara.sprite )
+//            }
+//    }
 
+    
     override func update(_ currentTime: TimeInterval) {
-        monkey.follow(player: capybara.sprite.position)
-        monkey.attack(capyX: capybara.sprite.position.x, capyY: capybara.sprite.position.y)
+        
+//        for i in 0..<enemies.count {
+//           // if !enemies[i].isInContact {
+//            if enemies[i].isInContact == false {
+//                //enemies[i].changePosition(size: size)
+//                timeToChangePosition(i, currentTime)
+//            }
+//           
+//        }
+        
+        
+        for i in 0..<enemies.count {
+            //timeToAttack(i, currentTime)
+            timeToChangePosition(i, currentTime)
+        }
+        
+    
+        
+        
         if joystick.isJoystickStatic() {
             if !capybara.isCapivaraHitting && !capybara.isCapivaraTakingDamage {
-                capybara.stop()
+                if weapon == true {
+                    capybara.stop()
+                }
+                else {
+                    capybara.stopZarabatana()
+                }
             }
-
         } else {
             let direction = joystick.getDirection()
             validateMovement(direction)
             if !capybara.isCapivaraHitting && !capybara.isCapivaraTakingDamage {
-                capybara.walk(positionX: joystick.positionX )
+                if weapon == true {
+                    capybara.walk(positionX: joystick.positionX )
+                } else {
+                    capybara.walkZarabatana(positionX: joystick.positionX )
+                }
             }
         }
 
         capybara.death()
         if capybara.life <= 0 {
-//            alligator.isFollowing = false
-//            if (currentTime - alligator.finishAnimation) > 1 {
-//                alligator.sprite.removeAllActions()
-//            }
+           monkey.sprite.removeAllActions()
+
             
             if (currentTime - gameOver) > 4 {
                 
@@ -139,15 +221,11 @@ class SecondScene: SKScene, SKPhysicsContactDelegate {
             }
         }
 
-        if isContact {
 
-        }
 
-        if let view = self.view {
-            if capybara.sprite.position.x >= 1400 {
-               // transactionScene.goToSecondView(view: view)
-            }
-        }
+        
+        lifeBar.updateProgress(capybara.life / Float(maxLife))
+        
     }
 
     private func validateMovement(_ direction: Direction) {
@@ -172,13 +250,29 @@ class SecondScene: SKScene, SKPhysicsContactDelegate {
 
     func setupController(){
         self.virtualController?.controller?.extendedGamepad?.buttonX.pressedChangedHandler = { button, value, pressed in
-            if pressed && self.isContact {
-                self.capybara.hit()
-               // self.alligator.changeLife(damage: self.capybara.getDamage())
-
+            if self.weapon == true {
+                if pressed && self.isContact {
+                    self.capybara.hit()
+                        //self.playerAttack()
+                }
+                else {
+                    self.capybara.hit()
+                }
+            } else {
+                self.capybara.shootZarabatana(capybara: self.capybara.sprite,
+                                              alligator: self.monkey.sprite)
+            }
+        }
+        changeWeapon()
+    }
+    
+    private func changeWeapon() {
+        self.virtualController?.controller?.extendedGamepad?.buttonY.pressedChangedHandler = { button, value, pressed in
+            if pressed {
+                self.weapon.toggle()
+                self.weaponSelection.changeWeapon(weapon: self.weapon)
             }
             else {
-                self.capybara.hit()
             }
         }
     }
@@ -189,31 +283,68 @@ class SecondScene: SKScene, SKPhysicsContactDelegate {
             self.setupController()
         }
     }
+    
+    private func isEnemyMask(_ mask: UInt32) -> Bool {
+        return (mask == 2 || mask == 3 || mask == 4)
+    }
+    
 
+    private func getEnemy(_ bodyA: UInt32, _ bodyB: UInt32) -> Int {
+        var index = 0
+        let body = (bodyA == 1) ? bodyB : bodyA
+        for i in enemies {
+            if body == i.sprite.physicsBody?.categoryBitMask {
+                index = enemies.firstIndex{$0 === i} ?? 0
+                break
+            }
+        }
+        return index
+    }
+    
+    
     func didEnd(_ contact: SKPhysicsContact) {
+        let bodyA = contact.bodyA.categoryBitMask
+        let bodyB = contact.bodyB.categoryBitMask
+        let enemyIndex = getEnemy(bodyA, bodyB)
+        enemies[enemyIndex].isInContact = false
         isContact = false
     }
 
     func didBegin(_ contact: SKPhysicsContact) {
-        if contact.bodyA.categoryBitMask == 1 && contact.bodyB.categoryBitMask == 2 {
-            contactAttack()
-        }
-        if contact.bodyA.categoryBitMask == 2 && contact.bodyB.categoryBitMask == 1 {
-            contactAttack()
-        }
+
+        let bodyA = contact.bodyA.categoryBitMask
+        let bodyB = contact.bodyB.categoryBitMask
+        let alligatorMaskA = isEnemyMask(bodyA)
+        let alligatorMaskB = isEnemyMask(bodyB)
+
+//        if bodyA == 1 && alligatorMaskB {
+//            contactAttack(bodyA, bodyB)
+//        }
+//        if alligatorMaskA && bodyB == 1 {
+//            contactAttack(bodyA, bodyB)
+//        }
+
+//        if contact.bodyA.categoryBitMask == 2 && contact.bodyB.categoryBitMask == 3 {
+//            enemies[self.lastEnemyIndex].changeLife(damage: capybara.getDamageZarabatana())
+//        }
+        
     }
+    
+
+    
+    
+    
+    
+    
 
     private func contactAttack() {
+//        lastEnemyIndex = getEnemy(bodyA, bodyB)
+        enemies[lastEnemyIndex].isInContact = true
         isContact = true
-        //monkey.attack()
-
-//        if alligator.isAlligatoraAttacking == false {
-//            capybara.changeLife(damage: alligator.getDamage())
-//            //Aqui, chamar animaçao da capivara tomando dano
-//        }
-//        else {
-//            setGamePadAction()
-//        }
+        
+        if enemies[lastEnemyIndex].isMonkeyAttacking == false {
+            capybara.changeLife(damage: enemies[lastEnemyIndex].getDamage())
+        }
     }
 
     private func setGamePadAction() {

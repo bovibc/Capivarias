@@ -27,5 +27,8 @@ struct Assets {
     let gameOverMap = "Game Over"
     
     let monkeyWalking = "Monkey_Waking"
-    
+    let monkeyAttacking = "jogando-banana"
+    let banana = "banana"
+    let monkey_stopped = "monkey_stopped"
+    let monkey_taking_damage = "monkey_taking_damage"
 }

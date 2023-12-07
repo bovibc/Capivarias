@@ -59,8 +59,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         weaponSelection.yScale = 0.7
     }
 
-    func changeLifeBar() {
-    }
+
 
     private func setupBackground() {
         backgroundController.setupBackground(scene: self, imageName: assets.map3)

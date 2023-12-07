@@ -9,7 +9,7 @@ import Foundation
 import SpriteKit
 
 class Alligator {
-    private var life: Float = 100
+    var life: Float = 100
     private var damage: Float = 10
     private var speed: CGFloat = 1.5
     private var attackSpeed: CGFloat = 1

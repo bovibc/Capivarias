@@ -14,7 +14,7 @@ class Capybara {
     var isCapivaraTakingDamage = false
     var life: Float = 100
     private var damageSword: Float = 20   //Aqui, é o dano da espada
-    private var damageZarabatana: Float = 5
+    private var damageZarabatana: Float = 100
     private var breathTime: Float = 100
     private var speed: CGFloat = 5
     private var defense: Float = 100
@@ -125,7 +125,7 @@ class Capybara {
         guard !isCapivaraHitting else { return }
         
         let seedBullet = SKSpriteNode(imageNamed: assets.seedBullet)
-        let bulletTravelTime = distanceBetweenPoints(capybara.position, alligator.position)/zarabatanaBulletSpeed
+      //  let bulletTravelTime = distanceBetweenPoints(capybara.position, alligator.position)/zarabatanaBulletSpeed
         
         seedBullet.position = CGPoint(x: capybara.position.x + capybara.size.width / 2.0,
                                    y: capybara.position.y)
@@ -138,7 +138,7 @@ class Capybara {
 
         capybara.parent?.addChild(seedBullet)
         let moveAction = SKAction.move(to: CGPoint(x: alligator.position.x,
-                                                   y: alligator.position.y), duration: bulletTravelTime)
+                                                   y: alligator.position.y), duration: 4)
 
         let deleteAction = SKAction.removeFromParent()
         let combine = SKAction.sequence([moveAction, deleteAction])
