@@ -15,7 +15,6 @@ class FirstScene: SKScene, SKPhysicsContactDelegate {
     var virtualController: GCVirtualController?
     var joystick = Joystick()
     var enemies: [Alligator] = [Alligator()]
-    var audioPlayer = AudioPlayer()
     var capybara = Capybara()
     let backgroundController = BackgroundController()
     var door = SKSpriteNode()
@@ -34,7 +33,7 @@ class FirstScene: SKScene, SKPhysicsContactDelegate {
         connectController()
         setObstacles()
         setupContact()
-        audioPlayer.playEnviroment(sound: sounds.ambient, type: "mp3", volume: 0.7)
+        AudioPlayer.shared.EnviromentSong()
         setupLifeBar()
         setupWeaponSelection()
         backgroundController.setupBackground(scene: self, imageName: assets.firstMapGround)
