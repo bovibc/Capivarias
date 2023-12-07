@@ -12,14 +12,14 @@ import SpriteKit
 class Monkey {
     var life: Float = 100
     private var damage: Float = 20
-    private var speed: CGFloat = 2
+    private var speed: CGFloat = 8
     private var attackSpeed: CGFloat = 1
     private let staticName: String = "m1"
     var assets = Assets()
     private var isMonkeyWalking: Bool = false
     private let speedAtack: Float = 3.0
     var isFollowing: Bool = true
-    private var scale: CGFloat = 0.19
+    private var scale: CGFloat = 0.09
     var sprite: SKSpriteNode
     var rangeX: Double = 500
     var rangeY: Double = 500

@@ -22,7 +22,7 @@ class AudioPlayer: ObservableObject {
     @Published var effectPlayerSong: Bool = true
     
     @Published
-    var enviromentVolume: Float = 1.0 {
+    var enviromentVolume: Float = 0.3 {
         didSet {
             enviromentPlayer?.volume = enviromentVolume
         }
@@ -46,7 +46,7 @@ class AudioPlayer: ObservableObject {
         if let path = Bundle.main.path(forResource: sound, ofType: type) {
             do {
                 enviromentPlayer = try AVAudioPlayer(contentsOf: URL(fileURLWithPath: path))
-                enviromentPlayer?.volume = enviromentVolume * volume
+                enviromentPlayer?.volume = enviromentVolume * 0.3
                 enviromentPlayer?.numberOfLoops = -1 //loops sound
                 enviromentPlayer?.play()
             } catch {
@@ -80,7 +80,7 @@ class AudioPlayer: ObservableObject {
             guard let enviromentPlayer else {return}
             AudioPlayer.shared.stopMusic(songEnviroment: enviromentPlayer)
         } else {
-            AudioPlayer.shared.playEnviroment(sound: songs.ambient, type: "mp3", volume: 1.0)
+            AudioPlayer.shared.playEnviroment(sound: songs.ambient, type: "mp3", volume: 0.7)
         }
     }
     

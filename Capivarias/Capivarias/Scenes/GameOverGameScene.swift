@@ -27,7 +27,7 @@ class GameOverGameScene: SKScene {
         setupBackground()
         addCenterButton()
         addPlayAgainButton()
-        //AudioPlayer.shared.playEffect(effect: sounds.deathMenu, type: "mp3", volume: 1.0)
+        AudioPlayer.shared.playEffect(effect: sounds.deathMenu, type: "mp3", volume: 0.4)
        // addGoToMenuButton()
     
     }
