@@ -170,7 +170,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     private func gameOverActions(_ currentTime: TimeInterval) {
-        if (lastEnemyIndex <= enemies.count && (currentTime - enemies[lastEnemyIndex].finishAnimation) > 1) {
+        if (lastEnemyIndex < enemies.count && (currentTime - enemies[lastEnemyIndex].finishAnimation) > 1) {
             enemies[lastEnemyIndex].sprite.removeAllActions()
         }
 
