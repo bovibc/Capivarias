@@ -41,9 +41,11 @@
 		C0D60CA42AE80B910064C863 /* Weapons.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D60CA32AE80B910064C863 /* Weapons.swift */; };
 		C0E127642B14C90D004219DE /* MenuGameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = C0E127632B14C90D004219DE /* MenuGameScene.sks */; };
 		F20BC15C2B0280A9009D9B65 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20BC15B2B0280A9009D9B65 /* Assets.swift */; };
+		F219B2B62B20AE3F00CB1BDF /* FirstScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = F219B2B52B20AE3F00CB1BDF /* FirstScene.sks */; };
 		F27320612B0787200038AF22 /* blow-gun.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F27320602B0787200038AF22 /* blow-gun.mp3 */; };
 		F2A77F832AE7E7A50030F197 /* AudioPlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A77F822AE7E7A50030F197 /* AudioPlayerController.swift */; };
 		F2C014B62AE81319000E9B87 /* BackgroundController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C014B52AE81319000E9B87 /* BackgroundController.swift */; };
+		F2D779632B20A9060075061E /* FirstScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D779622B20A9060075061E /* FirstScene.swift */; };
 		F2E112C52AFE782F00B76955 /* Sounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E112C42AFE782F00B76955 /* Sounds.swift */; };
 /* End PBXBuildFile section */
 
@@ -83,9 +85,11 @@
 		C0D60CA32AE80B910064C863 /* Weapons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weapons.swift; sourceTree = "<group>"; };
 		C0E127632B14C90D004219DE /* MenuGameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MenuGameScene.sks; sourceTree = "<group>"; };
 		F20BC15B2B0280A9009D9B65 /* Assets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
+		F219B2B52B20AE3F00CB1BDF /* FirstScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = FirstScene.sks; sourceTree = "<group>"; };
 		F27320602B0787200038AF22 /* blow-gun.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "blow-gun.mp3"; sourceTree = "<group>"; };
 		F2A77F822AE7E7A50030F197 /* AudioPlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerController.swift; sourceTree = "<group>"; };
 		F2C014B52AE81319000E9B87 /* BackgroundController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundController.swift; sourceTree = "<group>"; };
+		F2D779622B20A9060075061E /* FirstScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstScene.swift; sourceTree = "<group>"; };
 		F2E112C42AFE782F00B76955 /* Sounds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sounds.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -139,6 +143,7 @@
 				328080702AF26F71009650E3 /* GameOverGameScene.swift */,
 				C049F4DA2B14BAFE0047E317 /* MenuGameScene.swift */,
 				084E31192AF1326C000C71A8 /* GameScene.swift */,
+				F2D779622B20A9060075061E /* FirstScene.swift */,
 				084E311D2AF132A4000C71A8 /* TransactionsScene.swift */,
 				0875D0FB2B0248BE007B84C6 /* SecondScene.swift */,
 				C083EAE72B1DF28200771D3F /* CreditsScene.swift */,
@@ -217,6 +222,7 @@
 				083A14A42AFE5A7300B4F9EE /* SecondScene.sks */,
 				C0E127632B14C90D004219DE /* MenuGameScene.sks */,
 				C083EAE92B1DF35800771D3F /* CreditsScene.sks */,
+				F219B2B52B20AE3F00CB1BDF /* FirstScene.sks */,
 			);
 			path = Documents;
 			sourceTree = "<group>";
@@ -308,6 +314,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				08AD311B2B064C82009F3A58 /* alligator-axe-atack.mp3 in Resources */,
+				F219B2B62B20AE3F00CB1BDF /* FirstScene.sks in Resources */,
 				0813A2DA2AD6DEFE00428484 /* Main.storyboard in Resources */,
 				08AD311D2B064C82009F3A58 /* capivara-sword-atack.mp3 in Resources */,
 				08AD311C2B064C82009F3A58 /* death-menu-sound.mp3 in Resources */,
@@ -350,6 +357,7 @@
 				0813A2CF2AD6DEFE00428484 /* AppDelegate.swift in Sources */,
 				F2E112C52AFE782F00B76955 /* Sounds.swift in Sources */,
 				32F443582B16138E00E0D208 /* WeaponSelection.swift in Sources */,
+				F2D779632B20A9060075061E /* FirstScene.swift in Sources */,
 				C0D60CA42AE80B910064C863 /* Weapons.swift in Sources */,
 				085A2ECF2B063A9D00307D15 /* Position.swift in Sources */,
 				084E311E2AF132A4000C71A8 /* TransactionsScene.swift in Sources */,
