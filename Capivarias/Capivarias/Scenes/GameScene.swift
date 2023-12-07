@@ -170,7 +170,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     private func gameOverActions(_ currentTime: TimeInterval) {
-        if (currentTime - enemies[lastEnemyIndex].finishAnimation) > 1 {
+        if (lastEnemyIndex <= enemies.count && (currentTime - enemies[lastEnemyIndex].finishAnimation) > 1) {
             enemies[lastEnemyIndex].sprite.removeAllActions()
         }
 
@@ -216,7 +216,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func setupController(){
         self.virtualController?.controller?.extendedGamepad?.buttonX.pressedChangedHandler = { button, value, pressed in
             if self.weapon == true {
-                if pressed && self.isContact {
+                if pressed && self.isContact && !self.capybara.isCapivaraHitting {
                     self.capybara.swordAttackAnimation()
                     self.playerSwordAttack()
                 }
