@@ -67,7 +67,7 @@ class Monkey {
     private func setPhysics() {
         let width = 0.55 * sprite.size.width
         let height = 0.25 * sprite.size.height
-        sprite.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: width, height: height), center: CGPoint(x: -25, y: -40))
+        sprite.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: width, height: height), center: CGPoint(x: 0, y: -40))
         sprite.physicsBody?.affectedByGravity = false
         sprite.physicsBody?.allowsRotation = false
         sprite.physicsBody?.categoryBitMask = 2
