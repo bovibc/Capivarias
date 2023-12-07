@@ -70,6 +70,22 @@ class Joystick: SKScene {
         return Direction(horizontal, vertical)
     }
     
+    let buttonX: UIButton = {
+        let button = UIButton()
+        // Configurar a imagem para o botão X
+        let image = UIImage(named: "Sair") // Substitua "sua_imagem" pelo nome da sua imagem
+        button.setImage(image, for: .normal)
+        // Adicionar uma ação para o botão X
+        button.addTarget(Joystick.self, action: #selector(buttonXPressed(_:)), for: .touchUpInside)
+        return button
+    }()
+    
+    @objc func buttonXPressed(_ sender: UIButton) {
+        // Ação ao pressionar o botão X
+        print("Botão X pressionado")
+    }
+    
+    
     func connectController(connect: @escaping ((GCVirtualController) -> Void)) {
         let controlConfig = GCVirtualController.Configuration()
         controlConfig.elements = [GCInputLeftThumbstick, GCInputButtonX, GCInputButtonY]

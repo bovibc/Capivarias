@@ -15,7 +15,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var virtualController: GCVirtualController?
     var joystick = Joystick()
     var enemies: [Alligator] = [Alligator()]
-    var audioPlayer = AudioPlayer()
     var capybara = Capybara()
     let backgroundController = BackgroundController()
     var door = SKSpriteNode()
@@ -37,9 +36,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         connectController()
         setObstacles()
         setupContact()
-        audioPlayer.playEnviroment(sound: sounds.ambient, type: "mp3", volume: 0.7)
         setupLifeBar()
         setupWeaponSelection()
+        AudioPlayer.shared.EnviromentSong()
         
     }
 
@@ -188,7 +187,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     private func gameOverActions(_ currentTime: TimeInterval) {
-        if (currentTime - enemies[lastEnemyIndex].finishAnimation) > 1 {
+        if (lastEnemyIndex < enemies.count && (currentTime - enemies[lastEnemyIndex].finishAnimation) > 1) {
             enemies[lastEnemyIndex].sprite.removeAllActions()
         }
 
@@ -234,11 +233,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func setupController(){
         self.virtualController?.controller?.extendedGamepad?.buttonX.pressedChangedHandler = { button, value, pressed in
             if self.weapon == true {
-                if pressed && self.isContact {
+                if pressed && self.isContact && !self.capybara.isCapivaraHitting {
                     self.capybara.swordAttackAnimation()
                     self.playerSwordAttack()
-                }
-                else {
+                } else {
                     self.capybara.swordAttackAnimation()
                 }
             } else if !self.enemies.isEmpty {

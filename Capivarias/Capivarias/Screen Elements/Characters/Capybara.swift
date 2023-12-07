@@ -13,8 +13,8 @@ class Capybara {
     var isCapivaraWalking = false
     var isCapivaraTakingDamage = false
     var life: Float = 100
-    private var damageSword: Float = 20
-    private var damageZarabatana: Float = 1
+    private var damageSword: Float = 25
+    private var damageZarabatana: Float = 10
     private var breathTime: Float = 100
     private var speed: CGFloat = 5
     private var defense: Float = 100
@@ -22,7 +22,6 @@ class Capybara {
     private var zarabatanaBulletSpeed = 600.0
     private var isDead = false
     private var staticName: String = "capybara_stopped"
-    var audioPlayer = AudioPlayer()
     var sounds = Sounds()
     let assets = Assets()
     let attackTexture:[SKTexture]
@@ -110,7 +109,7 @@ class Capybara {
 
     func swordAttackAnimation() {
         guard !isCapivaraHitting else { return }
-        audioPlayer.playEffect(effect: sounds.swordAttack, type: "mp3", volume: 0.1)
+        AudioPlayer.shared.playEffect(effect: sounds.swordAttack, type: "mp3", volume: 0.1)
         
         let animation = SKAction.animate(with: attackTexture, timePerFrame: 0.07)
         
@@ -149,7 +148,7 @@ class Capybara {
         
         let textures = Textures.getTextures(atlas: assets.capybaraAttackZarabatana)
         
-        audioPlayer.playEffect(effect: "blow-gun", type: ".mp3", volume: 0.8)
+        AudioPlayer.shared.playEffect(effect: "blow-gun", type: ".mp3", volume: 0.15)
         let animation = SKAction.animate(with: textures, timePerFrame: 0.07,
                                          resize: true,
                                          restore: true)
@@ -264,7 +263,7 @@ class Capybara {
     }
 
     private func stayingDeadAction() {
-        let textures = Textures.getTextures(atlas: assets.deadCapybara )
+        let textures = Textures.getTextures(atlas: assets.deadCapybara)
         let action = SKAction.animate(with: textures,
                                       timePerFrame: 0.001,
                                       resize: true,

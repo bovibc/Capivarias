@@ -9,15 +9,16 @@ import UIKit
 import SpriteKit
 import GameplayKit
 
+
 class GameViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if let scene = GKScene(fileNamed: "GameScene") {
+        if let scene = GKScene(fileNamed: "MenuGameScene") {
             
             // Get the SKScene from the loaded GKScene
-            if let sceneNode = scene.rootNode as! GameScene? {
+            if let sceneNode = scene.rootNode as! MenuGameScene? {
                 
                 // Copy gameplay related content over to the scene
                 
@@ -28,7 +29,7 @@ class GameViewController: UIViewController {
                 if let view = self.view as! SKView? {
                     view.presentScene(sceneNode)
                     view.ignoresSiblingOrder = true
-                    view.showsPhysics = false
+                    view.showsPhysics = true
                     view.showsFPS = false
                     view.showsNodeCount = false
                 }

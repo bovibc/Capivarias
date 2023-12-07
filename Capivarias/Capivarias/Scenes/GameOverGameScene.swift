@@ -10,21 +10,6 @@ import SpriteKit
 import GameplayKit
 import GameController
 
-class SKButtonNode: SKSpriteNode {
-    var action: (() -> Void)?
-
-    func setButtonAction(target: @escaping () -> Void) {
-        self.isUserInteractionEnabled = true
-        self.action = target
-    }
-
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let action = action {
-            action()
-        }
-    }
-}
-
 
 class GameOverGameScene: SKScene {
     
@@ -32,7 +17,7 @@ class GameOverGameScene: SKScene {
     var alligator = Alligator()
     var capybara = Capybara()
     var transactionScene = TrasactionsScenes()
-    var audioPlayer = AudioPlayer()
+    //var audioPlayer = AudioPlayer()
     let sounds = Sounds()
     let assets = Assets()
     
@@ -42,7 +27,7 @@ class GameOverGameScene: SKScene {
         setupBackground()
         addCenterButton()
         addPlayAgainButton()
-        audioPlayer.playEffect(effect: sounds.deathMenu, type: "mp3", volume: 1.0)
+        AudioPlayer.shared.playEffect(effect: sounds.deathMenu, type: "mp3", volume: 0.4)
        // addGoToMenuButton()
     
     }
@@ -93,7 +78,7 @@ class GameOverGameScene: SKScene {
         // Configurar a ação de animação ao tocar no botão
         let scaleUp = SKAction.scale(to: 1.1, duration: 0.1) // Aumenta o tamanho do botão em 10%
         let scaleDown = SKAction.scale(to: 1.0, duration: 0.1) // Reduz o tamanho de volta ao tamanho original
-        let buttonAction = SKAction.sequence([scaleUp, scaleDown])
+        var buttonAction = SKAction.sequence([scaleUp, scaleDown])
         
 
         button.name = "playAgainButton"
@@ -135,7 +120,7 @@ class GameOverGameScene: SKScene {
         // Configurar a ação de animação ao tocar no botão
         let scaleUp = SKAction.scale(to: 1.1, duration: 0.1) // Aumenta o tamanho do botão em 10%
         let scaleDown = SKAction.scale(to: 1.0, duration: 0.1) // Reduz o tamanho de volta ao tamanho original
-        let buttonAction = SKAction.sequence([scaleUp, scaleDown])
+        var buttonAction = SKAction.sequence([scaleUp, scaleDown])
         
 
         button.name = "playAgainButton"

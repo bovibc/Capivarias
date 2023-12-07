@@ -33,12 +33,19 @@
 		320C13BB2B14BBD500877993 /* LifeBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320C13BA2B14BBD500877993 /* LifeBar.swift */; };
 		328080712AF26F71009650E3 /* GameOverGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328080702AF26F71009650E3 /* GameOverGameScene.swift */; };
 		32F443582B16138E00E0D208 /* WeaponSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32F443572B16138E00E0D208 /* WeaponSelection.swift */; };
+		C049F4DB2B14BAFE0047E317 /* MenuGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C049F4DA2B14BAFE0047E317 /* MenuGameScene.swift */; };
+		C049F4DD2B14BD2D0047E317 /* ButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C049F4DC2B14BD2D0047E317 /* ButtonNode.swift */; };
 		C060153D2AFE5A91001CDE0C /* Monkey.swift in Sources */ = {isa = PBXBuildFile; fileRef = C060153C2AFE5A91001CDE0C /* Monkey.swift */; };
+		C083EAE82B1DF28200771D3F /* CreditsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C083EAE72B1DF28200771D3F /* CreditsScene.swift */; };
+		C083EAEA2B1DF35800771D3F /* CreditsScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = C083EAE92B1DF35800771D3F /* CreditsScene.sks */; };
 		C0D60CA42AE80B910064C863 /* Weapons.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D60CA32AE80B910064C863 /* Weapons.swift */; };
+		C0E127642B14C90D004219DE /* MenuGameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = C0E127632B14C90D004219DE /* MenuGameScene.sks */; };
 		F20BC15C2B0280A9009D9B65 /* Assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = F20BC15B2B0280A9009D9B65 /* Assets.swift */; };
+		F219B2B62B20AE3F00CB1BDF /* FirstScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = F219B2B52B20AE3F00CB1BDF /* FirstScene.sks */; };
 		F27320612B0787200038AF22 /* blow-gun.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F27320602B0787200038AF22 /* blow-gun.mp3 */; };
 		F2A77F832AE7E7A50030F197 /* AudioPlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A77F822AE7E7A50030F197 /* AudioPlayerController.swift */; };
 		F2C014B62AE81319000E9B87 /* BackgroundController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C014B52AE81319000E9B87 /* BackgroundController.swift */; };
+		F2D779632B20A9060075061E /* FirstScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D779622B20A9060075061E /* FirstScene.swift */; };
 		F2E112C52AFE782F00B76955 /* Sounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E112C42AFE782F00B76955 /* Sounds.swift */; };
 /* End PBXBuildFile section */
 
@@ -70,12 +77,19 @@
 		320C13BA2B14BBD500877993 /* LifeBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeBar.swift; sourceTree = "<group>"; };
 		328080702AF26F71009650E3 /* GameOverGameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverGameScene.swift; sourceTree = "<group>"; };
 		32F443572B16138E00E0D208 /* WeaponSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponSelection.swift; sourceTree = "<group>"; };
+		C049F4DA2B14BAFE0047E317 /* MenuGameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuGameScene.swift; sourceTree = "<group>"; };
+		C049F4DC2B14BD2D0047E317 /* ButtonNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonNode.swift; sourceTree = "<group>"; };
 		C060153C2AFE5A91001CDE0C /* Monkey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Monkey.swift; sourceTree = "<group>"; };
+		C083EAE72B1DF28200771D3F /* CreditsScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsScene.swift; sourceTree = "<group>"; };
+		C083EAE92B1DF35800771D3F /* CreditsScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CreditsScene.sks; sourceTree = "<group>"; };
 		C0D60CA32AE80B910064C863 /* Weapons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weapons.swift; sourceTree = "<group>"; };
+		C0E127632B14C90D004219DE /* MenuGameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MenuGameScene.sks; sourceTree = "<group>"; };
 		F20BC15B2B0280A9009D9B65 /* Assets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
+		F219B2B52B20AE3F00CB1BDF /* FirstScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = FirstScene.sks; sourceTree = "<group>"; };
 		F27320602B0787200038AF22 /* blow-gun.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "blow-gun.mp3"; sourceTree = "<group>"; };
 		F2A77F822AE7E7A50030F197 /* AudioPlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerController.swift; sourceTree = "<group>"; };
 		F2C014B52AE81319000E9B87 /* BackgroundController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundController.swift; sourceTree = "<group>"; };
+		F2D779622B20A9060075061E /* FirstScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstScene.swift; sourceTree = "<group>"; };
 		F2E112C42AFE782F00B76955 /* Sounds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sounds.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -113,8 +127,8 @@
 				082ED83D2AFCFFD300AB1C67 /* Info.plist */,
 				084E31182AF1323B000C71A8 /* Scenes */,
 				08CEE5EF2AE1633F00149B83 /* Auxiliary */,
-				08CEE5F22AE163AA00149B83 /* Controllers */,
 				08CEE5F02AE1638F00149B83 /* Documents */,
+				08CEE5F22AE163AA00149B83 /* Controllers */,
 				08CEE5EC2AE1631300149B83 /* Screen Elements */,
 				0813A2CE2AD6DEFE00428484 /* AppDelegate.swift */,
 				0813A2D82AD6DEFE00428484 /* Main.storyboard */,
@@ -127,9 +141,12 @@
 			isa = PBXGroup;
 			children = (
 				328080702AF26F71009650E3 /* GameOverGameScene.swift */,
+				C049F4DA2B14BAFE0047E317 /* MenuGameScene.swift */,
 				084E31192AF1326C000C71A8 /* GameScene.swift */,
+				F2D779622B20A9060075061E /* FirstScene.swift */,
 				084E311D2AF132A4000C71A8 /* TransactionsScene.swift */,
 				0875D0FB2B0248BE007B84C6 /* SecondScene.swift */,
+				C083EAE72B1DF28200771D3F /* CreditsScene.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -203,6 +220,9 @@
 				0813A2D22AD6DEFE00428484 /* Actions.sks */,
 				08E8EE372AE961EC0076F4CE /* GameScene.sks */,
 				083A14A42AFE5A7300B4F9EE /* SecondScene.sks */,
+				C0E127632B14C90D004219DE /* MenuGameScene.sks */,
+				C083EAE92B1DF35800771D3F /* CreditsScene.sks */,
+				F219B2B52B20AE3F00CB1BDF /* FirstScene.sks */,
 			);
 			path = Documents;
 			sourceTree = "<group>";
@@ -213,6 +233,7 @@
 				0813A2D62AD6DEFE00428484 /* GameViewController.swift */,
 				F2C014B52AE81319000E9B87 /* BackgroundController.swift */,
 				F2A77F822AE7E7A50030F197 /* AudioPlayerController.swift */,
+				C049F4DC2B14BD2D0047E317 /* ButtonNode.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -293,6 +314,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				08AD311B2B064C82009F3A58 /* alligator-axe-atack.mp3 in Resources */,
+				F219B2B62B20AE3F00CB1BDF /* FirstScene.sks in Resources */,
 				0813A2DA2AD6DEFE00428484 /* Main.storyboard in Resources */,
 				08AD311D2B064C82009F3A58 /* capivara-sword-atack.mp3 in Resources */,
 				08AD311C2B064C82009F3A58 /* death-menu-sound.mp3 in Resources */,
@@ -301,7 +323,9 @@
 				083A14A52AFE5A7300B4F9EE /* SecondScene.sks in Resources */,
 				0813A2DF2AD6DEFF00428484 /* LaunchScreen.storyboard in Resources */,
 				08AD31122B064B5B009F3A58 /* Assets.xcassets in Resources */,
+				C0E127642B14C90D004219DE /* MenuGameScene.sks in Resources */,
 				F27320612B0787200038AF22 /* blow-gun.mp3 in Resources */,
+				C083EAEA2B1DF35800771D3F /* CreditsScene.sks in Resources */,
 				08AD311E2B064C82009F3A58 /* ambient-forest.mp3 in Resources */,
 				0813A2D32AD6DEFE00428484 /* Actions.sks in Resources */,
 			);
@@ -317,11 +341,13 @@
 				08CEE5F62AE1651A00149B83 /* Constants.swift in Sources */,
 				08CEE5FC2AE1680800149B83 /* Joystick.swift in Sources */,
 				F2A77F832AE7E7A50030F197 /* AudioPlayerController.swift in Sources */,
+				C083EAE82B1DF28200771D3F /* CreditsScene.swift in Sources */,
 				F2C014B62AE81319000E9B87 /* BackgroundController.swift in Sources */,
 				08CEE5FA2AE167E800149B83 /* Alligator.swift in Sources */,
 				084E311A2AF1326C000C71A8 /* GameScene.swift in Sources */,
 				0875D0FC2B0248BE007B84C6 /* SecondScene.swift in Sources */,
 				084E311C2AF1327D000C71A8 /* (null) in Sources */,
+				C049F4DB2B14BAFE0047E317 /* MenuGameScene.swift in Sources */,
 				08CEE5F42AE1643A00149B83 /* Textures.swift in Sources */,
 				0813A2D72AD6DEFE00428484 /* GameViewController.swift in Sources */,
 				328080712AF26F71009650E3 /* GameOverGameScene.swift in Sources */,
@@ -331,10 +357,12 @@
 				0813A2CF2AD6DEFE00428484 /* AppDelegate.swift in Sources */,
 				F2E112C52AFE782F00B76955 /* Sounds.swift in Sources */,
 				32F443582B16138E00E0D208 /* WeaponSelection.swift in Sources */,
+				F2D779632B20A9060075061E /* FirstScene.swift in Sources */,
 				C0D60CA42AE80B910064C863 /* Weapons.swift in Sources */,
 				085A2ECF2B063A9D00307D15 /* Position.swift in Sources */,
 				084E311E2AF132A4000C71A8 /* TransactionsScene.swift in Sources */,
 				C060153D2AFE5A91001CDE0C /* Monkey.swift in Sources */,
+				C049F4DD2B14BD2D0047E317 /* ButtonNode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

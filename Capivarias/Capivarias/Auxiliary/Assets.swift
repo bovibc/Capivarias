@@ -21,14 +21,17 @@ struct Assets {
     let capybaraDying = "Capybara_Dying"
     let deadCapybara = "Dead_Capybara"
     let capybaraZarabanataWalking = "Capybara_zarabatana_walking"
-
-    let seedBullet = "seed"
     let capybaraAttackZarabatana = "Capybara_ShootingZarabatana"
 
+    let seedBullet = "seed"
 
     let map3 = "Mapa dos Jacares"
     let gameOverMap = "Game Over"
-    
+    let firstMapGround = "FirstMapGround"
+    let lakeObjects = "FirstMapGround"
+
     let monkeyWalking = "Monkey_Waking"
-    
+
+    let backgroundMenu = "Background Menu"
+    let backgroundCredits = "BackgroundCredits"
 }
