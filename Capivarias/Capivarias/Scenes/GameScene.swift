@@ -179,7 +179,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if let view = self.view {
             if capybara.sprite.position.x >= 1400 {
                 virtualController?.disconnect()
-                transactionScene.goToNextLevel(view: view, gameScene: "SecondScene")
+                transactionScene.goToNextLevel(view: view, gameScene: "ThirdScene")
             }
         }
 
