@@ -10,11 +10,6 @@ import SpriteKit
 
 class Capybara {
     var currentState = CapybaraStates.none
-    
-//    var isCapivaraHitting = false
-//    var isCapivaraWalking = false
-//    var isCapivaraTakingDamage = false
-//    private var isDead = false
 
     var life: Float = 100
     private var damageSword: Float = 20
@@ -247,6 +242,8 @@ class Capybara {
     
     func enterState(nextState: CapybaraStates){
         print("Indo para estado \(nextState)")
+        
+        guard currentState != .die else {return}
     
         currentState = nextState
         switch currentState {
