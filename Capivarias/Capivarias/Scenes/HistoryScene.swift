@@ -11,7 +11,7 @@ import SpriteKit
 class HistoryScene: SKScene {
     var historyImage: SKSpriteNode!
     var nextButton: SKSpriteNode!
-    var backButton: SKSpriteNode!
+    var backButton: SKSpriteNode?
     var transactionScene = TrasactionsScenes()
     let backgroundController = BackgroundController()
     let assets = Assets()
@@ -27,14 +27,17 @@ class HistoryScene: SKScene {
     
     override func update(_ currentTime: TimeInterval) {
         if currentDialogueindex > 0 {
+            
             backButton = SKSpriteNode(imageNamed: assets.seta)
-            backButton.position = CGPoint(x: (size.width * 0.05), y: size.height / 2)
+            guard let backButton else { return}
             backButton.name = "backButton"
+            backButton.position = CGPoint(x: (size.width * 0.05), y: size.height / 2)
             backButton.xScale = -1.0
+            
             addChild(backButton)
         } else {
             guard let backButton else { return}
-            self.backButton.removeFromParent()
+            backButton.removeFromParent()
         }
     }
     
@@ -58,7 +61,7 @@ class HistoryScene: SKScene {
     
     func showNextDialogue() {
         if currentDialogueindex < assets.history.count {
-            
+            guard let historyImage else {return}
             // historyImage.texture = SKTexture(imageNamed: "dialogueImage\(currentDialogueIndex + 1)")
             historyImage.texture = SKTexture(imageNamed: assets.history[currentDialogueindex])
             print(historyImage.texture)
@@ -74,14 +77,14 @@ class HistoryScene: SKScene {
     
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+       // guard let backButton else { return}
         for touch in touches {
             let location = touch.location(in: self)
-            // guard let backButton = backButton?.contains(location) else {return}
             if nextButton.contains(location) {
                 // Ação ao clicar no botão (por exemplo, avançar para a próxima fala)
                 currentDialogueindex += 1
                 showNextDialogue()
-            } else if backButton.contains(location) {
+            } else if ((backButton?.contains(location)) != nil) {
                 if currentDialogueindex > 0{
                     currentDialogueindex -= 1
                     
