@@ -12,14 +12,14 @@ import SpriteKit
 class Monkey {
     var life: Float = 100
     private var damage: Float = 20
-    private var speed: CGFloat = 2
+    private var speed: CGFloat = 8
     private var attackSpeed: CGFloat = 1
     private let staticName: String = "m1"
     var assets = Assets()
     private var isMonkeyWalking: Bool = false
     private let speedAtack: Float = 3.0
     var isFollowing: Bool = true
-    private var scale: CGFloat = 0.19
+    private var scale: CGFloat = 0.09
     var sprite: SKSpriteNode
     var rangeX: Double = 500
     var rangeY: Double = 500
@@ -67,7 +67,7 @@ class Monkey {
     private func setPhysics() {
         let width = 0.55 * sprite.size.width
         let height = 0.25 * sprite.size.height
-        sprite.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: width, height: height), center: CGPoint(x: -25, y: -40))
+        sprite.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: width, height: height), center: CGPoint(x: 0, y: -40))
         sprite.physicsBody?.affectedByGravity = false
         sprite.physicsBody?.allowsRotation = false
         sprite.physicsBody?.categoryBitMask = 2

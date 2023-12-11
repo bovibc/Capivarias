@@ -46,6 +46,8 @@
 		F219B2B62B20AE3F00CB1BDF /* FirstScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = F219B2B52B20AE3F00CB1BDF /* FirstScene.sks */; };
 		F27320612B0787200038AF22 /* blow-gun.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F27320602B0787200038AF22 /* blow-gun.mp3 */; };
 		F2A77F832AE7E7A50030F197 /* AudioPlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A77F822AE7E7A50030F197 /* AudioPlayerController.swift */; };
+		F2B935C22B23ED17000AC530 /* ThirdScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B935C12B23ED17000AC530 /* ThirdScene.swift */; };
+		F2B935C42B23ED3E000AC530 /* ThirdScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = F2B935C32B23ED3E000AC530 /* ThirdScene.sks */; };
 		F2C014B62AE81319000E9B87 /* BackgroundController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2C014B52AE81319000E9B87 /* BackgroundController.swift */; };
 		F2D779632B20A9060075061E /* FirstScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D779622B20A9060075061E /* FirstScene.swift */; };
 		F2E112C52AFE782F00B76955 /* Sounds.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E112C42AFE782F00B76955 /* Sounds.swift */; };
@@ -92,6 +94,8 @@
 		F219B2B52B20AE3F00CB1BDF /* FirstScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = FirstScene.sks; sourceTree = "<group>"; };
 		F27320602B0787200038AF22 /* blow-gun.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "blow-gun.mp3"; sourceTree = "<group>"; };
 		F2A77F822AE7E7A50030F197 /* AudioPlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayerController.swift; sourceTree = "<group>"; };
+		F2B935C12B23ED17000AC530 /* ThirdScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdScene.swift; sourceTree = "<group>"; };
+		F2B935C32B23ED3E000AC530 /* ThirdScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ThirdScene.sks; sourceTree = "<group>"; };
 		F2C014B52AE81319000E9B87 /* BackgroundController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundController.swift; sourceTree = "<group>"; };
 		F2D779622B20A9060075061E /* FirstScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstScene.swift; sourceTree = "<group>"; };
 		F2E112C42AFE782F00B76955 /* Sounds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sounds.swift; sourceTree = "<group>"; };
@@ -152,6 +156,7 @@
 				0875D0FB2B0248BE007B84C6 /* SecondScene.swift */,
 				C083EAE72B1DF28200771D3F /* CreditsScene.swift */,
 				C06827DF2B21EEED0001EEB1 /* HistoryScene.swift */,
+				F2B935C12B23ED17000AC530 /* ThirdScene.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -225,6 +230,7 @@
 				0813A2D22AD6DEFE00428484 /* Actions.sks */,
 				08E8EE372AE961EC0076F4CE /* GameScene.sks */,
 				083A14A42AFE5A7300B4F9EE /* SecondScene.sks */,
+				F2B935C32B23ED3E000AC530 /* ThirdScene.sks */,
 				C0E127632B14C90D004219DE /* MenuGameScene.sks */,
 				C083EAE92B1DF35800771D3F /* CreditsScene.sks */,
 				F219B2B52B20AE3F00CB1BDF /* FirstScene.sks */,
@@ -325,6 +331,7 @@
 				08AD311D2B064C82009F3A58 /* capivara-sword-atack.mp3 in Resources */,
 				08AD311C2B064C82009F3A58 /* death-menu-sound.mp3 in Resources */,
 				08AD311A2B064C82009F3A58 /* monkey-banana-atack.mp3 in Resources */,
+				F2B935C42B23ED3E000AC530 /* ThirdScene.sks in Resources */,
 				08E8EE382AE961EC0076F4CE /* GameScene.sks in Resources */,
 				083A14A52AFE5A7300B4F9EE /* SecondScene.sks in Resources */,
 				0813A2DF2AD6DEFF00428484 /* LaunchScreen.storyboard in Resources */,
@@ -358,6 +365,7 @@
 				C049F4DB2B14BAFE0047E317 /* MenuGameScene.swift in Sources */,
 				08CEE5F42AE1643A00149B83 /* Textures.swift in Sources */,
 				0813A2D72AD6DEFE00428484 /* GameViewController.swift in Sources */,
+				F2B935C22B23ED17000AC530 /* ThirdScene.swift in Sources */,
 				328080712AF26F71009650E3 /* GameOverGameScene.swift in Sources */,
 				F20BC15C2B0280A9009D9B65 /* Assets.swift in Sources */,
 				08CEE5F82AE1653C00149B83 /* Capybara.swift in Sources */,

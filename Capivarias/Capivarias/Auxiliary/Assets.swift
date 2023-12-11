@@ -26,7 +26,7 @@ struct Assets {
     let seedBullet = "seed"
 
     let map3 = "Mapa dos Jacares"
-    let gameOverMap = "Game Over"
+    let gameOverMap = "game over 3"
     let firstMapGround = "FirstMapGround"
     let lakeObjects = "FirstMapGround"
 
@@ -34,7 +34,7 @@ struct Assets {
 
     let backgroundMenu = "Background Menu"
     let backgroundCredits = "BackgroundCredits"
-    
+
     let seta = "Seta"
     
     let historyMap = "HistoryMap"

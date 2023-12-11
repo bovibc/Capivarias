@@ -14,7 +14,6 @@ class SecondScene: SKScene, SKPhysicsContactDelegate {
     var virtualController: GCVirtualController?
     var joystick = Joystick()
     var monkey = Monkey()
-    //var audioPlayer = AudioPlayer()
     var capybara = Capybara()
     let backgroundController = BackgroundController()
     var door = SKSpriteNode()
@@ -81,7 +80,7 @@ class SecondScene: SKScene, SKPhysicsContactDelegate {
     }
 
     private func setupAudio() {
-        //AudioPlayer.shared.playEnviroment(sound: "ambient-forest", type: "mp3", volume: 1.0)
+        AudioPlayer.shared.playEnviroment(sound: "ambient-forest", type: "mp3", volume: 0.7)
     }
 
     private func setupContact() {
