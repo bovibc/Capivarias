@@ -13,7 +13,7 @@ class Capybara {
     var isCapivaraWalking = false
     var isCapivaraTakingDamage = false
     var life: Float = 100
-    private var damageSword: Float = 25
+    private var damageSword: Float = 50
     private var damageZarabatana: Float = 2
     private var breathTime: Float = 100
     private var speed: CGFloat = 5

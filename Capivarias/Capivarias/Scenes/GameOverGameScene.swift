@@ -97,7 +97,7 @@ class GameOverGameScene: SKScene {
             if let scene = GKScene(fileNamed: "GameScene") {
                 if let sceneNode = scene.rootNode as? GameScene {
                     if let view = self.view {
-                        self.transactionScene.goToNextLevel(view: view, gameScene: "GameScene")
+                        self.transactionScene.goToNextLevel(view: view, gameScene: "FirstScene")
                     }
                 }
             }
