@@ -38,6 +38,8 @@
 		C060153D2AFE5A91001CDE0C /* Monkey.swift in Sources */ = {isa = PBXBuildFile; fileRef = C060153C2AFE5A91001CDE0C /* Monkey.swift */; };
 		C06827E02B21EEED0001EEB1 /* HistoryScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06827DF2B21EEED0001EEB1 /* HistoryScene.swift */; };
 		C06827E22B21F23C0001EEB1 /* HistoryScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = C06827E12B21F23C0001EEB1 /* HistoryScene.sks */; };
+		C07776202B27440500B3D8B6 /* WinScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C077761F2B27440500B3D8B6 /* WinScene.swift */; };
+		C07776222B27443500B3D8B6 /* WinScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = C07776212B27443500B3D8B6 /* WinScene.sks */; };
 		C083EAE82B1DF28200771D3F /* CreditsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C083EAE72B1DF28200771D3F /* CreditsScene.swift */; };
 		C083EAEA2B1DF35800771D3F /* CreditsScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = C083EAE92B1DF35800771D3F /* CreditsScene.sks */; };
 		C0D60CA42AE80B910064C863 /* Weapons.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D60CA32AE80B910064C863 /* Weapons.swift */; };
@@ -86,6 +88,8 @@
 		C060153C2AFE5A91001CDE0C /* Monkey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Monkey.swift; sourceTree = "<group>"; };
 		C06827DF2B21EEED0001EEB1 /* HistoryScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryScene.swift; sourceTree = "<group>"; };
 		C06827E12B21F23C0001EEB1 /* HistoryScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = HistoryScene.sks; sourceTree = "<group>"; };
+		C077761F2B27440500B3D8B6 /* WinScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinScene.swift; sourceTree = "<group>"; };
+		C07776212B27443500B3D8B6 /* WinScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = WinScene.sks; sourceTree = "<group>"; };
 		C083EAE72B1DF28200771D3F /* CreditsScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsScene.swift; sourceTree = "<group>"; };
 		C083EAE92B1DF35800771D3F /* CreditsScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CreditsScene.sks; sourceTree = "<group>"; };
 		C0D60CA32AE80B910064C863 /* Weapons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weapons.swift; sourceTree = "<group>"; };
@@ -157,6 +161,7 @@
 				C083EAE72B1DF28200771D3F /* CreditsScene.swift */,
 				C06827DF2B21EEED0001EEB1 /* HistoryScene.swift */,
 				F2B935C12B23ED17000AC530 /* ThirdScene.swift */,
+				C077761F2B27440500B3D8B6 /* WinScene.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -235,6 +240,7 @@
 				C083EAE92B1DF35800771D3F /* CreditsScene.sks */,
 				F219B2B52B20AE3F00CB1BDF /* FirstScene.sks */,
 				C06827E12B21F23C0001EEB1 /* HistoryScene.sks */,
+				C07776212B27443500B3D8B6 /* WinScene.sks */,
 			);
 			path = Documents;
 			sourceTree = "<group>";
@@ -340,6 +346,7 @@
 				F27320612B0787200038AF22 /* blow-gun.mp3 in Resources */,
 				C083EAEA2B1DF35800771D3F /* CreditsScene.sks in Resources */,
 				08AD311E2B064C82009F3A58 /* ambient-forest.mp3 in Resources */,
+				C07776222B27443500B3D8B6 /* WinScene.sks in Resources */,
 				0813A2D32AD6DEFE00428484 /* Actions.sks in Resources */,
 				C06827E22B21F23C0001EEB1 /* HistoryScene.sks in Resources */,
 			);
@@ -369,6 +376,7 @@
 				328080712AF26F71009650E3 /* GameOverGameScene.swift in Sources */,
 				F20BC15C2B0280A9009D9B65 /* Assets.swift in Sources */,
 				08CEE5F82AE1653C00149B83 /* Capybara.swift in Sources */,
+				C07776202B27440500B3D8B6 /* WinScene.swift in Sources */,
 				320C13BB2B14BBD500877993 /* LifeBar.swift in Sources */,
 				0813A2CF2AD6DEFE00428484 /* AppDelegate.swift in Sources */,
 				F2E112C52AFE782F00B76955 /* Sounds.swift in Sources */,

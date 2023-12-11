@@ -29,6 +29,7 @@ struct Assets {
     let gameOverMap = "game over 3"
     let firstMapGround = "FirstMapGround"
     let lakeObjects = "FirstMapGround"
+    let mapWin = "mapWin"
 
     let monkeyWalking = "Monkey_Waking"
 
@@ -39,4 +40,7 @@ struct Assets {
     
     let historyMap = "HistoryMap"
     let history = ["Falas1","Falas2","Falas3","Falas4","Falas5","Falas6","Falas7","Falas8","Falas9","Falas10"]
+    let win = ["win1","win2","win3","win4"]
+    let playagain = "playagain"
+    let menu = "menu"
 }

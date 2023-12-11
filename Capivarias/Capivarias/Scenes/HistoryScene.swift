@@ -15,7 +15,6 @@ class HistoryScene: SKScene {
     var transactionScene = TrasactionsScenes()
     let backgroundController = BackgroundController()
     let assets = Assets()
-    var history: [String] = []
     var currentDialogueindex = 0
     var removed: Bool = false
 
@@ -60,11 +59,9 @@ class HistoryScene: SKScene {
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-       // guard let backButton else { return}
         for touch in touches {
             let location = touch.location(in: self)
             if nextButton.contains(location) {
-                // Ação ao clicar no botão (por exemplo, avançar para a próxima fala)
                 currentDialogueindex += 1
                 showNextDialogue()
             } else if ((backButton?.contains(location)) != nil) {

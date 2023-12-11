@@ -26,7 +26,7 @@ class MenuGameScene: SKScene {
         cancelMusic()
         cancelEffect()
         credits()
-        addPlayAgainButton()
+        startPlay()
         AudioPlayer.shared.EnviromentSong()
     }
     
@@ -39,7 +39,7 @@ class MenuGameScene: SKScene {
         scene?.size = CGSize(width: view?.scene?.size.width ?? 600, height: view?.scene?.size.height ?? 800)
     }
     
-    private func addPlayAgainButton() {
+    private func startPlay() {
         let buttonTexture = SKTexture(imageNamed: "Jogar")
         let button = SKButtonNode(texture: buttonTexture)
         
