@@ -40,7 +40,7 @@ struct Assets {
     
     let historyMap = "HistoryMap"
     let history = ["Falas1","Falas2","Falas3","Falas4","Falas5","Falas6","Falas7","Falas8","Falas9","Falas10"]
-    let win = ["Win1","Win2","Win3","Win4"]
+    let win = ["win1","win2","win3","win4"]
     let playagain = "playagain"
     let menu = "menu"
 }
