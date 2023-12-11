@@ -36,6 +36,8 @@
 		C049F4DB2B14BAFE0047E317 /* MenuGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C049F4DA2B14BAFE0047E317 /* MenuGameScene.swift */; };
 		C049F4DD2B14BD2D0047E317 /* ButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C049F4DC2B14BD2D0047E317 /* ButtonNode.swift */; };
 		C060153D2AFE5A91001CDE0C /* Monkey.swift in Sources */ = {isa = PBXBuildFile; fileRef = C060153C2AFE5A91001CDE0C /* Monkey.swift */; };
+		C06827E02B21EEED0001EEB1 /* HistoryScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06827DF2B21EEED0001EEB1 /* HistoryScene.swift */; };
+		C06827E22B21F23C0001EEB1 /* HistoryScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = C06827E12B21F23C0001EEB1 /* HistoryScene.sks */; };
 		C083EAE82B1DF28200771D3F /* CreditsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C083EAE72B1DF28200771D3F /* CreditsScene.swift */; };
 		C083EAEA2B1DF35800771D3F /* CreditsScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = C083EAE92B1DF35800771D3F /* CreditsScene.sks */; };
 		C0D60CA42AE80B910064C863 /* Weapons.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D60CA32AE80B910064C863 /* Weapons.swift */; };
@@ -80,6 +82,8 @@
 		C049F4DA2B14BAFE0047E317 /* MenuGameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuGameScene.swift; sourceTree = "<group>"; };
 		C049F4DC2B14BD2D0047E317 /* ButtonNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonNode.swift; sourceTree = "<group>"; };
 		C060153C2AFE5A91001CDE0C /* Monkey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Monkey.swift; sourceTree = "<group>"; };
+		C06827DF2B21EEED0001EEB1 /* HistoryScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryScene.swift; sourceTree = "<group>"; };
+		C06827E12B21F23C0001EEB1 /* HistoryScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = HistoryScene.sks; sourceTree = "<group>"; };
 		C083EAE72B1DF28200771D3F /* CreditsScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsScene.swift; sourceTree = "<group>"; };
 		C083EAE92B1DF35800771D3F /* CreditsScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = CreditsScene.sks; sourceTree = "<group>"; };
 		C0D60CA32AE80B910064C863 /* Weapons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weapons.swift; sourceTree = "<group>"; };
@@ -147,6 +151,7 @@
 				084E311D2AF132A4000C71A8 /* TransactionsScene.swift */,
 				0875D0FB2B0248BE007B84C6 /* SecondScene.swift */,
 				C083EAE72B1DF28200771D3F /* CreditsScene.swift */,
+				C06827DF2B21EEED0001EEB1 /* HistoryScene.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -223,6 +228,7 @@
 				C0E127632B14C90D004219DE /* MenuGameScene.sks */,
 				C083EAE92B1DF35800771D3F /* CreditsScene.sks */,
 				F219B2B52B20AE3F00CB1BDF /* FirstScene.sks */,
+				C06827E12B21F23C0001EEB1 /* HistoryScene.sks */,
 			);
 			path = Documents;
 			sourceTree = "<group>";
@@ -328,6 +334,7 @@
 				C083EAEA2B1DF35800771D3F /* CreditsScene.sks in Resources */,
 				08AD311E2B064C82009F3A58 /* ambient-forest.mp3 in Resources */,
 				0813A2D32AD6DEFE00428484 /* Actions.sks in Resources */,
+				C06827E22B21F23C0001EEB1 /* HistoryScene.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -339,6 +346,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				08CEE5F62AE1651A00149B83 /* Constants.swift in Sources */,
+				C06827E02B21EEED0001EEB1 /* HistoryScene.swift in Sources */,
 				08CEE5FC2AE1680800149B83 /* Joystick.swift in Sources */,
 				F2A77F832AE7E7A50030F197 /* AudioPlayerController.swift in Sources */,
 				C083EAE82B1DF28200771D3F /* CreditsScene.swift in Sources */,

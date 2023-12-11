@@ -34,4 +34,9 @@ struct Assets {
 
     let backgroundMenu = "Background Menu"
     let backgroundCredits = "BackgroundCredits"
+    
+    let seta = "Seta"
+    
+    let historyMap = "HistoryMap"
+    let history = ["Falas1","Falas2","Falas3","Falas4","Falas5","Falas6","Falas7","Falas8","Falas9","Falas10"]
 }

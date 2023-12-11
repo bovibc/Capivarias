@@ -67,7 +67,7 @@ class MenuGameScene: SKScene {
             button.run(scaleAction)
             
             if let view = self.view {
-                self.transactionScene.goToNextLevel(view: view, gameScene: "FirstScene")
+                self.transactionScene.goToNextLevel(view: view, gameScene: "HistoryScene")
             }
             
         }
